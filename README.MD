@@ -1,40 +1,26 @@
-# umami
+# Umami Kotlin SDK
 
-Kotlin Multiplatform Library
+> **Disclaimer:** This library is currently in active development. There is no stable or usable build available yet. Please check back later for updates or follow the repository for progress.
 
-### Run Sample App
+An unofficial, open-source library for Kotlin Multiplatform that makes it easy to interact with the [Umami](https://umami.is) web analytics REST API.
 
- - Desktop JVM: `./gradlew :sample:composeApp:run`
- - Android: `open project in Android Studio and run the sample app`
- - iOS: `open 'sample/iosApp/iosApp.xcodeproj' in Xcode and run the sample app`
- - JavaScript: `./gradlew :sample:composeApp:jsBrowserRun`
- - Wasm: `./gradlew :sample:composeApp:wasmJsBrowserRun`
- - Linux/Macos/Windows native: `./gradlew :sample:terminalApp:runDebugExecutable[architecture]`
+This SDK provides a type-safe, asynchronous wrapper, allowing you to integrate Umami's privacy-focused analytics into your Kotlin applications (Android, iOS, JVM, etc.) with minimal effort.
 
-### Publish to MavenLocal
+## What is Umami?
 
-1) Run `./gradlew :umami:publishToMavenLocal`
-2) Open `~/.m2/repository/dev/appoutlet/`
+[Umami](https://umami.is) is a simple, fast, privacy-focused alternative to Google Analytics. It provides you with powerful web analytics while respecting user privacy and without collecting any personal information. This SDK helps you send data to your self-hosted or cloud-hosted Umami instance directly from your application.
 
-### Publish to MavenCentral
+## ✨ Features
 
-1) Create an account and a namespace on Sonatype:  
-   https://central.sonatype.org/register/central-portal/#create-an-account
-2) Add developer id, name, email and the project url to  
-   `./umami/build.gradle.kts`
-3) Generate a GPG key:  
-   https://getstream.io/blog/publishing-libraries-to-mavencentral-2021/#generating-a-gpg-key-pair
-   ```
-   gpg --full-gen-key
-   gpg --keyserver keyserver.ubuntu.com --send-keys XXXXXXXX
-   gpg --export-secret-key XXXXXXXX > XXXXXXXX.gpg
-   ```
-4) Add these lines to `gradle.properties`:
-   ```
-   signing.keyId=XXXXXXXX
-   signing.password=[key password]
-   signing.secretKeyRingFile=../XXXXXXXX.gpg
-   mavenCentralUsername=[generated username]
-   mavenCentralPassword=[generated password]
-   ```
-5) Run `./gradlew :umami:publishAndReleaseToMavenCentral --no-configuration-cache`
+* **Kotlin Multiplatform:** Write your analytics tracking logic once and share it across Android, iOS, JVM, and more.
+* **Asynchronous:** Built with Kotlin Coroutines for non-blocking API calls.
+* **Type-Safe:** Reduces the risk of errors when interacting with the Umami API.
+* **Lightweight & Simple:** A clean API surface that is easy to understand and integrate.
+
+## 🙌 Contributing
+
+Contributions are welcome\! If you'd like to help improve the SDK, please feel free to open an issue to discuss a new feature or submit a pull request.
+
+## 📜 License
+
+This project is licensed under the [MIT License](LICENSE).

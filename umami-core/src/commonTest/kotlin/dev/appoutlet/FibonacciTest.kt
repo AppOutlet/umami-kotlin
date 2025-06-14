@@ -14,5 +14,4 @@ class FibonacciTest {
             getFibonacciNumbers(15)
         )
     }
-
 }

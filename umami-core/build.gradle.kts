@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.maven.publish)
     alias(libs.plugins.serialization)
+    alias(libs.plugins.detekt)
 }
 kotlin {
     jvmToolchain(17)
@@ -72,7 +73,28 @@ kotlin {
             }
         }
     }
+}
 
+dependencies {
+    detektPlugins(libs.detekt.formatting)
+}
+
+detekt {
+    autoCorrect = true
+    config.setFrom(file("$rootDir/detekt/detekt.yml"))
+    buildUponDefaultConfig = true
+    source.setFrom(
+        "src/commonMain/kotlin",
+        "src/commonTest/kotlin",
+        "src/androidMain/kotlin",
+        "src/iosMain/kotlin",
+        "src/jsMain/kotlin",
+        "src/jvmMain/kotlin",
+        "src/linuxMain/kotlin",
+        "src/macosMain/kotlin",
+        "src/mingwMain/kotlin",
+        "src/wasmJsMain/kotlin",
+    )
 }
 
 android {
@@ -88,10 +110,10 @@ android {
 //https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-publish-libraries.html
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
-    coordinates("dev.appoutlet", "umami", "1.0.0")
+    coordinates("dev.appoutlet", "umami-core", "1.0.0")
 
     pom {
-        name = "umami"
+        name = "umami-core"
         description = "Kotlin Multiplatform library"
         url = "github url" //todo
 

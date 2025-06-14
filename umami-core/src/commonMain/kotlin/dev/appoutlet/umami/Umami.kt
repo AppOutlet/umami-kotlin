@@ -22,7 +22,6 @@ import kotlinx.serialization.json.Json
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
-// TODO add KDOC comments to the public API
 @OptIn(ExperimentalUuidApi::class)
 class Umami(
     internal val baseUrl: Url,
@@ -89,4 +88,3 @@ class Umami(
         }
     }
 }
-

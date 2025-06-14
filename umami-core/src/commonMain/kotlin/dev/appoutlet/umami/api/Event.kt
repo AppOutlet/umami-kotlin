@@ -30,7 +30,7 @@ suspend fun Umami.event(
             url = url,
             name = name,
             tag = tag,
-            ip = ip,
+            ip = ip?.value,
             userAgent = userAgent,
             timestamp = timestamp,
             id = id

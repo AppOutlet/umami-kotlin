@@ -1,6 +1,7 @@
 package dev.appoutlet.umami
 
 import dev.appoutlet.umami.domain.Hostname
+import dev.appoutlet.umami.domain.Ip
 import dev.appoutlet.umami.domain.Language
 import dev.appoutlet.umami.domain.ScreenSize
 import dev.appoutlet.umami.util.createUserAgent
@@ -24,16 +25,16 @@ import kotlin.uuid.Uuid
 // TODO add KDOC comments to the public API
 @OptIn(ExperimentalUuidApi::class)
 class Umami(
-    val baseUrl: Url,
-    val website: Uuid,
-    val hostname: Hostname?,
-    val language: Language?,
-    val screen: ScreenSize?,
-    val ip: String?,
-    val userAgent: String,
+    internal val baseUrl: Url,
+    internal val website: Uuid,
+    internal val hostname: Hostname?,
+    internal val language: Language?,
+    internal val screen: ScreenSize?,
+    internal val ip: Ip?,
+    internal val userAgent: String,
 ) {
-    var cache: String? = null
-    val httpClient by lazy {
+    internal var cache: String? = null
+    internal val httpClient by lazy {
         HttpClient {
             expectSuccess = true
 
@@ -82,7 +83,7 @@ class Umami(
                 hostname = hostname?.let(::Hostname),
                 language = language?.let(::Language),
                 screen = screen?.let(::ScreenSize),
-                ip = ip,
+                ip = ip?.let(::Ip),
                 userAgent = userAgent
             )
         }

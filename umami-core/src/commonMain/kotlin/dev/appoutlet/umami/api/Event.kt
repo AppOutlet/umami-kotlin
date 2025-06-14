@@ -53,6 +53,7 @@ suspend fun Umami.identify(
 }
 
 @OptIn(ExperimentalUuidApi::class)
+@Suppress("LongParameterList")
 private suspend fun Umami.send(
     type: EventType,
     referrer: String?,

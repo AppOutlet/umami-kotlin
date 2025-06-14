@@ -23,14 +23,15 @@ import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
 @OptIn(ExperimentalUuidApi::class)
+@Suppress("LongParameterList")
 class Umami(
-    internal val baseUrl: Url,
+    internal val baseUrl: Url = Url("https://api.umami.is"),
     internal val website: Uuid,
-    internal val hostname: Hostname?,
-    internal val language: Language?,
-    internal val screen: ScreenSize?,
-    internal val ip: Ip?,
-    internal val userAgent: String,
+    internal val hostname: Hostname? = null,
+    internal val language: Language? = null,
+    internal val screen: ScreenSize? = null,
+    internal val ip: Ip? = null,
+    internal val userAgent: String = createUserAgent(),
 ) {
     internal var cache: String? = null
     internal val httpClient by lazy {

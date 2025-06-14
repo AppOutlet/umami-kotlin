@@ -17,6 +17,10 @@ This SDK provides a type-safe, asynchronous wrapper, allowing you to integrate U
 * **Type-Safe:** Reduces the risk of errors when interacting with the Umami API.
 * **Lightweight & Simple:** A clean API surface that is easy to understand and integrate.
 
+## 🗺️ Roadmap
+
+For details on the current development status and future plans, please see the [Roadmap](docs/roadmap.md).
+
 ## 🙌 Contributing
 
 Contributions are welcome\! If you'd like to help improve the SDK, please feel free to open an issue to discuss a new feature or submit a pull request.

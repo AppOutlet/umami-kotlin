@@ -1,3 +1,5 @@
+![banner](docs/banner.png)
+
 # Umami Kotlin SDK
 
 > **Disclaimer:** This library is currently in active development. There is no stable or usable build available yet. Please check back later for updates or follow the repository for progress.

@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
 site_name: Umami Kotlin SDK
-site_url: https://umami-kotlin-sdk.appoutlet.dev
-repo_url: https://github.com/AppOutlet/umami-kotlin-sdk
-repo_name: AppOutlet/umami-kotlin-sdk
+site_url: https://umami-kotlin.appoutlet.dev
+repo_url: https://github.com/AppOutlet/umami-kotlin
+repo_name: AppOutlet/umami-kotlin
 theme:
   name: material
   palette:

@@ -117,7 +117,7 @@ mavenPublishing {
     pom {
         name = "umami"
         description = "Umami SDK for Kotlin projects"
-        url = "https://github.com/AppOutlet/umami-kotlin-sdk"
+        url = "https://github.com/AppOutlet/umami-kotlin"
         inceptionYear = "2025"
 
         licenses {
@@ -137,9 +137,9 @@ mavenPublishing {
         }
 
         scm {
-            url = "https://github.com/AppOutlet/umami-kotlin-sdk"
-            connection = "scm:git:https://github.com/AppOutlet/umami-kotlin-sdk.git"
-            developerConnection = "scm:git:ssh://github.com/AppOutlet/umami-kotlin-sdk.git"
+            url = "https://github.com/AppOutlet/umami-kotlin"
+            connection = "scm:git:https://github.com/AppOutlet/umami-kotlin.git"
+            developerConnection = "scm:git:ssh://github.com/AppOutlet/umami-kotlin.git"
         }
     }
 

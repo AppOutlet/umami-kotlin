@@ -6,8 +6,8 @@ on:
       - '**'
 
 jobs:
-  publish-artifacts:
-    name: Publish Artifacts
+  verify:
+    name: Verify
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

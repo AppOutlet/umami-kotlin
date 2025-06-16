@@ -1,5 +1,5 @@
 ![banner](docs/banner.png)
-
+# Umami Kotlin
 An unofficial, open-source Kotlin Multiplatform library for seamless interaction with the [Umami](https://umami.is) web analytics REST API.
 
 This SDK offers a type-safe, asynchronous wrapper, enabling you to integrate Umami's privacy-centric analytics into your Kotlin applications (Android, iOS, JVM, etc.) with minimal effort.
@@ -24,7 +24,7 @@ This SDK offers a type-safe, asynchronous wrapper, enabling you to integrate Uma
 
 ### Installation
 
-To add the Umami Kotlin SDK to your project, include the following dependency in your `build.gradle.kts` file:
+To add the Umami Kotlin to your project, include the following dependency in your `build.gradle.kts` file:
 
 ```kotlin
 // In your commonMain dependencies

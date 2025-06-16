@@ -28,6 +28,14 @@ jobs:
           git commit --no-verify -m "Bump to version ${{ github.ref_name }}"
           git push
 
+      - name: Set publishing parameters
+        run: |
+          echo "mavenCentralUsername=${{ secrets.ORG_GRADLE_PROJECT_MAVENCENTRALUSERNAME }}" >> gradle.properties
+          echo "mavenCentralPassword=${{ secrets.ORG_GRADLE_PROJECT_MAVENCENTRALPASSWORD }}" >> gradle.properties
+          echo "signingInMemoryKeyId=${{ secrets.ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYID }}" >> gradle.properties
+          echo "signingInMemoryKeyPassword=${{ secrets.ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYPASSWORD }}" >> gradle.properties
+          echo "signingInMemoryKey=\"${{ secrets.ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEY }}\"" >> gradle.properties
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
@@ -39,6 +47,9 @@ jobs:
         with:
           add-job-summary: 'on-failure'
           cache-read-only: false
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
 
       - name: Run detekt
         run: ./gradlew detekt

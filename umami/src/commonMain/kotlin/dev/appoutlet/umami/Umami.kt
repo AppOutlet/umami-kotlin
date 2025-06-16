@@ -25,7 +25,8 @@ import kotlin.uuid.Uuid
 /**
  * The main class for interacting with the Umami API.
  *
- * @property baseUrl The base URL of the Umami API. Defaults to "https://api.umami.is". If you are using a self-hosted version of Umami, you need to provide the URL pointing to your instance.
+ * @property baseUrl The base URL of the Umami API. Defaults to "https://api.umami.is". If you are using a self-hosted
+ * version of Umami, you need to provide the URL pointing to your instance.
  * @property website The UUID of the website to track events for.
  * @property hostname Optional hostname for the website.
  * @property language Optional language of the user's browser.
@@ -44,7 +45,7 @@ class Umami(
     internal val ip: Ip? = null,
     internal val userAgent: String = createUserAgent(),
 ) {
-    internal var cache: String? = null
+    internal var headers = mutableMapOf<String, String?>()
     internal val httpClient by lazy {
         HttpClient {
             expectSuccess = true
@@ -72,7 +73,14 @@ class Umami(
             }
         }.apply {
             plugin(HttpSend).intercept { requestBuilder ->
-                cache?.let { requestBuilder.headers.append("x-umami-cache", it) }
+
+                headers
+                    .filterValues { it != null }
+                    .forEach { (key, value) ->
+                        if (value.isNullOrBlank()) return@forEach
+                        requestBuilder.headers.append(name = key, value = value)
+                    }
+
                 execute(requestBuilder)
             }
         }
@@ -88,9 +96,10 @@ class Umami(
          * @param language Optional language string of the user's browser.
          * @param screen Optional screen size string of the user's device (e.g., "1920x1080").
          * @param ip Optional IP address string of the user.
-         * @param userAgent The user agent string for HTTP requests. Defaults to a generated string using [createUserAgent].
+         * @param userAgent The user agent string for HTTP requests. Defaults to a generated string [createUserAgent].
          * @return An instance of [Umami].
-         * @throws IllegalArgumentException if the website UUID string is invalid, or if other string parameters are invalid according to their respective domain classes.
+         * @throws IllegalArgumentException if the website UUID string is invalid, or if other string parameters are
+         * invalid according to their respective domain classes.
          */
         fun create(
             baseUrl: String = "https://api.umami.is",

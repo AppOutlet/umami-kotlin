@@ -6,14 +6,12 @@ on:
       - '**'
 
 jobs:
-  publish-artifacts:
-    name: Publish Artifacts
+  verify:
+    name: Verify
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: main
 
       - name: Setup Java
         uses: actions/setup-java@v4

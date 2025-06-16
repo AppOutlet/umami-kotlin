@@ -128,5 +128,5 @@ private suspend fun Umami.send(
 
     if (response.beep != null) error("Umami server considered the event invalid")
 
-    cache = response.cache
+    headers["x-umami-cache"] = response.cache
 }

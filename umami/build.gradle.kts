@@ -108,11 +108,9 @@ android {
 
 //Publishing your Kotlin Multiplatform library to Maven Central
 //https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-publish-libraries.html
-val libraryVersion = "0.1.1"
-
 mavenPublishing {
-    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
-    coordinates("dev.appoutlet", "umami", libraryVersion)
+    publishToMavenCentral(host = SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
+    coordinates(groupId = "dev.appoutlet", artifactId = "umami", version = "0.1.1")
 
     pom {
         name = "umami"

@@ -23,18 +23,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout main
           git add .
           git commit --no-verify -m "Bump to version ${{ github.ref_name }}"
           git push
-
-      - name: Set publishing parameters
-        run: |
-          echo "mavenCentralUsername=${{ secrets.ORG_GRADLE_PROJECT_MAVENCENTRALUSERNAME }}" >> gradle.properties
-          echo "mavenCentralPassword=${{ secrets.ORG_GRADLE_PROJECT_MAVENCENTRALPASSWORD }}" >> gradle.properties
-          echo "signingInMemoryKeyId=${{ secrets.ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYID }}" >> gradle.properties
-          echo "signingInMemoryKeyPassword=${{ secrets.ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYPASSWORD }}" >> gradle.properties
-          echo "signingInMemoryKey=\"${{ secrets.ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEY }}\"" >> gradle.properties
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -56,3 +47,9 @@ jobs:
 
       - name: Publish to Maven Central
         run: ./gradlew publishAllPublicationsToMavenCentralRepository --no-configuration-cache
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.ORG_GRADLE_PROJECT_MAVENCENTRALUSERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.ORG_GRADLE_PROJECT_MAVENCENTRALPASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyId: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYID }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYPASSWORD }}

@@ -24,7 +24,7 @@ This SDK offers a type-safe, asynchronous wrapper, enabling you to integrate Uma
 
 ### Installation
 
-To add the Umami Kotlin SDK to your project, include the following dependency in your `build.gradle.kts` file:
+To add the Umami Kotlin to your project, include the following dependency in your `build.gradle.kts` file:
 
 ```kotlin
 // In your commonMain dependencies
@@ -63,4 +63,4 @@ Contributions are highly welcome\! If you have an idea for a new feature or want
 
 ## 📜 License
 
-This project is licensed under the [MIT License](https://github.com/AppOutlet/umami-kotlin-sdk/blob/main/LICENSE).
+This project is licensed under the [MIT License](https://github.com/AppOutlet/umami-kotlin/blob/main/LICENSE).

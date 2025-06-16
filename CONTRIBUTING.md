@@ -1,6 +1,6 @@
-# Contributing to umami-kotlin-sdk
+# Contributing to umami-kotlin
 
-First off, thank you for considering contributing to `umami-kotlin-sdk`\! It’s people like you that make the open-source community such a fantastic place. We're thrilled you're here and welcome all positive contributions, whether it's reporting a bug, submitting a fix, proposing a new feature, or improving documentation.
+First off, thank you for considering contributing to `umami-kotlin`\! It’s people like you that make the open-source community such a fantastic place. We're thrilled you're here and welcome all positive contributions, whether it's reporting a bug, submitting a fix, proposing a new feature, or improving documentation.
 
 This document provides a set of guidelines to help you get started. Our goal is to make the contribution process as easy and transparent as possible for everyone.
 
@@ -14,7 +14,7 @@ There are many ways to contribute to the project.
 
 ### 🐛 Reporting Bugs
 
-If you encounter a bug, please [**open a new issue**](https://github.com/AppOutlet/umami-kotlin-sdk/issues/new) on our GitHub repository. A great bug report is detailed and reproducible. Please include:
+If you encounter a bug, please [**open a new issue**](https://github.com/AppOutlet/umami-kotlin/issues/new) on our GitHub repository. A great bug report is detailed and reproducible. Please include:
 
   * A clear and descriptive title.
   * The version of the SDK you are using.
@@ -24,13 +24,13 @@ If you encounter a bug, please [**open a new issue**](https://github.com/AppOutl
 
 ### ✨ Suggesting Enhancements
 
-Have an idea for a new feature or an improvement to an existing one? We'd love to hear it\! Please [**open a new issue**](https://github.com/AppOutlet/umami-kotlin-sdk/issues/new) to describe your proposal.
+Have an idea for a new feature or an improvement to an existing one? We'd love to hear it\! Please [**open a new issue**](https://github.com/AppOutlet/umami-kotlin/issues/new) to describe your proposal.
 
 Provide as much context as you can, including the problem you're trying to solve and why the enhancement would be valuable.
 
 ### 💻 Your First Code Contribution
 
-Ready to write some code? The best way to start is by looking for an existing issue to work on. For newcomers, we highly recommend picking an issue tagged with [`good first issue`](https://github.com/AppOutlet/umami-kotlin-sdk/issues?q=state%3Aopen%20label%3A%22good%20first%20issue%22), as these are designed to be great entry points into the project.
+Ready to write some code? The best way to start is by looking for an existing issue to work on. For newcomers, we highly recommend picking an issue tagged with [`good first issue`](https://github.com/AppOutlet/umami-kotlin/issues?q=state%3Aopen%20label%3A%22good%20first%20issue%22), as these are designed to be great entry points into the project.
 
 Once you've found an issue you'd like to tackle, leave a comment to let us know you're working on it.
 
@@ -53,14 +53,14 @@ To get the project running on your local machine, you'll need a couple of things
 We use the standard GitHub Fork & Pull Request workflow. If you are new to this process, you can read GitHub's guide on [how to create a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request). Here is the step-by-step process:
 
 1.  **Fork the Repository**
-    Click the "Fork" button at the top right of the [main repository page](https://github.com/AppOutlet/umami-kotlin-sdk).
+    Click the "Fork" button at the top right of the [main repository page](https://github.com/AppOutlet/umami-kotlin).
 
 2.  **Clone Your Fork**
     Clone your forked repository to your local machine.
 
     ```bash
-    git clone https://github.com/YOUR_USERNAME/umami-kotlin-sdk.git
-    cd umami-kotlin-sdk
+    git clone https://github.com/YOUR_USERNAME/umami-kotlin.git
+    cd umami-kotlin
     ```
 
 3.  **Create a New Branch**
@@ -95,7 +95,7 @@ We use the standard GitHub Fork & Pull Request workflow. If you are new to this 
     ```
 
 7.  **Submit a Pull Request (PR)**
-    Go to your fork on GitHub and click the "Compare & pull request" button. This will open a PR against the main `umami-kotlin-sdk` repository.
+    Go to your fork on GitHub and click the "Compare & pull request" button. This will open a PR against the main `umami-kotlin` repository.
 
     In your PR description, please:
 

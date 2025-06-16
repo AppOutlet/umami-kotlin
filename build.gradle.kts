@@ -11,7 +11,7 @@ plugins {
 }
 
 tasks.dokkaHtmlMultiModule {
-    moduleName.set("Umami Kotlin SDK")
+    moduleName.set("Umami Kotlin")
     outputDirectory.set(layout.projectDirectory.dir("docs/reference"))
 }
 

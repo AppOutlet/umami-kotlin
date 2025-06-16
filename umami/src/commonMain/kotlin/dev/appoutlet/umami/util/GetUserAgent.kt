@@ -24,6 +24,6 @@ fun createUserAgent(
  * Gets the current platform/operating system.
  * This is an expect function, with actual implementations for each supported platform.
  *
- * @return A string representing the current platform (e.g., "Android", "iOS", "macOS", "Windows", "Linux", "Js", "WasmJs").
+ * @return A string representing the current platform (e.g., "Android", "iOS", "macOS", etc.).
  */
 internal expect fun getPlatform(): String

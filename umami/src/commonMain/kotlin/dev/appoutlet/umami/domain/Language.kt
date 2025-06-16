@@ -4,6 +4,12 @@ import kotlin.jvm.JvmInline
 
 private const val MAX_LANGUAGE_LENGTH = 35
 
+/**
+ * Represents a language code.
+ *
+ * @property value The string representation of the language code (e.g., "en", "pt-BR").
+ * @throws IllegalArgumentException if the language code is blank or exceeds [MAX_LANGUAGE_LENGTH] characters.
+ */
 @JvmInline
 value class Language(val value: String) {
     init {

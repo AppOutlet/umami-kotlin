@@ -110,12 +110,13 @@ android {
 //https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-publish-libraries.html
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
-    coordinates("dev.appoutlet", "umami-core", "1.0.0")
+    coordinates("dev.appoutlet", "umami", "0.1.0")
 
     pom {
-        name = "umami-core"
-        description = "Kotlin Multiplatform library"
-        url = "github url" //todo
+        name = "umami"
+        description = "Umami SDK for Kotlin projects"
+        url = "https://github.com/AppOutlet/umami-kotlin-sdk"
+        inceptionYear = "2025"
 
         licenses {
             license {
@@ -126,15 +127,19 @@ mavenPublishing {
 
         developers {
             developer {
-                id = "" //todo
-                name = "" //todo
-                email = "" //todo
+                id = "messiaslima"
+                name = "Messias Junior"
+                email = "messiaslima.03@gmail.com"
+                url = "https://github.com/messiaslima"
             }
         }
 
         scm {
-            url = "github url" //todo
+            url = "https://github.com/AppOutlet/umami-kotlin-sdk"
+            connection = "scm:git:https://github.com/AppOutlet/umami-kotlin-sdk.git"
+            developerConnection = "scm:git:ssh://github.com/AppOutlet/umami-kotlin-sdk.git"
         }
     }
+
     if (project.hasProperty("signing.keyId")) signAllPublications()
 }

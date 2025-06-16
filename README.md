@@ -2,8 +2,6 @@
 
 # Umami Kotlin SDK
 
-> **Disclaimer:** This library is currently in active development. There is no stable or usable build available yet. Please check back later for updates or follow the repository for progress.
-
 An unofficial, open-source library for Kotlin Multiplatform that makes it easy to interact with the [Umami](https://umami.is) web analytics REST API.
 
 This SDK provides a type-safe, asynchronous wrapper, allowing you to integrate Umami's privacy-focused analytics into your Kotlin applications (Android, iOS, JVM, etc.) with minimal effort.
@@ -22,6 +20,32 @@ This SDK provides a type-safe, asynchronous wrapper, allowing you to integrate U
 ## 🗺️ Roadmap
 
 For details on the current development status and future plans, please see the [Roadmap](docs/roadmap.md).
+
+## How to use it?
+
+### Installation
+
+To use the Umami Kotlin SDK in your project, add the following dependency to your `build.gradle.kts` file:
+
+```kotlin
+dependencies {
+    implementation("dev.appoutlet:umami:<library version>")
+}
+```
+
+### Usage
+
+Here's a basic example of how to use the SDK:
+
+```kotlin
+val umami = Umami.create(website = "<website id>")
+
+umami.event(
+    title = "Hello World",
+    url = "/hello-world",
+    name = "terminal-app-event",
+)
+```
 
 ## 🙌 Contributing
 

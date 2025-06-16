@@ -44,7 +44,7 @@ class Umami(
     internal val ip: Ip? = null,
     internal val userAgent: String = createUserAgent(),
 ) {
-    internal var cache: String? = null
+    internal var headers = mutableMapOf<String, String?>()
     internal val httpClient by lazy {
         HttpClient {
             expectSuccess = true
@@ -72,7 +72,14 @@ class Umami(
             }
         }.apply {
             plugin(HttpSend).intercept { requestBuilder ->
-                cache?.let { requestBuilder.headers.append("x-umami-cache", it) }
+
+                headers
+                    .filterValues { it != null }
+                    .forEach { (key, value) ->
+                        if (value.isNullOrBlank()) return@forEach
+                        requestBuilder.headers.append(name = key, value = value)
+                    }
+
                 execute(requestBuilder)
             }
         }

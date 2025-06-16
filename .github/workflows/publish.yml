@@ -1,0 +1,47 @@
+name: Publish
+run-name: Release ${{ github.ref_name }}
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  publish-artifacts:
+    name: Publish Artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Update gradle project version
+        run: |
+          sed -i -E 's/libraryVersion = "[0-9]+\.[0-9]+\.[0-9]+"/libraryVersion = "${{ github.ref_name }}"/g' umami/build.gradle.kts
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout main
+          git add .
+          git commit --no-verify -m "Bump to version ${{ github.ref_name }}"
+          git push
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'jetbrains'
+          java-version: '17'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          add-job-summary: 'on-failure'
+          cache-read-only: false
+
+      - name: Run detekt
+        run: ./gradlew detekt
+
+      - name: Publish to Maven Central
+        run: ./gradlew publishAllPublicationsToMavenCentralRepository --no-configuration-cache

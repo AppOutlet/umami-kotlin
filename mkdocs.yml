@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
+site_name: Umami Kotlin SDK
+site_url: https://umami-kotlin-sdk.appoutlet.dev
+repo_url: https://github.com/AppOutlet/umami-kotlin-sdk
+repo_name: AppOutlet/umami-kotlin-sdk
+theme:
+  name: material
+  palette:
+    primary: 'deep purple'
+    accent: 'indigo'
+  features:
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.top
+    - search.suggest
+  icon:
+    repo: fontawesome/brands/github
+
+nav:
+  - Overview: index.md
+  - Roadmap: roadmap.md
+  - API Reference: reference
+
+markdown_extensions:
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+plugins:
+  - search

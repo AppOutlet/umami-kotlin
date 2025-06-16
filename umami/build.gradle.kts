@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.maven.publish)
     alias(libs.plugins.serialization)
     alias(libs.plugins.detekt)
+    alias(libs.plugins.dokka)
 }
 kotlin {
     jvmToolchain(17)

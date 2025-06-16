@@ -6,6 +6,18 @@ import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import kotlin.uuid.ExperimentalUuidApi
 
+/**
+ * Sends an event to the Umami API.
+ *
+ * @param referrer The referrer URL.
+ * @param title The title of the page.
+ * @param url The URL of the page.
+ * @param name The name of the event.
+ * @param data Additional data for the event.
+ * @param tag A tag for the event.
+ * @param timestamp The timestamp of the event.
+ * @param id The ID of the event.
+ */
 suspend fun Umami.event(
     referrer: String? = null,
     title: String? = null,
@@ -29,6 +41,18 @@ suspend fun Umami.event(
     )
 }
 
+/**
+ * Sends an identify event to the Umami API.
+ *
+ * @param referrer The referrer URL.
+ * @param title The title of the page.
+ * @param url The URL of the page.
+ * @param name The name of the event.
+ * @param data Additional data for the event.
+ * @param tag A tag for the event.
+ * @param timestamp The timestamp of the event.
+ * @param id The ID of the event.
+ */
 suspend fun Umami.identify(
     referrer: String? = null,
     title: String? = null,
@@ -52,6 +76,19 @@ suspend fun Umami.identify(
     )
 }
 
+/**
+ * Sends an event to the Umami API.
+ *
+ * @param type The type of the event.
+ * @param referrer The referrer URL.
+ * @param title The title of the page.
+ * @param url The URL of the page.
+ * @param name The name of the event.
+ * @param data Additional data for the event.
+ * @param tag A tag for the event.
+ * @param timestamp The timestamp of the event.
+ * @param id The ID of the event.
+ */
 @OptIn(ExperimentalUuidApi::class)
 @Suppress("LongParameterList")
 private suspend fun Umami.send(

@@ -1,4 +1,5 @@
 import com.vanniktech.maven.publish.SonatypeHost
+import org.jetbrains.dokka.gradle.DokkaTaskPartial
 
 plugins {
     alias(libs.plugins.multiplatform)
@@ -6,6 +7,7 @@ plugins {
     alias(libs.plugins.maven.publish)
     alias(libs.plugins.serialization)
     alias(libs.plugins.detekt)
+    alias(libs.plugins.dokka)
 }
 kotlin {
     jvmToolchain(17)

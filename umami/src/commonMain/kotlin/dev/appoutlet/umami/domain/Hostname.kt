@@ -4,6 +4,12 @@ import kotlin.jvm.JvmInline
 
 private const val MAX_HOSTNAME_LENGTH = 100
 
+/**
+ * Represents a hostname.
+ *
+ * @property value The string representation of the hostname.
+ * @throws IllegalArgumentException if the hostname is longer than [MAX_HOSTNAME_LENGTH] characters.
+ */
 @JvmInline
 value class Hostname(val value: String) {
     init {

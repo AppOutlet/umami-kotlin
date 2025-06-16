@@ -2,7 +2,7 @@
 
 This document outlines the current development status and future plans for the Umami API. It is intended for developers who are using or contributing to this library.
 
-## Umami API (2% Complete)
+## Umami API
 
 - [x] Send tracking event data - `POST /api/send`
 - [ ] Login user - `POST /api/auth/login`

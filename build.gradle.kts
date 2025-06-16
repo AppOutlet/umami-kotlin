@@ -1,3 +1,6 @@
+import org.gradle.kotlin.dsl.withType
+import org.jetbrains.dokka.gradle.DokkaTaskPartial
+
 plugins {
     alias(libs.plugins.multiplatform).apply(false)
     alias(libs.plugins.android.library).apply(false)
@@ -5,4 +8,17 @@ plugins {
     alias(libs.plugins.android.application).apply(false)
     alias(libs.plugins.detekt)
     alias(libs.plugins.dokka)
+}
+
+tasks.dokkaHtmlMultiModule {
+    moduleName.set("Umami Kotlin SDK")
+    outputDirectory.set(layout.projectDirectory.dir("docs/reference"))
+}
+
+subprojects {
+    tasks.withType<DokkaTaskPartial>().configureEach {
+        dokkaSourceSets.configureEach {
+            includes.from("module.md")
+        }
+    }
 }

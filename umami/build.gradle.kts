@@ -141,5 +141,5 @@ mavenPublishing {
         }
     }
 
-    if (project.hasProperty("signing.keyId")) signAllPublications()
+    signAllPublications()
 }

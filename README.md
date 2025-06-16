@@ -1,55 +1,67 @@
 ![banner](docs/banner.png)
 
-# Umami Kotlin SDK
+An unofficial, open-source Kotlin Multiplatform library for seamless interaction with the [Umami](https://umami.is) web analytics REST API.
 
-An unofficial, open-source library for Kotlin Multiplatform that makes it easy to interact with the [Umami](https://umami.is) web analytics REST API.
+This SDK offers a type-safe, asynchronous wrapper, enabling you to integrate Umami's privacy-centric analytics into your Kotlin applications (Android, iOS, JVM, etc.) with minimal effort.
 
-This SDK provides a type-safe, asynchronous wrapper, allowing you to integrate Umami's privacy-focused analytics into your Kotlin applications (Android, iOS, JVM, etc.) with minimal effort.
+### What is Umami?
 
-## What is Umami?
+[Umami](https://umami.is) is a simple, fast, and privacy-focused alternative to Google Analytics. It grants you powerful web analytics while respecting user privacy by not collecting any personal information. This SDK facilitates sending data directly from your application to your self-hosted or cloud-based Umami instance.
 
-[Umami](https://umami.is) is a simple, fast, privacy-focused alternative to Google Analytics. It provides you with powerful web analytics while respecting user privacy and without collecting any personal information. This SDK helps you send data to your self-hosted or cloud-hosted Umami instance directly from your application.
+## ✨ Key Features
 
-## ✨ Features
+* **Kotlin Multiplatform:** Write your analytics logic once and deploy it across Android, iOS, JVM, and other platforms.
+* **Asynchronous by Design:** Built with Kotlin Coroutines for efficient, non-blocking API communication.
+* **Type-Safe:** Minimizes errors and ensures correctness when interacting with the Umami API.
+* **Lightweight and Simple:** Features a clean, intuitive API that is easy to integrate and use.
 
-* **Kotlin Multiplatform:** Write your analytics tracking logic once and share it across Android, iOS, JVM, and more.
-* **Asynchronous:** Built with Kotlin Coroutines for non-blocking API calls.
-* **Type-Safe:** Reduces the risk of errors when interacting with the Umami API.
-* **Lightweight & Simple:** A clean API surface that is easy to understand and integrate.
+## 🚀 Getting Started
 
-## 🗺️ Roadmap
+### Prerequisites
 
-For details on the current development status and future plans, please see the [Roadmap](docs/roadmap.md).
-
-## How to use it?
+* An Umami instance (either [cloud-hosted](https://umami.is/cloud) or self-hosted).
+* Your Website ID from your Umami dashboard.
 
 ### Installation
 
-To use the Umami Kotlin SDK in your project, add the following dependency to your `build.gradle.kts` file:
+To add the Umami Kotlin SDK to your project, include the following dependency in your `build.gradle.kts` file:
 
 ```kotlin
+// In your commonMain dependencies
 dependencies {
-    implementation("dev.appoutlet:umami:<library version>")
+    implementation("dev.appoutlet:umami:<latest-version>")
 }
 ```
 
+*Remember to replace `<latest-version>` with the most recent version from the repository.*
+
 ### Usage
 
-Here's a basic example of how to use the SDK:
+1.  **Initialize the SDK:** Create an `Umami` instance with your server URL and website ID.
 
-```kotlin
-val umami = Umami.create(website = "<website id>")
+    ```kotlin
+    val umami = Umami.create(
+        website = "<your-website-id>"                // The ID of your website in Umami
+    )
+    ```
 
-umami.event(
-    title = "Hello World",
-    url = "/hello-world",
-    name = "terminal-app-event",
-)
-```
+2.  **Track Events:** Send custom events with optional data payloads.
 
-## 🙌 Contributing
+    ```kotlin
+    // Example of tracking a simple page view or event
+    umami.trackEvent(
+        url = "/screen/main",
+        name = "app-launch"
+    )
+    ```
 
-Contributions are welcome\! If you'd like to help improve the SDK, please feel free to open an issue to discuss a new feature or submit a pull request.
+## 🗺️ Project Roadmap
+
+For details on our development status and future plans, please consult the [Roadmap](docs/roadmap.md).
+
+## 🙌 How to Contribute
+
+Contributions are highly welcome\! If you have an idea for a new feature or want to help improve the SDK, please open an issue for discussion or submit a pull request.
 
 ## 📜 License
 

@@ -16,7 +16,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(project(":umami-core"))
+            implementation(project(":umami"))
         }
     }
 }

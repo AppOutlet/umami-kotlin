@@ -28,7 +28,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-include(":umami-core")
+include(":umami")
 include(":sample:composeApp")
 include(":sample:terminalApp")
 

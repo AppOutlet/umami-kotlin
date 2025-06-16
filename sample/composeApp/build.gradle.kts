@@ -39,7 +39,7 @@ kotlin {
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
-            implementation(project(":umami-core"))
+            implementation(project(":umami"))
         }
 
         androidMain.dependencies {

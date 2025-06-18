@@ -34,19 +34,16 @@ suspend fun whenSomethingHappens() {
 
 ### **Ready to Start?**
 
-Dive into our **Get Started** guide to add `umami-kotlin` to your project and track your first event in minutes.
+Dive into our **Get Started** guide to add `umami-kotlin` to your project and track your first event in minutes. Or, if you want to see the source code, check out the project on GitHub.
 
-**[Get Started 🚀](get-started.md){ .md-button .md-button--primary }**
-
-Or, if you want to see the source code, check out the project on GitHub.
-
-**[View on GitHub](https://github.com/AppOutlet/umami-kotlin) { .md-button }**
+**[Get Started  :octicons-rocket-16:](get-started.md){ .md-button .md-button--primary }**
+**[View on GitHub :octicons-mark-github-24:](https://github.com/AppOutlet/umami-kotlin){ .md-button }**
 
 -----
 
-![AppOutlet Logo](img/appoutlet.png) { align=left }
+[![AppOutlet Logo](img/appoutlet.png){ align=left width=200 }](https://appoutlet.dev)
 
 ### **A Project by [AppOutlet](https://appoutlet.dev)**
 
- `umami-kotlin` is developed and maintained by **AppOutlet**. You can explore our other projects on our website.
+ `umami-kotlin` is developed and maintained by **AppOutlet**. You can explore our other projects on [our website](https://appoutlet.dev).
  

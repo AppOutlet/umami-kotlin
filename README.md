@@ -1,5 +1,6 @@
 ![banner](docs/banner.png)
 # Umami Kotlin
+
 [![Maven Central Version](https://img.shields.io/maven-central/v/dev.appoutlet/umami?style=for-the-badge&label=Maven%20Central&link=https%3A%2F%2Fcentral.sonatype.com%2Fartifact%2Fdev.appoutlet%2Fumami)](https://central.sonatype.com/artifact/dev.appoutlet/umami)
 
 An unofficial, open-source Kotlin Multiplatform library for seamless interaction with the [Umami](https://umami.is) web analytics REST API.
@@ -8,7 +9,7 @@ This SDK offers a type-safe, asynchronous wrapper, enabling you to integrate Uma
 
 ### What is Umami?
 
-[Umami](https://umami.is) is a simple, fast, and privacy-focused alternative to Google Analytics. It grants you powerful web analytics while respecting user privacy by not collecting any personal information. This SDK facilitates sending data directly from your application to your self-hosted or cloud-based Umami instance.
+[Umami](https://umami.is) is a simple, fast, and privacy-focused alternative to Google Analytics. It grants you powerful web analytics while respecting user privacy by not collecting any personal information.
 
 ## ✨ Key Features
 
@@ -17,54 +18,34 @@ This SDK offers a type-safe, asynchronous wrapper, enabling you to integrate Uma
 * **Type-Safe:** Minimizes errors and ensures correctness when interacting with the Umami API.
 * **Lightweight and Simple:** Features a clean, intuitive API that is easy to integrate and use.
 
-## 🚀 Getting Started
+## 📚 Documentation
 
-### Prerequisites
+This README provides a high-level overview. For a comprehensive guide, including **installation instructions, detailed usage examples, and the full API reference**, please visit our official documentation website.
 
-* An Umami instance (either [cloud-hosted](https://umami.is/cloud) or self-hosted).
-* Your Website ID from your Umami dashboard.
+### **[➡️ View the Official Docs](https://appoutlet.dev/umami-kotlin/)**
 
-### Installation
-
-To add the Umami Kotlin to your project, include the following dependency in your `build.gradle.kts` file:
-
+#### Basic usage
 ```kotlin
-// In your commonMain dependencies
-dependencies {
-    implementation("dev.appoutlet:umami:<latest-version>")
+// Add the dependency in your commonMain build.gradle.kts file
+commonMain.dependencies {
+    implementation("dev.appoutlet:umami:LATEST_VERSION")
+}
+
+// Initialize the Umami instance with your server URL and website ID
+val umami = Umami.create(website = "your-website-id")
+
+// Track a custom event
+fun whenSomethingHappens() {
+    umami.event(url = "/screen/main", name = "app-launch")
 }
 ```
 
-*Remember to replace `<latest-version>` with the most recent version from the repository.*
-
-### Usage
-
-1.  **Initialize the SDK:** Create an `Umami` instance with your server URL and website ID.
-
-    ```kotlin
-    val umami = Umami.create(
-        website = "<your-website-id>"                // The ID of your website in Umami
-    )
-    ```
-
-2.  **Track Events:** Send custom events with optional data payloads.
-
-    ```kotlin
-    // Example of tracking a simple page view or event
-    umami.trackEvent(
-        url = "/screen/main",
-        name = "app-launch"
-    )
-    ```
-
-## 🗺️ Project Roadmap
-
-For details on our development status and future plans, please consult the [Roadmap](docs/roadmap.md).
-
 ## 🙌 How to Contribute
 
-Contributions are highly welcome\! If you have an idea for a new feature or want to help improve the SDK, please open an issue for discussion or submit a pull request.
+Contributions are highly welcome\! If you have an idea for a new feature or want to help improve the SDK, please open an issue for discussion or submit a pull request on GitHub.
+
+This library is proudly developed and maintained by **[AppOutlet](https://appoutlet.dev)**.
 
 ## 📜 License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](https://www.google.com/search?q=LICENSE).

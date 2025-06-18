@@ -14,6 +14,7 @@ theme:
     - navigation.instant.progress
     - navigation.top
     - search.suggest
+    - content.code.copy
   icon:
     repo: fontawesome/brands/github
 
@@ -32,6 +33,9 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - attr_list
+  - md_in_html
+  - pymdownx.blocks.caption
 
 plugins:
   - search

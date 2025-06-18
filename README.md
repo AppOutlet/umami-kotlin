@@ -53,9 +53,9 @@ This project is licensed under the [MIT License](https://www.google.com/search?q
 -----
 <div align="center">
 
-![AppOutlet Logo](docs/img/appoutlet.png)
+[![AppOutlet Logo](docs/img/appoutlet.png)](https://appoutlet.dev)
 ### **A Project by [AppOutlet](https://appoutlet.dev)**
 
 </div>
 
-`umami-kotlin` is developed and maintained by **AppOutlet**. You can explore our other projects on our website.
+`umami-kotlin` is developed and maintained by **AppOutlet**. You can explore our other projects on [our website](https://appoutlet.dev).

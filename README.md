@@ -1,4 +1,4 @@
-![banner](docs/banner.png)
+![banner](docs/img/banner.png)
 # Umami Kotlin
 
 [![Maven Central Version](https://img.shields.io/maven-central/v/dev.appoutlet/umami?style=for-the-badge&label=Maven%20Central&link=https%3A%2F%2Fcentral.sonatype.com%2Fartifact%2Fdev.appoutlet%2Fumami)](https://central.sonatype.com/artifact/dev.appoutlet/umami)
@@ -49,3 +49,13 @@ This library is proudly developed and maintained by **[AppOutlet](https://appout
 ## 📜 License
 
 This project is licensed under the [MIT License](https://www.google.com/search?q=LICENSE).
+
+-----
+<div align="center">
+
+![AppOutlet Logo](docs/img/appoutlet.png)
+### **A Project by [AppOutlet](https://appoutlet.dev)**
+
+</div>
+
+`umami-kotlin` is developed and maintained by **AppOutlet**. You can explore our other projects on our website.

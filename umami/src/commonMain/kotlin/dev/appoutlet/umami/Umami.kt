@@ -25,6 +25,7 @@ import kotlin.uuid.Uuid
 /**
  * The main class for interacting with the Umami API.
  *
+ * @constructor Creates an instance of [Umami] with the specified parameters using typesafe parameters.
  * @property baseUrl The base URL of the Umami API. Defaults to "https://api.umami.is". If you are using a self-hosted
  * version of Umami, you need to provide the URL pointing to your instance.
  * @property website The UUID of the website to track events for.

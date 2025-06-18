@@ -51,11 +51,11 @@ This library is proudly developed and maintained by **[AppOutlet](https://appout
 This project is licensed under the [MIT License](https://www.google.com/search?q=LICENSE).
 
 -----
-<div align="center">
-
-[![AppOutlet Logo](docs/img/appoutlet.png)](https://appoutlet.dev)
-### **A Project by [AppOutlet](https://appoutlet.dev)**
-
+<div>
+    <a href="https://appoutlet.dev">
+        <img src="docs/img/appoutlet.png" width="128" align="left" />
+    </a>
 </div>
 
-`umami-kotlin` is developed and maintained by **AppOutlet**. You can explore our other projects on [our website](https://appoutlet.dev).
+### A Project by [AppOutlet](https://appoutlet.dev)
+`umami-kotlin` is a library developed and maintained by **AppOutlet**. You can explore our other projects on [our website](https://appoutlet.dev).

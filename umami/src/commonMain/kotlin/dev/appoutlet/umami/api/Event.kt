@@ -30,7 +30,6 @@ import kotlin.uuid.ExperimentalUuidApi
  * @param timestamp The timestamp of the event. The default is the current time in milliseconds since the epoch.
  * @param id The ID of the event.
  */
-@OptIn(ExperimentalTime::class)
 fun Umami.event(
     referrer: String? = null,
     title: String? = null,
@@ -38,7 +37,7 @@ fun Umami.event(
     name: String? = null,
     data: Map<String, Any?>? = null,
     tag: String? = null,
-    timestamp: Long? = Clock.System.now().toEpochMilliseconds(),
+    timestamp: Long? = currentTimeMillis(),
     id: String? = null,
 ) {
     send(
@@ -55,16 +54,15 @@ fun Umami.event(
 }
 
 /**
- * Sends an identify event to the Umami API.
+ * Sends an event to identify the user on the Umami server.
  *
  * @param data Additional data for the event.
  * @param timestamp The timestamp of the event.
  * @param id The ID of the event.
  */
-@OptIn(ExperimentalTime::class)
 fun Umami.identify(
     data: Map<String, Any?>? = null,
-    timestamp: Long? = Clock.System.now().toEpochMilliseconds(),
+    timestamp: Long? = currentTimeMillis(),
     id: String? = null,
 ) {
     send(
@@ -79,6 +77,14 @@ fun Umami.identify(
         id = id
     )
 }
+
+/**
+ * Returns the current time in milliseconds since the epoch.
+ *
+ * Uses the multiplatform `Clock.System.now()` to obtain the current instant and converts it to milliseconds.
+ */
+@OptIn(ExperimentalTime::class)
+private fun currentTimeMillis(): Long = Clock.System.now().toEpochMilliseconds()
 
 /**
  * Sends an event to the Umami API.

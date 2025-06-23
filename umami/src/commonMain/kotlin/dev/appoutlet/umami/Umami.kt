@@ -103,7 +103,7 @@ class Umami(
          * invalid according to their respective domain classes.
          */
         fun create(
-            baseUrl: String = "https://api.umami.is",
+            baseUrl: String = "https://cloud.umami.is",
             website: String,
             hostname: String? = null,
             language: String? = null,

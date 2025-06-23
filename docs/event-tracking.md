@@ -22,7 +22,7 @@ suspend fun event(
     name: String? = null,
     data: Map<String, Any>? = null,
     tag: String? = null,
-    timestamp: Long = currentTimeMillis(),
+    timestamp: Long = now(),
     id: String? = null
 )
 ```
@@ -36,7 +36,7 @@ suspend fun event(
 * `name` (String): The name of the custom event. This is the primary field for tracking a **custom event**.
 * `data` (Map): A map of additional, custom data to associate with the event.
 * `tag` (String): A tag to categorize the event.
-* `timestamp` (Long): The timestamp of when the event occurred, in milliseconds since the epoch. Defaults to the current time.
+* `timestamp` (Long): The timestamp of when the event occurred, in **seconds** since the epoch. Defaults to the current time.
 * `id` (String): A unique identifier for the event.
 
 !!! info
@@ -74,7 +74,7 @@ The `identify()` function is a specialized method used to associate custom data 
 ```kotlin
 suspend fun identify(
     data: Map<String, Any>,
-    timestamp: Long = currentTimeMillis(),
+    timestamp: Long = now(),
     id: String? = null
 )
 ```

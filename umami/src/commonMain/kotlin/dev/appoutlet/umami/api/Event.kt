@@ -5,17 +5,12 @@ import dev.appoutlet.umami.Umami
 import io.ktor.client.call.body
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.post
-import io.ktor.client.request.preparePost
 import io.ktor.client.request.setBody
 import io.ktor.client.request.url
-import io.ktor.client.statement.HttpStatement
 import io.ktor.http.HttpMethod
-import io.ktor.http.URLBuilder
-import io.ktor.http.isSuccess
 import kotlinx.coroutines.launch
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
-import kotlin.time.Instant
 import kotlin.uuid.ExperimentalUuidApi
 
 /**

@@ -18,7 +18,6 @@ import kotlinx.coroutines.launch
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
-
 /**
  * Default event queue capacity. The capacity can be customized on the Umami object creation.
  * After this number, the queue will wait until the list has room for adding more items in the queue.

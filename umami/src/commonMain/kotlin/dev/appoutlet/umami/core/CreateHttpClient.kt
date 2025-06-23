@@ -15,7 +15,6 @@ import io.ktor.http.userAgent
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-
 /**
  * Creates and configures a new [HttpClient] instance for the [Umami] context.
  *

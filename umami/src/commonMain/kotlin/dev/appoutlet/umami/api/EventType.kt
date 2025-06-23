@@ -1,7 +1,7 @@
 package dev.appoutlet.umami.api
 
 /**
- * Represents the type of an event.
+ * Represents the type of the event.
  *
  * @property value The string representation of the event type.
  */

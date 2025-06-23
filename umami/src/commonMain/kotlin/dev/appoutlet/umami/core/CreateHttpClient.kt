@@ -15,7 +15,20 @@ import io.ktor.http.userAgent
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-fun Umami.createHttpClient() = HttpClient {
+
+/**
+ * Creates and configures a new [HttpClient] instance for the [Umami] context.
+ *
+ * The client is set up with:
+ * - Default request settings (base URL, JSON content type, accept header, user agent)
+ * - Logging plugin (disabled by default)
+ * - Content negotiation using kotlinx.serialization with custom JSON settings
+ * - Interceptor to append non-blank headers to each request
+ *
+ * @receiver [Umami] The context providing configuration values such as baseUrl and userAgent.
+ * @return Configured [HttpClient] instance.
+ */
+internal fun Umami.createHttpClient() = HttpClient {
     expectSuccess = true
 
     defaultRequest {

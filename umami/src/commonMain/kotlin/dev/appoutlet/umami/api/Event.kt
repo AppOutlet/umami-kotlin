@@ -13,6 +13,9 @@ import io.ktor.http.HttpMethod
 import io.ktor.http.URLBuilder
 import io.ktor.http.isSuccess
 import kotlinx.coroutines.launch
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 import kotlin.uuid.ExperimentalUuidApi
 
 /**
@@ -24,17 +27,18 @@ import kotlin.uuid.ExperimentalUuidApi
  * @param name The name of the event.
  * @param data Additional data for the event.
  * @param tag A tag for the event.
- * @param timestamp The timestamp of the event.
+ * @param timestamp The timestamp of the event. The default is the current time in milliseconds since the epoch.
  * @param id The ID of the event.
  */
-suspend fun Umami.event(
+@OptIn(ExperimentalTime::class)
+fun Umami.event(
     referrer: String? = null,
     title: String? = null,
     url: String? = null,
-    name: String,
+    name: String? = null,
     data: Map<String, Any?>? = null,
     tag: String? = null,
-    timestamp: Long? = null,
+    timestamp: Long? = Clock.System.now().toEpochMilliseconds(),
     id: String? = null,
 ) {
     send(
@@ -53,34 +57,24 @@ suspend fun Umami.event(
 /**
  * Sends an identify event to the Umami API.
  *
- * @param referrer The referrer URL.
- * @param title The title of the page.
- * @param url The URL of the page.
- * @param name The name of the event.
  * @param data Additional data for the event.
- * @param tag A tag for the event.
  * @param timestamp The timestamp of the event.
  * @param id The ID of the event.
  */
-// TODO remove unused parameters
-suspend fun Umami.identify(
-    referrer: String? = null,
-    title: String? = null,
-    url: String? = null,
-    name: String,
+@OptIn(ExperimentalTime::class)
+fun Umami.identify(
     data: Map<String, Any?>? = null,
-    tag: String? = null,
-    timestamp: Long? = null,
+    timestamp: Long? = Clock.System.now().toEpochMilliseconds(),
     id: String? = null,
 ) {
     send(
         type = EventType.Identify,
-        referrer = referrer,
-        title = title,
-        url = url,
-        name = name,
+        referrer = null,
+        title = null,
+        url = null,
+        name = null,
         data = data,
-        tag = tag,
+        tag = null,
         timestamp = timestamp,
         id = id
     )
@@ -101,12 +95,12 @@ suspend fun Umami.identify(
  */
 @OptIn(ExperimentalUuidApi::class)
 @Suppress("LongParameterList")
-private suspend fun Umami.send(
+private fun Umami.send(
     type: EventType,
     referrer: String?,
     title: String?,
     url: String?,
-    name: String,
+    name: String?,
     data: Map<String, Any?>?,
     tag: String?,
     timestamp: Long?,
@@ -141,7 +135,11 @@ private suspend fun Umami.send(
     eventQueue.trySend(requestBuilder)
 }
 
-
+/**
+ * Processes a single event queue item by sending the HTTP request to the Umami API.
+ *
+ * @param request The HTTP request builder containing the event data.
+ */
 internal fun Umami.processEventQueueItem(request: HttpRequestBuilder) = umamiCoroutineScope.launch {
     try {
         val response = httpClient.post(request).body<EventResponse>()

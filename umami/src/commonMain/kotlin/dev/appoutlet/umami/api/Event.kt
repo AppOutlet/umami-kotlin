@@ -78,7 +78,7 @@ fun Umami.identify(
 /**
  * Returns the current time in milliseconds since the epoch.
  *
- * Uses the multiplatform `Clock.System.now()` to obtain the current instant and returns the number of seconds since the epoch.
+ * Uses `Clock.System.now()` to obtain the current instant and returns the number of seconds since the epoch.
  * Note: The returned value is in seconds, not milliseconds.
  */
 @OptIn(ExperimentalTime::class)

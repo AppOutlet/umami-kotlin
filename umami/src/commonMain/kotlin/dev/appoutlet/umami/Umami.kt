@@ -8,8 +8,8 @@ import dev.appoutlet.umami.domain.Ip
 import dev.appoutlet.umami.domain.Language
 import dev.appoutlet.umami.domain.ScreenSize
 import dev.appoutlet.umami.util.createUserAgent
-import io.ktor.client.request.*
-import io.ktor.http.*
+import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.http.Url
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel

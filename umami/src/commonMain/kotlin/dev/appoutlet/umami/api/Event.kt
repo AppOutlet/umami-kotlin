@@ -3,6 +3,8 @@ package dev.appoutlet.umami.api
 import co.touchlab.kermit.Logger
 import dev.appoutlet.umami.Umami
 import io.ktor.client.call.body
+import io.ktor.client.plugins.ClientRequestException
+import io.ktor.client.plugins.ResponseException
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
@@ -140,6 +142,9 @@ private fun Umami.send(
  * Processes a single event queue item by sending the HTTP request to the Umami API.
  *
  * @param request The HTTP request builder containing the event data.
+ * @throws ClientRequestException if the request fails due to a client error (4xx).
+ * @throws ResponseException if the response is invalid or cannot be processed.
+ * @throws Throwable for any other unexpected errors during the request.
  */
 internal fun Umami.processEventQueueItem(request: HttpRequestBuilder) = umamiCoroutineScope.launch {
     try {
@@ -150,7 +155,13 @@ internal fun Umami.processEventQueueItem(request: HttpRequestBuilder) = umamiCor
         }
 
         headers["x-umami-cache"] = response.cache
-    } catch (e: Exception) {
-        Logger.e(throwable = e) { "Error processing item on event queue" }
+    } catch (clientRequestException: ClientRequestException) {
+        Logger.e(throwable = clientRequestException) {
+            "Error processing event request"
+        }
+    } catch (responseException: ResponseException) {
+        Logger.e(throwable = responseException) {
+            "Error processing event response"
+        }
     }
 }

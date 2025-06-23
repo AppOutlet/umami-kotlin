@@ -113,7 +113,7 @@ android {
 //https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-publish-libraries.html
 mavenPublishing {
     publishToMavenCentral(host = SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
-    coordinates(groupId = "dev.appoutlet", artifactId = "umami", version = "0.1.7")
+    coordinates(groupId = "dev.appoutlet", artifactId = "umami", version = "0.1.8")
 
     pom {
         name = "umami"

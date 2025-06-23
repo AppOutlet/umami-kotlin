@@ -1,9 +1,18 @@
 package dev.appoutlet.umami.api
 
+import co.touchlab.kermit.Logger
 import dev.appoutlet.umami.Umami
 import io.ktor.client.call.body
+import io.ktor.client.plugins.ClientRequestException
+import io.ktor.client.plugins.ResponseException
+import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
+import io.ktor.client.request.url
+import io.ktor.http.HttpMethod
+import kotlinx.coroutines.launch
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 import kotlin.uuid.ExperimentalUuidApi
 
 /**
@@ -15,17 +24,17 @@ import kotlin.uuid.ExperimentalUuidApi
  * @param name The name of the event.
  * @param data Additional data for the event.
  * @param tag A tag for the event.
- * @param timestamp The timestamp of the event.
+ * @param timestamp The timestamp of the event. The default is the current time in milliseconds since the epoch.
  * @param id The ID of the event.
  */
-suspend fun Umami.event(
+fun Umami.event(
     referrer: String? = null,
     title: String? = null,
     url: String? = null,
-    name: String,
+    name: String? = null,
     data: Map<String, Any?>? = null,
     tag: String? = null,
-    timestamp: Long? = null,
+    timestamp: Long? = currentTimeMillis(),
     id: String? = null,
 ) {
     send(
@@ -42,39 +51,37 @@ suspend fun Umami.event(
 }
 
 /**
- * Sends an identify event to the Umami API.
+ * Sends an event to identify the user on the Umami server.
  *
- * @param referrer The referrer URL.
- * @param title The title of the page.
- * @param url The URL of the page.
- * @param name The name of the event.
  * @param data Additional data for the event.
- * @param tag A tag for the event.
  * @param timestamp The timestamp of the event.
  * @param id The ID of the event.
  */
-suspend fun Umami.identify(
-    referrer: String? = null,
-    title: String? = null,
-    url: String? = null,
-    name: String,
+fun Umami.identify(
     data: Map<String, Any?>? = null,
-    tag: String? = null,
-    timestamp: Long? = null,
+    timestamp: Long? = currentTimeMillis(),
     id: String? = null,
 ) {
     send(
         type = EventType.Identify,
-        referrer = referrer,
-        title = title,
-        url = url,
-        name = name,
+        referrer = null,
+        title = null,
+        url = null,
+        name = null,
         data = data,
-        tag = tag,
+        tag = null,
         timestamp = timestamp,
         id = id
     )
 }
+
+/**
+ * Returns the current time in milliseconds since the epoch.
+ *
+ * Uses the multiplatform `Clock.System.now()` to obtain the current instant and converts it to milliseconds.
+ */
+@OptIn(ExperimentalTime::class)
+private fun currentTimeMillis(): Long = Clock.System.now().toEpochMilliseconds()
 
 /**
  * Sends an event to the Umami API.
@@ -91,12 +98,12 @@ suspend fun Umami.identify(
  */
 @OptIn(ExperimentalUuidApi::class)
 @Suppress("LongParameterList")
-private suspend fun Umami.send(
+private fun Umami.send(
     type: EventType,
     referrer: String?,
     title: String?,
     url: String?,
-    name: String,
+    name: String?,
     data: Map<String, Any?>?,
     tag: String?,
     timestamp: Long?,
@@ -122,11 +129,39 @@ private suspend fun Umami.send(
         )
     )
 
-    val response: EventResponse = httpClient.post("api/send") {
+    val requestBuilder = HttpRequestBuilder().apply {
+        url("api/send")
+        method = HttpMethod.Post
         setBody(request)
-    }.body()
+    }
 
-    if (response.beep != null) error("Umami server considered the event invalid")
+    eventQueue.trySend(requestBuilder)
+}
 
-    headers["x-umami-cache"] = response.cache
+/**
+ * Processes a single event queue item by sending the HTTP request to the Umami API.
+ *
+ * @param request The HTTP request builder containing the event data.
+ * @throws ClientRequestException if the request fails due to a client error (4xx).
+ * @throws ResponseException if the response is invalid or cannot be processed.
+ * @throws Throwable for any other unexpected errors during the request.
+ */
+internal fun Umami.processEventQueueItem(request: HttpRequestBuilder) = umamiCoroutineScope.launch {
+    try {
+        val response = httpClient.post(request).body<EventResponse>()
+
+        if (response.beep != null) {
+            Logger.e { "Umami server considered the event invalid \n $response" }
+        }
+
+        headers["x-umami-cache"] = response.cache
+    } catch (clientRequestException: ClientRequestException) {
+        Logger.e(throwable = clientRequestException) {
+            "Error processing event request"
+        }
+    } catch (responseException: ResponseException) {
+        Logger.e(throwable = responseException) {
+            "Error processing event response"
+        }
+    }
 }

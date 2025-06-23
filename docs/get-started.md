@@ -49,12 +49,12 @@ You'll need your **Website ID** from your Umami dashboard. If you're self-hostin
 
 ### **Step 3: Track Your First Event**
 
-With the client configured, you're ready to track an event\! The `event()` method is a `suspend` function, so it needs to be called from within a coroutine.
+With the client configured, you're ready to track an event\!
 
 Here is a complete, runnable example:
 
 ```kotlin
-fun trackMyFirstEvent() = runBlocking {
+fun trackMyFirstEvent() {
     val umami = Umami.create(website = "your-website-id")
 
     // Let's track a page view for a user opening the app's home screen
@@ -65,3 +65,5 @@ fun trackMyFirstEvent() = runBlocking {
 ```
 
 This code initializes the client and sends a simple page view event. You can also track custom events by providing a `name` to the `event()` function. It's that simple!
+
+The events are processed asynchronously backed by a [Channel](https://kotlinlang.org/docs/coroutines-and-channels.html#channels) and the HTTP requests are made out of the main thread, so you can call this from anywhere in your application without blocking the UI or main thread. More details about event tracking on [the event tracking page](event-tracking.md).

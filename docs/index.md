@@ -21,7 +21,7 @@ commonMain.dependencies {
 val umami = Umami.create(website = "your-website-id")
 
 // Track a custom event
-suspend fun whenSomethingHappens() {
+fun whenSomethingHappens() {
     umami.event(url = "/screen/main", name = "app-launch")
 }
 ```

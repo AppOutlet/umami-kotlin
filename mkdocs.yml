@@ -23,6 +23,7 @@ theme:
 nav:
   - Overview: index.md
   - Getting started: get-started.md
+  - Event tracking: event-tracking.md
   - Roadmap: roadmap.md
   - API Reference: reference
 
@@ -42,9 +43,10 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
-  - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
+  - admonition
+  - pymdownx.details
 
 plugins:
   - search

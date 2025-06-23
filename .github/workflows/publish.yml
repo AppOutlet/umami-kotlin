@@ -13,17 +13,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Update gradle project version
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git fetch
-          git checkout main
-          sed -i '' -E 's/version = "[0-9]+\.[0-9]+\.[0-9]+"/version = "${{ github.ref_name }}"/g' umami/build.gradle.kts
-          git add .
-          git commit --no-verify -m "Bump to version ${{ github.ref_name }}"
-          git push
-
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
@@ -43,6 +32,17 @@ jobs:
 
       - name: Run detekt
         run: ./gradlew detekt
+
+      - name: Update gradle project version
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch
+          git checkout main
+          sed -i '' -E 's/version = "[0-9]+\.[0-9]+\.[0-9]+"/version = "${{ github.ref_name }}"/g' umami/build.gradle.kts
+          git add .
+          git commit --no-verify -m "Bump to version ${{ github.ref_name }}"
+          git push
 
       - name: Publish to Maven Central
         run: ./gradlew publishAllPublicationsToMavenCentralRepository --no-configuration-cache

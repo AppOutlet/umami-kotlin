@@ -34,7 +34,7 @@ fun Umami.event(
     name: String? = null,
     data: Map<String, Any?>? = null,
     tag: String? = null,
-    timestamp: Long? = currentTimeMillis(),
+    timestamp: Long? = now(),
     id: String? = null,
 ) {
     send(
@@ -59,7 +59,7 @@ fun Umami.event(
  */
 fun Umami.identify(
     data: Map<String, Any?>? = null,
-    timestamp: Long? = currentTimeMillis(),
+    timestamp: Long? = now(),
     id: String? = null,
 ) {
     send(
@@ -78,10 +78,11 @@ fun Umami.identify(
 /**
  * Returns the current time in milliseconds since the epoch.
  *
- * Uses the multiplatform `Clock.System.now()` to obtain the current instant and converts it to milliseconds.
+ * Uses the multiplatform `Clock.System.now()` to obtain the current instant and returns the number of seconds since the epoch.
+ * Note: The returned value is in seconds, not milliseconds.
  */
 @OptIn(ExperimentalTime::class)
-private fun currentTimeMillis(): Long = Clock.System.now().toEpochMilliseconds()
+private fun now(): Long = Clock.System.now().epochSeconds
 
 /**
  * Sends an event to the Umami API.

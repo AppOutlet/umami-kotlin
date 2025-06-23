@@ -1,26 +1,28 @@
 package dev.appoutlet.umami
 
+import co.touchlab.kermit.Logger
+import dev.appoutlet.umami.api.processEventQueueItem
+import dev.appoutlet.umami.core.createHttpClient
 import dev.appoutlet.umami.domain.Hostname
 import dev.appoutlet.umami.domain.Ip
 import dev.appoutlet.umami.domain.Language
 import dev.appoutlet.umami.domain.ScreenSize
 import dev.appoutlet.umami.util.createUserAgent
-import io.ktor.client.HttpClient
-import io.ktor.client.plugins.HttpSend
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.plugins.defaultRequest
-import io.ktor.client.plugins.logging.LogLevel
-import io.ktor.client.plugins.logging.Logging
-import io.ktor.client.plugins.plugin
-import io.ktor.client.request.accept
-import io.ktor.http.ContentType
+import io.ktor.client.request.HttpRequest
+import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.client.statement.HttpStatement
 import io.ktor.http.Url
-import io.ktor.http.contentType
-import io.ktor.http.userAgent
-import io.ktor.serialization.kotlinx.json.json
-import kotlinx.serialization.json.Json
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.launch
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
+
+private const val EVENT_QUEUE_CAPACITY = 25
+
+
 
 /**
  * The main class for interacting with the Umami API.
@@ -45,45 +47,24 @@ class Umami(
     internal val screen: ScreenSize? = null,
     internal val ip: Ip? = null,
     internal val userAgent: String = createUserAgent(),
+    internal val eventQueueCapacity: Int = EVENT_QUEUE_CAPACITY,
 ) {
+    internal val umamiCoroutineScope = CoroutineScope(Dispatchers.Default)
+
     internal var headers = mutableMapOf<String, String?>()
-    internal val httpClient by lazy {
-        HttpClient {
-            expectSuccess = true
 
-            defaultRequest {
-                url(baseUrl.toString())
-                contentType(ContentType.Application.Json)
-                accept(ContentType.Application.Json)
-                userAgent(userAgent)
-            }
+    internal val httpClient by lazy { createHttpClient() }
 
-            install(Logging) {
-                level = LogLevel.NONE
-            }
+    internal val eventQueue = Channel<HttpRequestBuilder>(capacity = eventQueueCapacity)
 
-            install(ContentNegotiation) {
-                json(
-                    Json {
-                        isLenient = false
-                        ignoreUnknownKeys = true
-                        coerceInputValues = true
-                        explicitNulls = false
-                    }
-                )
-            }
-        }.apply {
-            plugin(HttpSend).intercept { requestBuilder ->
+    init {
+        Logger.setTag("Umami")
+        consumeEventQueue()
+    }
 
-                headers
-                    .filterValues { it != null }
-                    .forEach { (key, value) ->
-                        if (value.isNullOrBlank()) return@forEach
-                        requestBuilder.headers.append(name = key, value = value)
-                    }
-
-                execute(requestBuilder)
-            }
+    private fun consumeEventQueue() {
+        umamiCoroutineScope.launch {
+            eventQueue.consumeEach { request -> processEventQueueItem(request) }
         }
     }
 
@@ -110,6 +91,7 @@ class Umami(
             screen: String? = null,
             ip: String? = null,
             userAgent: String = createUserAgent(),
+            eventQueueCapacity: Int = EVENT_QUEUE_CAPACITY
         ): Umami {
             return Umami(
                 baseUrl = Url(baseUrl),
@@ -118,7 +100,8 @@ class Umami(
                 language = language?.let(::Language),
                 screen = screen?.let(::ScreenSize),
                 ip = ip?.let(::Ip),
-                userAgent = userAgent
+                userAgent = userAgent,
+                eventQueueCapacity = eventQueueCapacity
             )
         }
     }

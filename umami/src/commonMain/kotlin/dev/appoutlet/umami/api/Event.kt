@@ -1,9 +1,18 @@
 package dev.appoutlet.umami.api
 
+import co.touchlab.kermit.Logger
 import dev.appoutlet.umami.Umami
 import io.ktor.client.call.body
+import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.post
+import io.ktor.client.request.preparePost
 import io.ktor.client.request.setBody
+import io.ktor.client.request.url
+import io.ktor.client.statement.HttpStatement
+import io.ktor.http.HttpMethod
+import io.ktor.http.URLBuilder
+import io.ktor.http.isSuccess
+import kotlinx.coroutines.launch
 import kotlin.uuid.ExperimentalUuidApi
 
 /**
@@ -53,6 +62,7 @@ suspend fun Umami.event(
  * @param timestamp The timestamp of the event.
  * @param id The ID of the event.
  */
+// TODO remove unused parameters
 suspend fun Umami.identify(
     referrer: String? = null,
     title: String? = null,
@@ -122,11 +132,26 @@ private suspend fun Umami.send(
         )
     )
 
-    val response: EventResponse = httpClient.post("api/send") {
+    val requestBuilder = HttpRequestBuilder().apply {
+        url("api/send")
+        method = HttpMethod.Post
         setBody(request)
-    }.body()
+    }
 
-    if (response.beep != null) error("Umami server considered the event invalid")
+    eventQueue.trySend(requestBuilder)
+}
 
-    headers["x-umami-cache"] = response.cache
+
+internal fun Umami.processEventQueueItem(request: HttpRequestBuilder) = umamiCoroutineScope.launch {
+    try {
+        val response = httpClient.post(request).body<EventResponse>()
+
+        if (response.beep != null) {
+            Logger.e { "Umami server considered the event invalid \n $response" }
+        }
+
+        headers["x-umami-cache"] = response.cache
+    } catch (e: Exception) {
+        Logger.e(throwable = e) { "Error processing item on event queue" }
+    }
 }

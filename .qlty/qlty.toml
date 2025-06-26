@@ -1,0 +1,10 @@
+config_version = "0"
+
+exclude_patterns = [
+    'docs/**'
+]
+
+test_patterns = []
+
+[smells.function_parameters]
+enabled = false

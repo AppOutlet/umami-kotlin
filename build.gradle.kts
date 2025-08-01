@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.android.application).apply(false)
     alias(libs.plugins.detekt)
     alias(libs.plugins.dokka)
+    alias(libs.plugins.gitHooks)
 }
 
 tasks.dokkaHtmlMultiModule {

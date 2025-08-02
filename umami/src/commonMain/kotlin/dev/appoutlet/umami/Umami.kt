@@ -8,6 +8,8 @@ import dev.appoutlet.umami.domain.Ip
 import dev.appoutlet.umami.domain.Language
 import dev.appoutlet.umami.domain.ScreenSize
 import dev.appoutlet.umami.util.createUserAgent
+import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.engine.cio.CIO
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.http.Url
 import kotlinx.coroutines.CoroutineScope
@@ -62,11 +64,13 @@ class Umami(
      */
     internal var headers = mutableMapOf<String, String?>()
 
+    internal var httpClientEngine: HttpClientEngine = CIO.create()
+
     /**
      * An HTTP client for making requests to the Umami API.
      * This client is created lazily to ensure it is initialized only when needed.
      */
-    internal val httpClient by lazy { createHttpClient() }
+    internal val httpClient by lazy { createHttpClient(httpClientEngine) }
 
     /**
      * A channel that acts as an event queue for HTTP requests.

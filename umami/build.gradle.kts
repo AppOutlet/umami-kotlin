@@ -27,6 +27,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.kermit)
+            implementation(libs.ktor.client.cio)
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.client.serialization)
@@ -35,8 +36,10 @@ kotlin {
         }
 
         commonTest.dependencies {
-            implementation(kotlin("test"))
+            implementation(libs.coroutines.test)
             implementation(libs.kotest.assertions)
+            implementation(libs.kotlin.test)
+            implementation(libs.ktor.client.mock)
         }
 
         androidMain.dependencies {

@@ -2,6 +2,7 @@ package dev.appoutlet.umami.core
 
 import dev.appoutlet.umami.Umami
 import io.ktor.client.HttpClient
+import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.plugins.HttpSend
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
@@ -27,7 +28,7 @@ import kotlinx.serialization.json.Json
  * @receiver [Umami] The context providing configuration values such as baseUrl and userAgent.
  * @return Configured [HttpClient] instance.
  */
-internal fun Umami.createHttpClient() = HttpClient {
+internal fun Umami.createHttpClient(engine: HttpClientEngine) = HttpClient(engine) {
     expectSuccess = true
 
     defaultRequest {

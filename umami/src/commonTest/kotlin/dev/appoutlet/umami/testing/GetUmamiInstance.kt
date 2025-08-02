@@ -10,10 +10,10 @@ import io.ktor.content.TextContent
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
-import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 import kotlinx.coroutines.test.TestScope
 import kotlinx.serialization.json.Json
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
 val json = Json {
     ignoreUnknownKeys = true
@@ -44,7 +44,7 @@ inline fun <reified T> HttpRequestData.body(): T {
     return json.decodeFromString<T>(textJson)
 }
 
-inline fun <reified T> MockRequestHandleScope.respond(content: T) : HttpResponseData {
+inline fun <reified T> MockRequestHandleScope.respond(content: T): HttpResponseData {
     return respond(
         content = json.encodeToString(content),
         status = HttpStatusCode.OK,

@@ -1,10 +1,20 @@
 config_version = "0"
 
+[[source]]
+name = "default"
+default = true
+
+[sources.default]
+repository = "https://github.com/AppOutlet/umami-kotlin.git"
+branch = "main"
+
 exclude_patterns = [
     'docs/**'
 ]
 
-test_patterns = []
+test_patterns = [
+    '**/src/*Test/**',
+]
 
 [smells.function_parameters]
 enabled = false

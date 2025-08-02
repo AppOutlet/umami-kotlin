@@ -22,7 +22,7 @@ import kotlin.uuid.Uuid
  * Default event queue capacity. The capacity can be customized on the Umami object creation.
  * After this number, the queue will wait until the list has room for adding more items in the queue.
  */
-private const val EVENT_QUEUE_CAPACITY = 25
+const val EVENT_QUEUE_CAPACITY = 25
 
 /**
  * The main class for interacting with the Umami API.

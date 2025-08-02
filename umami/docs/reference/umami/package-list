@@ -1,0 +1,48 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:dev.appoutlet.umami.api////PointingToDeclaration/umami/dev.appoutlet.umami.api/index.html
+$dokka.location:dev.appoutlet.umami.api//event/dev.appoutlet.umami.Umami#kotlin.String?#kotlin.String?#kotlin.String?#kotlin.String?#kotlin.collections.Map[kotlin.String,kotlin.Any?]?#kotlin.String?#kotlin.Long?#kotlin.String?/PointingToDeclaration/umami/dev.appoutlet.umami.api/event.html
+$dokka.location:dev.appoutlet.umami.api//identify/dev.appoutlet.umami.Umami#kotlin.collections.Map[kotlin.String,kotlin.Any?]?#kotlin.Long?#kotlin.String?/PointingToDeclaration/umami/dev.appoutlet.umami.api/identify.html
+$dokka.location:dev.appoutlet.umami.api/EventResponse///PointingToDeclaration/umami/dev.appoutlet.umami.api/-event-response/index.html
+$dokka.location:dev.appoutlet.umami.api/EventResponse/EventResponse/#kotlin.String?#kotlin.String?#kotlin.String?#kotlin.String?/PointingToDeclaration/umami/dev.appoutlet.umami.api/-event-response/-event-response.html
+$dokka.location:dev.appoutlet.umami.api/EventResponse/beep/#/PointingToDeclaration/umami/dev.appoutlet.umami.api/-event-response/beep.html
+$dokka.location:dev.appoutlet.umami.api/EventResponse/cache/#/PointingToDeclaration/umami/dev.appoutlet.umami.api/-event-response/cache.html
+$dokka.location:dev.appoutlet.umami.api/EventResponse/sessionId/#/PointingToDeclaration/umami/dev.appoutlet.umami.api/-event-response/session-id.html
+$dokka.location:dev.appoutlet.umami.api/EventResponse/visitId/#/PointingToDeclaration/umami/dev.appoutlet.umami.api/-event-response/visit-id.html
+$dokka.location:dev.appoutlet.umami.api/EventType.Event///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}umami/dev.appoutlet.umami.api/-event-type/-event/index.html
+$dokka.location:dev.appoutlet.umami.api/EventType.Identify///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}umami/dev.appoutlet.umami.api/-event-type/-identify/index.html
+$dokka.location:dev.appoutlet.umami.api/EventType///PointingToDeclaration/umami/dev.appoutlet.umami.api/-event-type/index.html
+$dokka.location:dev.appoutlet.umami.api/EventType/entries/#/PointingToDeclaration/umami/dev.appoutlet.umami.api/-event-type/entries.html
+$dokka.location:dev.appoutlet.umami.api/EventType/value/#/PointingToDeclaration/umami/dev.appoutlet.umami.api/-event-type/value.html
+$dokka.location:dev.appoutlet.umami.api/EventType/valueOf/#kotlin.String/PointingToDeclaration/umami/dev.appoutlet.umami.api/-event-type/value-of.html
+$dokka.location:dev.appoutlet.umami.api/EventType/values/#/PointingToDeclaration/umami/dev.appoutlet.umami.api/-event-type/values.html
+$dokka.location:dev.appoutlet.umami.domain////PointingToDeclaration/umami/dev.appoutlet.umami.domain/index.html
+$dokka.location:dev.appoutlet.umami.domain/Hostname///PointingToDeclaration/umami/dev.appoutlet.umami.domain/-hostname/index.html
+$dokka.location:dev.appoutlet.umami.domain/Hostname/Hostname/#kotlin.String/PointingToDeclaration/umami/dev.appoutlet.umami.domain/-hostname/-hostname.html
+$dokka.location:dev.appoutlet.umami.domain/Hostname/toString/#/PointingToDeclaration/umami/dev.appoutlet.umami.domain/-hostname/to-string.html
+$dokka.location:dev.appoutlet.umami.domain/Hostname/value/#/PointingToDeclaration/umami/dev.appoutlet.umami.domain/-hostname/value.html
+$dokka.location:dev.appoutlet.umami.domain/Ip///PointingToDeclaration/umami/dev.appoutlet.umami.domain/-ip/index.html
+$dokka.location:dev.appoutlet.umami.domain/Ip/Ip/#kotlin.String/PointingToDeclaration/umami/dev.appoutlet.umami.domain/-ip/-ip.html
+$dokka.location:dev.appoutlet.umami.domain/Ip/value/#/PointingToDeclaration/umami/dev.appoutlet.umami.domain/-ip/value.html
+$dokka.location:dev.appoutlet.umami.domain/Language///PointingToDeclaration/umami/dev.appoutlet.umami.domain/-language/index.html
+$dokka.location:dev.appoutlet.umami.domain/Language/Language/#kotlin.String/PointingToDeclaration/umami/dev.appoutlet.umami.domain/-language/-language.html
+$dokka.location:dev.appoutlet.umami.domain/Language/toString/#/PointingToDeclaration/umami/dev.appoutlet.umami.domain/-language/to-string.html
+$dokka.location:dev.appoutlet.umami.domain/Language/value/#/PointingToDeclaration/umami/dev.appoutlet.umami.domain/-language/value.html
+$dokka.location:dev.appoutlet.umami.domain/ScreenSize///PointingToDeclaration/umami/dev.appoutlet.umami.domain/-screen-size/index.html
+$dokka.location:dev.appoutlet.umami.domain/ScreenSize/ScreenSize/#kotlin.Int#kotlin.Int/PointingToDeclaration/umami/dev.appoutlet.umami.domain/-screen-size/-screen-size.html
+$dokka.location:dev.appoutlet.umami.domain/ScreenSize/ScreenSize/#kotlin.String/PointingToDeclaration/umami/dev.appoutlet.umami.domain/-screen-size/-screen-size.html
+$dokka.location:dev.appoutlet.umami.domain/ScreenSize/toString/#/PointingToDeclaration/umami/dev.appoutlet.umami.domain/-screen-size/to-string.html
+$dokka.location:dev.appoutlet.umami.domain/ScreenSize/value/#/PointingToDeclaration/umami/dev.appoutlet.umami.domain/-screen-size/value.html
+$dokka.location:dev.appoutlet.umami.util////PointingToDeclaration/umami/dev.appoutlet.umami.util/index.html
+$dokka.location:dev.appoutlet.umami.util//createUserAgent/#kotlin.String#kotlin.String#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/umami/dev.appoutlet.umami.util/create-user-agent.html
+$dokka.location:dev.appoutlet.umami.util//getPlatform/#/PointingToDeclaration/umami/dev.appoutlet.umami.util/get-platform.html
+$dokka.location:dev.appoutlet.umami////PointingToDeclaration/umami/dev.appoutlet.umami/index.html
+$dokka.location:dev.appoutlet.umami//EVENT_QUEUE_CAPACITY/#/PointingToDeclaration/umami/dev.appoutlet.umami/-e-v-e-n-t_-q-u-e-u-e_-c-a-p-a-c-i-t-y.html
+$dokka.location:dev.appoutlet.umami/Umami.Companion///PointingToDeclaration/umami/dev.appoutlet.umami/-umami/-companion/index.html
+$dokka.location:dev.appoutlet.umami/Umami.Companion/create/#kotlin.String#kotlin.String#kotlin.String?#kotlin.String?#kotlin.String?#kotlin.String?#kotlin.String#kotlin.Int/PointingToDeclaration/umami/dev.appoutlet.umami/-umami/-companion/create.html
+$dokka.location:dev.appoutlet.umami/Umami///PointingToDeclaration/umami/dev.appoutlet.umami/-umami/index.html
+$dokka.location:dev.appoutlet.umami/Umami/Umami/#io.ktor.http.Url#kotlin.uuid.Uuid#dev.appoutlet.umami.domain.Hostname?#dev.appoutlet.umami.domain.Language?#dev.appoutlet.umami.domain.ScreenSize?#dev.appoutlet.umami.domain.Ip?#kotlin.String#kotlin.Int/PointingToDeclaration/umami/dev.appoutlet.umami/-umami/-umami.html
+dev.appoutlet.umami
+dev.appoutlet.umami.api
+dev.appoutlet.umami.domain
+dev.appoutlet.umami.util

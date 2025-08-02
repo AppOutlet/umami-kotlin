@@ -1,4 +1,4 @@
-import org.jetbrains.dokka.gradle.DokkaTaskPartial
+import java.time.LocalDateTime
 
 plugins {
     alias(libs.plugins.multiplatform).apply(false)
@@ -10,15 +10,34 @@ plugins {
     alias(libs.plugins.gitHooks)
 }
 
-tasks.dokkaHtmlMultiModule {
+dokka {
     moduleName.set("Umami Kotlin")
-    outputDirectory.set(layout.projectDirectory.dir("docs/reference"))
-}
 
-subprojects {
-    tasks.withType<DokkaTaskPartial>().configureEach {
-        dokkaSourceSets.configureEach {
-            includes.from("module.md")
+    dokkaPublications.html {
+        failOnWarning.set(true)
+        outputDirectory.set(projectDir.resolve("docs/reference"))
+    }
+
+    dokkaSourceSets.configureEach {
+        println(this.toString())
+        includes.from("README.md")
+    }
+
+    pluginsConfiguration {
+        html {
+            val year = LocalDateTime.now().year
+            footerMessage.set("© AppOutlet $year")
+        }
+
+        versioning {
+            renderVersionsNavigationOnAllPages.set(true)
+            version.set("0.1.9")
+            olderVersionsDir.set(projectDir.resolve("docs/old/reference"))
         }
     }
+}
+
+dependencies {
+    dokka(project(":umami"))
+    dokkaHtmlPlugin("org.jetbrains.dokka:versioning-plugin:2.0.0")
 }

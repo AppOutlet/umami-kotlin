@@ -29,7 +29,6 @@ compose = { id = "org.jetbrains.compose", version.ref = "compose" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 dokka = "org.jetbrains.dokka:2.0.0"
-gitHooks = "eu.bambooapps.gradle.plugin.githook:1.1.1"
 maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }
 multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

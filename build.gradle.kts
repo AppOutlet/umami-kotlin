@@ -1,4 +1,4 @@
-import org.gradle.kotlin.dsl.withType
+import com.android.build.gradle.internal.tasks.factory.letIfPresent
 import org.jetbrains.dokka.gradle.DokkaTaskPartial
 
 plugins {
@@ -8,7 +8,6 @@ plugins {
     alias(libs.plugins.android.application).apply(false)
     alias(libs.plugins.detekt)
     alias(libs.plugins.dokka)
-    alias(libs.plugins.gitHooks)
 }
 
 tasks.dokkaHtmlMultiModule {
@@ -24,8 +23,17 @@ subprojects {
     }
 }
 
-gradle.projectsEvaluated {
-    println("projectsEvaluated")
-    val task = tasks.findByName("installGitHooks")
-    task?.actions?.forEach { action -> action.invoke(task) }
+tasks.register("installGitHooks") {
+    doLast {
+        exec {
+            commandLine("bash", "$rootDir/git-hooks/install-git-hooks.sh")
+        }
+    }
 }
+
+ afterEvaluate {
+     val task = tasks.named("installGitHooks").get()
+     task.actions.forEach { action ->
+         action.execute(task)
+     }
+ }

@@ -10,6 +10,10 @@ plugins {
     alias(libs.plugins.gitHooks)
 }
 
+dependencies {
+    dokka(project(":umami"))
+}
+
 dokka {
     moduleName.set("Umami Kotlin")
 
@@ -22,14 +26,5 @@ dokka {
             val year = LocalDateTime.now().year
             footerMessage.set("© AppOutlet $year")
         }
-
-        versioning {
-            renderVersionsNavigationOnAllPages.set(true)
-            version.set("0.1.9")
-        }
     }
-}
-
-dependencies {
-    dokka(project(":umami"))
 }

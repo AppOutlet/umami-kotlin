@@ -1,4 +1,5 @@
 import com.vanniktech.maven.publish.SonatypeHost
+import java.time.LocalDateTime
 
 plugins {
     alias(libs.plugins.multiplatform)
@@ -108,11 +109,11 @@ android {
     }
 }
 
-//Publishing your Kotlin Multiplatform library to Maven Central
-//https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-publish-libraries.html
+val version = "0.1.9"
+
 mavenPublishing {
     publishToMavenCentral(host = SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
-    coordinates(groupId = "dev.appoutlet", artifactId = "umami", version = "0.1.9")
+    coordinates(groupId = "dev.appoutlet", artifactId = "umami", version = version)
 
     pom {
         name = "umami"
@@ -144,4 +145,23 @@ mavenPublishing {
     }
 
     signAllPublications()
+}
+
+dokka {
+    dokkaPublications.html {
+        outputDirectory.set(projectDir.resolve("docs/reference"))
+    }
+
+    dokkaSourceSets {
+        configureEach {
+            includes.from(project.layout.projectDirectory.file("module.md"))
+        }
+    }
+
+    pluginsConfiguration {
+        html {
+            val year = LocalDateTime.now().year
+            footerMessage.set("© AppOutlet $year")
+        }
+    }
 }

@@ -20,7 +20,7 @@ dokka {
 
     dokkaSourceSets.configureEach {
         println(this.toString())
-        includes.from("README.md")
+        includes.from("module.md")
     }
 
     pluginsConfiguration {

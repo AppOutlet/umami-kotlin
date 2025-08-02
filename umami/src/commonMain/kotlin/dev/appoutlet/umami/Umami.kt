@@ -51,20 +51,15 @@ class Umami(
     internal val ip: Ip? = null,
     internal val userAgent: String = createUserAgent(),
     internal val eventQueueCapacity: Int = EVENT_QUEUE_CAPACITY,
+    internal val httpClientEngine: HttpClientEngine = CIO.create(),
+    internal val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
 ) {
-    /**
-     * Coroutine scope for running background tasks related to Umami.
-     * This scope uses the Default dispatcher, which is suitable for CPU-intensive tasks.
-     */
-    internal val umamiCoroutineScope = CoroutineScope(Dispatchers.Default)
 
     /**
      * A mutable map to hold custom headers for HTTP requests.
      * This can be used to add additional headers like authentication tokens or custom metadata.
      */
     internal var headers = mutableMapOf<String, String?>()
-
-    internal var httpClientEngine: HttpClientEngine = CIO.create()
 
     /**
      * An HTTP client for making requests to the Umami API.
@@ -90,7 +85,7 @@ class Umami(
      * Each item is processed by the [processEventQueueItem] function, which sends the event to the Umami API.
      */
     private fun consumeEventQueue() {
-        umamiCoroutineScope.launch {
+        coroutineScope.launch {
             eventQueue.consumeEach { request -> processEventQueueItem(request) }
         }
     }
@@ -119,7 +114,9 @@ class Umami(
             screen: String? = null,
             ip: String? = null,
             userAgent: String = createUserAgent(),
-            eventQueueCapacity: Int = EVENT_QUEUE_CAPACITY
+            eventQueueCapacity: Int = EVENT_QUEUE_CAPACITY,
+            httpClientEngine: HttpClientEngine = CIO.create(),
+            coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
         ): Umami {
             return Umami(
                 baseUrl = Url(baseUrl),
@@ -129,7 +126,9 @@ class Umami(
                 screen = screen?.let(::ScreenSize),
                 ip = ip?.let(::Ip),
                 userAgent = userAgent,
-                eventQueueCapacity = eventQueueCapacity
+                eventQueueCapacity = eventQueueCapacity,
+                httpClientEngine = httpClientEngine,
+                coroutineScope = coroutineScope,
             )
         }
     }

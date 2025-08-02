@@ -147,7 +147,7 @@ private fun Umami.send(
  * @throws ResponseException if the response is invalid or cannot be processed.
  * @throws Throwable for any other unexpected errors during the request.
  */
-internal fun Umami.processEventQueueItem(request: HttpRequestBuilder) = umamiCoroutineScope.launch {
+internal fun Umami.processEventQueueItem(request: HttpRequestBuilder) = coroutineScope.launch {
     try {
         val response = httpClient.post(request).body<EventResponse>()
 

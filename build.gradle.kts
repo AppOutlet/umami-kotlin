@@ -23,3 +23,9 @@ subprojects {
         }
     }
 }
+
+gradle.projectsEvaluated {
+    println("projectsEvaluated")
+    val task = tasks.findByName("installGitHooks")
+    task?.actions?.forEach { action -> action.invoke(task) }
+}

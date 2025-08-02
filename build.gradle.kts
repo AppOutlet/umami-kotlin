@@ -14,13 +14,7 @@ dokka {
     moduleName.set("Umami Kotlin")
 
     dokkaPublications.html {
-        failOnWarning.set(true)
         outputDirectory.set(projectDir.resolve("docs/reference"))
-    }
-
-    dokkaSourceSets.configureEach {
-        println(this.toString())
-        includes.from("module.md")
     }
 
     pluginsConfiguration {
@@ -32,12 +26,10 @@ dokka {
         versioning {
             renderVersionsNavigationOnAllPages.set(true)
             version.set("0.1.9")
-            olderVersionsDir.set(projectDir.resolve("docs/old/reference"))
         }
     }
 }
 
 dependencies {
     dokka(project(":umami"))
-    dokkaHtmlPlugin("org.jetbrains.dokka:versioning-plugin:2.0.0")
 }

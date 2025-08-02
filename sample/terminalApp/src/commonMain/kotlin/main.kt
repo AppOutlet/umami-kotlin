@@ -4,8 +4,7 @@ import kotlinx.coroutines.runBlocking
 
 fun main() = runBlocking {
     val umami = Umami.create(
-        baseUrl = "http://192.168.1.1:3000",
-        website = "45242d93-0acf-4103-9d8e-65325d615e81",
+        website = "7330db89-268f-4f13-bd45-d1e2755c1b00",
     )
 
     umami.event(

@@ -8,6 +8,8 @@ import dev.appoutlet.umami.domain.Ip
 import dev.appoutlet.umami.domain.Language
 import dev.appoutlet.umami.domain.ScreenSize
 import dev.appoutlet.umami.util.createUserAgent
+import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.engine.cio.CIO
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.http.Url
 import kotlinx.coroutines.CoroutineScope
@@ -49,12 +51,9 @@ class Umami(
     internal val ip: Ip? = null,
     internal val userAgent: String = createUserAgent(),
     internal val eventQueueCapacity: Int = EVENT_QUEUE_CAPACITY,
+    internal val httpClientEngine: HttpClientEngine = CIO.create(),
+    internal val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
 ) {
-    /**
-     * Coroutine scope for running background tasks related to Umami.
-     * This scope uses the Default dispatcher, which is suitable for CPU-intensive tasks.
-     */
-    internal val umamiCoroutineScope = CoroutineScope(Dispatchers.Default)
 
     /**
      * A mutable map to hold custom headers for HTTP requests.
@@ -66,7 +65,7 @@ class Umami(
      * An HTTP client for making requests to the Umami API.
      * This client is created lazily to ensure it is initialized only when needed.
      */
-    internal val httpClient by lazy { createHttpClient() }
+    internal val httpClient by lazy { createHttpClient(httpClientEngine) }
 
     /**
      * A channel that acts as an event queue for HTTP requests.
@@ -86,7 +85,7 @@ class Umami(
      * Each item is processed by the [processEventQueueItem] function, which sends the event to the Umami API.
      */
     private fun consumeEventQueue() {
-        umamiCoroutineScope.launch {
+        coroutineScope.launch {
             eventQueue.consumeEach { request -> processEventQueueItem(request) }
         }
     }
@@ -115,7 +114,9 @@ class Umami(
             screen: String? = null,
             ip: String? = null,
             userAgent: String = createUserAgent(),
-            eventQueueCapacity: Int = EVENT_QUEUE_CAPACITY
+            eventQueueCapacity: Int = EVENT_QUEUE_CAPACITY,
+            httpClientEngine: HttpClientEngine = CIO.create(),
+            coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
         ): Umami {
             return Umami(
                 baseUrl = Url(baseUrl),
@@ -125,7 +126,9 @@ class Umami(
                 screen = screen?.let(::ScreenSize),
                 ip = ip?.let(::Ip),
                 userAgent = userAgent,
-                eventQueueCapacity = eventQueueCapacity
+                eventQueueCapacity = eventQueueCapacity,
+                httpClientEngine = httpClientEngine,
+                coroutineScope = coroutineScope,
             )
         }
     }

@@ -25,8 +25,13 @@ jobs:
           add-job-summary: 'on-failure'
           cache-read-only: false
 
-      - name: Run detekt
-        run: ./gradlew detekt
+      - name: Check code style
+        run: ./gradlew detekt koverVerify koverXmlReport
 
-      - name: Run detekt
-        run: ./gradlew jvmTest
+      - name: Upload coverage report
+        uses: qltysh/qlty-action/coverage@v1.1.1
+        with:
+          token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          files: build/reports/kover/report.xml
+          format: "jacoco"
+          add-prefix: src/commonMain/kotlin

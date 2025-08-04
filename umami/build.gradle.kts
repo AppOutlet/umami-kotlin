@@ -114,7 +114,7 @@ android {
     }
 }
 
-val version = "0.1.9"
+val version = "0.1.10"
 
 mavenPublishing {
     publishToMavenCentral(host = SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)

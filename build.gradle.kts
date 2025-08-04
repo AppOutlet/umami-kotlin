@@ -1,4 +1,6 @@
 import java.time.LocalDateTime
+import kotlinx.kover.gradle.plugin.dsl.AggregationType
+import kotlinx.kover.gradle.plugin.dsl.CoverageUnit
 
 plugins {
     alias(libs.plugins.multiplatform).apply(false)
@@ -8,10 +10,12 @@ plugins {
     alias(libs.plugins.detekt)
     alias(libs.plugins.dokka)
     alias(libs.plugins.gitHooks)
+    alias(libs.plugins.kover)
 }
 
 dependencies {
     dokka(project(":umami"))
+    kover(project(":umami"))
 }
 
 dokka {
@@ -25,6 +29,32 @@ dokka {
         html {
             val year = LocalDateTime.now().year
             footerMessage.set("© AppOutlet $year")
+        }
+    }
+}
+
+kover {
+    reports {
+        verify {
+            rule {
+                minBound(
+                    minValue = 77,
+                    coverageUnits = CoverageUnit.LINE,
+                    aggregationForGroup = AggregationType.COVERED_PERCENTAGE
+                )
+
+                minBound(
+                    minValue = 78,
+                    coverageUnits = CoverageUnit.INSTRUCTION,
+                    aggregationForGroup = AggregationType.COVERED_PERCENTAGE
+                )
+
+                minBound(
+                    minValue = 25,
+                    coverageUnits = CoverageUnit.BRANCH,
+                    aggregationForGroup = AggregationType.COVERED_PERCENTAGE,
+                )
+            }
         }
     }
 }

@@ -39,7 +39,7 @@ jobs:
           cache-read-only: false
 
       - name: Run dokka
-        run: ./gradlew dokkaHtmlMultiModule --no-configuration-cache
+        run: ./gradlew dokkaGeneratePublicationHtml --no-configuration-cache
 
       - uses: actions/setup-python@v5
         with:

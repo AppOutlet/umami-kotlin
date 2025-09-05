@@ -5,7 +5,7 @@ compose = "1.8.2"
 coroutines = "1.10.2"
 detekt = "1.23.8"
 kotest = "6.0.2"
-kotlin = "2.2.0"
+kotlin = "2.2.10"
 ktor = "3.2.3"
 maven-publish = "0.34.0"
 

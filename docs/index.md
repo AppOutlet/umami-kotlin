@@ -5,7 +5,12 @@
 
 Welcome to the official documentation for `umami-kotlin`, a simple and powerful library for adding privacy-first analytics to your Kotlin applications.
 
-This open-source library makes it easy to interact with the excellent, privacy-focused [Umami](https://umami.is) analytics platform. While born from the need for a unified solution in Kotlin Multiplatform, its JVM target makes it fully compatible with any **server-side framework (like Ktor or SpringBoot)** and even **traditional Java applications**.
+This open-source library makes it easy to interact with the excellent, privacy-focused [Umami](https://umami.is) analytics platform. 
+
+While born from the need for a unified solution in Kotlin Multiplatform, due its "multiplatform" aspect, Umami Kotlin is supported by the following platforms:
+
+* 🌎[Kotlin Multiplatform](getstarted/kmp.md) (iOS, Android, Desktop, WebAssembly, etc.)
+* 🤖Android Applications 
 
 ### **At a Glance**
 
@@ -36,7 +41,7 @@ fun whenSomethingHappens() {
 
 Dive into our **Get Started** guide to add `umami-kotlin` to your project and track your first event in minutes. Or, if you want to see the source code, check out the project on GitHub.
 
-**[Get Started  :octicons-rocket-16:](get-started.md){ .md-button .md-button--primary }**
+**[Get Started  :octicons-rocket-16:](getstarted/kmp.md){ .md-button .md-button--primary }**
 **[View on GitHub :octicons-mark-github-24:](https://github.com/AppOutlet/umami-kotlin){ .md-button }**
 
 -----

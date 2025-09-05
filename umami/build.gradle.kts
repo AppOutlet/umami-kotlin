@@ -1,5 +1,7 @@
-import com.vanniktech.maven.publish.SonatypeHost
+@file:OptIn(ExperimentalWasmDsl::class)
+
 import java.time.LocalDateTime
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
     alias(libs.plugins.multiplatform)
@@ -117,7 +119,7 @@ android {
 val version = "0.1.10"
 
 mavenPublishing {
-    publishToMavenCentral(host = SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
+    publishToMavenCentral(true)
     coordinates(groupId = "dev.appoutlet", artifactId = "umami", version = version)
 
     pom {

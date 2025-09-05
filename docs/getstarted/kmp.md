@@ -1,69 +1,223 @@
-# Track your first event in a Kotlin Multiplatform application
+# Track your first event in a Kotlin Multiplatform (KMP) application
 
-Welcome\! This guide will walk you through the essential steps to install `umami-kotlin`, configure the client, and send your first event. You'll be up and running in just a few minutes.
+This guide is fully focused on adding analytics with `umami-kotlin` to a **shared Kotlin Multiplatform codebase** (Android, iOS, Desktop, Web, etc.). You'll add the dependency to `commonMain`, configure a cross-platform singleton, and track your first events from shared code.
 
-### **Step 1: Add the Dependency**
+---
+## 1. Supported targets
+`umami-kotlin` is published as a Multiplatform library and can be used from:
 
-First, you need to add `umami-kotlin` to your project. The library is hosted on Maven Central.
+* Android (JVM / Compose Multiplatform)
+* iOS (via Kotlin/Native; accessible from Swift/Objective-C)
+* Desktop (JVM)
+* JavaScript / WASM (where Ktor HTTP engine is available)
+* Other native targets (Linux, macOS, Windows) as enabled by your KMP setup
 
-[](https://central.sonatype.com/artifact/dev.appoutlet/umami)
+---
+## 2. Add the dependency (commonMain)
+Add the library to the `commonMain` source set so all platforms can access it.
 
-Add the following to your `build.gradle.kts` file's `dependencies` block. Make sure to use the latest version number shown in the badge above.
-
-
-=== "Multiplatform"
-    ```kotlin title="composeApp/build.gradle.kts"
-    // In your commonMain dependencies
+=== "composeApp/build.gradle.kts"
+    ```kotlin
     kotlin {
         sourceSets {
-            commonMain.dependencies {
-                implementation("dev.appoutlet:umami:LATEST_VERSION")
+            val commonMain by getting {
+                dependencies {
+                    implementation("dev.appoutlet:umami:LATEST_VERSION")
+                }
             }
         }
     }
     ```
-=== "Single platform (Kotlin/JVM, Android, etc.)"
-    ```kotlin title="app/build.gradle.kts"
-    // In your module dependencies
-    dependencies {
-        implementation("dev.appoutlet:umami:LATEST_VERSION")
+
+=== "Version Catalog (libs.versions.toml)"
+    ```toml
+    [versions]
+    umami = "LATEST_VERSION" # Replace with latest
+
+    [libraries]
+    umami = { group = "dev.appoutlet", name = "umami", version.ref = "umami" }
+    ```
+    ```kotlin title="composeApp/build.gradle.kts"
+    kotlin {
+        sourceSets {
+            val commonMain by getting {
+                dependencies {
+                    implementation(libs.umami)
+                }
+            }
+        }
     }
     ```
-### **Step 2: Create and Configure the Client**
 
-Next, you need to create an instance of the `Umami` client. This object will handle all communication with the Umami API.
+!!! note
+    Make sure you refresh/Sync Gradle after adding the dependency so the IDE recognizes the API across all targets.
 
-It's highly recommended to create this as a **singleton** in your project's dependency injection setup (see our Recipes section for examples).
-
-To create it, use the `Umami.create()` factory method:
-
-```kotlin
-val umami = Umami.create(
-    website = "your-website-id",
-    // The `baseUrl` is optional. It defaults to the Umami Cloud if not provided.
-    baseUrl = "https://your-umami-instance.com" // Only needed for self-hosted
-)
-```
-
-You'll need your **Website ID** from your Umami dashboard. If you're self-hosting Umami, you must also provide your instance's URL to the `baseUrl` parameter.
-
-### **Step 3: Track Your First Event**
-
-With the client configured, you're ready to track an event\!
-
-Here is a complete, runnable example:
+---
+## 3. Create a shared analytics singleton
+Define a single instance in shared code so every platform uses the same configuration.
 
 ```kotlin
-fun trackMyFirstEvent() {
-    val umami = Umami.create(website = "your-website-id")
+// shared/src/commonMain/kotlin/analytics/Analytics.kt
+package analytics
 
-    // Let's track a page view for a user opening the app's home screen
-    umami.event(url = "/home", title = "Home Screen")
+import dev.appoutlet.umami.Umami
 
-    println("First event tracked!")
+object AnalyticsService {
+    // Basic factory usage (parses strings internally)
+    val umami: Umami = Umami.create(
+        website = "YOUR-WEBSITE-UUID", // Required (copy from Umami dashboard)
+        // baseUrl = "https://your-self-hosted-instance" // Only if self-hosting
+    )
+
+    fun trackAppLaunch() = umami.event(url = "/launch", title = "App Launch")
 }
 ```
 
-This code initializes the client and sends a simple page view event. You can also track custom events by providing a `name` to the `event()` function. It's that simple!
+### Type‑safe primary constructor option
+If you already validate inputs (e.g. UUID, hostname) you can use the primary constructor with domain objects:
+```kotlin
+import dev.appoutlet.umami.Umami
+import dev.appoutlet.umami.domain.*
+import io.ktor.http.Url
+import kotlin.uuid.Uuid
 
-The events are processed asynchronously backed by a [Channel](https://kotlinlang.org/docs/coroutines-and-channels.html#channels) and the HTTP requests are made out of the main thread, so you can call this from anywhere in your application without blocking the UI or main thread. More details about event tracking on [the event tracking page](../event-tracking.md).
+val umamiTypeSafe = Umami(
+    baseUrl = Url("https://analytics.example.com"),
+    website = Uuid.parse("YOUR-WEBSITE-UUID"),
+    hostname = Hostname("example.com"),
+    language = Language("en-US"),
+    screen = ScreenSize("1080x1920"),
+    ip = null,
+    eventQueueCapacity = 50
+)
+```
+Both approaches are functionally equivalent; `create()` just wraps parsing.
+
+### Using Koin (Dependency Injection)
+If you prefer DI, define a Koin module in `commonMain`:
+```kotlin
+// shared/src/commonMain/kotlin/di/AnalyticsModule.kt
+package di
+
+import dev.appoutlet.umami.Umami
+import org.koin.dsl.module
+
+val analyticsModule = module {
+    single { Umami.create(website = "YOUR-WEBSITE-UUID") }
+}
+```
+Start Koin in each platform's entry point (example Android shown; do similarly for iOS/Desktop):
+```kotlin
+// Android example (e.g. in Application.onCreate)
+startKoin { modules(analyticsModule) }
+```
+Inject where needed in shared code by implementing `KoinComponent`:
+```kotlin
+// shared/src/commonMain/kotlin/analytics/AnalyticsFacade.kt
+package analytics
+
+import dev.appoutlet.umami.Umami
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+
+object AnalyticsFacade : KoinComponent {
+    private val umami: Umami by inject()
+    fun trackAppLaunch() = umami.event(url = "/launch", title = "App Launch")
+}
+```
+
+---
+## 4. Track events from shared code
+The primary tracking functions are **regular (non-suspend)** and return immediately:
+
+* `event()` – Page views + custom events
+* `identify()` – Attach metadata to a session (optional)
+
+```kotlin
+AnalyticsService.umami.event(url = "/home", title = "Home Screen")
+AnalyticsService.umami.event(name = "button_clicked", data = mapOf("id" to "save"))
+AnalyticsService.umami.identify(data = mapOf("plan" to "pro"))
+```
+
+You can wrap these in your own domain API to centralize naming or tagging conventions.
+
+### Koin usage example
+If using the Koin setup above:
+```kotlin
+// Simple wrapper using injected instance
+object EventTracker : org.koin.core.component.KoinComponent {
+    private val umami: dev.appoutlet.umami.Umami by inject()
+
+    fun trackHome() = umami.event(url = "/home", title = "Home Screen")
+    fun trackButton(id: String) = umami.event(name = "button_clicked", data = mapOf("id" to id))
+    fun identifyPlan(plan: String) = umami.identify(data = mapOf("plan" to plan))
+}
+
+// Usage
+EventTracker.trackHome()
+EventTracker.trackButton("save")
+EventTracker.identifyPlan("pro")
+```
+
+---
+## 5. Asynchronous processing model
+Calls to `event()` / `identify()` enqueue a request into an internal Kotlin `Channel` (capacity default = 25). A background coroutine (on `Dispatchers.Default`) processes each item sequentially using Ktor. Your UI / main thread is never blocked.
+
+Key points:
+* If the queue is full, producers suspend until space is available (rare in typical UI usage).
+* Events are sent in order of invocation.
+
+To tune throughput:
+```kotlin
+val umamiCustom = Umami.create(
+    website = "...",
+    eventQueueCapacity = 100
+)
+```
+
+---
+## 6. Optional configuration
+Parameter (factory) | Purpose | When to change
+------------------- | ------- | --------------
+`baseUrl` | Your own Umami instance | Self-hosted installs
+`hostname` | Override site host | Multi-domain analytics
+`language` | User locale | Provide when not derivable platform-side
+`screen` | Screen resolution | You collect manually; optional
+`ip` | Override IP | Rare (server-side forwarding)
+`userAgent` | Custom UA string | Simulator/test tagging
+`eventQueueCapacity` | Channel size | High-volume burst events
+
+Example adding language & dynamic screen size (Android + Desktop differences handled via expect/actual):
+```kotlin
+// commonMain
+expect fun currentScreenSize(): String?
+expect fun currentLanguageTag(): String?
+
+val umami = Umami.create(
+    website = "YOUR-WEBSITE-UUID",
+    language = currentLanguageTag(),
+    screen = currentScreenSize()
+)
+```
+```kotlin
+// androidMain
+actual fun currentScreenSize(): String? = "1080x2400"
+actual fun currentLanguageTag(): String? = java.util.Locale.getDefault().toLanguageTag()
+```
+```kotlin
+// iosMain
+import platform.UIKit.UIScreen
+import platform.Foundation.NSLocale
+import platform.Foundation.currentLocale
+
+actual fun currentScreenSize(): String? {
+    val bounds = UIScreen.mainScreen.bounds
+    return "${'$'}{bounds.size.width.toInt()}x${'$'}{bounds.size.height.toInt()}"
+}
+actual fun currentLanguageTag(): String? = NSLocale.currentLocale.languageCode
+```
+---
+## 7. Next steps
+* Explore [Event tracking details](../event-tracking.md)
+
+You're ready to gather cross-platform usage insights with a single analytics layer.

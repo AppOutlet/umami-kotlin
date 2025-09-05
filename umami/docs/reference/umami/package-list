@@ -39,9 +39,9 @@ $dokka.location:dev.appoutlet.umami.util//getPlatform/#/PointingToDeclaration/u
 $dokka.location:dev.appoutlet.umami////PointingToDeclaration/umami/dev.appoutlet.umami/index.html
 $dokka.location:dev.appoutlet.umami//EVENT_QUEUE_CAPACITY/#/PointingToDeclaration/umami/dev.appoutlet.umami/-e-v-e-n-t_-q-u-e-u-e_-c-a-p-a-c-i-t-y.html
 $dokka.location:dev.appoutlet.umami/Umami.Companion///PointingToDeclaration/umami/dev.appoutlet.umami/-umami/-companion/index.html
-$dokka.location:dev.appoutlet.umami/Umami.Companion/create/#kotlin.String#kotlin.String#kotlin.String?#kotlin.String?#kotlin.String?#kotlin.String?#kotlin.String#kotlin.Int/PointingToDeclaration/umami/dev.appoutlet.umami/-umami/-companion/create.html
+$dokka.location:dev.appoutlet.umami/Umami.Companion/create/#kotlin.String#kotlin.String#kotlin.String?#kotlin.String?#kotlin.String?#kotlin.String?#kotlin.String#kotlin.Int#io.ktor.client.engine.HttpClientEngine#kotlinx.coroutines.CoroutineScope/PointingToDeclaration/umami/dev.appoutlet.umami/-umami/-companion/create.html
 $dokka.location:dev.appoutlet.umami/Umami///PointingToDeclaration/umami/dev.appoutlet.umami/-umami/index.html
-$dokka.location:dev.appoutlet.umami/Umami/Umami/#io.ktor.http.Url#kotlin.uuid.Uuid#dev.appoutlet.umami.domain.Hostname?#dev.appoutlet.umami.domain.Language?#dev.appoutlet.umami.domain.ScreenSize?#dev.appoutlet.umami.domain.Ip?#kotlin.String#kotlin.Int/PointingToDeclaration/umami/dev.appoutlet.umami/-umami/-umami.html
+$dokka.location:dev.appoutlet.umami/Umami/Umami/#io.ktor.http.Url#kotlin.uuid.Uuid#dev.appoutlet.umami.domain.Hostname?#dev.appoutlet.umami.domain.Language?#dev.appoutlet.umami.domain.ScreenSize?#dev.appoutlet.umami.domain.Ip?#kotlin.String#kotlin.Int#io.ktor.client.engine.HttpClientEngine#kotlinx.coroutines.CoroutineScope/PointingToDeclaration/umami/dev.appoutlet.umami/-umami/-umami.html
 dev.appoutlet.umami
 dev.appoutlet.umami.api
 dev.appoutlet.umami.domain

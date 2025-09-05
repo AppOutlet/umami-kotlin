@@ -3,19 +3,22 @@
 Once you have configured the `Umami` client, you can begin tracking user interactions. `umami-kotlin` provides a straightforward API for sending analytics data to your Umami instance asynchronously, ensuring that tracking calls never block your application's main thread.
 
 !!! warning ""
-    If you haven't already, please refer to the [Get Started](get-started.md) guide to set up the `Umami` client in your project.
+    If you haven't already, please refer to the [Get Started](getstarted/kmp.md) guide to set up the `Umami` client in your project.
 
 The library offers two primary functions for this purpose:
 
 * `event()`: Used to track page views and custom events. This will be your most commonly used function.
 * `identify()`: Used to send specific data to identify a user and create a new session. (optional)
 
+!!! info
+    Both `event()` and `identify()` are regular (non-suspend) functions. They queue work internally and return immediately without blocking.
+
 ## **Tracking Page Views and Custom Events**
 
 The `event()` function is the universal method for sending most tracking data. You can use it to record a simple page view, a specific user interaction (like a button click), or both at the same time.
 
 ```kotlin
-suspend fun event(
+fun event(
     referrer: String? = null,
     title: String? = null,
     url: String? = null,
@@ -72,7 +75,7 @@ umami.event(
 The `identify()` function is a specialized method used to associate custom data with the current user's session. This is useful for enriching your analytics with session-specific information.
 
 ```kotlin
-suspend fun identify(
+fun identify(
     data: Map<String, Any>,
     timestamp: Long = now(),
     id: String? = null

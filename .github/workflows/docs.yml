@@ -29,6 +29,8 @@ jobs:
         with:
           distribution: 'jetbrains'
           java-version: '17'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -37,7 +39,7 @@ jobs:
           cache-read-only: false
 
       - name: Run dokka
-        run: ./gradlew dokkaHtmlMultiModule --no-configuration-cache
+        run: ./gradlew dokkaGeneratePublicationHtml --no-configuration-cache
 
       - uses: actions/setup-python@v5
         with:

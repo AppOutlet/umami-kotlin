@@ -1,7 +1,9 @@
 ![banner](docs/img/banner.png)
 # Umami Kotlin
 
-[![Maven Central Version](https://img.shields.io/maven-central/v/dev.appoutlet/umami?style=for-the-badge&label=Maven%20Central&link=https%3A%2F%2Fcentral.sonatype.com%2Fartifact%2Fdev.appoutlet%2Fumami)](https://central.sonatype.com/artifact/dev.appoutlet/umami)
+[![Maven Central Version](https://img.shields.io/maven-central/v/dev.appoutlet/umami?&label=Maven%20Central&link=https%3A%2F%2Fcentral.sonatype.com%2Fartifact%2Fdev.appoutlet%2Fumami)](https://central.sonatype.com/artifact/dev.appoutlet/umami)
+[![Maintainability](https://qlty.sh/gh/AppOutlet/projects/umami-kotlin/maintainability.svg)](https://qlty.sh/gh/AppOutlet/projects/umami-kotlin)
+[![Code Coverage](https://qlty.sh/gh/AppOutlet/projects/umami-kotlin/coverage.svg)](https://qlty.sh/gh/AppOutlet/projects/umami-kotlin)
 
 An unofficial, open-source Kotlin Multiplatform library for seamless interaction with the [Umami](https://umami.is) web analytics REST API.
 

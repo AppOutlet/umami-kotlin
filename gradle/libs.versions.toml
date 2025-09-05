@@ -4,7 +4,7 @@ androidx-activityCompose = "1.10.1"
 compose = "1.8.2"
 coroutines = "1.10.2"
 detekt = "1.23.8"
-kotest = "5.9.1"
+kotest = "6.0.1"
 kotlin = "2.2.0"
 ktor = "3.2.3"
 maven-publish = "0.34.0"
@@ -13,7 +13,7 @@ maven-publish = "0.34.0"
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
-kermit = "co.touchlab:kermit:2.0.6"
+kermit = "co.touchlab:kermit:2.0.8"
 kotest-assertions = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }

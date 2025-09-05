@@ -1,4 +1,4 @@
-# Getting started
+# Track your first event in a Kotlin Multiplatform application
 
 Welcome\! This guide will walk you through the essential steps to install `umami-kotlin`, configure the client, and send your first event. You'll be up and running in just a few minutes.
 
@@ -66,4 +66,4 @@ fun trackMyFirstEvent() {
 
 This code initializes the client and sends a simple page view event. You can also track custom events by providing a `name` to the `event()` function. It's that simple!
 
-The events are processed asynchronously backed by a [Channel](https://kotlinlang.org/docs/coroutines-and-channels.html#channels) and the HTTP requests are made out of the main thread, so you can call this from anywhere in your application without blocking the UI or main thread. More details about event tracking on [the event tracking page](event-tracking.md).
+The events are processed asynchronously backed by a [Channel](https://kotlinlang.org/docs/coroutines-and-channels.html#channels) and the HTTP requests are made out of the main thread, so you can call this from anywhere in your application without blocking the UI or main thread. More details about event tracking on [the event tracking page](../event-tracking.md).

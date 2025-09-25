@@ -13,7 +13,7 @@ plugins {
     alias(libs.plugins.kover)
 }
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 
     androidTarget { publishLibraryVariants("release") }
     jvm()
@@ -30,7 +30,6 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.kermit)
-            implementation(libs.ktor.client.cio)
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.client.serialization)

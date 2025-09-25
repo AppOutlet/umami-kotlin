@@ -115,7 +115,7 @@ android {
     }
 }
 
-val version = "0.1.11"
+val version = "0.1.12"
 
 mavenPublishing {
     publishToMavenCentral(true)

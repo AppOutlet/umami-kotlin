@@ -1,0 +1,13 @@
+# EditorConfig is awesome: https://editorconfig.org
+root = true
+
+[*.{kt,kts}]
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+max_line_length = 120
+charset = utf-8
+ij_kotlin_imports_layout = *, java, javax, org, com
+ij_continuation_indent_size = 4
+ij_kotlin_name_count_to_use_star_import = 99

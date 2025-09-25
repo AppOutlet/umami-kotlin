@@ -3,7 +3,7 @@ rootProject.name = "umami"
 pluginManagement {
     repositories {
         google {
-            content { 
+            content {
               	includeGroupByRegex("com\\.android.*")
               	includeGroupByRegex("com\\.google.*")
               	includeGroupByRegex("androidx.*")
@@ -18,7 +18,7 @@ pluginManagement {
 dependencyResolutionManagement {
     repositories {
         google {
-            content { 
+            content {
               	includeGroupByRegex("com\\.android.*")
               	includeGroupByRegex("com\\.google.*")
               	includeGroupByRegex("androidx.*")
@@ -29,6 +29,6 @@ dependencyResolutionManagement {
     }
 }
 include(":umami")
-include(":sample:composeApp")
+include(":sample:simple-compose-app:composeApp")
 include(":sample:terminalApp")
 

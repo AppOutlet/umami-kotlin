@@ -3,13 +3,13 @@ package dev.appoutlet.umami
 import co.touchlab.kermit.Logger
 import dev.appoutlet.umami.api.processEventQueueItem
 import dev.appoutlet.umami.core.createHttpClient
+import dev.appoutlet.umami.core.defaultHttpClientEngine
 import dev.appoutlet.umami.domain.Hostname
 import dev.appoutlet.umami.domain.Ip
 import dev.appoutlet.umami.domain.Language
 import dev.appoutlet.umami.domain.ScreenSize
 import dev.appoutlet.umami.util.createUserAgent
 import io.ktor.client.engine.HttpClientEngine
-import io.ktor.client.engine.cio.CIO
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.http.Url
 import kotlinx.coroutines.CoroutineScope
@@ -51,7 +51,7 @@ class Umami(
     internal val ip: Ip? = null,
     internal val userAgent: String = createUserAgent(),
     internal val eventQueueCapacity: Int = EVENT_QUEUE_CAPACITY,
-    internal val httpClientEngine: HttpClientEngine = CIO.create(),
+    internal val httpClientEngine: HttpClientEngine = defaultHttpClientEngine(),
     internal val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
 ) {
 
@@ -115,7 +115,7 @@ class Umami(
             ip: String? = null,
             userAgent: String = createUserAgent(),
             eventQueueCapacity: Int = EVENT_QUEUE_CAPACITY,
-            httpClientEngine: HttpClientEngine = CIO.create(),
+            httpClientEngine: HttpClientEngine = defaultHttpClientEngine(),
             coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
         ): Umami {
             return Umami(

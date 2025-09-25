@@ -65,3 +65,17 @@ internal fun Umami.createHttpClient(engine: HttpClientEngine) = HttpClient(engin
         execute(requestBuilder)
     }
 }
+
+/**
+ * Provides the default [HttpClientEngine] for the current platform.
+ *
+ * Platform mapping:
+ * - Android and JVM: OkHttp
+ * - macOS and iOS: Darwin
+ * - JS and Wasm: Js
+ * - Linux: Curl
+ * - Windows: WinHttp
+ *
+ * @return The correct [HttpClientEngine] implementation for the platform.
+ */
+expect fun defaultHttpClientEngine(): HttpClientEngine

@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 // This instance can be injected into your ViewModel and can be created wherever it suits better your architecture.
 val umami = Umami.create(
     baseUrl = "http://192.168.1.1:3000",
-    website = "45242d93-0acf-4103-9d8e-65325d615e81",
+    website = "74f75ec4-d0a3-47f2-9458-11f9febf7d7b",
 )
 
 @Composable

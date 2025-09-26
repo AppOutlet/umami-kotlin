@@ -36,5 +36,5 @@ plugins {
 include(":umami")
 include(":sample:simple-compose-app:composeApp")
 include(":sample:terminalApp")
-include(":sample:kombu")
+include(":sample:kombu:composeApp")
 

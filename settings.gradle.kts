@@ -36,5 +36,7 @@ plugins {
 include(":umami")
 include(":sample:simple-compose-app:composeApp")
 include(":sample:terminalApp")
+include(":sample:kombu:kombu-desktop")
 include(":sample:kombu:kombu-shared")
 
+include(":sample:kombu:kombu-android")

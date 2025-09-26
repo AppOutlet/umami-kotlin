@@ -11,7 +11,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		13141F6E12370AB6F83B294E /* Exceptions for "iosApp" folder in "Kombu" target */ = {
+		13141F6E12370AB6F83B294E /* Exceptions for "Kombu" folder in "Kombu" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -21,12 +21,12 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		21B77910D038B9312DE9B74B /* iosApp */ = {
+		21B77910D038B9312DE9B74B /* Kombu */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				13141F6E12370AB6F83B294E /* Exceptions for "iosApp" folder in "Kombu" target */,
+				13141F6E12370AB6F83B294E /* Exceptions for "Kombu" folder in "Kombu" target */,
 			);
-			path = iosApp;
+			path = Kombu;
 			sourceTree = "<group>";
 		};
 		D23272370B9FEFB1279D85F4 /* Configuration */ = {
@@ -51,7 +51,7 @@
 			isa = PBXGroup;
 			children = (
 				D23272370B9FEFB1279D85F4 /* Configuration */,
-				21B77910D038B9312DE9B74B /* iosApp */,
+				21B77910D038B9312DE9B74B /* Kombu */,
 				6EDB5E84662F02BA28A53F2F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -81,7 +81,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				21B77910D038B9312DE9B74B /* iosApp */,
+				21B77910D038B9312DE9B74B /* Kombu */,
 			);
 			name = Kombu;
 			packageProductDependencies = (
@@ -98,7 +98,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1620;
-				LastUpgradeCheck = 1620;
+				LastUpgradeCheck = 2600;
 				TargetAttributes = {
 					AAAAEA5448F88BE81B0F66DE = {
 						CreatedOnToolsVersion = 16.2;
@@ -170,16 +170,14 @@
 		2517438FF4597316632E0707 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = arm64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
-				DEVELOPMENT_TEAM = "${TEAM_ID}";
+				DEVELOPMENT_ASSET_PATHS = "\"Kombu/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = iosApp/Info.plist;
+				INFOPLIST_FILE = Kombu/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Kombu;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -199,16 +197,14 @@
 		7D2B7E6E9966B3466D3A3F6A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = arm64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
-				DEVELOPMENT_TEAM = "${TEAM_ID}";
+				DEVELOPMENT_ASSET_PATHS = "\"Kombu/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = iosApp/Info.plist;
+				INFOPLIST_FILE = Kombu/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Kombu;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -262,6 +258,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "${TEAM_ID}";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -278,6 +275,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -320,6 +318,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "${TEAM_ID}";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -343,6 +342,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};

@@ -31,13 +31,14 @@ ktor-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json", 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
-compose = { id = "org.jetbrains.compose", version.ref = "compose" }
+compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+compose-hotReload = "org.jetbrains.compose.hot-reload:1.0.0-beta08"
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 dokka = "org.jetbrains.dokka:2.0.0"
 gitHooks = "eu.bambooapps.gradle.plugin.githook:1.1.1"
 kover = "org.jetbrains.kotlinx.kover:0.9.2"
 maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }
-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 

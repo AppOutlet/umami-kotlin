@@ -4,14 +4,15 @@ import java.time.LocalDateTime
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
-    alias(libs.plugins.multiplatform)
     alias(libs.plugins.android.library)
-    alias(libs.plugins.maven.publish)
-    alias(libs.plugins.serialization)
     alias(libs.plugins.detekt)
     alias(libs.plugins.dokka)
+    alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kover)
+    alias(libs.plugins.maven.publish)
+    alias(libs.plugins.serialization)
 }
+
 kotlin {
     jvmToolchain(21)
 

@@ -39,7 +39,7 @@ dependencies {
 
 compose.desktop {
     application {
-        mainClass = "dev.appoutlet.kombu.MainKt"
+        mainClass = "dev.appoutlet.kombu.Kombu"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)

@@ -12,7 +12,6 @@ kotlin = "2.2.20"
 ktor = "3.3.0"
 lifecycle = "2.9.4"
 maven-publish = "0.34.0"
-jetbrainsKotlinJvm = "2.2.21"
 coreKtx = "1.17.0"
 junit = "4.13.2"
 junitVersion = "1.3.0"
@@ -72,6 +71,6 @@ kover = "org.jetbrains.kotlinx.kover:0.9.2"
 maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 

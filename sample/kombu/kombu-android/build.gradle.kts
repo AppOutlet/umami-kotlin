@@ -40,7 +40,6 @@ dependencies {
     implementation(project(":sample:kombu:kombu-shared"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.material)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activityCompose)
     implementation(platform(libs.androidx.compose.bom))

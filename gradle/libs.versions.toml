@@ -9,7 +9,7 @@ coroutines = "1.10.2"
 detekt = "1.23.8"
 kotest = "6.0.3"
 kotlin = "2.2.20"
-ktor = "3.3.0"
+ktor = "3.3.1"
 lifecycle = "2.9.4"
 maven-publish = "0.34.0"
 jetbrainsKotlinJvm = "2.2.20"
@@ -64,7 +64,7 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-compose-hotReload = "org.jetbrains.compose.hot-reload:1.0.0-beta08"
+compose-hotReload = "org.jetbrains.compose.hot-reload:1.0.0-rc02"
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 dokka = "org.jetbrains.dokka:2.0.0"
 gitHooks = "eu.bambooapps.gradle.plugin.githook:1.1.1"

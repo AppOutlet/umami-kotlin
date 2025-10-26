@@ -115,16 +115,16 @@ private fun Umami.send(
         payload = EventPayload(
             website = website.toString(),
             data = data?.mapValues { it.value?.toString() },
-            hostname = hostname?.value,
-            language = language?.value,
+            hostname = options.hostname?.value,
+            language = options.language?.value,
             referrer = referrer,
-            screen = screen?.value,
+            screen = options.screen?.value,
             title = title,
             url = url,
             name = name,
             tag = tag,
-            ip = ip?.value,
-            userAgent = userAgent,
+            ip = options.ip?.value,
+            userAgent = options.userAgent,
             timestamp = timestamp,
             id = id
         )
@@ -147,7 +147,7 @@ private fun Umami.send(
  * @throws ResponseException if the response is invalid or cannot be processed.
  * @throws Throwable for any other unexpected errors during the request.
  */
-internal fun Umami.processEventQueueItem(request: HttpRequestBuilder) = coroutineScope.launch {
+internal fun Umami.processEventQueueItem(request: HttpRequestBuilder) = options.coroutineScope.launch {
     try {
         val response = httpClient.post(request).body<EventResponse>()
 

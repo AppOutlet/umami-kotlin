@@ -36,7 +36,7 @@ const val EVENT_QUEUE_CAPACITY = 25
  */
 @OptIn(ExperimentalUuidApi::class)
 class Umami(internal val website: Uuid, umamiOptions: UmamiOptionsBuilder.() -> Unit = {}) {
-    private val options = UmamiOptionsBuilder().apply(umamiOptions).build(website)
+    internal val options = UmamiOptionsBuilder().apply(umamiOptions).build(website)
 
     /**
      * A mutable map to hold custom headers for HTTP requests.

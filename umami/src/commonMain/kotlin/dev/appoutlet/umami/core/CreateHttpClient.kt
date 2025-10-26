@@ -32,10 +32,10 @@ internal fun Umami.createHttpClient(engine: HttpClientEngine) = HttpClient(engin
     expectSuccess = true
 
     defaultRequest {
-        url(baseUrl.toString())
+        url(options.baseUrl.toString())
         contentType(ContentType.Application.Json)
         accept(ContentType.Application.Json)
-        userAgent(userAgent)
+        userAgent(options.userAgent)
     }
 
     install(Logging) {

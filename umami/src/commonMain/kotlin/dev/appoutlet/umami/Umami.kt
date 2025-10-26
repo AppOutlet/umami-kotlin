@@ -12,13 +12,13 @@ import dev.appoutlet.umami.util.createUserAgent
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.http.Url
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
-import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 
 /**
  * Default event queue capacity. The capacity can be customized on the Umami object creation.
@@ -26,34 +26,17 @@ import kotlin.uuid.Uuid
  */
 const val EVENT_QUEUE_CAPACITY = 25
 
+
 /**
- * The main class for interacting with the Umami API.
+ * The main entry point for the Umami analytics library.
+ * This class is responsible for initializing the Umami configuration and managing the event queue.
  *
- * @constructor Creates an instance of [Umami] with the specified parameters using typesafe parameters.
- * @property baseUrl The base URL of the Umami API. Defaults to "https://api.umami.is". If you are using a self-hosted
- * version of Umami, you need to provide the URL pointing to your instance.
- * @property website The UUID of the website to track events for.
- * @property hostname Optional hostname for the website.
- * @property language Optional language of the user's browser.
- * @property screen Optional screen size of the user's device.
- * @property ip Optional IP address of the user.
- * @property userAgent The user agent string for HTTP requests. Defaults to a generated string using [createUserAgent].
- * @property eventQueueCapacity The capacity of the event queue. Defaults to [EVENT_QUEUE_CAPACITY].
+ * @param website The UUID of the website to track events for.
+ * @param umamiOptions A builder for configuring Umami options, such as the base URL, hostname, and event queue capacity.
  */
 @OptIn(ExperimentalUuidApi::class)
-@Suppress("LongParameterList")
-class Umami(
-    internal val baseUrl: Url = Url("https://api.umami.is"),
-    internal val website: Uuid,
-    internal val hostname: Hostname? = null,
-    internal val language: Language? = null,
-    internal val screen: ScreenSize? = null,
-    internal val ip: Ip? = null,
-    internal val userAgent: String = createUserAgent(),
-    internal val eventQueueCapacity: Int = EVENT_QUEUE_CAPACITY,
-    internal val httpClientEngine: HttpClientEngine = defaultHttpClientEngine(),
-    internal val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
-) {
+class Umami(internal val website: Uuid, umamiOptions: UmamiOptionsBuilder.() -> Unit = {}) {
+    private val options = UmamiOptionsBuilder().apply(umamiOptions).build(website)
 
     /**
      * A mutable map to hold custom headers for HTTP requests.
@@ -65,14 +48,56 @@ class Umami(
      * An HTTP client for making requests to the Umami API.
      * This client is created lazily to ensure it is initialized only when needed.
      */
-    internal val httpClient by lazy { createHttpClient(httpClientEngine) }
+    internal val httpClient by lazy { createHttpClient(options.httpClientEngine) }
 
     /**
      * A channel that acts as an event queue for HTTP requests.
      * This queue allows for asynchronous processing of events, enabling the application to send events
      * without blocking the main thread.
      */
-    internal val eventQueue = Channel<HttpRequestBuilder>(capacity = eventQueueCapacity)
+    internal val eventQueue = Channel<HttpRequestBuilder>(capacity = options.eventQueueCapacity)
+
+    /**
+     * @param baseUrl The base URL of the Umami API.
+     * @param website The UUID of the website to track events for.
+     * @param hostname The hostname of the website.
+     * @param language The language of the user's browser.
+     * @param screen The screen size of the user's device.
+     * @param ip The IP address of the user.
+     * @param userAgent The user agent of the user's browser.
+     * @param eventQueueCapacity The capacity of the event queue.
+     * @param httpClientEngine The HTTP client engine to use for requests.
+     * @param coroutineScope The coroutine scope to use for background tasks.
+     */
+    @Deprecated(
+        message = "Use the primary constructor with UmamiOptionsBuilder instead.",
+        replaceWith = ReplaceWith("Umami(website = ...) { }")
+    )
+    constructor(
+        baseUrl: Url = Url("https://api.umami.is"),
+        website: Uuid,
+        hostname: Hostname? = null,
+        language: Language? = null,
+        screen: ScreenSize? = null,
+        ip: Ip? = null,
+        userAgent: String = createUserAgent(),
+        eventQueueCapacity: Int = EVENT_QUEUE_CAPACITY,
+        httpClientEngine: HttpClientEngine = defaultHttpClientEngine(),
+        coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
+    ) : this(
+        website = website,
+        umamiOptions = {
+            this.baseUrl = baseUrl
+            this.hostname = hostname
+            this.language = language
+            this.screen = screen
+            this.ip = ip
+            this.userAgent = userAgent
+            this.eventQueueCapacity = eventQueueCapacity
+            this.httpClientEngine = httpClientEngine
+            this.coroutineScope = coroutineScope
+        },
+    )
 
     init {
         Logger.setTag("Umami")
@@ -85,7 +110,7 @@ class Umami(
      * Each item is processed by the [processEventQueueItem] function, which sends the event to the Umami API.
      */
     private fun consumeEventQueue() {
-        coroutineScope.launch {
+        options.coroutineScope.launch {
             eventQueue.consumeEach { request -> processEventQueueItem(request) }
         }
     }
@@ -106,6 +131,10 @@ class Umami(
          * @throws IllegalArgumentException if the website UUID string is invalid, or if other string parameters are
          * invalid according to their respective domain classes.
          */
+        @Deprecated(
+            message = "Use the primary constructor with UmamiOptionsBuilder instead.",
+            replaceWith = ReplaceWith("Umami(website = ...) { }")
+        )
         fun create(
             baseUrl: String = "https://cloud.umami.is",
             website: String,

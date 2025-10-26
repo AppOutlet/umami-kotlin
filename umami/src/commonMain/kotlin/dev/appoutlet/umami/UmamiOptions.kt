@@ -57,7 +57,7 @@ class UmamiOptionsBuilder {
     var language: Language? = null
 
     /** The screen size of the user's device. */
-    var screen: ScreenSize? = null
+    var screenSize: ScreenSize? = null
 
     /** The IP address of the user. */
     var ip: Ip? = null
@@ -74,6 +74,24 @@ class UmamiOptionsBuilder {
     /** The coroutine scope to use for background tasks. */
     var coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
 
+    /** Sets the base URL of the Umami API. */
+    fun baseUrl(value: String) { baseUrl = Url(value) }
+
+    /** Sets the hostname of the website. */
+    fun hostname(value: String) { hostname = Hostname(value) }
+
+    /** Sets the language of the user's browser. */
+    fun language(value: String) { language = Language(value) }
+
+    /** Sets the screen size of the user's device from a string (e.g., "1920x1080"). */
+    fun screenSize(value: String) { screenSize = ScreenSize(value) }
+
+    /** Sets the screen size of the user's device from width and height. */
+    fun screenSize(width: Int, height: Int) { screenSize = ScreenSize(width = width, height = height) }
+
+    /** Sets the IP address of the user. */
+    fun ip(value: String) { ip = Ip(value) }
+
     /**
      * Builds an [UmamiOptions] instance with the configured properties.
      *
@@ -86,7 +104,7 @@ class UmamiOptionsBuilder {
             baseUrl = baseUrl,
             hostname = hostname,
             language = language,
-            screen = screen,
+            screen = screenSize,
             ip = ip,
             userAgent = userAgent,
             eventQueueCapacity = eventQueueCapacity,

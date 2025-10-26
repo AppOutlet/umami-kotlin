@@ -12,13 +12,13 @@ import dev.appoutlet.umami.util.createUserAgent
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.http.Url
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
-import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 
 /**
  * Default event queue capacity. The capacity can be customized on the Umami object creation.
@@ -33,6 +33,7 @@ const val EVENT_QUEUE_CAPACITY = 25
  * @param website The UUID of the website to track events for.
  * @param umamiOptions A builder for configuring Umami options, such as the base URL, hostname, and event queue capacity.
  */
+// TODO: update documentation page to reflect the new constructor with UmamiOptionsBuilder
 @OptIn(ExperimentalUuidApi::class)
 class Umami(internal val website: Uuid, umamiOptions: UmamiOptionsBuilder.() -> Unit = {}) {
     internal val options = UmamiOptionsBuilder().apply(umamiOptions).build(website)
@@ -77,7 +78,7 @@ class Umami(internal val website: Uuid, umamiOptions: UmamiOptionsBuilder.() -> 
         website: Uuid,
         hostname: Hostname? = null,
         language: Language? = null,
-        screen: ScreenSize? = null,
+        screenSize: ScreenSize? = null,
         ip: Ip? = null,
         userAgent: String = createUserAgent(),
         eventQueueCapacity: Int = EVENT_QUEUE_CAPACITY,
@@ -89,13 +90,18 @@ class Umami(internal val website: Uuid, umamiOptions: UmamiOptionsBuilder.() -> 
             this.baseUrl = baseUrl
             this.hostname = hostname
             this.language = language
-            this.screen = screen
+            this.screenSize = screenSize
             this.ip = ip
             this.userAgent = userAgent
             this.eventQueueCapacity = eventQueueCapacity
             this.httpClientEngine = httpClientEngine
             this.coroutineScope = coroutineScope
         },
+    )
+
+    constructor(website: String, umamiOptions: UmamiOptionsBuilder.() -> Unit = {}) : this(
+        website = Uuid.parse(website),
+        umamiOptions = umamiOptions,
     )
 
     init {
@@ -139,7 +145,7 @@ class Umami(internal val website: Uuid, umamiOptions: UmamiOptionsBuilder.() -> 
             website: String,
             hostname: String? = null,
             language: String? = null,
-            screen: String? = null,
+            screenSize: String? = null,
             ip: String? = null,
             userAgent: String = createUserAgent(),
             eventQueueCapacity: Int = EVENT_QUEUE_CAPACITY,
@@ -151,7 +157,7 @@ class Umami(internal val website: Uuid, umamiOptions: UmamiOptionsBuilder.() -> 
                 website = Uuid.parse(website),
                 hostname = hostname?.let(::Hostname),
                 language = language?.let(::Language),
-                screen = screen?.let(::ScreenSize),
+                screenSize = screenSize?.let(::ScreenSize),
                 ip = ip?.let(::Ip),
                 userAgent = userAgent,
                 eventQueueCapacity = eventQueueCapacity,

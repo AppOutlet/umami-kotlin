@@ -5,6 +5,8 @@ import dev.appoutlet.umami.domain.Hostname
 import dev.appoutlet.umami.domain.Ip
 import dev.appoutlet.umami.domain.Language
 import dev.appoutlet.umami.domain.ScreenSize
+import dev.appoutlet.umami.util.DefaultUmamiLogger
+import dev.appoutlet.umami.util.UmamiLogger
 import dev.appoutlet.umami.util.createUserAgent
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.http.Url
@@ -38,7 +40,8 @@ internal data class UmamiOptions(
     val userAgent: String,
     val eventQueueCapacity: Int,
     val httpClientEngine: HttpClientEngine,
-    val coroutineScope: CoroutineScope
+    val coroutineScope: CoroutineScope,
+    val logger: UmamiLogger,
 )
 
 /**
@@ -73,6 +76,8 @@ class UmamiOptionsBuilder {
 
     /** The coroutine scope to use for background tasks. */
     var coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
+
+    var logger: UmamiLogger = DefaultUmamiLogger()
 
     /** Sets the base URL of the Umami API. */
     fun baseUrl(value: String) { baseUrl = Url(value) }
@@ -109,7 +114,8 @@ class UmamiOptionsBuilder {
             userAgent = userAgent,
             eventQueueCapacity = eventQueueCapacity,
             httpClientEngine = httpClientEngine,
-            coroutineScope = coroutineScope
+            coroutineScope = coroutineScope,
+            logger = logger,
         )
     }
 }

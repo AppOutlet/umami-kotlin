@@ -1,7 +1,7 @@
 package dev.appoutlet.umami.api
 
-import co.touchlab.kermit.Logger
 import dev.appoutlet.umami.Umami
+import dev.appoutlet.umami.util.logger
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.ResponseException
@@ -152,17 +152,13 @@ internal fun Umami.processEventQueueItem(request: HttpRequestBuilder) = options.
         val response = httpClient.post(request).body<EventResponse>()
 
         if (response.beep != null) {
-            Logger.e { "Umami server considered the event invalid \n $response" }
+            logger.error("Umami server considered the event invalid \n $response")
         }
 
         headers["x-umami-cache"] = response.cache
     } catch (clientRequestException: ClientRequestException) {
-        Logger.e(throwable = clientRequestException) {
-            "Error processing event request"
-        }
+        logger.error("Error processing event request", clientRequestException)
     } catch (responseException: ResponseException) {
-        Logger.e(throwable = responseException) {
-            "Error processing event response"
-        }
+        logger.error("Error processing event response", responseException)
     }
 }

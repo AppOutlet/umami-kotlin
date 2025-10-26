@@ -1,6 +1,5 @@
 package dev.appoutlet.umami
 
-import co.touchlab.kermit.Logger
 import dev.appoutlet.umami.api.processEventQueueItem
 import dev.appoutlet.umami.core.createHttpClient
 import dev.appoutlet.umami.core.defaultHttpClientEngine
@@ -12,13 +11,13 @@ import dev.appoutlet.umami.util.createUserAgent
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.http.Url
-import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
 /**
  * Default event queue capacity. The capacity can be customized on the Umami object creation.
@@ -31,7 +30,7 @@ const val EVENT_QUEUE_CAPACITY = 25
  * This class is responsible for initializing the Umami configuration and managing the event queue.
  *
  * @param website The UUID of the website to track events for.
- * @param umamiOptions A builder for configuring Umami options, such as the base URL, hostname, and event queue capacity.
+ * @param umamiOptions A builder for configuring Umami options, such as the base URL, hostname, and queue capacity.
  */
 // TODO: update documentation page to reflect the new constructor with UmamiOptionsBuilder
 @OptIn(ExperimentalUuidApi::class)
@@ -105,7 +104,6 @@ class Umami(internal val website: Uuid, umamiOptions: UmamiOptionsBuilder.() -> 
     )
 
     init {
-        Logger.setTag("Umami")
         consumeEventQueue()
     }
 

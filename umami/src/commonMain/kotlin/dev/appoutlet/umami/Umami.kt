@@ -2,17 +2,7 @@ package dev.appoutlet.umami
 
 import dev.appoutlet.umami.api.processEventQueueItem
 import dev.appoutlet.umami.core.createHttpClient
-import dev.appoutlet.umami.core.defaultHttpClientEngine
-import dev.appoutlet.umami.domain.Hostname
-import dev.appoutlet.umami.domain.Ip
-import dev.appoutlet.umami.domain.Language
-import dev.appoutlet.umami.domain.ScreenSize
-import dev.appoutlet.umami.util.createUserAgent
-import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.request.HttpRequestBuilder
-import io.ktor.http.Url
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.consumeEach
@@ -60,48 +50,6 @@ class Umami(internal val website: Uuid, umamiOptions: UmamiOptionsBuilder.() -> 
     internal lateinit var eventQueueJob: Job
 
     /**
-     * @param baseUrl The base URL of the Umami API.
-     * @param website The UUID of the website to track events for.
-     * @param hostname The hostname of the website.
-     * @param language The language of the user's browser.
-     * @param screen The screen size of the user's device.
-     * @param ip The IP address of the user.
-     * @param userAgent The user agent of the user's browser.
-     * @param eventQueueCapacity The capacity of the event queue.
-     * @param httpClientEngine The HTTP client engine to use for requests.
-     * @param coroutineScope The coroutine scope to use for background tasks.
-     */
-    @Deprecated(
-        message = "Use the primary constructor with UmamiOptionsBuilder instead.",
-        replaceWith = ReplaceWith("Umami(website = ...) { }")
-    )
-    constructor(
-        baseUrl: Url = Url("https://api.umami.is"),
-        website: Uuid,
-        hostname: Hostname? = null,
-        language: Language? = null,
-        screen: ScreenSize? = null,
-        ip: Ip? = null,
-        userAgent: String = createUserAgent(),
-        eventQueueCapacity: Int = EVENT_QUEUE_CAPACITY,
-        httpClientEngine: HttpClientEngine = defaultHttpClientEngine(),
-        coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
-    ) : this(
-        website = website,
-        umamiOptions = {
-            this.baseUrl = baseUrl
-            this.hostname = hostname
-            this.language = language
-            this.screenSize = screen
-            this.ip = ip
-            this.userAgent = userAgent
-            this.eventQueueCapacity = eventQueueCapacity
-            this.httpClientEngine = httpClientEngine
-            this.coroutineScope = coroutineScope
-        },
-    )
-
-    /**
      * Creates an [Umami] instance with a string representation of the website UUID.
      *
      * @param website The string representation of the website UUID to track events for.
@@ -125,53 +73,6 @@ class Umami(internal val website: Uuid, umamiOptions: UmamiOptionsBuilder.() -> 
     private fun consumeEventQueue() {
         eventQueueJob = options.coroutineScope.launch {
             eventQueue.consumeEach { request -> processEventQueueItem(request) }
-        }
-    }
-
-    companion object {
-        /**
-         * Creates an [Umami] instance with string inputs, which are then parsed into appropriate types.
-         *
-         * @param baseUrl The base URL of the Umami API. Defaults to "https://api.umami.is".
-         * @param website The UUID string of the website to track events for.
-         * @param hostname Optional hostname string for the website.
-         * @param language Optional language string of the user's browser.
-         * @param screen Optional screen size string of the user's device (e.g., "1920x1080").
-         * @param ip Optional IP address string of the user.
-         * @param userAgent The user agent string for HTTP requests. Defaults to a generated string [createUserAgent].
-         * @param eventQueueCapacity The capacity of the event queue. Defaults to [EVENT_QUEUE_CAPACITY].
-         * @return An instance of [Umami].
-         * @throws IllegalArgumentException if the website UUID string is invalid, or if other string parameters are
-         * invalid according to their respective domain classes.
-         */
-        @Deprecated(
-            message = "Use the primary constructor with UmamiOptionsBuilder instead.",
-            replaceWith = ReplaceWith("Umami(website = ...) { }")
-        )
-        fun create(
-            baseUrl: String = "https://cloud.umami.is",
-            website: String,
-            hostname: String? = null,
-            language: String? = null,
-            screen: String? = null,
-            ip: String? = null,
-            userAgent: String = createUserAgent(),
-            eventQueueCapacity: Int = EVENT_QUEUE_CAPACITY,
-            httpClientEngine: HttpClientEngine = defaultHttpClientEngine(),
-            coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
-        ): Umami {
-            return Umami(
-                baseUrl = Url(baseUrl),
-                website = Uuid.parse(website),
-                hostname = hostname?.let(::Hostname),
-                language = language?.let(::Language),
-                screen = screen?.let(::ScreenSize),
-                ip = ip?.let(::Ip),
-                userAgent = userAgent,
-                eventQueueCapacity = eventQueueCapacity,
-                httpClientEngine = httpClientEngine,
-                coroutineScope = coroutineScope,
-            )
         }
     }
 }

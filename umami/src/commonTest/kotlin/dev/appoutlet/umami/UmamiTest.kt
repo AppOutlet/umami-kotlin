@@ -44,6 +44,7 @@ class UmamiTest {
 
         with(umami.options) {
             website shouldBe fixtureWebsite
+            baseUrl shouldBe fixtureUrl
             hostname shouldBe fixtureHostName
             language shouldBe fixtureLanguage
             screenSize shouldBe fixtureScreenSize
@@ -53,6 +54,35 @@ class UmamiTest {
             httpClientEngine shouldBe fixtureClientEngine
             coroutineScope shouldBe this@runTest
             logger shouldBe fixtureLogger
+        }
+
+        umami.eventQueueJob.cancel()
+    }
+
+    @Test
+    fun `should create instance - string constructor`() = runTest {
+        val fixtureWebsite = "6ac9affa-c62a-4b45-b232-0516ea55029c"
+        val fixtureUrl = "https://appoutlet.dev"
+        val fixtureHostName = "umami-kotlin.appoutlet.dev"
+        val fixtureLanguage = "pt-BR"
+        val fixtureScreenSize = "1920x1080"
+        val fixtureIp = "192.168.1.1"
+
+        val umami = Umami(website = fixtureWebsite) {
+            baseUrl(fixtureUrl)
+            hostname(fixtureHostName)
+            language(fixtureLanguage)
+            screenSize(fixtureScreenSize)
+            ip(fixtureIp)
+        }
+
+        with(umami.options) {
+            website.toString() shouldBe fixtureWebsite
+            baseUrl.toString() shouldBe fixtureUrl
+            hostname?.value shouldBe fixtureHostName
+            language?.value shouldBe fixtureLanguage
+            screenSize?.value shouldBe fixtureScreenSize
+            ip?.value shouldBe fixtureIp
         }
 
         umami.eventQueueJob.cancel()

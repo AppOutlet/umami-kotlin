@@ -12,7 +12,6 @@ plugins {
     alias(libs.plugins.maven.publish)
     alias(libs.plugins.mokkery)
     alias(libs.plugins.serialization)
-    kotlin("plugin.allopen")
 }
 
 kotlin {

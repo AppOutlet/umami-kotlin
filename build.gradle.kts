@@ -11,14 +11,12 @@ plugins {
     alias(libs.plugins.maven.publish) apply false
     alias(libs.plugins.kotlin.multiplatform) apply false
     alias(libs.plugins.kotlin.jvm) apply false
-    kotlin("plugin.allopen") version "2.2.21" apply false
 
     alias(libs.plugins.detekt)
     alias(libs.plugins.dokka)
     alias(libs.plugins.gitHooks)
     alias(libs.plugins.kover)
     alias(libs.plugins.kotlin.android) apply false
-
 }
 
 dependencies {

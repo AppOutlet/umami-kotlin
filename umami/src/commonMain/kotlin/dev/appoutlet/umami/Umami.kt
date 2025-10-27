@@ -61,7 +61,7 @@ class Umami(internal val website: Uuid, umamiOptions: UmamiOptionsBuilder.() -> 
      * @param website The UUID of the website to track events for.
      * @param hostname The hostname of the website.
      * @param language The language of the user's browser.
-     * @param screen The screen size of the user's device.
+     * @param screenSize The screen size of the user's device.
      * @param ip The IP address of the user.
      * @param userAgent The user agent of the user's browser.
      * @param eventQueueCapacity The capacity of the event queue.
@@ -77,7 +77,7 @@ class Umami(internal val website: Uuid, umamiOptions: UmamiOptionsBuilder.() -> 
         website: Uuid,
         hostname: Hostname? = null,
         language: Language? = null,
-        screenSize: ScreenSize? = null,
+        screen: ScreenSize? = null,
         ip: Ip? = null,
         userAgent: String = createUserAgent(),
         eventQueueCapacity: Int = EVENT_QUEUE_CAPACITY,
@@ -89,7 +89,7 @@ class Umami(internal val website: Uuid, umamiOptions: UmamiOptionsBuilder.() -> 
             this.baseUrl = baseUrl
             this.hostname = hostname
             this.language = language
-            this.screenSize = screenSize
+            this.screenSize = screen
             this.ip = ip
             this.userAgent = userAgent
             this.eventQueueCapacity = eventQueueCapacity
@@ -143,7 +143,7 @@ class Umami(internal val website: Uuid, umamiOptions: UmamiOptionsBuilder.() -> 
             website: String,
             hostname: String? = null,
             language: String? = null,
-            screenSize: String? = null,
+            screen: String? = null,
             ip: String? = null,
             userAgent: String = createUserAgent(),
             eventQueueCapacity: Int = EVENT_QUEUE_CAPACITY,
@@ -155,7 +155,7 @@ class Umami(internal val website: Uuid, umamiOptions: UmamiOptionsBuilder.() -> 
                 website = Uuid.parse(website),
                 hostname = hostname?.let(::Hostname),
                 language = language?.let(::Language),
-                screenSize = screenSize?.let(::ScreenSize),
+                screen = screen?.let(::ScreenSize),
                 ip = ip?.let(::Ip),
                 userAgent = userAgent,
                 eventQueueCapacity = eventQueueCapacity,

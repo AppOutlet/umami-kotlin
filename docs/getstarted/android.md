@@ -191,9 +191,9 @@ import dev.appoutlet.umami.domain.ScreenSize
 import kotlin.uuid.Uuid
 
 val umamiTypeSafe = Umami(Uuid.parse("YOUR-WEBSITE-UUID")) {
-    hostname(Hostname("example.com"))
-    language(Language("en-US"))
-    screenSize(ScreenSize(1080, 2400))
+    this.hostname = Hostname("example.com")
+    this.language = Language("en-US")
+    this.screenSize = ScreenSize(1080, 2400)
     eventQueueCapacity = 50
 }
 ```

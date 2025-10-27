@@ -190,8 +190,8 @@ Parameter | Type | Purpose | When to change
 Example adding language & dynamic screen size (Android + Desktop differences handled via expect/actual):
 ```kotlin
 // commonMain
-expect fun currentScreenSize(): String?
-expect fun currentLanguageTag(): String?
+expect fun currentScreenSize(): String
+expect fun currentLanguageTag(): String
 
 val umami = Umami("YOUR-WEBSITE-UUID") {
     language(currentLanguageTag())
@@ -200,8 +200,8 @@ val umami = Umami("YOUR-WEBSITE-UUID") {
 ```
 ```kotlin
 // androidMain
-actual fun currentScreenSize(): String? = "1080x2400"
-actual fun currentLanguageTag(): String? = java.util.Locale.getDefault().toLanguageTag()
+actual fun currentScreenSize(): String = "1080x2400"
+actual fun currentLanguageTag(): String = java.util.Locale.getDefault().toLanguageTag()
 ```
 ```kotlin
 // iosMain
@@ -209,11 +209,11 @@ import platform.UIKit.UIScreen
 import platform.Foundation.NSLocale
 import platform.Foundation.currentLocale
 
-actual fun currentScreenSize(): String? {
+actual fun currentScreenSize(): String {
     val bounds = UIScreen.mainScreen.bounds
     return "${'$'}{bounds.size.width.toInt()}x${'$'}{bounds.size.height.toInt()}"
 }
-actual fun currentLanguageTag(): String? = NSLocale.currentLocale.languageCode
+actual fun currentLanguageTag(): String = NSLocale.currentLocale.languageCode
 ```
 ---
 ## 7. Next steps

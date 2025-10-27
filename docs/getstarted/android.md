@@ -73,10 +73,9 @@ class MyApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        umami = Umami.create(
-            website = "YOUR-WEBSITE-UUID", // Required
-            // baseUrl = "https://your-self-hosted-instance" // Only if self-hosting
-        )
+        umami = Umami("YOUR-WEBSITE-UUID") {
+            // baseUrl("https://your-self-hosted-instance") // Only if self-hosting
+        }
     }
 }
 ```
@@ -99,10 +98,9 @@ val umami = (applicationContext as MyApp).umami
 object AnalyticsModule {
     @Provides
     @Singleton
-    fun provideUmami(): Umami = Umami.create(
-        website = "YOUR-WEBSITE-UUID"
-        // baseUrl = "https://your-self-hosted-instance"
-    )
+    fun provideUmami(): Umami = Umami("YOUR-WEBSITE-UUID") {
+        // baseUrl("https://your-self-hosted-instance")
+    }
 }
 ```
 Inject where needed:
@@ -153,51 +151,53 @@ umami.identify(data = mapOf("account_type" to "pro_user"))
     The calls return immediately; events are placed into an internal queue and processed off the main thread. See detailed parameter explanations on the [Event Tracking page](../event-tracking.md).
 
 ---
-## 6. Optional Configuration Parameters
-When calling `Umami.create(...)`, you can also pass:
+## 6. Optional Configuration
+All optional parameters can be set inside the `Umami` constructor lambda.
 
-* `hostname` – Hostname associated with the tracked site.
-* `language` – User language (e.g. `en-US`).
-* `screen` – Screen size (`"1080x2400"`).
-* `ip` – IP address override (rarely needed; normally omit).
-* `userAgent` – Custom User-Agent string (defaults to a generated one).
-* `eventQueueCapacity` – Size of the internal channel (default: 25).
+Parameter | Type | Purpose | When to change
+--- | --- | --- | ---
+`baseUrl(String)` | Function | Your own Umami instance | Self-hosted installs
+`hostname(String)` | Function | Override site host | Multi-domain analytics
+`language(String)` | Function | User locale | Provide when not derivable platform-side
+`screenSize(String)` | Function | Screen resolution | You collect manually; optional
+`ip(String)` | Function | Override IP | Rare (server-side forwarding)
+`userAgent` | `String` | Custom UA string | Simulator/test tagging
+`eventQueueCapacity` | `Int` | Channel size | High-volume burst events
+`httpClientEngine` | `HttpClientEngine` | Ktor HTTP engine | Platform-specific needs (e.g., custom proxy)
+`coroutineScope` | `CoroutineScope` | Background task scope | Integrate with app's lifecycle
+`logger` | `UmamiLogger` | Logging backend | Custom logging or disabling logs
 
-Example using the factory:
+Example with common parameters:
 ```kotlin
-val umami = Umami.create(
-    website = "YOUR-WEBSITE-UUID",
-    baseUrl = "https://analytics.example.com", // Only for self-hosted
-    language = Locale.getDefault().toLanguageTag(),
-    screen = "${Resources.getSystem().displayMetrics.widthPixels}x${Resources.getSystem().displayMetrics.heightPixels}",
+import android.content.res.Resources
+import java.util.Locale
+
+val umami = Umami("YOUR-WEBSITE-UUID") {
+    baseUrl("https://analytics.example.com") // Only for self-hosted
+    language(Locale.getDefault().toLanguageTag())
+    screenSize("${Resources.getSystem().displayMetrics.widthPixels}x${Resources.getSystem().displayMetrics.heightPixels}")
     eventQueueCapacity = 50
-)
+}
 ```
 
-### Type-safe construction via primary constructor
-If you prefer stronger type safety (letting the compiler ensure each value is valid when wrapped), you can instantiate `Umami` with its primary constructor and the domain value objects instead of raw Strings. This is useful if you already validate or parse these values elsewhere.
+### Type-safe constructor
+If you already have domain objects (e.g., `Uuid`, `Hostname`), you can use the primary constructor for type safety. This is useful if you validate these values elsewhere.
 
 ```kotlin
 import dev.appoutlet.umami.Umami
 import dev.appoutlet.umami.domain.Hostname
 import dev.appoutlet.umami.domain.Language
 import dev.appoutlet.umami.domain.ScreenSize
-import dev.appoutlet.umami.domain.Ip
-import io.ktor.http.Url
 import kotlin.uuid.Uuid
 
-val umamiTypeSafe = Umami(
-    baseUrl = Url("https://analytics.example.com"),
-    website = Uuid.parse("YOUR-WEBSITE-UUID"),
-    hostname = Hostname("example.com"),
-    language = Language("en-US"),
-    screen = ScreenSize(1080, 2400),
-    ip = null, // Or Ip("203.0.113.42") if you explicitly need to override
+val umamiTypeSafe = Umami(Uuid.parse("YOUR-WEBSITE-UUID")) {
+    hostname = Hostname("example.com")
+    language = Language("en-US")
+    screenSize = ScreenSize(1080, 2400)
     eventQueueCapacity = 50
-)
+}
 ```
-
-Both approaches are equivalent functionally—the factory (`create`) does the parsing & wrapping for you—so choose whichever matches your coding style or validation flow.
+Both approaches are functionally equivalent. The string-based constructor just handles parsing for you.
 
 ---
 ## 7. Threading & Performance

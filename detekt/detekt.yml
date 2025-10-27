@@ -1,3 +1,9 @@
 complexity:
   LongParameterList:
     ignoreDefaultParameters: true
+
+style:
+    ForbiddenImport:
+        active: true
+        imports:
+          - co.touchlab.kermit.Logger

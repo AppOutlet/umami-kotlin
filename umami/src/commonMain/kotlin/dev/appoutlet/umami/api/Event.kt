@@ -1,7 +1,7 @@
 package dev.appoutlet.umami.api
 
-import co.touchlab.kermit.Logger
 import dev.appoutlet.umami.Umami
+import dev.appoutlet.umami.util.logger
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.ResponseException
@@ -115,16 +115,16 @@ private fun Umami.send(
         payload = EventPayload(
             website = website.toString(),
             data = data?.mapValues { it.value?.toString() },
-            hostname = hostname?.value,
-            language = language?.value,
+            hostname = options.hostname?.value,
+            language = options.language?.value,
             referrer = referrer,
-            screen = screen?.value,
+            screen = options.screenSize?.value,
             title = title,
             url = url,
             name = name,
             tag = tag,
-            ip = ip?.value,
-            userAgent = userAgent,
+            ip = options.ip?.value,
+            userAgent = options.userAgent,
             timestamp = timestamp,
             id = id
         )
@@ -147,22 +147,18 @@ private fun Umami.send(
  * @throws ResponseException if the response is invalid or cannot be processed.
  * @throws Throwable for any other unexpected errors during the request.
  */
-internal fun Umami.processEventQueueItem(request: HttpRequestBuilder) = coroutineScope.launch {
+internal fun Umami.processEventQueueItem(request: HttpRequestBuilder) = options.coroutineScope.launch {
     try {
         val response = httpClient.post(request).body<EventResponse>()
 
         if (response.beep != null) {
-            Logger.e { "Umami server considered the event invalid \n $response" }
+            logger.error("Umami server considered the event invalid \n $response")
         }
 
         headers["x-umami-cache"] = response.cache
     } catch (clientRequestException: ClientRequestException) {
-        Logger.e(throwable = clientRequestException) {
-            "Error processing event request"
-        }
+        logger.error("Error processing event request", clientRequestException)
     } catch (responseException: ResponseException) {
-        Logger.e(throwable = responseException) {
-            "Error processing event response"
-        }
+        logger.error("Error processing event response", responseException)
     }
 }

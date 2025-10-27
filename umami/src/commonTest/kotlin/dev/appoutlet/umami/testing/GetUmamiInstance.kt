@@ -32,11 +32,10 @@ fun TestScope.getUmamiInstance(
             ?.invoke(this, request) ?: error("No mock response defined for ${request.url.encodedPath}")
     }
 
-    return Umami.create(
-        website = Uuid.random().toString(),
-        httpClientEngine = mockEngine,
-        coroutineScope = this
-    )
+    return Umami(website = Uuid.random().toString()) {
+        httpClientEngine = mockEngine
+        coroutineScope = this@getUmamiInstance
+    }
 }
 
 inline fun <reified T> HttpRequestData.body(): T {

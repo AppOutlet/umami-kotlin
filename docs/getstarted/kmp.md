@@ -64,34 +64,29 @@ import dev.appoutlet.umami.Umami
 
 object AnalyticsService {
     // Basic factory usage (parses strings internally)
-    val umami: Umami = Umami.create(
-        website = "YOUR-WEBSITE-UUID", // Required (copy from Umami dashboard)
-        // baseUrl = "https://your-self-hosted-instance" // Only if self-hosting
-    )
+    val umami: Umami = Umami("YOUR-WEBSITE-UUID") {
+        // baseUrl("https://your-self-hosted-instance") // Only if self-hosting
+    }
 
     fun trackAppLaunch() = umami.event(url = "/launch", title = "App Launch")
 }
 ```
 
-### Type‑safe primary constructor option
+### Type-safe constructor
 If you already validate inputs (e.g. UUID, hostname) you can use the primary constructor with domain objects:
 ```kotlin
 import dev.appoutlet.umami.Umami
-import dev.appoutlet.umami.domain.*
-import io.ktor.http.Url
 import kotlin.uuid.Uuid
 
-val umamiTypeSafe = Umami(
-    baseUrl = Url("https://analytics.example.com"),
-    website = Uuid.parse("YOUR-WEBSITE-UUID"),
-    hostname = Hostname("example.com"),
-    language = Language("en-US"),
-    screen = ScreenSize("1080x1920"),
-    ip = null,
+val umamiTypeSafe = Umami(Uuid.parse("YOUR-WEBSITE-UUID")) {
+    baseUrl("https://analytics.example.com")
+    hostname("example.com")
+    language("en-US")
+    screenSize("1080x1920")
     eventQueueCapacity = 50
-)
+}
 ```
-Both approaches are functionally equivalent; `create()` just wraps parsing.
+Both approaches are functionally equivalent; the string-based constructor just wraps parsing.
 
 ### Using Koin (Dependency Injection)
 If you prefer DI, define a Koin module in `commonMain`:
@@ -103,7 +98,7 @@ import dev.appoutlet.umami.Umami
 import org.koin.dsl.module
 
 val analyticsModule = module {
-    single { Umami.create(website = "YOUR-WEBSITE-UUID") }
+    single { Umami("YOUR-WEBSITE-UUID") }
 }
 ```
 Start Koin in each platform's entry point (example Android shown; do similarly for iOS/Desktop):
@@ -169,40 +164,44 @@ Key points:
 
 To tune throughput:
 ```kotlin
-val umamiCustom = Umami.create(
-    website = "...",
+val umamiCustom = Umami("...") {
     eventQueueCapacity = 100
-)
+}
 ```
 
 ---
 ## 6. Optional configuration
-Parameter (factory) | Purpose | When to change
-------------------- | ------- | --------------
-`baseUrl` | Your own Umami instance | Self-hosted installs
-`hostname` | Override site host | Multi-domain analytics
-`language` | User locale | Provide when not derivable platform-side
-`screen` | Screen resolution | You collect manually; optional
-`ip` | Override IP | Rare (server-side forwarding)
-`userAgent` | Custom UA string | Simulator/test tagging
-`eventQueueCapacity` | Channel size | High-volume burst events
+All optional parameters can be set inside the `Umami` constructor lambda.
+
+Parameter | Type | Purpose | When to change
+--- | --- | --- | ---
+`baseUrl(String)` | Function | Your own Umami instance | Self-hosted installs
+`hostname(String)` | Function | Override site host | Multi-domain analytics
+`language(String)` | Function | User locale | Provide when not derivable platform-side
+`screenSize(String)` | Function | Screen resolution | You collect manually; optional
+`ip(String)` | Function | Override IP | Rare (server-side forwarding)
+`userAgent` | `String` | Custom UA string | Simulator/test tagging
+`eventQueueCapacity` | `Int` | Channel size | High-volume burst events
+`httpClientEngine` | `HttpClientEngine` | Ktor HTTP engine | Platform-specific needs (e.g., custom proxy)
+`coroutineScope` | `CoroutineScope` | Background task scope | Integrate with app's lifecycle
+`logger` | `UmamiLogger` | Logging backend | Custom logging or disabling logs
+
 
 Example adding language & dynamic screen size (Android + Desktop differences handled via expect/actual):
 ```kotlin
 // commonMain
-expect fun currentScreenSize(): String?
-expect fun currentLanguageTag(): String?
+expect fun currentScreenSize(): String
+expect fun currentLanguageTag(): String
 
-val umami = Umami.create(
-    website = "YOUR-WEBSITE-UUID",
-    language = currentLanguageTag(),
-    screen = currentScreenSize()
-)
+val umami = Umami("YOUR-WEBSITE-UUID") {
+    language(currentLanguageTag())
+    screenSize(currentScreenSize())
+}
 ```
 ```kotlin
 // androidMain
-actual fun currentScreenSize(): String? = "1080x2400"
-actual fun currentLanguageTag(): String? = java.util.Locale.getDefault().toLanguageTag()
+actual fun currentScreenSize(): String = "1080x2400"
+actual fun currentLanguageTag(): String = java.util.Locale.getDefault().toLanguageTag()
 ```
 ```kotlin
 // iosMain
@@ -210,11 +209,11 @@ import platform.UIKit.UIScreen
 import platform.Foundation.NSLocale
 import platform.Foundation.currentLocale
 
-actual fun currentScreenSize(): String? {
+actual fun currentScreenSize(): String {
     val bounds = UIScreen.mainScreen.bounds
     return "${'$'}{bounds.size.width.toInt()}x${'$'}{bounds.size.height.toInt()}"
 }
-actual fun currentLanguageTag(): String? = NSLocale.currentLocale.languageCode
+actual fun currentLanguageTag(): String = NSLocale.currentLocale.languageCode
 ```
 ---
 ## 7. Next steps

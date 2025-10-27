@@ -17,7 +17,6 @@ plugins {
     alias(libs.plugins.gitHooks)
     alias(libs.plugins.kover)
     alias(libs.plugins.kotlin.android) apply false
-
 }
 
 dependencies {

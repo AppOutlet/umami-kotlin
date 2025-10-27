@@ -118,7 +118,7 @@ private fun Umami.send(
             hostname = options.hostname?.value,
             language = options.language?.value,
             referrer = referrer,
-            screen = options.screen?.value,
+            screen = options.screenSize?.value,
             title = title,
             url = url,
             name = name,

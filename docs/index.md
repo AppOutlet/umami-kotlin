@@ -23,7 +23,7 @@ commonMain.dependencies {
 }
 
 // Initialize the Umami instance with your server URL and website ID
-val umami = Umami.create(website = "your-website-id")
+val umami = Umami("your-website-uuid")
 
 // Track a custom event
 fun whenSomethingHappens() {

@@ -32,7 +32,6 @@ const val EVENT_QUEUE_CAPACITY = 25
  * @param website The UUID of the website to track events for.
  * @param umamiOptions A builder for configuring Umami options, such as the base URL, hostname, and queue capacity.
  */
-// TODO: update documentation page to reflect the new constructor with UmamiOptionsBuilder
 @OptIn(ExperimentalUuidApi::class)
 class Umami(internal val website: Uuid, umamiOptions: UmamiOptionsBuilder.() -> Unit = {}) {
     internal val options = UmamiOptionsBuilder().apply(umamiOptions).build(website)
@@ -61,7 +60,7 @@ class Umami(internal val website: Uuid, umamiOptions: UmamiOptionsBuilder.() -> 
      * @param website The UUID of the website to track events for.
      * @param hostname The hostname of the website.
      * @param language The language of the user's browser.
-     * @param screenSize The screen size of the user's device.
+     * @param screen The screen size of the user's device.
      * @param ip The IP address of the user.
      * @param userAgent The user agent of the user's browser.
      * @param eventQueueCapacity The capacity of the event queue.
@@ -98,6 +97,13 @@ class Umami(internal val website: Uuid, umamiOptions: UmamiOptionsBuilder.() -> 
         },
     )
 
+    /**
+     * Creates an [Umami] instance with a string representation of the website UUID.
+     *
+     * @param website The string representation of the website UUID to track events for.
+     * @param umamiOptions A builder for configuring Umami options, such as the base URL, hostname, and queue capacity.
+     * @throws IllegalArgumentException if the website UUID string is invalid.
+     */
     constructor(website: String, umamiOptions: UmamiOptionsBuilder.() -> Unit = {}) : this(
         website = Uuid.parse(website),
         umamiOptions = umamiOptions,

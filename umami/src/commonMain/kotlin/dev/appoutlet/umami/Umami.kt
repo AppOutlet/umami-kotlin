@@ -13,6 +13,7 @@ import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.http.Url
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
@@ -54,6 +55,9 @@ class Umami(internal val website: Uuid, umamiOptions: UmamiOptionsBuilder.() -> 
      * without blocking the main thread.
      */
     internal val eventQueue = Channel<HttpRequestBuilder>(capacity = options.eventQueueCapacity)
+
+    /** [Job] to control the event queue */
+    internal lateinit var eventQueueJob: Job
 
     /**
      * @param baseUrl The base URL of the Umami API.
@@ -119,7 +123,7 @@ class Umami(internal val website: Uuid, umamiOptions: UmamiOptionsBuilder.() -> 
      * Each item is processed by the [processEventQueueItem] function, which sends the event to the Umami API.
      */
     private fun consumeEventQueue() {
-        options.coroutineScope.launch {
+        eventQueueJob = options.coroutineScope.launch {
             eventQueue.consumeEach { request -> processEventQueueItem(request) }
         }
     }

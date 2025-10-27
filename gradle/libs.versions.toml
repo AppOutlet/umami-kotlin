@@ -67,6 +67,7 @@ dokka = "org.jetbrains.dokka:2.1.0"
 gitHooks = "eu.bambooapps.gradle.plugin.githook:1.1.1"
 kover = "org.jetbrains.kotlinx.kover:0.9.3"
 maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }
+mokkery = "dev.mokkery:2.10.2"
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

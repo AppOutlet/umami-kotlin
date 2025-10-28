@@ -7,6 +7,7 @@ android-targetSdk = "36"
 compose = "1.9.1"
 coroutines = "1.10.2"
 detekt = "1.23.8"
+dokka = "2.1.0"
 kotest = "6.0.4"
 kotlin = "2.2.21"
 ktor = "3.3.1"
@@ -25,6 +26,7 @@ androidx-activityCompose = { module = "androidx.activity:activity-compose", vers
 coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "coroutines" }
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+dokka-versioning = { module = "org.jetbrains.dokka:versioning-plugin", version.ref = "dokka" }
 kermit = "co.touchlab:kermit:2.0.8"
 kotest-assertions = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -63,7 +65,7 @@ compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose" 
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 compose-hotReload = "org.jetbrains.compose.hot-reload:1.0.0-rc02"
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
-dokka = "org.jetbrains.dokka:2.1.0"
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 gitHooks = "eu.bambooapps.gradle.plugin.githook:1.1.1"
 kover = "org.jetbrains.kotlinx.kover:0.9.3"
 maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }

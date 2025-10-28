@@ -22,19 +22,34 @@ plugins {
 dependencies {
     dokka(project(":umami"))
     kover(project(":umami"))
+    dokkaPlugin(libs.dokka.versioning)
 }
 
+val version = "0.2.0"
+
 dokka {
-    moduleName.set("Umami Kotlin")
+    val currentVersion = version
 
     dokkaPublications.html {
         outputDirectory.set(projectDir.resolve("docs/reference"))
+    }
+
+    dokkaSourceSets {
+        configureEach {
+            includes.from(project.layout.projectDirectory.file("module.md"))
+        }
     }
 
     pluginsConfiguration {
         html {
             val year = LocalDateTime.now().year
             footerMessage.set("© AppOutlet $year")
+        }
+
+        versioning {
+            version.set(currentVersion)
+            olderVersionsDir.set(projectDir.resolve("docs/older"))
+            renderVersionsNavigationOnAllPages.set(true)
         }
     }
 }

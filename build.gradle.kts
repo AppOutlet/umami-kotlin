@@ -25,7 +25,7 @@ dependencies {
     dokkaPlugin(libs.dokka.versioning)
 }
 
-val version = "0.2.0"
+val version = "0.2.1"
 
 dokka {
     val currentVersion = version

@@ -1,6 +1,7 @@
 @file:OptIn(ExperimentalWasmDsl::class)
 
 import java.time.LocalDateTime
+import org.gradle.kotlin.dsl.dokkaPlugin
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
@@ -88,6 +89,7 @@ kotlin {
 
 dependencies {
     detektPlugins(libs.detekt.formatting)
+    dokkaPlugin(libs.dokka.versioning)
 }
 
 detekt {
@@ -156,6 +158,8 @@ mavenPublishing {
 }
 
 dokka {
+    val currentVersion = version
+
     dokkaPublications.html {
         outputDirectory.set(projectDir.resolve("docs/reference"))
     }
@@ -170,6 +174,12 @@ dokka {
         html {
             val year = LocalDateTime.now().year
             footerMessage.set("© AppOutlet $year")
+        }
+
+        versioning {
+            version.set(currentVersion)
+            olderVersionsDir.set(projectDir.resolve("docs/older"))
+            renderVersionsNavigationOnAllPages.set(true)
         }
     }
 }

@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html class="no-js">
+<html class="no-js" lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>umami</title>
     <link href="images/logo-icon.svg" rel="icon" type="image/svg">
-    <script>var pathToRoot = "";</script>
-    <script>document.documentElement.classList.replace("no-js","js");</script>
+        <script>var pathToRoot = "";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
-    if (storage == null) {
+      if (storage == null) {
         const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
         if (osDarkSchemePreferred === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    } else {
+      } else {
         const savedDarkMode = JSON.parse(storage)
-        if(savedDarkMode === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    }
+      }
     </script>
 <script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
 <script type="text/javascript" src="scripts/sourceset_dependencies.js" async="async"></script>
@@ -25,20 +25,19 @@
 <link href="styles/main.css" rel="Stylesheet">
 <link href="styles/prism.css" rel="Stylesheet">
 <link href="styles/logo-styles.css" rel="Stylesheet">
-<link href="styles/font-jb-sans-auto.css" rel="Stylesheet">
 <link href="ui-kit/ui-kit.min.css" rel="Stylesheet">
-<script type="text/javascript" src="scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="scripts/safe-local-storage_blocking.js"></script>
 <script type="text/javascript" src="scripts/navigation-loader.js" async="async"></script>
 <script type="text/javascript" src="scripts/platform-content-handler.js" async="async"></script>
 <script type="text/javascript" src="scripts/main.js" defer="defer"></script>
 <script type="text/javascript" src="scripts/prism.js" async="async"></script>
 <script type="text/javascript" src="ui-kit/ui-kit.min.js" defer="defer"></script>
-<script type="text/javascript" src="scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+<link href="styles/multimodule.css" rel="Stylesheet">
 </head>
 <body>
-    <div class="root">
-    <nav class="navigation theme-dark" id="navigation-wrapper">
-            <a class="library-name--link" href="index.html">
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="index.html" tabindex="1">
                     umami
             </a>
         <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
@@ -46,26 +45,33 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-        </div>
+<dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ReplaceVersionsCommand&quot;,&quot;location&quot;:&quot;index.html&quot;}"><div class="dropdown versions-dropdown" data-role="dropdown">
+  <div class="button button_dropdown versions-dropdown-button" role="combobox" data-role="dropdown-toggle" aria-controls="versions-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Select version" tabindex="0" title="0.2.1"><span class="versions-dropdown-button-text">0.2.1</span></div>
+  <div class="dropdown--list dropdown--list_positioned_left versions-dropdown-data" role="listbox" data-role="dropdown-listbox" aria-label="Versions" id="versions-listbox">
+    <div class="dropdown--header" data-remove-style="true" style="display: none"><span>Select version</span><button class="button" data-role="dropdown-toggle" aria-label="Close versions selection"><i class="ui-kit-icon ui-kit-icon_cross"></i></button></div>
+<a href="index.html" class="dropdown--option dropdown--option_active dropdown--option-link" style="display: block; padding: 5px; color: #fff" data-remove-style="true" role="option" title="0.2.1"><span class="dropdown--option-icon dropdown--option-icon_selected"></span><span class="dropdown--option-text">0.2.1</span></a><a href="older/0.2.0/index.html" class="dropdown--option dropdown--option-link" style="display: block; padding: 5px; color: #fff" data-remove-style="true" role="option" title="0.2.0"><span class="dropdown--option-icon"></span><span class="dropdown--option-text">0.2.0</span></a></div>
+  <div class="dropdown--overlay"></div>
+</div>
+</dokka-template-command>        </div>
         <div class="navigation-controls">
-        <div class="filter-section filter-section_loading" id="filter-section">
-                <button class="platform-tag platform-selector jvm-like" data-active=""
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
                         data-filter=":umami/androidMain">android</button>
-                <button class="platform-tag platform-selector common-like" data-active=""
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
                         data-filter=":umami/commonMain">common</button>
-                <button class="platform-tag platform-selector common-like" data-active=""
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
                         data-filter=":umami/iosMain">ios</button>
-                <button class="platform-tag platform-selector js-like" data-active=""
+                <button class="platform-tag platform-selector js-like" data-active="" aria-pressed="true"
                         data-filter=":umami/jsMain">js</button>
-                <button class="platform-tag platform-selector jvm-like" data-active=""
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
                         data-filter=":umami/jvmMain">jvm</button>
-                <button class="platform-tag platform-selector native-like" data-active=""
+                <button class="platform-tag platform-selector native-like" data-active="" aria-pressed="true"
                         data-filter=":umami/linuxMain">linux</button>
-                <button class="platform-tag platform-selector common-like" data-active=""
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
                         data-filter=":umami/macosMain">macos</button>
-                <button class="platform-tag platform-selector native-like" data-active=""
+                <button class="platform-tag platform-selector native-like" data-active="" aria-pressed="true"
                         data-filter=":umami/mingwMain">mingw</button>
-                <button class="platform-tag platform-selector wasm-like" data-active=""
+                <button class="platform-tag platform-selector wasm-like" data-active="" aria-pressed="true"
                         data-filter=":umami/wasmJsMain">wasmJs</button>
             <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
                 <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
@@ -75,9 +81,9 @@
                         aria-expanded="false"
                         aria-label="Toggle source sets"
                 ></button>
-                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
-                    <div class="dropdown--header"><span>Platform filter</span>
-                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
                             <i class="ui-kit-icon ui-kit-icon_cross"></i>
                         </button>
                     </div>
@@ -156,7 +162,7 @@
                 </ul>
                 <div class="dropdown--overlay"></div>
             </div>
-        </div>
+        </ul>
             <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
                     type="button">Switch theme
             </button>
@@ -164,37 +170,39 @@
                 API
             </div>
         </div>
-    </nav>
-        <div id="container">
-            <div class="sidebar" id="leftColumn">
-                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
-                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
-                        data-role="dropdown-listbox">
-                        <div class="dropdown--header">
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
                             <span>
                                     umami
                             </span>
-                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
-                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
-                            </button>
-                        </div>
-                        <div class="sidebar--inner" id="sideMenu"></div>
-                    </ul>
-                    <div class="dropdown--overlay"></div>
-                </div>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
-            <div id="main">
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
 <div class="main-content" id="content" pageIds="umami::////PointingToDeclaration//-1607663457">
   <div class="breadcrumbs"></div>
   <div class="cover ">
     <h1 class="cover"><span><span>umami</span></span></h1>
     <div class="platform-hinted UnderCoverText with-platform-tabs" data-platform-hinted="data-platform-hinted">
       <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":umami/androidMain" data-filterable-set=":umami/androidMain" data-active="" data-toggle=":umami/androidMain">android</button><button class="platform-bookmark" data-filterable-current=":umami/commonMain" data-filterable-set=":umami/commonMain" data-toggle=":umami/commonMain">common</button><button class="platform-bookmark" data-filterable-current=":umami/iosMain" data-filterable-set=":umami/iosMain" data-toggle=":umami/iosMain">ios</button><button class="platform-bookmark" data-filterable-current=":umami/jsMain" data-filterable-set=":umami/jsMain" data-toggle=":umami/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":umami/jvmMain" data-filterable-set=":umami/jvmMain" data-toggle=":umami/jvmMain">jvm</button><button class="platform-bookmark" data-filterable-current=":umami/linuxMain" data-filterable-set=":umami/linuxMain" data-toggle=":umami/linuxMain">linux</button><button class="platform-bookmark" data-filterable-current=":umami/macosMain" data-filterable-set=":umami/macosMain" data-toggle=":umami/macosMain">macos</button><button class="platform-bookmark" data-filterable-current=":umami/mingwMain" data-filterable-set=":umami/mingwMain" data-toggle=":umami/mingwMain">mingw</button><button class="platform-bookmark" data-filterable-current=":umami/wasmJsMain" data-filterable-set=":umami/wasmJsMain" data-toggle=":umami/wasmJsMain">wasmJs</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":umami/androidMain"><p class="paragraph">The <code class="lang-kotlin">umami</code> module is the core tracking library for the Umami Kotlin SDK. It provides a simple, type-safe API for sending analytics data to both <strong>self-hosted</strong> and <strong>Umami Cloud</strong> instances.</p><p class="paragraph">This module contains the basic configuration logic and functionality required to track events and page views.</p><p class="paragraph">It is designed to work well in:</p><ul><li><p class="paragraph">Kotlin Multiplatform (KMP) applications</p></li><li><p class="paragraph">Pure Android applications</p></li><li><p class="paragraph">Pure Java (JVM) applications</p></li></ul><p class="paragraph">Use this module to easily integrate analytics tracking into your apps with minimal setup and full cross-platform compatibility.</p></div><div class="content sourceset-dependent-content" data-togglable=":umami/commonMain"><p class="paragraph">The <code class="lang-kotlin">umami</code> module is the core tracking library for the Umami Kotlin SDK. It provides a simple, type-safe API for sending analytics data to both <strong>self-hosted</strong> and <strong>Umami Cloud</strong> instances.</p><p class="paragraph">This module contains the basic configuration logic and functionality required to track events and page views.</p><p class="paragraph">It is designed to work well in:</p><ul><li><p class="paragraph">Kotlin Multiplatform (KMP) applications</p></li><li><p class="paragraph">Pure Android applications</p></li><li><p class="paragraph">Pure Java (JVM) applications</p></li></ul><p class="paragraph">Use this module to easily integrate analytics tracking into your apps with minimal setup and full cross-platform compatibility.</p></div><div class="content sourceset-dependent-content" data-togglable=":umami/iosMain"><p class="paragraph">The <code class="lang-kotlin">umami</code> module is the core tracking library for the Umami Kotlin SDK. It provides a simple, type-safe API for sending analytics data to both <strong>self-hosted</strong> and <strong>Umami Cloud</strong> instances.</p><p class="paragraph">This module contains the basic configuration logic and functionality required to track events and page views.</p><p class="paragraph">It is designed to work well in:</p><ul><li><p class="paragraph">Kotlin Multiplatform (KMP) applications</p></li><li><p class="paragraph">Pure Android applications</p></li><li><p class="paragraph">Pure Java (JVM) applications</p></li></ul><p class="paragraph">Use this module to easily integrate analytics tracking into your apps with minimal setup and full cross-platform compatibility.</p></div><div class="content sourceset-dependent-content" data-togglable=":umami/jsMain"><p class="paragraph">The <code class="lang-kotlin">umami</code> module is the core tracking library for the Umami Kotlin SDK. It provides a simple, type-safe API for sending analytics data to both <strong>self-hosted</strong> and <strong>Umami Cloud</strong> instances.</p><p class="paragraph">This module contains the basic configuration logic and functionality required to track events and page views.</p><p class="paragraph">It is designed to work well in:</p><ul><li><p class="paragraph">Kotlin Multiplatform (KMP) applications</p></li><li><p class="paragraph">Pure Android applications</p></li><li><p class="paragraph">Pure Java (JVM) applications</p></li></ul><p class="paragraph">Use this module to easily integrate analytics tracking into your apps with minimal setup and full cross-platform compatibility.</p></div><div class="content sourceset-dependent-content" data-togglable=":umami/jvmMain"><p class="paragraph">The <code class="lang-kotlin">umami</code> module is the core tracking library for the Umami Kotlin SDK. It provides a simple, type-safe API for sending analytics data to both <strong>self-hosted</strong> and <strong>Umami Cloud</strong> instances.</p><p class="paragraph">This module contains the basic configuration logic and functionality required to track events and page views.</p><p class="paragraph">It is designed to work well in:</p><ul><li><p class="paragraph">Kotlin Multiplatform (KMP) applications</p></li><li><p class="paragraph">Pure Android applications</p></li><li><p class="paragraph">Pure Java (JVM) applications</p></li></ul><p class="paragraph">Use this module to easily integrate analytics tracking into your apps with minimal setup and full cross-platform compatibility.</p></div><div class="content sourceset-dependent-content" data-togglable=":umami/linuxMain"><p class="paragraph">The <code class="lang-kotlin">umami</code> module is the core tracking library for the Umami Kotlin SDK. It provides a simple, type-safe API for sending analytics data to both <strong>self-hosted</strong> and <strong>Umami Cloud</strong> instances.</p><p class="paragraph">This module contains the basic configuration logic and functionality required to track events and page views.</p><p class="paragraph">It is designed to work well in:</p><ul><li><p class="paragraph">Kotlin Multiplatform (KMP) applications</p></li><li><p class="paragraph">Pure Android applications</p></li><li><p class="paragraph">Pure Java (JVM) applications</p></li></ul><p class="paragraph">Use this module to easily integrate analytics tracking into your apps with minimal setup and full cross-platform compatibility.</p></div><div class="content sourceset-dependent-content" data-togglable=":umami/macosMain"><p class="paragraph">The <code class="lang-kotlin">umami</code> module is the core tracking library for the Umami Kotlin SDK. It provides a simple, type-safe API for sending analytics data to both <strong>self-hosted</strong> and <strong>Umami Cloud</strong> instances.</p><p class="paragraph">This module contains the basic configuration logic and functionality required to track events and page views.</p><p class="paragraph">It is designed to work well in:</p><ul><li><p class="paragraph">Kotlin Multiplatform (KMP) applications</p></li><li><p class="paragraph">Pure Android applications</p></li><li><p class="paragraph">Pure Java (JVM) applications</p></li></ul><p class="paragraph">Use this module to easily integrate analytics tracking into your apps with minimal setup and full cross-platform compatibility.</p></div><div class="content sourceset-dependent-content" data-togglable=":umami/mingwMain"><p class="paragraph">The <code class="lang-kotlin">umami</code> module is the core tracking library for the Umami Kotlin SDK. It provides a simple, type-safe API for sending analytics data to both <strong>self-hosted</strong> and <strong>Umami Cloud</strong> instances.</p><p class="paragraph">This module contains the basic configuration logic and functionality required to track events and page views.</p><p class="paragraph">It is designed to work well in:</p><ul><li><p class="paragraph">Kotlin Multiplatform (KMP) applications</p></li><li><p class="paragraph">Pure Android applications</p></li><li><p class="paragraph">Pure Java (JVM) applications</p></li></ul><p class="paragraph">Use this module to easily integrate analytics tracking into your apps with minimal setup and full cross-platform compatibility.</p></div><div class="content sourceset-dependent-content" data-togglable=":umami/wasmJsMain"><p class="paragraph">The <code class="lang-kotlin">umami</code> module is the core tracking library for the Umami Kotlin SDK. It provides a simple, type-safe API for sending analytics data to both <strong>self-hosted</strong> and <strong>Umami Cloud</strong> instances.</p><p class="paragraph">This module contains the basic configuration logic and functionality required to track events and page views.</p><p class="paragraph">It is designed to work well in:</p><ul><li><p class="paragraph">Kotlin Multiplatform (KMP) applications</p></li><li><p class="paragraph">Pure Android applications</p></li><li><p class="paragraph">Pure Java (JVM) applications</p></li></ul><p class="paragraph">Use this module to easily integrate analytics tracking into your apps with minimal setup and full cross-platform compatibility.</p></div>    </div>
+<div class="content sourceset-dependent-content" data-togglable=":umami/androidMain"><p class="paragraph">The <code class="lang-kotlin">umami</code> module is the core tracking library for the Umami Kotlin SDK. It provides a simple, type-safe API for sending analytics data to both <strong>self-hosted</strong> and <strong>Umami Cloud</strong> instances.</p><p class="paragraph">This module contains the basic configuration logic and functionality required to track events and page views.</p><p class="paragraph">It is designed to work well in:</p><ul><li><p class="paragraph">Kotlin Multiplatform (KMP) applications</p></li><li><p class="paragraph">Pure Android applications</p></li><li><p class="paragraph">Pure Java (JVM) applications</p></li></ul><p class="paragraph">Use this module to easily integrate analytics tracking into your apps with minimal setup and full cross-platform compatibility.</p></div><div class="content sourceset-dependent-content" data-active="" data-togglable=":umami/commonMain"><p class="paragraph">The <code class="lang-kotlin">umami</code> module is the core tracking library for the Umami Kotlin SDK. It provides a simple, type-safe API for sending analytics data to both <strong>self-hosted</strong> and <strong>Umami Cloud</strong> instances.</p><p class="paragraph">This module contains the basic configuration logic and functionality required to track events and page views.</p><p class="paragraph">It is designed to work well in:</p><ul><li><p class="paragraph">Kotlin Multiplatform (KMP) applications</p></li><li><p class="paragraph">Pure Android applications</p></li><li><p class="paragraph">Pure Java (JVM) applications</p></li></ul><p class="paragraph">Use this module to easily integrate analytics tracking into your apps with minimal setup and full cross-platform compatibility.</p></div><div class="content sourceset-dependent-content" data-togglable=":umami/iosMain"><p class="paragraph">The <code class="lang-kotlin">umami</code> module is the core tracking library for the Umami Kotlin SDK. It provides a simple, type-safe API for sending analytics data to both <strong>self-hosted</strong> and <strong>Umami Cloud</strong> instances.</p><p class="paragraph">This module contains the basic configuration logic and functionality required to track events and page views.</p><p class="paragraph">It is designed to work well in:</p><ul><li><p class="paragraph">Kotlin Multiplatform (KMP) applications</p></li><li><p class="paragraph">Pure Android applications</p></li><li><p class="paragraph">Pure Java (JVM) applications</p></li></ul><p class="paragraph">Use this module to easily integrate analytics tracking into your apps with minimal setup and full cross-platform compatibility.</p></div><div class="content sourceset-dependent-content" data-togglable=":umami/jsMain"><p class="paragraph">The <code class="lang-kotlin">umami</code> module is the core tracking library for the Umami Kotlin SDK. It provides a simple, type-safe API for sending analytics data to both <strong>self-hosted</strong> and <strong>Umami Cloud</strong> instances.</p><p class="paragraph">This module contains the basic configuration logic and functionality required to track events and page views.</p><p class="paragraph">It is designed to work well in:</p><ul><li><p class="paragraph">Kotlin Multiplatform (KMP) applications</p></li><li><p class="paragraph">Pure Android applications</p></li><li><p class="paragraph">Pure Java (JVM) applications</p></li></ul><p class="paragraph">Use this module to easily integrate analytics tracking into your apps with minimal setup and full cross-platform compatibility.</p></div><div class="content sourceset-dependent-content" data-togglable=":umami/jvmMain"><p class="paragraph">The <code class="lang-kotlin">umami</code> module is the core tracking library for the Umami Kotlin SDK. It provides a simple, type-safe API for sending analytics data to both <strong>self-hosted</strong> and <strong>Umami Cloud</strong> instances.</p><p class="paragraph">This module contains the basic configuration logic and functionality required to track events and page views.</p><p class="paragraph">It is designed to work well in:</p><ul><li><p class="paragraph">Kotlin Multiplatform (KMP) applications</p></li><li><p class="paragraph">Pure Android applications</p></li><li><p class="paragraph">Pure Java (JVM) applications</p></li></ul><p class="paragraph">Use this module to easily integrate analytics tracking into your apps with minimal setup and full cross-platform compatibility.</p></div><div class="content sourceset-dependent-content" data-togglable=":umami/linuxMain"><p class="paragraph">The <code class="lang-kotlin">umami</code> module is the core tracking library for the Umami Kotlin SDK. It provides a simple, type-safe API for sending analytics data to both <strong>self-hosted</strong> and <strong>Umami Cloud</strong> instances.</p><p class="paragraph">This module contains the basic configuration logic and functionality required to track events and page views.</p><p class="paragraph">It is designed to work well in:</p><ul><li><p class="paragraph">Kotlin Multiplatform (KMP) applications</p></li><li><p class="paragraph">Pure Android applications</p></li><li><p class="paragraph">Pure Java (JVM) applications</p></li></ul><p class="paragraph">Use this module to easily integrate analytics tracking into your apps with minimal setup and full cross-platform compatibility.</p></div><div class="content sourceset-dependent-content" data-togglable=":umami/macosMain"><p class="paragraph">The <code class="lang-kotlin">umami</code> module is the core tracking library for the Umami Kotlin SDK. It provides a simple, type-safe API for sending analytics data to both <strong>self-hosted</strong> and <strong>Umami Cloud</strong> instances.</p><p class="paragraph">This module contains the basic configuration logic and functionality required to track events and page views.</p><p class="paragraph">It is designed to work well in:</p><ul><li><p class="paragraph">Kotlin Multiplatform (KMP) applications</p></li><li><p class="paragraph">Pure Android applications</p></li><li><p class="paragraph">Pure Java (JVM) applications</p></li></ul><p class="paragraph">Use this module to easily integrate analytics tracking into your apps with minimal setup and full cross-platform compatibility.</p></div><div class="content sourceset-dependent-content" data-togglable=":umami/mingwMain"><p class="paragraph">The <code class="lang-kotlin">umami</code> module is the core tracking library for the Umami Kotlin SDK. It provides a simple, type-safe API for sending analytics data to both <strong>self-hosted</strong> and <strong>Umami Cloud</strong> instances.</p><p class="paragraph">This module contains the basic configuration logic and functionality required to track events and page views.</p><p class="paragraph">It is designed to work well in:</p><ul><li><p class="paragraph">Kotlin Multiplatform (KMP) applications</p></li><li><p class="paragraph">Pure Android applications</p></li><li><p class="paragraph">Pure Java (JVM) applications</p></li></ul><p class="paragraph">Use this module to easily integrate analytics tracking into your apps with minimal setup and full cross-platform compatibility.</p></div><div class="content sourceset-dependent-content" data-togglable=":umami/wasmJsMain"><p class="paragraph">The <code class="lang-kotlin">umami</code> module is the core tracking library for the Umami Kotlin SDK. It provides a simple, type-safe API for sending analytics data to both <strong>self-hosted</strong> and <strong>Umami Cloud</strong> instances.</p><p class="paragraph">This module contains the basic configuration logic and functionality required to track events and page views.</p><p class="paragraph">It is designed to work well in:</p><ul><li><p class="paragraph">Kotlin Multiplatform (KMP) applications</p></li><li><p class="paragraph">Pure Android applications</p></li><li><p class="paragraph">Pure Java (JVM) applications</p></li></ul><p class="paragraph">Use this module to easily integrate analytics tracking into your apps with minimal setup and full cross-platform compatibility.</p></div>    </div>
   </div>
   <h2 class="">Packages</h2>
   <div class="table"><a data-name="-1838164562%2FPackages%2F-1331833762" anchor-label="dev.appoutlet.umami" id="-1838164562%2FPackages%2F-1331833762" data-filterable-set=":umami/commonMain"></a>
-    <div class="table-row" data-filterable-current=":umami/commonMain" data-filterable-set=":umami/commonMain">
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":umami/commonMain" data-filterable-set=":umami/commonMain">
       <div>
         <div class="main-subrow ">
           <div class=""><span class="inline-flex">
@@ -202,7 +210,7 @@
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1838164562%2FPackages%2F-1331833762"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right">
+          <div class="pull-right platform-tags--wrapper">
             <div class="platform-tags no-gutters">
               <div class="platform-tag common-like">common</div>
             </div>
@@ -212,7 +220,7 @@
       </div>
     </div>
 <a data-name="-1481894950%2FPackages%2F-1331833762" anchor-label="dev.appoutlet.umami.api" id="-1481894950%2FPackages%2F-1331833762" data-filterable-set=":umami/commonMain"></a>
-    <div class="table-row" data-filterable-current=":umami/commonMain" data-filterable-set=":umami/commonMain">
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":umami/commonMain" data-filterable-set=":umami/commonMain">
       <div>
         <div class="main-subrow ">
           <div class=""><span class="inline-flex">
@@ -220,9 +228,35 @@
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1481894950%2FPackages%2F-1331833762"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right">
+          <div class="pull-right platform-tags--wrapper">
             <div class="platform-tags no-gutters">
               <div class="platform-tag common-like">common</div>
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </div>
+<a data-name="834850339%2FPackages%2F-1607663457" anchor-label="dev.appoutlet.umami.core" id="834850339%2FPackages%2F-1607663457" data-filterable-set=":umami/commonMain,:umami/androidMain,:umami/iosMain,:umami/jsMain,:umami/jvmMain,:umami/linuxMain,:umami/macosMain,:umami/mingwMain,:umami/wasmJsMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":umami/commonMain,:umami/androidMain,:umami/iosMain,:umami/jsMain,:umami/jvmMain,:umami/linuxMain,:umami/macosMain,:umami/mingwMain,:umami/wasmJsMain" data-filterable-set=":umami/commonMain,:umami/androidMain,:umami/iosMain,:umami/jsMain,:umami/jvmMain,:umami/linuxMain,:umami/macosMain,:umami/mingwMain,:umami/wasmJsMain">
+      <div>
+        <div class="main-subrow ">
+          <div class=""><span class="inline-flex">
+              <div><a href="umami/dev.appoutlet.umami.core/index.html">dev.appoutlet.umami.core</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="834850339%2FPackages%2F-1607663457"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div class="pull-right platform-tags--wrapper">
+            <div class="platform-tags no-gutters">
+              <div class="platform-tag jvm-like">android</div>
+              <div class="platform-tag common-like">common</div>
+              <div class="platform-tag common-like">ios</div>
+              <div class="platform-tag js-like">js</div>
+              <div class="platform-tag jvm-like">jvm</div>
+              <div class="platform-tag native-like">linux</div>
+              <div class="platform-tag common-like">macos</div>
+              <div class="platform-tag native-like">mingw</div>
+              <div class="platform-tag wasm-like">wasmJs</div>
             </div>
           </div>
         </div>
@@ -230,7 +264,7 @@
       </div>
     </div>
 <a data-name="70061704%2FPackages%2F-1331833762" anchor-label="dev.appoutlet.umami.domain" id="70061704%2FPackages%2F-1331833762" data-filterable-set=":umami/commonMain"></a>
-    <div class="table-row" data-filterable-current=":umami/commonMain" data-filterable-set=":umami/commonMain">
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":umami/commonMain" data-filterable-set=":umami/commonMain">
       <div>
         <div class="main-subrow ">
           <div class=""><span class="inline-flex">
@@ -238,7 +272,7 @@
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="70061704%2FPackages%2F-1331833762"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right">
+          <div class="pull-right platform-tags--wrapper">
             <div class="platform-tags no-gutters">
               <div class="platform-tag common-like">common</div>
             </div>
@@ -247,8 +281,8 @@
         <div></div>
       </div>
     </div>
-<a data-name="643074246%2FPackages%2F-1607663457" anchor-label="dev.appoutlet.umami.util" id="643074246%2FPackages%2F-1607663457" data-filterable-set=":umami/androidMain,:umami/commonMain,:umami/iosMain,:umami/jsMain,:umami/jvmMain,:umami/linuxMain,:umami/macosMain,:umami/mingwMain,:umami/wasmJsMain"></a>
-    <div class="table-row" data-filterable-current=":umami/androidMain,:umami/commonMain,:umami/iosMain,:umami/jsMain,:umami/jvmMain,:umami/linuxMain,:umami/macosMain,:umami/mingwMain,:umami/wasmJsMain" data-filterable-set=":umami/androidMain,:umami/commonMain,:umami/iosMain,:umami/jsMain,:umami/jvmMain,:umami/linuxMain,:umami/macosMain,:umami/mingwMain,:umami/wasmJsMain">
+<a data-name="643074246%2FPackages%2F-1607663457" anchor-label="dev.appoutlet.umami.util" id="643074246%2FPackages%2F-1607663457" data-filterable-set=":umami/commonMain,:umami/androidMain,:umami/iosMain,:umami/jsMain,:umami/jvmMain,:umami/linuxMain,:umami/macosMain,:umami/mingwMain,:umami/wasmJsMain"></a>
+    <div class="table-row table-row_platform-tagged" data-filterable-current=":umami/commonMain,:umami/androidMain,:umami/iosMain,:umami/jsMain,:umami/jvmMain,:umami/linuxMain,:umami/macosMain,:umami/mingwMain,:umami/wasmJsMain" data-filterable-set=":umami/commonMain,:umami/androidMain,:umami/iosMain,:umami/jsMain,:umami/jvmMain,:umami/linuxMain,:umami/macosMain,:umami/mingwMain,:umami/wasmJsMain">
       <div>
         <div class="main-subrow ">
           <div class=""><span class="inline-flex">
@@ -256,7 +290,7 @@
 <span class="anchor-wrapper"><span class="anchor-icon" pointing-to="643074246%2FPackages%2F-1607663457"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
-          <div class="pull-right">
+          <div class="pull-right platform-tags--wrapper">
             <div class="platform-tags no-gutters">
               <div class="platform-tag jvm-like">android</div>
               <div class="platform-tag common-like">common</div>
@@ -276,17 +310,21 @@
   </div>
 </div>
     <div class="footer">
-        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
-        <span>© AppOutlet 2025</span>
-        <span class="pull-right">
-            <span>Generated by </span>
-            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
-                <span>dokka</span>
-            </a>
-        </span>
-    </div>
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© AppOutlet 2025</div>
+                </div>
             </div>
         </div>
     </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

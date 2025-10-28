@@ -1,9 +1,0 @@
-$dokka.format:html-v1
-$dokka.linkExtension:html
-
-module:umami
-dev.appoutlet.umami
-dev.appoutlet.umami.api
-dev.appoutlet.umami.core
-dev.appoutlet.umami.domain
-dev.appoutlet.umami.util

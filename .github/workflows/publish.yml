@@ -47,14 +47,9 @@ jobs:
 
       - name: Archive previous documentation version
         run: |
-          mkdir -p docs/older/${{ github.ref_name }}
-          cp -r docs/reference/* docs/older/${{ github.ref_name }}/
-
-      - name: Commit and push changes
-        run: |
-          git add .
-          git commit --no-verify -m "chore: Release version ${{ github.ref_name }}"
-          git push
+          ./gradlew dokkaGeneratePublicationHtml --no-configuration-cache
+          mkdir -p docs/versions/${{ github.ref_name }}
+          cp -r docs/reference/* docs/versions/${{ github.ref_name }}/
 
       - name: Publish to Maven Central
         run: ./gradlew publishAllPublicationsToMavenCentralRepository --no-configuration-cache
@@ -64,3 +59,12 @@ jobs:
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEY }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyId: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYID }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGINMEMORYKEYPASSWORD }}
+
+      - name: Commit and push changes
+        run: |
+          git add .
+          git commit --no-verify -m "chore: Release version ${{ github.ref_name }}"
+          git push
+
+      - name: Call Docs Workflow
+        uses: ./.github/workflows/docs.yml

@@ -9,6 +9,8 @@ on:
       - 'docs/**'
       - 'mkdocs.yml'
       - '.github/workflows/docs.yml'
+  workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: write
@@ -38,9 +40,6 @@ jobs:
           add-job-summary: 'on-failure'
           cache-read-only: false
 
-      - name: Run dokka
-        run: ./gradlew dokkaGeneratePublicationHtml --no-configuration-cache
-
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -62,13 +61,3 @@ jobs:
 
       - name: Mkdocs Github deployment
         run: mkdocs gh-deploy --force
-
-      - name: Commit and push documentation changes
-        run: |
-          git add docs/reference
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "docs: Update generated documentation"
-            git push
-          fi

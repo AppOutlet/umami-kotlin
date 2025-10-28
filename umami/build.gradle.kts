@@ -178,7 +178,7 @@ dokka {
 
         versioning {
             version.set(currentVersion)
-            olderVersionsDir.set(projectDir.resolve("docs/older"))
+            olderVersionsDir.set(projectDir.resolve("docs/versions"))
             renderVersionsNavigationOnAllPages.set(true)
         }
     }

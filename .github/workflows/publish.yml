@@ -47,8 +47,9 @@ jobs:
 
       - name: Archive previous documentation version
         run: |
-          mkdir -p docs/older/${{ github.ref_name }}
-          cp -r docs/reference/* docs/older/${{ github.ref_name }}/
+          ./gradlew dokkaGeneratePublicationHtml --no-configuration-cache
+          mkdir -p docs/versions/${{ github.ref_name }}
+          cp -r docs/reference/* docs/versions/${{ github.ref_name }}/
 
       - name: Commit and push changes
         run: |

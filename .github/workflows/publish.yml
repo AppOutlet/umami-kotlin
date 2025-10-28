@@ -33,16 +33,27 @@ jobs:
       - name: Run detekt
         run: ./gradlew detekt
 
-      - name: Update gradle project version
+      - name: Configure Git Credentials
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Update version in build files
+        run: |
           git fetch
           git checkout main
-          sed -i '' -E 's/"[0-9]+\.[0-9]+\.[0-9]+"/"${{ github.ref_name }}"/g' build.gradle.kts
-          sed -i '' -E 's/version = "[0-9]+\.[0-9]+\.[0-9]+"/version = "${{ github.ref_name }}"/g' umami/build.gradle.kts
+          sed -i '' -E 's/version = "[0-9]+\.[0-9]+\.[0-9]+"/version = "${{ github.ref_name }}"/g' build.gradle.kts
+          sed -i '' -E 's/version = "[0-g]+\.[0-9]+\.[0-9]+"/version = "${{ github.ref_name }}"/g' umami/build.gradle.kts
+
+      - name: Archive previous documentation version
+        run: |
+          mkdir -p docs/older/${{ github.ref_name }}
+          cp -r docs/reference/* docs/older/${{ github.ref_name }}/
+
+      - name: Commit and push changes
+        run: |
           git add .
-          git commit --no-verify -m "Bump to version ${{ github.ref_name }}"
+          git commit --no-verify -m "chore: Release version ${{ github.ref_name }}"
           git push
 
       - name: Publish to Maven Central

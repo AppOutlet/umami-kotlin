@@ -63,7 +63,7 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-compose-hotReload = "org.jetbrains.compose.hot-reload:1.0.0-rc02"
+compose-hotReload = "org.jetbrains.compose.hot-reload:1.0.0-rc04"
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 gitHooks = "eu.bambooapps.gradle.plugin.githook:1.1.1"

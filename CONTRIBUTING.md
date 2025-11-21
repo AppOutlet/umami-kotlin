@@ -38,7 +38,7 @@ Once you've found an issue you'd like to tackle, leave a comment to let us know 
 
 To get the project running on your local machine, you'll need a couple of things.
 
-  * **IDE**: The SDK is a Kotlin Multiplatform project built with Gradle. We recommend using [**IntelliJ IDEA Community Edition**](https://www.jetbrains.com/idea/download/), which has excellent support for Kotlin and Gradle right out of the box.
+  * **IDE**: The SDK is a Kotlin Multiplatform project built with Gradle. We recommend using **IntelliJ IDEA Community Edition** or **Android Studio**, which both have excellent support for Kotlin and Gradle right out of the box.
   * **Project Dependencies**: The core of this SDK is an abstraction layer built on top of the Umami REST API. We use the powerful [**Ktor**](https://ktor.io/) library to handle networking. Familiarity with these resources will be helpful:
       * [**Ktor Documentation**](https://ktor.io/docs/welcome.html)
       * [**Umami REST API Documentation**](https://umami.is/docs/api)

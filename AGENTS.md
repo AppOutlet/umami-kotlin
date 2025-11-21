@@ -39,7 +39,7 @@ All contributions must adhere to the guidelines outlined in [`CONTRIBUTING.md`](
 
 ## Development Setup
 
-The project is built with Gradle. The recommended IDE is **IntelliJ IDEA Community Edition**.
+The project is built with Gradle. The recommended IDEs are **IntelliJ IDEA Community Edition** or **Android Studio**.
 
 After cloning the repository, you can verify your setup by running the build:
 

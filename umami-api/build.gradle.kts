@@ -95,7 +95,7 @@ detekt {
 }
 
 android {
-    namespace = "dev.appoutlet.umami.admin"
+    namespace = "dev.appoutlet.umami.api"
     compileSdk = 35
 
     defaultConfig {
@@ -111,7 +111,7 @@ mavenPublishing {
 
     pom {
         name = "umami-api"
-        description = "Umami Admin SDK for Kotlin projects"
+        description = "Umami API SDK for Kotlin projects"
         url = "https://github.com/AppOutlet/umami-kotlin"
         inceptionYear = "2025"
 
@@ -145,7 +145,7 @@ dokka {
     val currentVersion = version
 
     dokkaPublications.html {
-        outputDirectory.set(projectDir.resolve("docs/reference/admin"))
+        outputDirectory.set(projectDir.resolve("docs/reference/api"))
     }
 
     dokkaSourceSets {

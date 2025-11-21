@@ -21,6 +21,7 @@ plugins {
 
 dependencies {
     dokka(project(":umami"))
+    dokka(project(":umami-api"))
     kover(project(":umami"))
     dokkaPlugin(libs.dokka.versioning)
 }

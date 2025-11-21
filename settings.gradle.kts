@@ -34,6 +34,6 @@ plugins {
 }
 
 include(":umami")
+include(":umami-api")
 include(":sample:simple-compose-app:composeApp")
 include(":sample:terminalApp")
-include(":umami-admin")

@@ -107,10 +107,10 @@ val version = "0.2.1"
 
 mavenPublishing {
     publishToMavenCentral(true)
-    coordinates(groupId = "dev.appoutlet", artifactId = "umami-admin", version = version)
+    coordinates(groupId = "dev.appoutlet", artifactId = "umami-api", version = version)
 
     pom {
-        name = "umami-admin"
+        name = "umami-api"
         description = "Umami Admin SDK for Kotlin projects"
         url = "https://github.com/AppOutlet/umami-kotlin"
         inceptionYear = "2025"

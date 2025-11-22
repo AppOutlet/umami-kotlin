@@ -33,6 +33,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(project(":umami"))
+            implementation(libs.ktor.client.resources)
         }
 
         commonTest.dependencies {
@@ -59,6 +60,10 @@ kotlin {
         mingwMain.dependencies {
         }
 
+        all {
+            languageSettings.optIn("dev.appoutlet.umami.util.annotation.InternalUmamiApi")
+            languageSettings.optIn("kotlin.time.ExperimentalTime")
+        }
     }
 
     //https://kotlinlang.org/docs/native-objc-interop.html#export-of-kdoc-comments-to-generated-objective-c-headers
@@ -69,6 +74,7 @@ kotlin {
             }
         }
     }
+
 }
 
 dependencies {

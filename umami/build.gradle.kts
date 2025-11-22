@@ -35,6 +35,7 @@ kotlin {
             implementation(libs.kermit)
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.client.resources)
             implementation(libs.ktor.client.serialization)
             implementation(libs.ktor.serialization.json)
             implementation(libs.ktor.client.logging)
@@ -75,6 +76,9 @@ kotlin {
             implementation(libs.ktor.client.winhttp)
         }
 
+        all {
+            languageSettings.optIn("dev.appoutlet.umami.util.annotation.InternalUmamiApi")
+        }
     }
 
     //https://kotlinlang.org/docs/native-objc-interop.html#export-of-kdoc-comments-to-generated-objective-c-headers

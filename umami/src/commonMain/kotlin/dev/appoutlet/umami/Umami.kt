@@ -2,6 +2,7 @@ package dev.appoutlet.umami
 
 import dev.appoutlet.umami.api.processEventQueueItem
 import dev.appoutlet.umami.core.createHttpClient
+import dev.appoutlet.umami.util.annotation.InternalUmamiApi
 import io.ktor.client.request.HttpRequestBuilder
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
@@ -31,13 +32,15 @@ class Umami(internal val website: Uuid, umamiOptions: UmamiOptionsBuilder.() -> 
      * A mutable map to hold custom headers for HTTP requests.
      * This can be used to add additional headers like authentication tokens or custom metadata.
      */
-    internal var headers = mutableMapOf<String, String?>()
+    @InternalUmamiApi
+    var headers = mutableMapOf<String, String?>()
 
     /**
      * An HTTP client for making requests to the Umami API.
      * This client is created lazily to ensure it is initialized only when needed.
      */
-    internal val httpClient by lazy { createHttpClient(options.httpClientEngine) }
+    @InternalUmamiApi
+    val httpClient by lazy { createHttpClient(options.httpClientEngine) }
 
     /**
      * A channel that acts as an event queue for HTTP requests.

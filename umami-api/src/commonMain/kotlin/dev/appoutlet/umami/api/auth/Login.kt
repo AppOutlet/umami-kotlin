@@ -6,6 +6,9 @@ import dev.appoutlet.umami.domain.User
 import io.ktor.client.call.body
 import io.ktor.client.plugins.resources.post
 import io.ktor.client.request.setBody
+import io.ktor.http.HttpHeaders
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * Logs in to the Umami API.
@@ -19,7 +22,7 @@ suspend fun Umami.login(request: UmamiLogin.Request): UmamiLogin.Response {
         setBody(request)
     }.body()
 
-    headers["Authorization"] = "Bearer ${response.token}"
+    headers[HttpHeaders.Authorization] = "Bearer ${response.token}"
 
     return response
 }
@@ -54,9 +57,10 @@ interface UmamiLogin {
      * @property username The username of the user.
      * @property password The password of the user.
      */
+    @Serializable
     data class Request(
-        val username: String,
-        val password: String,
+        @SerialName("username") val username: String,
+        @SerialName("password") val password: String,
     )
 
     /**
@@ -64,8 +68,9 @@ interface UmamiLogin {
      * @property token The JWT token for authenticating subsequent requests.
      * @property user The details of the logged-in user.
      */
+    @Serializable
     data class Response(
-        val token: String,
-        val user: User
+        @SerialName("token") val token: String,
+        @SerialName("user") val user: User
     )
 }

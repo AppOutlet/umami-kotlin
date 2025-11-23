@@ -1,8 +1,8 @@
 package dev.appoutlet.umami.domain
 
+import kotlin.time.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlin.time.Instant
 
 @Serializable
 data class User(
@@ -20,4 +20,7 @@ data class User(
 
     @SerialName("isAdmin")
     val isAdmin: Boolean = false,
+
+    @SerialName("teams")
+    val teams: List<Team> = emptyList(),
 )

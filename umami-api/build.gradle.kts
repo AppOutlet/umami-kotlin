@@ -32,7 +32,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(project(":umami"))
+            api(project(":umami"))
             implementation(libs.ktor.client.resources)
         }
 

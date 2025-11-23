@@ -10,5 +10,9 @@ internal class Api {
 
         @Resource("/login")
         class Login(val parent: Auth = Auth())
+
+
+        @Resource("/verify")
+        class Verify(val parent: Auth = Auth())
     }
 }

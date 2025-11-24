@@ -20,6 +20,18 @@ This SDK offers a type-safe, asynchronous wrapper, enabling you to integrate Uma
 * **Type-Safe:** Minimizes errors and ensures correctness when interacting with the Umami API.
 * **Lightweight and Simple:** Features a clean, intuitive API that is easy to integrate and use.
 
+## 🚀 Modular Architecture
+
+`umami-kotlin` is designed to be lightweight by splitting the library into two modules:
+
+*   `:umami`: The core module for event tracking and client configuration. If you only need to track page views and custom events, this is the only module you need.
+*   `:umami-api`: An optional module that provides access to the rest of the Umami API, including **Authentication**, **Users**, and **Websites**.
+
+This modular approach ensures your application remains lean.
+
+*   For **event tracking** only, use `dev.appoutlet:umami`.
+*   To also use **Authentication** or manage **Users** and **Websites**, add a dependency on `dev.appoutlet:umami-api`.
+
 ## 📚 Documentation
 
 This README provides a high-level overview. For a comprehensive guide, including **installation instructions, detailed usage examples, and the full API reference**, please visit our official documentation website.
@@ -33,8 +45,8 @@ commonMain.dependencies {
     implementation("dev.appoutlet:umami:LATEST_VERSION")
 }
 
-// Initialize the Umami instance with your server URL and website ID
-val umami = Umami.create(website = "your-website-id")
+// Initialize the Umami instance with your website ID
+val umami = Umami("your-website-id")
 
 // Track a custom event
 fun whenSomethingHappens() {

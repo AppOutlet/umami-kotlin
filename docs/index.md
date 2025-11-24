@@ -31,6 +31,20 @@ fun whenSomethingHappens() {
 }
 ```
 
+### Modular by Design
+
+`umami-kotlin` is designed to be lightweight. To achieve this, the library is split into two main modules:
+
+*   `:umami`: The core module. It contains everything you need for event tracking and client configuration. For most users, this is the only module you'll need.
+*   `:umami-api`: An optional module that provides access to the rest of the Umami API, including **Authentication**, **Users**, and **Websites**.
+
+This separation ensures that if you only need to track events, you don't have to include the code for the other API functions, keeping your application lean.
+
+#### Which one should you use?
+
+*   For **event tracking** only, depend on `dev.appoutlet:umami`.
+*   To also use **Authentication**, or manage **Users** and **Websites**, add a dependency on `dev.appoutlet:umami-api`.
+
 ### **Core Philosophy**
 
 * **💎 Truly Multiplatform:** Write your analytics code once and run it everywhere—Android, iOS, Desktop, server-side (Ktor, SpringBoot, etc.), and any other **Java or Kotlin/JVM project**.

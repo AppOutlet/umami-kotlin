@@ -17,7 +17,6 @@ plugins {
 
 kotlin {
     jvmToolchain(21)
-
     androidTarget { publishLibraryVariants("release") }
     jvm()
     js { browser() }
@@ -32,13 +31,8 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(libs.kermit)
-            implementation(libs.ktor.client.core)
-            implementation(libs.ktor.client.content.negotiation)
+            api(project(":umami"))
             implementation(libs.ktor.client.resources)
-            implementation(libs.ktor.client.serialization)
-            implementation(libs.ktor.serialization.json)
-            implementation(libs.ktor.client.logging)
         }
 
         commonTest.dependencies {
@@ -46,38 +40,12 @@ kotlin {
             implementation(libs.kotest.assertions)
             implementation(libs.kotlin.test)
             implementation(libs.ktor.client.mock)
-        }
-
-        androidMain.dependencies {
-            implementation(libs.ktor.client.okhttp)
-        }
-
-        jvmMain.dependencies {
-            implementation(libs.ktor.client.okhttp)
-        }
-
-        jsMain.dependencies {
-            implementation(libs.ktor.client.js)
-        }
-
-        iosMain.dependencies {
-            implementation(libs.ktor.client.darwin)
-        }
-
-        macosMain.dependencies {
-            implementation(libs.ktor.client.darwin)
-        }
-
-        linuxMain.dependencies {
-            implementation(libs.ktor.client.curl)
-        }
-
-        mingwMain.dependencies {
-            implementation(libs.ktor.client.winhttp)
+            implementation(libs.ktor.serialization.json)
         }
 
         all {
             languageSettings.optIn("dev.appoutlet.umami.util.annotation.InternalUmamiApi")
+            languageSettings.optIn("kotlin.time.ExperimentalTime")
         }
     }
 
@@ -89,6 +57,7 @@ kotlin {
             }
         }
     }
+
 }
 
 dependencies {
@@ -115,7 +84,7 @@ detekt {
 }
 
 android {
-    namespace = "dev.appoutlet"
+    namespace = "dev.appoutlet.umami.api"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
@@ -127,11 +96,11 @@ val version = "0.2.1"
 
 mavenPublishing {
     publishToMavenCentral(true)
-    coordinates(groupId = "dev.appoutlet", artifactId = "umami", version = version)
+    coordinates(groupId = "dev.appoutlet", artifactId = "umami-api", version = version)
 
     pom {
-        name = "umami"
-        description = "Umami SDK for Kotlin projects"
+        name = "umami-api"
+        description = "Umami API SDK for Kotlin projects"
         url = "https://github.com/AppOutlet/umami-kotlin"
         inceptionYear = "2025"
 
@@ -165,7 +134,7 @@ dokka {
     val currentVersion = version
 
     dokkaPublications.html {
-        outputDirectory.set(projectDir.resolve("docs/reference"))
+        outputDirectory.set(projectDir.resolve("docs/reference/api"))
     }
 
     dokkaSourceSets {

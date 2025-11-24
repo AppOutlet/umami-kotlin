@@ -10,7 +10,7 @@ detekt = "1.23.8"
 dokka = "2.1.0"
 kotest = "6.0.4"
 kotlin = "2.2.21"
-ktor = "3.3.1"
+ktor = "3.3.2"
 maven-publish = "0.34.0"
 
 [libraries]

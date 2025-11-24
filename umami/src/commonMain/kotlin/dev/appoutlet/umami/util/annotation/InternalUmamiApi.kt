@@ -15,5 +15,5 @@ package dev.appoutlet.umami.util.annotation
     message = "This API is internal to Umami and should not be used directly from outside the library."
 )
 @Retention(AnnotationRetention.BINARY)
-@Target(AnnotationTarget.PROPERTY)
+@Target(AnnotationTarget.PROPERTY, AnnotationTarget.CONSTRUCTOR)
 annotation class InternalUmamiApi

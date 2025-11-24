@@ -17,7 +17,6 @@ plugins {
 
 kotlin {
     jvmToolchain(21)
-
     androidTarget { publishLibraryVariants("release") }
     jvm()
     js { browser() }
@@ -37,27 +36,11 @@ kotlin {
         }
 
         commonTest.dependencies {
-        }
-
-        androidMain.dependencies {
-        }
-
-        jvmMain.dependencies {
-        }
-
-        jsMain.dependencies {
-        }
-
-        iosMain.dependencies {
-        }
-
-        macosMain.dependencies {
-        }
-
-        linuxMain.dependencies {
-        }
-
-        mingwMain.dependencies {
+            implementation(libs.coroutines.test)
+            implementation(libs.kotest.assertions)
+            implementation(libs.kotlin.test)
+            implementation(libs.ktor.client.mock)
+            implementation(libs.ktor.serialization.json)
         }
 
         all {

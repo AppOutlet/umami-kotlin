@@ -4,12 +4,12 @@ import dev.appoutlet.umami.api.processEventQueueItem
 import dev.appoutlet.umami.core.createHttpClient
 import dev.appoutlet.umami.util.annotation.InternalUmamiApi
 import io.ktor.client.request.HttpRequestBuilder
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
-import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 
 /**
  * Default event queue capacity. The capacity can be customized on the Umami object creation.
@@ -25,7 +25,11 @@ const val EVENT_QUEUE_CAPACITY = 25
  * @param umamiOptions A builder for configuring Umami options, such as the base URL, hostname, and queue capacity.
  */
 @OptIn(ExperimentalUuidApi::class)
-class Umami(internal val website: Uuid, umamiOptions: UmamiOptionsBuilder.() -> Unit = {}) {
+class Umami @InternalUmamiApi constructor(
+    internal val website: Uuid,
+    private val enableEventQueue: Boolean = true,
+    umamiOptions: UmamiOptionsBuilder.() -> Unit = {},
+) {
     internal val options = UmamiOptionsBuilder().apply(umamiOptions).build(website)
 
     /**
@@ -52,20 +56,28 @@ class Umami(internal val website: Uuid, umamiOptions: UmamiOptionsBuilder.() -> 
     /** [Job] to control the event queue */
     internal lateinit var eventQueueJob: Job
 
-    /**
-     * Creates an [Umami] instance with a string representation of the website UUID.
-     *
-     * @param website The string representation of the website UUID to track events for.
-     * @param umamiOptions A builder for configuring Umami options, such as the base URL, hostname, and queue capacity.
-     * @throws IllegalArgumentException if the website UUID string is invalid.
-     */
-    constructor(website: String, umamiOptions: UmamiOptionsBuilder.() -> Unit = {}) : this(
+    constructor(
+        website: String,
+        umamiOptions: UmamiOptionsBuilder.() -> Unit = {},
+    ) : this(
         website = Uuid.parse(website),
+        enableEventQueue = true,
+        umamiOptions = umamiOptions,
+    )
+
+    constructor(
+        website: Uuid,
+        umamiOptions: UmamiOptionsBuilder.() -> Unit = {},
+    ) : this(
+        website = website,
+        enableEventQueue = true,
         umamiOptions = umamiOptions,
     )
 
     init {
-        consumeEventQueue()
+        if (enableEventQueue) {
+            consumeEventQueue()
+        }
     }
 
     /**

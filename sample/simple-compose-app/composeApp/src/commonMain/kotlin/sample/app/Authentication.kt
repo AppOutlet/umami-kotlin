@@ -24,7 +24,6 @@ import dev.appoutlet.umami.api.auth.login
 import dev.appoutlet.umami.api.auth.logout
 import dev.appoutlet.umami.api.auth.verify
 import dev.appoutlet.umami.domain.User
-import kotlin.math.log
 import kotlinx.coroutines.launch
 
 @Composable

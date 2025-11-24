@@ -21,8 +21,10 @@ const val EVENT_QUEUE_CAPACITY = 25
  * The main entry point for the Umami analytics library.
  * This class is responsible for initializing the Umami configuration and managing the event queue.
  *
- * @param website The UUID of the website to track events for.
- * @param umamiOptions A builder for configuring Umami options, such as the base URL, hostname, and queue capacity.
+ * @property website The UUID of the website to track events for.
+ * @param enableEventQueue A flag to enable or disable the event queue.
+ * @param umamiOptions A builder for configuring Umami options.
+ * @see InternalUmamiApi This is an internal API and may be changed in the future.
  */
 @OptIn(ExperimentalUuidApi::class)
 class Umami @InternalUmamiApi constructor(
@@ -35,6 +37,9 @@ class Umami @InternalUmamiApi constructor(
     /**
      * A mutable map to hold custom headers for HTTP requests.
      * This can be used to add additional headers like authentication tokens or custom metadata.
+     *
+     * Note: This property is marked with [InternalUmamiApi] and is not intended for public use.
+     * Its behavior may change in future releases.
      */
     @InternalUmamiApi
     var headers = mutableMapOf<String, String?>()
@@ -42,6 +47,9 @@ class Umami @InternalUmamiApi constructor(
     /**
      * An HTTP client for making requests to the Umami API.
      * This client is created lazily to ensure it is initialized only when needed.
+     *
+     * Note: This property is marked with [InternalUmamiApi] and is not intended for public use.
+     * Its behavior may change in future releases.
      */
     @InternalUmamiApi
     val httpClient by lazy { createHttpClient(options.httpClientEngine) }
@@ -56,6 +64,12 @@ class Umami @InternalUmamiApi constructor(
     /** [Job] to control the event queue */
     internal lateinit var eventQueueJob: Job
 
+    /**
+     * Creates an Umami instance.
+     *
+     * @param website The UUID of the website to track events for (as a String).
+     * @param umamiOptions A builder for configuring Umami options, such as the base URL, hostname, and queue capacity.
+     */
     constructor(
         website: String,
         umamiOptions: UmamiOptionsBuilder.() -> Unit = {},
@@ -65,6 +79,12 @@ class Umami @InternalUmamiApi constructor(
         umamiOptions = umamiOptions,
     )
 
+    /**
+     * Creates an Umami instance.
+     *
+     * @param website The UUID of the website to track events for.
+     * @param umamiOptions A builder for configuring Umami options, such as the base URL, hostname, and queue capacity.
+     */
     constructor(
         website: Uuid,
         umamiOptions: UmamiOptionsBuilder.() -> Unit = {},

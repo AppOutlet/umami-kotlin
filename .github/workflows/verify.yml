@@ -31,7 +31,7 @@ jobs:
         run: ./gradlew detekt koverVerify koverXmlReport
 
       - name: Upload coverage report
-        uses: qltysh/qlty-action/coverage@v1.1.1
+        uses: qltysh/qlty-action/coverage@v2.2.0
         with:
           token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
           files: build/reports/kover/report.xml

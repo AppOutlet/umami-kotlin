@@ -37,12 +37,13 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(project(":umami-api"))
+
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
-            implementation(compose.material3)
             implementation(compose.materialIconsExtended)
-            implementation(project(":umami-api"))
+
         }
 
         androidMain.dependencies {

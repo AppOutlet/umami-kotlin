@@ -50,8 +50,8 @@ internal data class UmamiOptions(
  */
 @OptIn(ExperimentalUuidApi::class)
 class UmamiOptionsBuilder {
-    /** The base URL of the Umami API. Defaults to "https://api.umami.is". */
-    var baseUrl: Url = Url("https://api.umami.is")
+    /** The base URL of the Umami API. Defaults to "https://cloud.umami.is". */
+    var baseUrl: Url = Url("https://cloud.umami.is")
 
     /** The hostname of the website. */
     var hostname: Hostname? = null

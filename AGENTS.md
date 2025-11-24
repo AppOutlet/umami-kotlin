@@ -41,12 +41,6 @@ All contributions must adhere to the guidelines outlined in [`CONTRIBUTING.md`](
 
 The project is built with Gradle. The recommended IDEs are **IntelliJ IDEA Community Edition** or **Android Studio**.
 
-After cloning the repository, you can verify your setup by running the build:
-
-```bash
-./gradlew build
-```
-
 ## Code Quality and Testing
 
 ### Static Analysis
@@ -67,11 +61,22 @@ Code coverage is enforced using **Kover**. The minimum coverage requirements are
 
 ### Testing
 
-All new features must be accompanied by tests. Bug fixes should also include a test that reproduces the bug. You can run all tests with:
+All new features must be accompanied by tests. Bug fixes should also include a test that reproduces the bug.
+
+When verifying that your changes compile and work correctly, run the JVM tests for the specific module you modified. Using `jvmTest` ensures compatibility with environments that don't have the Android SDK installed:
 
 ```bash
-./gradlew test
+# For the core library
+./gradlew :umami:jvmTest
+
+# For the API library
+./gradlew :umami-api:jvmTest
+
+# For sample applications (JVM target)
+./gradlew :sample:terminalApp:jvmTest
 ```
+
+Running tests will verify that the code compiles correctly, as compilation is a prerequisite for test execution. Full compilation and integration checks for all platforms (including Android) are performed automatically in the CI stage.
 
 ## Build and Release
 

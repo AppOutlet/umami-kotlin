@@ -27,7 +27,7 @@ jobs:
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
 
       - name: Setup Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: 'jetbrains'
           java-version: '17'

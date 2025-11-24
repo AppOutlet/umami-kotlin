@@ -32,7 +32,7 @@ jobs:
         run: ./gradlew koverXmlReport
 
       - name: umami-api - Upload coverage report
-        uses: qltysh/qlty-action/coverage@v2
+        uses: qltysh/qlty-action/coverage@v2.2.0
         with:
           token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
           files: umami-api/build/reports/kover/report.xml
@@ -41,7 +41,7 @@ jobs:
           add-prefix: umami-api/src/commonMain/kotlin/
 
       - name: umami - Upload coverage report
-        uses: qltysh/qlty-action/coverage@v2
+        uses: qltysh/qlty-action/coverage@v2.2.0
         with:
           token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
           files: umami/build/reports/kover/report.xml

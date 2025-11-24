@@ -6,9 +6,9 @@ import dev.appoutlet.umami.testing.getUmamiInstance
 import dev.appoutlet.umami.testing.respond
 import io.kotest.matchers.shouldBe
 import io.ktor.http.HttpHeaders
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.time.Clock
-import kotlinx.coroutines.test.runTest
 
 class LoginTest {
     @Test

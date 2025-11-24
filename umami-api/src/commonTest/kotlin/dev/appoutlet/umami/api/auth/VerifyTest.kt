@@ -4,9 +4,9 @@ import dev.appoutlet.umami.domain.User
 import dev.appoutlet.umami.testing.getUmamiInstance
 import dev.appoutlet.umami.testing.respond
 import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.time.Clock
-import kotlinx.coroutines.test.runTest
 
 class VerifyTest {
     @Test

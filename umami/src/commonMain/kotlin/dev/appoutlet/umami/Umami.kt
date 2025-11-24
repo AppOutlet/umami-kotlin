@@ -4,12 +4,12 @@ import dev.appoutlet.umami.api.processEventQueueItem
 import dev.appoutlet.umami.core.createHttpClient
 import dev.appoutlet.umami.util.annotation.InternalUmamiApi
 import io.ktor.client.request.HttpRequestBuilder
-import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
 /**
  * Default event queue capacity. The capacity can be customized on the Umami object creation.

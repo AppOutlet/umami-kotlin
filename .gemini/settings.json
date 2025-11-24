@@ -1,5 +1,8 @@
 {
   "context": {
-    "fileName": "AGENTS.md"
+    "fileName": [
+      "AGENTS.md",
+      "umami-api/src/commonTest/AGENTS.md"
+    ]
   }
 }

@@ -26,6 +26,7 @@ nav:
     - 🌎 Kotlin Multiplatform: getstarted/kmp.md
     - 🤖 Android: getstarted/android.md
   - Event tracking: event-tracking.md
+  - Authentication: auth.md
   - Roadmap: roadmap.md
   - API Reference: reference
 

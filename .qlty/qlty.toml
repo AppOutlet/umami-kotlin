@@ -44,6 +44,7 @@ exclude_patterns = [
 ]
 
 test_patterns = [
+  "**/*Test/**",
   "**/test/**",
   "**/spec/**",
   "**/*.test.*",
@@ -61,7 +62,6 @@ mode = "comment"
 name = "default"
 default = true
 
-
 [[plugin]]
 name = "actionlint"
 
@@ -70,10 +70,11 @@ name = "checkov"
 
 [[plugin]]
 name = "markdownlint"
-mode = "comment"
+mode = "disabled"
 
 [[plugin]]
 name = "prettier"
+mode = "disabled"
 
 [[plugin]]
 name = "radarlint-js"

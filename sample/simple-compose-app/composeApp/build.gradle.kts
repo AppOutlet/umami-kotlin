@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.compose.hotReload)
 }
 
 kotlin {
@@ -36,10 +37,13 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(project(":umami-api"))
+
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
-            implementation(project(":umami"))
+            implementation(compose.materialIconsExtended)
+
         }
 
         androidMain.dependencies {
@@ -55,11 +59,11 @@ kotlin {
 
 android {
     namespace = "sample.app"
-    compileSdk = 36
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = 21
-        targetSdk = 36
+        minSdk = libs.versions.android.minSdk.get().toInt()
+        targetSdk = libs.versions.android.targetSdk.get().toInt()
 
         applicationId = "sample.app.androidApp"
         versionCode = 1

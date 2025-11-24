@@ -1,0 +1,37 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:dev.appoutlet.umami.api.auth////PointingToDeclaration/umami-api/dev.appoutlet.umami.api.auth/index.html
+$dokka.location:dev.appoutlet.umami.api.auth//login/dev.appoutlet.umami.Umami#dev.appoutlet.umami.api.auth.UmamiLogin.Request/PointingToDeclaration/umami-api/dev.appoutlet.umami.api.auth/login.html
+$dokka.location:dev.appoutlet.umami.api.auth//login/dev.appoutlet.umami.Umami#kotlin.String#kotlin.String/PointingToDeclaration/umami-api/dev.appoutlet.umami.api.auth/login.html
+$dokka.location:dev.appoutlet.umami.api.auth//logout/dev.appoutlet.umami.Umami#/PointingToDeclaration/umami-api/dev.appoutlet.umami.api.auth/logout.html
+$dokka.location:dev.appoutlet.umami.api.auth//verify/dev.appoutlet.umami.Umami#/PointingToDeclaration/umami-api/dev.appoutlet.umami.api.auth/verify.html
+$dokka.location:dev.appoutlet.umami.api.auth/UmamiLogin.Request///PointingToDeclaration/umami-api/dev.appoutlet.umami.api.auth/-umami-login/-request/index.html
+$dokka.location:dev.appoutlet.umami.api.auth/UmamiLogin.Request/Request/#kotlin.String#kotlin.String/PointingToDeclaration/umami-api/dev.appoutlet.umami.api.auth/-umami-login/-request/-request.html
+$dokka.location:dev.appoutlet.umami.api.auth/UmamiLogin.Request/password/#/PointingToDeclaration/umami-api/dev.appoutlet.umami.api.auth/-umami-login/-request/password.html
+$dokka.location:dev.appoutlet.umami.api.auth/UmamiLogin.Request/username/#/PointingToDeclaration/umami-api/dev.appoutlet.umami.api.auth/-umami-login/-request/username.html
+$dokka.location:dev.appoutlet.umami.api.auth/UmamiLogin.Response///PointingToDeclaration/umami-api/dev.appoutlet.umami.api.auth/-umami-login/-response/index.html
+$dokka.location:dev.appoutlet.umami.api.auth/UmamiLogin.Response/Response/#kotlin.String#dev.appoutlet.umami.domain.User/PointingToDeclaration/umami-api/dev.appoutlet.umami.api.auth/-umami-login/-response/-response.html
+$dokka.location:dev.appoutlet.umami.api.auth/UmamiLogin.Response/token/#/PointingToDeclaration/umami-api/dev.appoutlet.umami.api.auth/-umami-login/-response/token.html
+$dokka.location:dev.appoutlet.umami.api.auth/UmamiLogin.Response/user/#/PointingToDeclaration/umami-api/dev.appoutlet.umami.api.auth/-umami-login/-response/user.html
+$dokka.location:dev.appoutlet.umami.api.auth/UmamiLogin///PointingToDeclaration/umami-api/dev.appoutlet.umami.api.auth/-umami-login/index.html
+$dokka.location:dev.appoutlet.umami.domain////PointingToDeclaration/umami-api/dev.appoutlet.umami.domain/index.html
+$dokka.location:dev.appoutlet.umami.domain/Team///PointingToDeclaration/umami-api/dev.appoutlet.umami.domain/-team/index.html
+$dokka.location:dev.appoutlet.umami.domain/Team/Team/#kotlin.String#kotlin.String#kotlin.String#kotlin.String?#kotlin.time.Instant#kotlin.time.Instant#kotlin.time.Instant?#kotlin.collections.List[dev.appoutlet.umami.domain.User]/PointingToDeclaration/umami-api/dev.appoutlet.umami.domain/-team/-team.html
+$dokka.location:dev.appoutlet.umami.domain/Team/accessCode/#/PointingToDeclaration/umami-api/dev.appoutlet.umami.domain/-team/access-code.html
+$dokka.location:dev.appoutlet.umami.domain/Team/createdAt/#/PointingToDeclaration/umami-api/dev.appoutlet.umami.domain/-team/created-at.html
+$dokka.location:dev.appoutlet.umami.domain/Team/deletedAt/#/PointingToDeclaration/umami-api/dev.appoutlet.umami.domain/-team/deleted-at.html
+$dokka.location:dev.appoutlet.umami.domain/Team/id/#/PointingToDeclaration/umami-api/dev.appoutlet.umami.domain/-team/id.html
+$dokka.location:dev.appoutlet.umami.domain/Team/logoUrl/#/PointingToDeclaration/umami-api/dev.appoutlet.umami.domain/-team/logo-url.html
+$dokka.location:dev.appoutlet.umami.domain/Team/members/#/PointingToDeclaration/umami-api/dev.appoutlet.umami.domain/-team/members.html
+$dokka.location:dev.appoutlet.umami.domain/Team/name/#/PointingToDeclaration/umami-api/dev.appoutlet.umami.domain/-team/name.html
+$dokka.location:dev.appoutlet.umami.domain/Team/updatedAt/#/PointingToDeclaration/umami-api/dev.appoutlet.umami.domain/-team/updated-at.html
+$dokka.location:dev.appoutlet.umami.domain/User///PointingToDeclaration/umami-api/dev.appoutlet.umami.domain/-user/index.html
+$dokka.location:dev.appoutlet.umami.domain/User/User/#kotlin.String#kotlin.String#kotlin.String#kotlin.time.Instant#kotlin.Boolean#kotlin.collections.List[dev.appoutlet.umami.domain.Team]/PointingToDeclaration/umami-api/dev.appoutlet.umami.domain/-user/-user.html
+$dokka.location:dev.appoutlet.umami.domain/User/createdAt/#/PointingToDeclaration/umami-api/dev.appoutlet.umami.domain/-user/created-at.html
+$dokka.location:dev.appoutlet.umami.domain/User/id/#/PointingToDeclaration/umami-api/dev.appoutlet.umami.domain/-user/id.html
+$dokka.location:dev.appoutlet.umami.domain/User/isAdmin/#/PointingToDeclaration/umami-api/dev.appoutlet.umami.domain/-user/is-admin.html
+$dokka.location:dev.appoutlet.umami.domain/User/role/#/PointingToDeclaration/umami-api/dev.appoutlet.umami.domain/-user/role.html
+$dokka.location:dev.appoutlet.umami.domain/User/teams/#/PointingToDeclaration/umami-api/dev.appoutlet.umami.domain/-user/teams.html
+$dokka.location:dev.appoutlet.umami.domain/User/username/#/PointingToDeclaration/umami-api/dev.appoutlet.umami.domain/-user/username.html
+dev.appoutlet.umami.api.auth
+dev.appoutlet.umami.domain

@@ -35,6 +35,8 @@ $dokka.location:dev.appoutlet.umami.domain/ScreenSize/ScreenSize/#kotlin.Int#kot
 $dokka.location:dev.appoutlet.umami.domain/ScreenSize/ScreenSize/#kotlin.String/PointingToDeclaration/umami/dev.appoutlet.umami.domain/-screen-size/-screen-size.html
 $dokka.location:dev.appoutlet.umami.domain/ScreenSize/toString/#/PointingToDeclaration/umami/dev.appoutlet.umami.domain/-screen-size/to-string.html
 $dokka.location:dev.appoutlet.umami.domain/ScreenSize/value/#/PointingToDeclaration/umami/dev.appoutlet.umami.domain/-screen-size/value.html
+$dokka.location:dev.appoutlet.umami.util.annotation////PointingToDeclaration/umami/dev.appoutlet.umami.util.annotation/index.html
+$dokka.location:dev.appoutlet.umami.util.annotation/InternalUmamiApi///PointingToDeclaration/umami/dev.appoutlet.umami.util.annotation/-internal-umami-api/index.html
 $dokka.location:dev.appoutlet.umami.util////PointingToDeclaration/umami/dev.appoutlet.umami.util/index.html
 $dokka.location:dev.appoutlet.umami.util//createUserAgent/#kotlin.String#kotlin.String#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/umami/dev.appoutlet.umami.util/create-user-agent.html
 $dokka.location:dev.appoutlet.umami.util//getPlatform/#/PointingToDeclaration/umami/dev.appoutlet.umami.util/get-platform.html
@@ -59,7 +61,10 @@ $dokka.location:dev.appoutlet.umami////PointingToDeclaration/umami/dev.appoutle
 $dokka.location:dev.appoutlet.umami//EVENT_QUEUE_CAPACITY/#/PointingToDeclaration/umami/dev.appoutlet.umami/-e-v-e-n-t_-q-u-e-u-e_-c-a-p-a-c-i-t-y.html
 $dokka.location:dev.appoutlet.umami/Umami///PointingToDeclaration/umami/dev.appoutlet.umami/-umami/index.html
 $dokka.location:dev.appoutlet.umami/Umami/Umami/#kotlin.String#kotlin.Function1[dev.appoutlet.umami.UmamiOptionsBuilder,kotlin.Unit]/PointingToDeclaration/umami/dev.appoutlet.umami/-umami/-umami.html
+$dokka.location:dev.appoutlet.umami/Umami/Umami/#kotlin.uuid.Uuid#kotlin.Boolean#kotlin.Function1[dev.appoutlet.umami.UmamiOptionsBuilder,kotlin.Unit]/PointingToDeclaration/umami/dev.appoutlet.umami/-umami/-umami.html
 $dokka.location:dev.appoutlet.umami/Umami/Umami/#kotlin.uuid.Uuid#kotlin.Function1[dev.appoutlet.umami.UmamiOptionsBuilder,kotlin.Unit]/PointingToDeclaration/umami/dev.appoutlet.umami/-umami/-umami.html
+$dokka.location:dev.appoutlet.umami/Umami/headers/#/PointingToDeclaration/umami/dev.appoutlet.umami/-umami/headers.html
+$dokka.location:dev.appoutlet.umami/Umami/httpClient/#/PointingToDeclaration/umami/dev.appoutlet.umami/-umami/http-client.html
 $dokka.location:dev.appoutlet.umami/UmamiOptionsBuilder///PointingToDeclaration/umami/dev.appoutlet.umami/-umami-options-builder/index.html
 $dokka.location:dev.appoutlet.umami/UmamiOptionsBuilder/UmamiOptionsBuilder/#/PointingToDeclaration/umami/dev.appoutlet.umami/-umami-options-builder/-umami-options-builder.html
 $dokka.location:dev.appoutlet.umami/UmamiOptionsBuilder/baseUrl/#/PointingToDeclaration/umami/dev.appoutlet.umami/-umami-options-builder/base-url.html
@@ -83,3 +88,4 @@ dev.appoutlet.umami.api
 dev.appoutlet.umami.core
 dev.appoutlet.umami.domain
 dev.appoutlet.umami.util
+dev.appoutlet.umami.util.annotation

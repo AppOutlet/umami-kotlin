@@ -1,5 +1,6 @@
 package dev.appoutlet.umami.api.auth
 
+import dev.appoutlet.umami.domain.Team
 import dev.appoutlet.umami.domain.User
 import dev.appoutlet.umami.testing.getUmamiInstance
 import dev.appoutlet.umami.testing.respond
@@ -15,7 +16,20 @@ class VerifyTest {
             id = "123",
             username = "testuser",
             role = "admin",
-            createdAt = Clock.System.now()
+            createdAt = Clock.System.now(),
+            isAdmin = true,
+            teams = listOf(
+                Team(
+                    id = "123",
+                    name = "Test Team",
+                    accessCode = "access-code",
+                    logoUrl = "https://example.com/logo.png",
+                    createdAt = Clock.System.now(),
+                    updatedAt = Clock.System.now(),
+                    deletedAt = Clock.System.now(),
+                    members = emptyList()
+                )
+            )
         )
 
         val umami = getUmamiInstance(

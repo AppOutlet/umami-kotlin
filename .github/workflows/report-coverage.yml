@@ -31,10 +31,21 @@ jobs:
         id: gradle_run
         run: ./gradlew koverXmlReport
 
-      - name: Upload coverage report
-        uses: qltysh/qlty-action/coverage@v1.1.1
+      - name: umami-api - Upload coverage report
+        uses: qltysh/qlty-action/coverage@v2
         with:
           token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
-          files: build/reports/kover/report.xml
+          files: umami-api/build/reports/kover/report.xml
           format: "jacoco"
-          add-prefix: src/commonMain/kotlin
+          skip-errors: false
+          add-prefix: umami-api/src/commonMain/kotlin/
+
+      - name: umami - Upload coverage report
+        uses: qltysh/qlty-action/coverage@v2
+        with:
+          token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          files: umami/build/reports/kover/report.xml
+          format: "jacoco"
+          skip-errors: false
+          add-prefix: umami/src/commonMain/kotlin/
+          validate-file-threshold: 70

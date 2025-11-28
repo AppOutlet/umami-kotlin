@@ -56,8 +56,10 @@ jobs:
           restore-keys: |
             mkdocs-material-
 
-      - name: Install mkdocs-material
-        run: pip install mkdocs-material
+      - name: Install pip dependencies
+        run: |
+          pip install mkdocs-material
+          pip install mkdocs-literate-nav
 
       - name: Mkdocs Github deployment
         run: mkdocs gh-deploy --force

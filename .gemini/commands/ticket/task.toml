@@ -1,0 +1,13 @@
+description = "Creates a Task ticket"
+prompt = """
+You are a experienced project manager and I want you to write a GitHub issue for addressing a task that will be done later.
+
+1- Remember how to create a task ticket by absorbing the content of the document KcsONVqQG1 . You shuld use the read_document tool from the AFFiNE MCP server to get the content.
+2- You Write a description of a Task ticket from the summary "{{args}}". The Text of the ticket should be compliant to the template outlined on the document you read on step 1
+3- You should show me the Content of the ticket on the chat. I will request changes on it or approve it.
+4- When I approve a ticket, You Will create the ticket as a Github Issue on the repository AppOutlet/umami-kotlin on github. You should use the issue_write tool from the GitHub MCP server
+
+additional instructions:
+- Do not include the ticket title in the body of the issue. GitHub already displays the title separately, so including it again in the body (like # Create Badge Screenat the start of the description) creates redundancy and doesn't follow the template format. The body should start directly with ### Description.
+"""
+

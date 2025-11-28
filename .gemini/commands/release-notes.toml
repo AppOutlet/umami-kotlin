@@ -164,11 +164,15 @@ Use this markdown template:
 
 ---
 
-### 📖 Full Changelog
-[Link to full changelog]: https://github.com/OWNER/REPO/compare/PREVIOUS_TAG...TAG
-
 ### 🙏 Contributors
 [If applicable, mention contributors]
+
+<details>
+<summary>Changelog</summary>
+
+[The raw, untransformed changelog from the GitHub release body should be placed here.]
+
+</details>
 ```
 
 ### Writing Guidelines
@@ -321,63 +325,49 @@ How does this look? Ready to publish or need more changes?
 
 ---
 
-## Step 6: Publish to GitHub
+## Step 6: Save Release Notes to File
 
 Once the user approves (says "approve", "looks good", "publish", etc.), confirm before proceeding:
 
 ```
-✅ **Ready to publish!**
+✅ **Ready to save!**
 
-I will now update the GitHub release using the MCP server:
-https://github.com/AppOutlet/umami-kotlin/releases/tag/TAG
+I will now write the release notes to `docs/release-notes/{{args}}.md`.
 
-This will replace the current release description with the new release notes.
+This will create a new file with the release notes content.
 
 Type "confirm" to proceed, or "wait" to make more changes.
 ```
 
-**After confirmation, use the MCP tool:**
-```
-update_release(
-  owner="AppOutlet",
-  repo="umami-kotlin",
-  release_id=RELEASE_ID,
-  body="RELEASE_NOTES_HERE"
-)
-```
+**After confirmation, write the file:**
+You should use a file writing tool to save the release notes to `docs/release-notes/{{args}}.md`. `{{args}}` will be the release tag you are working with.
 
 **On success:**
 ```
-🎉 **Release notes published successfully!**
+🎉 **Release notes saved successfully!**
 
-Your release notes are now live at:
-👉 https://github.com/AppOutlet/umami-kotlin/releases/tag/TAG
+Your release notes are now available at:
+👉 `docs/release-notes/{{args}}.md`
 
-Users can now see the updated release information!
-
-Would you like to:
+What would you like to do next?
 - Work on another release
-- Generate a changelog summary
 - Exit
 ```
 
 **On failure:**
 ```
-❌ **Failed to update release**
+❌ **Failed to save the file**
 
 Error: [ERROR_MESSAGE]
 
-Possible issues:
-- MCP server connection issue
-- Insufficient permissions
-- Release may have been deleted or modified
+This could be due to:
+- Permission issues
+- The directory `docs/release-notes/` does not exist.
 
 Would you like to:
 - Retry the update
-- Save the release notes to a file
-- Copy to clipboard for manual update
+- Copy the release notes to the clipboard for manual saving
 ```
-
 ---
 
 ## Error Handling

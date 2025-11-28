@@ -28,6 +28,7 @@ nav:
   - Event tracking: event-tracking.md
   - Authentication: auth.md
   - Roadmap: roadmap.md
+  - Release notes: release-notes/
   - API Reference: reference
 
 markdown_extensions:

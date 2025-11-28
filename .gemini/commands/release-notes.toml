@@ -127,7 +127,7 @@ Transform the technical changelog into polished, user-friendly release notes fol
 Use this markdown template:
 
 ```markdown
-# Release [VERSION] - [DATE]
+# Release [VERSION]
 
 [Write a compelling one-sentence summary highlighting the most important changes]
 

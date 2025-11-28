@@ -167,12 +167,7 @@ Use this markdown template:
 ### 🙏 Contributors
 [If applicable, mention contributors. Do not include bots like @dependabot[bot], @google-labs-jules[bot], @google-code-assit, @copilot, @claude, or any other user with `[bot]` in their name.]
 
-<details>
-<summary>Changelog</summary>
-
-[The raw, untransformed changelog from the GitHub release body should be placed here.]
-
-</details>
+!!! The is the [Full changelog](https://github.com/AppOutlet/umami-kotlin/releases/tag/{{args}})
 ```
 
 ### Writing Guidelines

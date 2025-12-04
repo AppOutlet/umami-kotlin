@@ -15,7 +15,7 @@ import kotlinx.serialization.Serializable
  * @param request The request object containing search, page, and pageSize parameters.
  * @return A [Users.Response] object containing the list of users and pagination metadata.
  */
-suspend fun Umami.getAllUsers(request: Users.Request): Users.Response {
+suspend fun Umami.getUsers(request: Users.Request): Users.Response {
     return httpClient.get(Api.Admin.Users()) {
         request.search?.let {
             parameter("search", it)
@@ -38,7 +38,7 @@ suspend fun Umami.getAllUsers(request: Users.Request): Users.Response {
  * @param pageSize Optional number of users per page.
  * @return A [Users.Response] object containing the list of users and pagination metadata.
  */
-suspend fun Umami.getAllUsers(
+suspend fun Umami.getUsers(
     search: String? = null,
     page: Int? = null,
     pageSize: Int? = null,
@@ -49,7 +49,7 @@ suspend fun Umami.getAllUsers(
         pageSize = pageSize,
     )
 
-    return getAllUsers(request)
+    return getUsers(request)
 }
 
 /**
@@ -57,7 +57,7 @@ suspend fun Umami.getAllUsers(
  */
 interface Users {
     /**
-     * Represents the request parameters for the getAllUsers API call.
+     * Represents the request parameters for the getUsers API call.
      * @property search Optional search query to filter users.
      * @property page Optional page number for pagination (1-indexed).
      * @property pageSize Optional number of users per page.
@@ -70,7 +70,7 @@ interface Users {
     )
 
     /**
-     * Represents the response from a successful getAllUsers API call.
+     * Represents the response from a successful getUsers API call.
      * @property data The list of users.
      * @property count The total count of users.
      * @property page The current page number.

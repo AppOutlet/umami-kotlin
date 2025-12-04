@@ -1,6 +1,6 @@
 # Quickstart: Get All Users
 
-This guide demonstrates how to use the new `getAllUsers` function.
+This guide demonstrates how to use the new `getUsers` function.
 
 ## Prerequisites
 
@@ -9,7 +9,7 @@ This guide demonstrates how to use the new `getAllUsers` function.
 
 ## Usage
 
-The `getAllUsers` function is an extension on the `Umami` object and accepts optional parameters for searching and pagination.
+The `getUsers` function is an extension on the `Umami` object and accepts optional parameters for searching and pagination.
 
 ### Basic Usage
 
@@ -17,7 +17,7 @@ To fetch the first page of users without any filters:
 
 ```kotlin
 // Assumes 'umami' is an initialized Umami client
-val response = umami.getAllUsers()
+val response = umami.getUsers()
 
 println("Total users: ${response.count}")
 response.data.forEach { user ->
@@ -30,7 +30,7 @@ response.data.forEach { user ->
 To search for a specific user and retrieve the second page of results:
 
 ```kotlin
-val response = umami.getAllUsers(
+val response = umami.getUsers(
     search = "admin",
     page = 2,
     pageSize = 10

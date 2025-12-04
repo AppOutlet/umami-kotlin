@@ -57,7 +57,7 @@ class UsersTest {
             }
         )
 
-        val result = umami.getAllUsers()
+        val result = umami.getUsers()
 
         result shouldBe fixtureUsersResponse
     }
@@ -97,7 +97,7 @@ class UsersTest {
             }
         )
 
-        val result = umami.getAllUsers(search = fixtureSearchTerm)
+        val result = umami.getUsers(search = fixtureSearchTerm)
 
         result shouldBe fixtureUsersResponse
     }
@@ -138,7 +138,7 @@ class UsersTest {
             }
         )
 
-        val result = umami.getAllUsers(page = fixturePage, pageSize = fixturePageSize)
+        val result = umami.getUsers(page = fixturePage, pageSize = fixturePageSize)
 
         result shouldBe fixtureUsersResponse
     }

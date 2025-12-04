@@ -20,5 +20,10 @@
         "Authorization": "Bearer ${GITHUB_PERSONAL_ACCESS_TOKEN}"
       }
     }
+  },
+  "ui": {
+    "footer": {
+      "hideContextPercentage": false
+    }
   }
 }

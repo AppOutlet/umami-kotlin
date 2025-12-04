@@ -29,9 +29,11 @@
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
-
-[Gates determined based on constitution file]
+*   [ ] **I. Modular by Design**: Does the feature respect the `umami` vs. `umami-api` module separation?
+*   [ ] **II. Type-Safe and Idiomatic Kotlin**: Is the code type-safe and does it use modern Kotlin idioms?
+*   [ ] **III. Asynchronous from the Ground Up**: Are all I/O operations and long-running tasks handled asynchronously with coroutines?
+*   [ ] **IV. Kotlin Multiplatform**: Is the feature implemented in `commonMain` where possible, with platform-specific code only where necessary?
+*   [ ] **V. Rigorously Tested**: Are there unit tests for the new feature and regression tests for any bug fixes?
 
 ## Project Structure
 

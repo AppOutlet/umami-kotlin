@@ -17,8 +17,8 @@ import kotlinx.serialization.Serializable
  * @param request The login request containing the username and password.
  * @return The login response containing the token and user information.
  */
-suspend fun Umami.login(request: UmamiLogin.Request): UmamiLogin.Response {
-    val response: UmamiLogin.Response = httpClient.post(Api.Auth.Login()) {
+suspend fun Umami.login(request: Login.Request): Login.Response {
+    val response: Login.Response = httpClient.post(Api.Auth.Login()) {
         setBody(request)
     }.body()
 
@@ -30,7 +30,7 @@ suspend fun Umami.login(request: UmamiLogin.Request): UmamiLogin.Response {
 /**
  * Logs in to the Umami API.
  * After a successful login, the authentication token is stored and used for subsequent requests.
- * This is a convenience function that creates a [UmamiLogin.Request] object.
+ * This is a convenience function that creates a [Login.Request] object.
  *
  * @param username The username for authentication.
  * @param password The password for authentication.
@@ -39,8 +39,8 @@ suspend fun Umami.login(request: UmamiLogin.Request): UmamiLogin.Response {
 suspend fun Umami.login(
     username: String,
     password: String,
-): UmamiLogin.Response {
-    val request = UmamiLogin.Request(
+): Login.Response {
+    val request = Login.Request(
         username = username,
         password = password,
     )
@@ -51,7 +51,7 @@ suspend fun Umami.login(
 /**
  * Namespace for the login API request and response data classes.
  */
-interface UmamiLogin {
+interface Login {
     /**
      * Represents the request body for the login API call.
      * @property username The username of the user.

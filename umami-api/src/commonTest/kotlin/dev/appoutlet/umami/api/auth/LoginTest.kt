@@ -16,7 +16,7 @@ class LoginTest {
         val fixtureUsername = "testuser"
         val fixturePassword = "testpassword"
         val fixtureToken = "sdfa6sdf8asdf76a5sdf654asd7f3as6df"
-        val fixtureResponse = UmamiLogin.Response(
+        val fixtureResponse = Login.Response(
             token = fixtureToken,
             user = User(
                 id = "123",
@@ -28,7 +28,7 @@ class LoginTest {
 
         val umami = getUmamiInstance(
             "/api/auth/login" to { request ->
-                val loginRequest = request.body<UmamiLogin.Request>()
+                val loginRequest = request.body<Login.Request>()
                 loginRequest.username shouldBe fixtureUsername
                 loginRequest.password shouldBe fixturePassword
                 respond(fixtureResponse)
@@ -48,12 +48,12 @@ class LoginTest {
     fun `should login using request object`() = runTest {
         val fixtureUsername = "testuser"
         val fixturePassword = "testpassword"
-        val fixtureRequest = UmamiLogin.Request(
+        val fixtureRequest = Login.Request(
             username = fixtureUsername,
             password = fixturePassword
         )
         val fixtureToken = "sdfa6sdf8asdf76a5sdf654asd7f3as6df"
-        val fixtureResponse = UmamiLogin.Response(
+        val fixtureResponse = Login.Response(
             token = fixtureToken,
             user = User(
                 id = "123",
@@ -65,7 +65,7 @@ class LoginTest {
 
         val umami = getUmamiInstance(
             "/api/auth/login" to { request ->
-                val loginRequest = request.body<UmamiLogin.Request>()
+                val loginRequest = request.body<Login.Request>()
                 loginRequest.username shouldBe fixtureUsername
                 loginRequest.password shouldBe fixturePassword
                 respond(fixtureResponse)

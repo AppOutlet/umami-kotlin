@@ -5,7 +5,7 @@
 
 ## Summary
 
-Implement a function to fetch a paginated and searchable list of all admin users from the `GET /api/admin/users` endpoint. This will be implemented in the `umami-api` module following the existing pattern for API calls (`Login.kt`) and will involve updating the `User` domain model to be compliant with the API response.
+Implement a function to fetch a paginated and searchable list of all admin users from the `GET /api/admin/users` endpoint. This will be implemented in the `umami-api` module following the existing pattern for API calls (`Login.kt`). This will involve merging new fields into the `User` domain model to make it compliant with the API response, while preserving existing fields to maintain backward compatibility. All date/time fields will use `kotlin.time.Instant`.
 
 ## Technical Context
 
@@ -48,7 +48,7 @@ The following files will be created or modified:
 │   └── src/
 │       ├── commonMain/
 │       │   └── kotlin/dev/appoutlet/umami/api/admin/
-│       │       └── GetAllUsers.kt      # New file
+│       │       └── Users.kt      # New file
 │       │   └── kotlin/dev/appoutlet/umami/domain/
 │       │       └── User.kt             # Modified file
 │       └── commonTest/

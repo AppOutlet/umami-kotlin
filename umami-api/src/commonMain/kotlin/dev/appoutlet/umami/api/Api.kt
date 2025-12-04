@@ -17,4 +17,11 @@ internal class Api {
         @Resource("/logout")
         class Logout(val parent: Auth = Auth())
     }
+
+    @Resource("/admin")
+    class Admin(val parent: Api = Api()) {
+
+        @Resource("/users")
+        class Users(val parent: Admin = Admin())
+    }
 }

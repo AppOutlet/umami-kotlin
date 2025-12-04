@@ -16,7 +16,7 @@ This document outlines the current development status and future plans for the U
 
 These endpoints are only available for admin users on self-hosted instances.
 
-- [ ] Returns all users in the system - `GET /api/admin/users`
+- [x] Returns all users in the system - `GET /api/admin/users`
 - [ ] Returns all websites in the system - `GET /api/admin/websites`
 - [ ] Returns all teams in the system - `GET /api/admin/teams`
 

@@ -23,6 +23,7 @@ The source code in the `:umami` library is organized into the following packages
 *   **Ktor**: Used for all HTTP networking. The library is designed to be multiplatform, with different client engines for each target (e.g., `OkHttp` for Android/JVM, `Darwin` for iOS).
 *   **Kotlinx Coroutines**: For handling asynchronous operations, especially the event queue.
 *   **Kotlinx Serialization**: For JSON serialization and deserialization.
+*   **kotlin.time.Instant**: Used for all date and time representations to ensure type safety and multiplatform compatibility.
 *   **Kermit**: For logging.
 *   **Kotest**: For assertions in tests.
 *   **Mokkery**: For creating mocks in tests.
@@ -46,7 +47,7 @@ The project is built with Gradle. The recommended IDEs are **IntelliJ IDEA Commu
 ### Static Analysis
 
 The project uses two main tools for static analysis:
-1.  **Detekt**: The configuration is in `detekt/detekt.yml`. You can run it with `./gradlew detekt`.
+1.  **Detekt**: The configuration is in `detekt/detekt.yml`. Detekt runs automatically before a git push.
 2.  **Qlty**: A multi-linter tool configured via `.qlty/qlty.toml`.
 
 Please ensure your changes do not introduce any new static analysis issues.

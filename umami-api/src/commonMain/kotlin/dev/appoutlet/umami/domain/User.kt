@@ -1,5 +1,4 @@
 package dev.appoutlet.umami.domain
-
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.time.Instant
@@ -44,6 +43,30 @@ data class User(
     val createdAt: Instant,
 
     /**
+     * The timestamp when the user was last updated (ISO 8601 format).
+     */
+    @SerialName("updatedAt")
+    val updatedAt: Instant? = null,
+
+    /**
+     * The timestamp when the user was deleted (ISO 8601 format).
+     */
+    @SerialName("deletedAt")
+    val deletedAt: Instant? = null,
+
+    /**
+     * The URL of the user's logo.
+     */
+    @SerialName("logoUrl")
+    val logoUrl: String? = null,
+
+    /**
+     * The display name of the user.
+     */
+    @SerialName("displayName")
+    val displayName: String? = null,
+
+    /**
      * Indicates whether the user has administrative privileges.
      *
      * This is typically a derived property based on the role field.
@@ -59,4 +82,11 @@ data class User(
      */
     @SerialName("teams")
     val teams: List<Team> = emptyList(),
+
+    /**
+     * Additional count-related information for the user,
+     * such as the number of websites they manage.
+     */
+    @SerialName("_count")
+    val count: UserCount? = null,
 )

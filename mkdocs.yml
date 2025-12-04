@@ -27,6 +27,7 @@ nav:
     - 🤖 Android: getstarted/android.md
   - Event tracking: event-tracking.md
   - Authentication: auth.md
+  - Admin: admin/
   - Roadmap: roadmap.md
   - Release notes: release-notes/
   - API Reference: reference

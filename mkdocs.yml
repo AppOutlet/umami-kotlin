@@ -5,6 +5,7 @@ repo_url: https://github.com/AppOutlet/umami-kotlin
 repo_name: AppOutlet/umami-kotlin
 theme:
   name: material
+  custom_dir: overrides
   palette:
     primary: 'deep purple'
     accent: 'indigo'

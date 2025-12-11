@@ -3,6 +3,7 @@ package dev.appoutlet.umami.api
 import dev.appoutlet.umami.testing.body
 import dev.appoutlet.umami.testing.getUmamiInstance
 import dev.appoutlet.umami.testing.respond
+import dev.appoutlet.umami.util.headers
 import io.kotest.matchers.shouldBe
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.setBody
@@ -164,7 +165,7 @@ class EventTest {
 
         job.join()
 
-        umami.headers["x-umami-cache"] shouldBe fixtureResponse.cache
+        umami.headers.get("x-umami-cache") shouldBe fixtureResponse.cache
 
         umami.eventQueue.close()
     }

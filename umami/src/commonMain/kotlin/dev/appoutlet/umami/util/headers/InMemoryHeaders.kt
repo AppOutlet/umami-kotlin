@@ -1,4 +1,4 @@
-package dev.appoutlet.umami.util.headersmap
+package dev.appoutlet.umami.util.headers
 
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock

@@ -1,4 +1,4 @@
-package dev.appoutlet.umami.util.headersmap
+package dev.appoutlet.umami.util.headers
 
 /**
  * A mutable map interface with suspendable operations, allowing for asynchronous implementations.

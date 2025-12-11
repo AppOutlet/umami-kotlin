@@ -76,12 +76,16 @@ interface UmamiLogger {
     enum class Severity {
         /** For detailed diagnostic information. */
         Verbose,
+
         /** For debugging and tracing code execution. */
         Debug,
+
         /** For informational messages about application progress. */
         Info,
+
         /** For potential problems or unexpected events. */
         Warn,
+
         /** For serious issues that may impact application functionality. */
         Error
     }

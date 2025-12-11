@@ -2,7 +2,7 @@ package dev.appoutlet.umami.util
 
 import dev.appoutlet.umami.Umami
 import dev.appoutlet.umami.util.annotation.InternalUmamiApi
-import dev.appoutlet.umami.util.headersmap.SuspendMutableMap
+import dev.appoutlet.umami.util.headers.SuspendMutableMap
 import dev.appoutlet.umami.util.logger.UmamiLogger
 
 /**

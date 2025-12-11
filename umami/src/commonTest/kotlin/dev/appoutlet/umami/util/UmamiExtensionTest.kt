@@ -1,6 +1,7 @@
 package dev.appoutlet.umami.util
 
 import dev.appoutlet.umami.Umami
+import dev.appoutlet.umami.util.logger.UmamiLogger
 import dev.mokkery.mock
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.test.runTest

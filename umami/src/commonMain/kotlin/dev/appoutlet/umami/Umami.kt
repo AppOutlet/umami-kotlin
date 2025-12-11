@@ -42,7 +42,7 @@ class Umami @InternalUmamiApi constructor(
      * Its behavior may change in future releases.
      */
     @InternalUmamiApi
-    var headers = mutableMapOf<String, String?>()
+    var headers = options.headers
 
     /**
      * An HTTP client for making requests to the Umami API.

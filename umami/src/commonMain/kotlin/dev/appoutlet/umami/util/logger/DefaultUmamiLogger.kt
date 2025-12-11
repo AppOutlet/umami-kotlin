@@ -1,11 +1,9 @@
-@file:Suppress("ForbiddenImport")
-
-package dev.appoutlet.umami.util
+package dev.appoutlet.umami.util.logger
 
 import co.touchlab.kermit.Logger
 
 internal class DefaultUmamiLogger(
-    private val logger: Logger = Logger.withTag("Umami")
+    private val logger: Logger = Logger.Companion.withTag("Umami")
 ) : UmamiLogger {
     override fun verbose(message: String) {
         logger.v(messageString = message)

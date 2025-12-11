@@ -1,4 +1,4 @@
-package dev.appoutlet.umami.util
+package dev.appoutlet.umami.util.logger
 
 interface UmamiLogger {
     fun verbose(message: String) {

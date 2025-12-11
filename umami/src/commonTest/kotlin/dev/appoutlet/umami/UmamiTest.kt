@@ -4,7 +4,7 @@ import dev.appoutlet.umami.domain.Hostname
 import dev.appoutlet.umami.domain.Ip
 import dev.appoutlet.umami.domain.Language
 import dev.appoutlet.umami.domain.ScreenSize
-import dev.appoutlet.umami.util.UmamiLogger
+import dev.appoutlet.umami.util.logger.UmamiLogger
 import dev.mokkery.mock
 import io.kotest.matchers.shouldBe
 import io.ktor.client.engine.HttpClientEngine

@@ -9,6 +9,7 @@ import dev.appoutlet.umami.util.logger.DefaultUmamiLogger
 import dev.appoutlet.umami.util.logger.UmamiLogger
 import dev.appoutlet.umami.util.createUserAgent
 import dev.appoutlet.umami.util.headersmap.InMemoryHeaders
+import dev.appoutlet.umami.util.headersmap.SuspendMutableMap
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.http.Url
 import kotlinx.coroutines.CoroutineScope
@@ -43,7 +44,7 @@ internal data class UmamiOptions(
     val httpClientEngine: HttpClientEngine,
     val coroutineScope: CoroutineScope,
     val logger: UmamiLogger,
-    val headers: MutableMap<String, String?>,
+    val headers: SuspendMutableMap<String, String?>,
 )
 
 /**
@@ -81,7 +82,7 @@ class UmamiOptionsBuilder {
 
     var logger: UmamiLogger = DefaultUmamiLogger()
 
-    val headers: MutableMap<String, String?> = InMemoryHeaders()
+    val headers: SuspendMutableMap<String, String?> = InMemoryHeaders()
 
     /** Sets the base URL of the Umami API. */
     fun baseUrl(value: String) { baseUrl = Url(value) }

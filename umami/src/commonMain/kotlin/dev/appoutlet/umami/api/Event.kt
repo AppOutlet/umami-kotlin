@@ -155,7 +155,7 @@ internal fun Umami.processEventQueueItem(request: HttpRequestBuilder) = options.
             logger.error("Umami server considered the event invalid \n $response")
         }
 
-        options.headers["x-umami-cache"] = response.cache
+        headers.put("x-umami-cache", response.cache)
     } catch (clientRequestException: ClientRequestException) {
         logger.error("Error processing event request", clientRequestException)
     } catch (responseException: ResponseException) {

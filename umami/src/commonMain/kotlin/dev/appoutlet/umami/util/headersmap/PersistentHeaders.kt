@@ -1,15 +1,15 @@
 package dev.appoutlet.umami.util.headersmap
 
-class PersistentHeaders : MutableMap<String, String> {
+class PersistentHeaders : MutableMap<String, String?> {
     override fun clear() {
         TODO("Not yet implemented")
     }
 
-    override fun put(key: String, value: String): String? {
+    override fun put(key: String, value: String?): String? {
         TODO("Not yet implemented")
     }
 
-    override fun putAll(from: Map<out String, String>) {
+    override fun putAll(from: Map<out String, String?>) {
         TODO("Not yet implemented")
     }
 
@@ -17,18 +17,20 @@ class PersistentHeaders : MutableMap<String, String> {
         TODO("Not yet implemented")
     }
 
-    override val entries: MutableSet<MutableMap.MutableEntry<String, String>>
+    override val entries: MutableSet<MutableMap.MutableEntry<String, String?>>
         get() = TODO("Not yet implemented")
+
     override val keys: MutableSet<String>
         get() = TODO("Not yet implemented")
-    override val values: MutableCollection<String>
+
+    override val values: MutableCollection<String?>
         get() = TODO("Not yet implemented")
 
     override fun containsKey(key: String): Boolean {
         TODO("Not yet implemented")
     }
 
-    override fun containsValue(value: String): Boolean {
+    override fun containsValue(value: String?): Boolean {
         TODO("Not yet implemented")
     }
 

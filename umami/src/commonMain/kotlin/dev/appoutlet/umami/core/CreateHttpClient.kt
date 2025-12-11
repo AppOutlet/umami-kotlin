@@ -59,7 +59,9 @@ internal fun Umami.createHttpClient(engine: HttpClientEngine) = HttpClient(engin
     plugin(HttpSend).intercept { requestBuilder ->
 
         headers
-            .filterValues { it != null }
+            .entries()
+            .asSequence()
+            .filter { it.value != null }
             .forEach { (key, value) ->
                 if (value.isNullOrBlank()) return@forEach
                 requestBuilder.headers.append(name = key, value = value)

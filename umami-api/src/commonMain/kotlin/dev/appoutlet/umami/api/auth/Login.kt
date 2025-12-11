@@ -22,7 +22,7 @@ suspend fun Umami.login(request: Login.Request): Login.Response {
         setBody(request)
     }.body()
 
-    headers[HttpHeaders.Authorization] = "Bearer ${response.token}"
+    headers.put(HttpHeaders.Authorization, "Bearer ${response.token}")
 
     return response
 }

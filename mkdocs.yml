@@ -57,3 +57,7 @@ plugins:
   - search
   - literate-nav:
       nav_file: SUMMARY.md
+
+extra:
+  analytics:
+    provider: custom

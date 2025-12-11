@@ -1,6 +1,7 @@
 package dev.appoutlet.umami.api
 
 import dev.appoutlet.umami.Umami
+import dev.appoutlet.umami.util.headers
 import dev.appoutlet.umami.util.logger
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException

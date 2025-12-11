@@ -5,11 +5,11 @@ import dev.appoutlet.umami.domain.Hostname
 import dev.appoutlet.umami.domain.Ip
 import dev.appoutlet.umami.domain.Language
 import dev.appoutlet.umami.domain.ScreenSize
-import dev.appoutlet.umami.util.logger.DefaultUmamiLogger
-import dev.appoutlet.umami.util.logger.UmamiLogger
 import dev.appoutlet.umami.util.createUserAgent
 import dev.appoutlet.umami.util.headersmap.InMemoryHeaders
 import dev.appoutlet.umami.util.headersmap.SuspendMutableMap
+import dev.appoutlet.umami.util.logger.DefaultUmamiLogger
+import dev.appoutlet.umami.util.logger.UmamiLogger
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.http.Url
 import kotlinx.coroutines.CoroutineScope

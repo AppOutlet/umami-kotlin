@@ -8,6 +8,7 @@ import kotlinx.coroutines.sync.withLock
  * This class is thread-safe through the use of a [Mutex] to protect concurrent access.
  * It wraps a standard [MutableMap] and provides a suspendable interface for its operations.
  */
+@Suppress("TooManyFunctions")
 class InMemoryHeaders : SuspendMutableMap<String, String?> {
     private val mutex = Mutex()
     private val headers: MutableMap<String, String?> = mutableMapOf()

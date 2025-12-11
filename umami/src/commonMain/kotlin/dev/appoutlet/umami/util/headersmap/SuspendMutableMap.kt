@@ -8,6 +8,7 @@ package dev.appoutlet.umami.util.headersmap
  * @param K The type of the keys in the map.
  * @param V The type of the values in the map.
  */
+@Suppress("TooManyFunctions")
 interface SuspendMutableMap<K, V> {
     /**
      * Associates the specified [value] with the specified [key] in this map.

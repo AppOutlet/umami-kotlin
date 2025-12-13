@@ -92,7 +92,7 @@ android {
     }
 }
 
-val version = "0.3.1"
+val version = "0.3.2"
 
 mavenPublishing {
     publishToMavenCentral(true)

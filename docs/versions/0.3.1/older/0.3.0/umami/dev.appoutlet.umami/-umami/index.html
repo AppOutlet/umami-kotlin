@@ -41,7 +41,14 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-<dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ReplaceVersionsCommand&quot;,&quot;location&quot;:&quot;dev.appoutlet.umami/-umami/index.html&quot;}">0.3.0</dokka-template-command>        </div>
+<dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ReplaceVersionsCommand&quot;,&quot;location&quot;:&quot;dev.appoutlet.umami/-umami/index.html&quot;}"><div class="dropdown versions-dropdown" data-role="dropdown">
+  <div class="button button_dropdown versions-dropdown-button" role="combobox" data-role="dropdown-toggle" aria-controls="versions-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Select version" tabindex="0" title="0.3.0"><span class="versions-dropdown-button-text">0.3.0</span></div>
+  <div class="dropdown--list dropdown--list_positioned_left versions-dropdown-data" role="listbox" data-role="dropdown-listbox" aria-label="Versions" id="versions-listbox">
+    <div class="dropdown--header" data-remove-style="true" style="display: none"><span>Select version</span><button class="button" data-role="dropdown-toggle" aria-label="Close versions selection"><i class="ui-kit-icon ui-kit-icon_cross"></i></button></div>
+<a href="../../../../../umami/dev.appoutlet.umami/-umami/index.html" class="dropdown--option dropdown--option-link" style="display: block; padding: 5px; color: #fff" data-remove-style="true" role="option" title="0.3.1"><span class="dropdown--option-icon"></span><span class="dropdown--option-text">0.3.1</span></a><a href="index.html" class="dropdown--option dropdown--option_active dropdown--option-link" style="display: block; padding: 5px; color: #fff" data-remove-style="true" role="option" title="0.3.0"><span class="dropdown--option-icon dropdown--option-icon_selected"></span><span class="dropdown--option-text">0.3.0</span></a></div>
+  <div class="dropdown--overlay"></div>
+</div>
+</dokka-template-command>        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true" data-filter=":umami/commonMain">common</button>
@@ -121,17 +128,17 @@
       </div>
       <div data-togglable="PROPERTY">
         <h2 class="tableheader">Properties</h2>
-        <div class="table"><a data-name="416083812%2FProperties%2F-1331833762" anchor-label="headers" id="416083812%2FProperties%2F-1331833762" data-filterable-set=":umami/commonMain"></a>
-          <div class="table-row table-row_content" data-filterable-current=":umami/commonMain" data-filterable-set=":umami/commonMain">
+        <div class="table"><a data-name="-1960847516%2FProperties%2F-1331833762" anchor-label="headers" id="-1960847516%2FProperties%2F-1331833762" data-filterable-set=":umami/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_PROPERTY" data-filterable-current=":umami/commonMain" data-filterable-set=":umami/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="headers.html"><span><span>headers</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="416083812%2FProperties%2F-1331833762"></span>
+                  <div><a href="../../dev.appoutlet.umami.util/headers.html"><span><span>headers</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1960847516%2FProperties%2F-1331833762"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":umami/commonMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="headers.html">headers</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">A mutable map to hold custom headers for HTTP requests. This can be used to add additional headers like authentication tokens or custom metadata.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":umami/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="index.html">Umami</a><span class="token punctuation">.</span><a href="../../dev.appoutlet.umami.util/headers.html">headers</a><span class="token operator">: </span><a href="../../dev.appoutlet.umami.util.headers/-suspend-mutable-map/index.html">SuspendMutableMap</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Provides convenient, internal access to the suspendable map of custom HTTP headers.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -161,7 +168,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":umami/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="index.html">Umami</a><span class="token punctuation">.</span><a href="../../dev.appoutlet.umami.util/logger.html">logger</a><span class="token operator">: </span><a href="../../dev.appoutlet.umami.util/-umami-logger/index.html">UmamiLogger</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":umami/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="index.html">Umami</a><span class="token punctuation">.</span><a href="../../dev.appoutlet.umami.util/logger.html">logger</a><span class="token operator">: </span><a href="../../dev.appoutlet.umami.util.logger/-umami-logger/index.html">UmamiLogger</a></div><div class="brief "><p class="paragraph">Provides convenient, internal access to the configured <a href="../../dev.appoutlet.umami.util.logger/-umami-logger/index.html">UmamiLogger</a> instance.</p></div></div></div>
                 </div>
               </div>
             </div>

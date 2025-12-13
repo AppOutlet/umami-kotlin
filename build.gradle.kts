@@ -28,7 +28,7 @@ dependencies {
     kover(project(":umami-api"))
 }
 
-val version = "0.3.0"
+val version = "0.3.1"
 
 dokka {
     val currentVersion = version

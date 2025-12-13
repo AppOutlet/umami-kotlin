@@ -4,6 +4,7 @@ import dev.appoutlet.umami.domain.User
 import dev.appoutlet.umami.testing.body
 import dev.appoutlet.umami.testing.getUmamiInstance
 import dev.appoutlet.umami.testing.respond
+import dev.appoutlet.umami.util.headers
 import io.kotest.matchers.shouldBe
 import io.ktor.http.HttpHeaders
 import kotlinx.coroutines.test.runTest
@@ -41,7 +42,7 @@ class LoginTest {
         )
 
         response shouldBe fixtureResponse
-        umami.headers[HttpHeaders.Authorization] shouldBe "Bearer $fixtureToken"
+        umami.headers.get(HttpHeaders.Authorization) shouldBe "Bearer $fixtureToken"
     }
 
     @Test

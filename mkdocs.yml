@@ -26,6 +26,7 @@ nav:
   - Getting started:
     - 🌎 Kotlin Multiplatform: getstarted/kmp.md
     - 🤖 Android: getstarted/android.md
+  - The Umami object: umami-object.md
   - Event tracking: event-tracking.md
   - Authentication: auth.md
   - Admin: admin/

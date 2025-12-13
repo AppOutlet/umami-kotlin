@@ -171,19 +171,7 @@ val umamiCustom = Umami("...") {
 
 ---
 ## 6. Optional configuration
-All optional parameters can be set inside the `Umami` constructor lambda.
-
-Parameter | Type | Purpose | When to change
---- | --- | --- | ---
-`baseUrl(String)` | Function | Your own Umami instance | Self-hosted installs
-`hostname(String)` | Function | Override site host | Multi-domain analytics
-`language(String)` | Function | User locale | Provide when not derivable platform-side
-`screenSize(String)` | Function | Screen resolution | You collect manually; optional
-`ip(String)` | Function | Override IP | Rare (server-side forwarding)
-`userAgent` | `String` | Custom UA string | Simulator/test tagging
-`eventQueueCapacity` | `Int` | Channel size | High-volume burst events
-`httpClientEngine` | `HttpClientEngine` | Ktor HTTP engine | Platform-specific needs (e.g., custom proxy)
-`coroutineScope` | `CoroutineScope` | Background task scope | Integrate with app's lifecycle
+All optional parameters can be set inside the `Umami` constructor lambda. For a more detailed explanation of each parameter, see [The Umami object documentation](../umami-object.md).
 `logger` | `UmamiLogger` | Logging backend | Custom logging or disabling logs
 
 

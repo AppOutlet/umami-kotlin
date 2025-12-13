@@ -18,18 +18,21 @@ import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
 /**
- * Represents the configuration options for the Umami analytics library.
+ * Represents the internal configuration options for the Umami analytics library, created from
+ * [UmamiOptionsBuilder]. This class consolidates all settings required for the client to operate.
  *
  * @property website The UUID of the website to track events for.
- * @property baseUrl The base URL of the Umami API.
- * @property hostname The hostname of the website.
- * @property language The language of the user's browser.
- * @property screen The screen size of the user's device.
+ * @property baseUrl The base URL of the Umami API endpoint (e.g., "https://cloud.umami.is").
+ * @property hostname The hostname of the website being tracked.
+ * @property language The language of the user's browser, typically in IETF language tag format (e.g., "en-US").
+ * @property screenSize The screen size of the user's device (e.g., "1920x1080").
  * @property ip The IP address of the user.
- * @property userAgent The user agent of the user's browser.
- * @property eventQueueCapacity The capacity of the event queue.
- * @property httpClientEngine The HTTP client engine to use for requests.
- * @property coroutineScope The coroutine scope to use for background tasks.
+ * @property userAgent The user agent string of the user's browser or client.
+ * @property eventQueueCapacity The maximum number of events to hold in the queue before processing.
+ * @property httpClientEngine The Ktor HTTP client engine used for making network requests.
+ * @property coroutineScope The coroutine scope used for launching background tasks, such as sending events.
+ * @property logger The logger instance for logging internal library messages.
+ * @property headers A suspendable map for managing custom HTTP headers to be sent with requests.
  */
 @OptIn(ExperimentalUuidApi::class)
 internal data class UmamiOptions(
@@ -44,69 +47,86 @@ internal data class UmamiOptions(
     val httpClientEngine: HttpClientEngine,
     val coroutineScope: CoroutineScope,
     val logger: UmamiLogger,
-    val headers: SuspendMutableMap<String, String?>,
+    val headers: SuspendMutableMap<String, String>,
 )
 
 /**
- * A builder for creating [UmamiOptions] instances.
- * This class provides a flexible way to configure Umami options using a DSL.
+ * A DSL-style builder for constructing [UmamiOptions] instances, providing a flexible way to
+ * configure the Umami client.
+ *
+ * This builder allows setting various properties such as the API endpoint, tracking parameters,
+ * and technical configurations like the HTTP client engine and coroutine scope. After configuring
+ * the desired options, the internal `build` method is called to create an immutable
+ * [UmamiOptions] object.
+ *
+ * Example usage:
+ * ```
+ * val umami = Umami(websiteId = "your-website-id") {
+ *     baseUrl("https://my.umami.instance")
+ *     hostname("myapp.com")
+ *     // ... other configurations
+ * }
+ * ```
  */
 @OptIn(ExperimentalUuidApi::class)
 class UmamiOptionsBuilder {
-    /** The base URL of the Umami API. Defaults to "https://cloud.umami.is". */
+    /** The base URL of the Umami API endpoint. Defaults to "https://cloud.umami.is". */
     var baseUrl: Url = Url("https://cloud.umami.is")
 
-    /** The hostname of the website. */
+    /** The hostname of the website being tracked (e.g., "myapp.com"). */
     var hostname: Hostname? = null
 
-    /** The language of the user's browser. */
+    /** The language of the user's browser, in IETF language tag format (e.g., "en-US"). */
     var language: Language? = null
 
-    /** The screen size of the user's device. */
+    /** The screen size of the user's device (e.g., "1920x1080"). */
     var screenSize: ScreenSize? = null
 
     /** The IP address of the user. */
     var ip: Ip? = null
 
-    /** The user agent of the user's browser. */
+    /** The user agent string of the client. Defaults to a generated value. */
     var userAgent: String = createUserAgent()
 
-    /** The capacity of the event queue. Defaults to [EVENT_QUEUE_CAPACITY]. */
+    /** The maximum number of events to hold in the queue. Defaults to [EVENT_QUEUE_CAPACITY]. */
     var eventQueueCapacity: Int = EVENT_QUEUE_CAPACITY
 
-    /** The HTTP client engine to use for requests. */
+    /** The Ktor HTTP client engine for network requests. Defaults to the platform's default engine. */
     var httpClientEngine: HttpClientEngine = defaultHttpClientEngine()
 
-    /** The coroutine scope to use for background tasks. */
+    /** The coroutine scope for background tasks. Defaults to [Dispatchers.Default]. */
     var coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
 
+    /** The logger for internal library messages. Defaults to [DefaultUmamiLogger]. */
     var logger: UmamiLogger = DefaultUmamiLogger()
 
-    var headers: SuspendMutableMap<String, String?> = InMemoryHeaders()
+    /** A suspendable map for managing custom HTTP headers. Defaults to [InMemoryHeaders]. */
+    var headers: SuspendMutableMap<String, String> = InMemoryHeaders()
 
-    /** Sets the base URL of the Umami API. */
+    /** Sets the base URL of the Umami API from a string. */
     fun baseUrl(value: String) { baseUrl = Url(value) }
 
-    /** Sets the hostname of the website. */
+    /** Sets the hostname of the website being tracked. */
     fun hostname(value: String) { hostname = Hostname(value) }
 
-    /** Sets the language of the user's browser. */
+    /** Sets the language of the user's browser from an IETF language tag string. */
     fun language(value: String) { language = Language(value) }
 
-    /** Sets the screen size of the user's device from a string (e.g., "1920x1080"). */
+    /** Sets the screen size from a string in "widthxheight" format (e.g., "1920x1080"). */
     fun screenSize(value: String) { screenSize = ScreenSize(value) }
 
-    /** Sets the screen size of the user's device from width and height. */
+    /** Sets the screen size from explicit width and height values. */
     fun screenSize(width: Int, height: Int) { screenSize = ScreenSize(width = width, height = height) }
 
     /** Sets the IP address of the user. */
     fun ip(value: String) { ip = Ip(value) }
 
     /**
-     * Builds an [UmamiOptions] instance with the configured properties.
+     * Builds an immutable [UmamiOptions] instance from the current builder configuration.
+     * This method is intended for internal use by the library.
      *
-     * @param website The UUID of the website to track events for.
-     * @return An [UmamiOptions] instance.
+     * @param website The UUID of the website to be tracked.
+     * @return An [UmamiOptions] instance with the configured settings.
      */
     internal fun build(website: Uuid): UmamiOptions {
         return UmamiOptions(

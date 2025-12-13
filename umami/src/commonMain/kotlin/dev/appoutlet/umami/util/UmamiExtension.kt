@@ -1,28 +1,37 @@
 package dev.appoutlet.umami.util
 
 import dev.appoutlet.umami.Umami
+import dev.appoutlet.umami.UmamiOptions
 import dev.appoutlet.umami.util.annotation.InternalUmamiApi
 import dev.appoutlet.umami.util.headers.SuspendMutableMap
 import dev.appoutlet.umami.util.logger.UmamiLogger
 
 /**
- * Provides convenient access to the [UmamiLogger] instance from the [Umami] object.
- * This extension property allows for easy logging throughout the library by accessing `umami.logger`.
+ * Provides convenient, internal access to the configured [UmamiLogger] instance.
  *
- * @receiver The [Umami] instance.
- * @return The [UmamiLogger] configured in the [Umami.options].
+ * This extension property simplifies logging within the library by exposing the logger
+ * directly on the [Umami] object. It retrieves the logger from the centrally managed
+ * [UmamiOptions]. Marked as [InternalUmamiApi] to indicate it is intended for use
+ * only within the Umami library.
+ *
+ * @receiver The [Umami] instance from which to get the logger.
+ * @return The [UmamiLogger] instance configured for this [Umami] client.
  */
 @InternalUmamiApi
 val Umami.logger: UmamiLogger
     get() = this.options.logger
 
 /**
- * Provides convenient access to the [SuspendMutableMap] for headers from the [Umami] object.
- * This allows for easy manipulation of headers that will be sent with requests.
+ * Provides convenient, internal access to the suspendable map of custom HTTP headers.
  *
- * @receiver The [Umami] instance.
- * @return The [SuspendMutableMap] for headers configured in the [Umami.options].
+ * This extension property allows for easy, asynchronous manipulation of headers that will be
+ * included in all outgoing requests made by the [Umami] client. It retrieves the header map
+ * from the centrally managed [UmamiOptions]. Marked as [InternalUmamiApi] to indicate it is
+ * intended for use only within the Umami library.
+ *
+ * @receiver The [Umami] instance from which to get the header map.
+ * @return The [SuspendMutableMap] instance used for managing custom headers.
  */
 @InternalUmamiApi
-val Umami.headers: SuspendMutableMap<String, String?>
+val Umami.headers: SuspendMutableMap<String, String>
     get() = this.options.headers

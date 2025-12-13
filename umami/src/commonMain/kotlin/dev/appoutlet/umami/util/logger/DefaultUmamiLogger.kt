@@ -5,68 +5,75 @@ package dev.appoutlet.umami.util.logger
 import co.touchlab.kermit.Logger
 
 /**
- * A default implementation of [UmamiLogger] that uses the Kermit logging library.
- * This class wraps a [Logger] instance and delegates the logging calls to it.
+ * A default, internal implementation of [UmamiLogger] that leverages the Kermit logging library.
  *
- * @property logger The underlying [Logger] instance used for logging. Defaults to a logger with the tag "Umami".
+ * This class acts as an adapter, translating calls from the [UmamiLogger] interface into the
+ * corresponding methods of a [co.touchlab.kermit.Logger] instance. It provides a ready-to-use
+ * logging solution for the Umami library, abstracting the underlying logging framework.
+ *
+ * @property logger The underlying [Logger] instance from the Kermit library, configured with the
+ * tag "Umami" by default.
  */
 internal class DefaultUmamiLogger(
     private val logger: Logger = Logger.withTag("Umami")
 ) : UmamiLogger {
     /**
-     * Logs a verbose message using the underlying Kermit logger.
+     * Logs a verbose message by delegating to the underlying Kermit logger's `v` method.
      *
-     * @param message The message to be logged.
+     * @param message The message string to be logged.
      */
     override fun verbose(message: String) {
         logger.v(messageString = message)
     }
 
     /**
-     * Logs a debug message using the underlying Kermit logger.
+     * Logs a debug message by delegating to the underlying Kermit logger's `d` method.
      *
-     * @param message The message to be logged.
+     * @param message The message string to be logged.
      */
     override fun debug(message: String) {
         logger.d(messageString = message)
     }
 
     /**
-     * Logs an info message using the underlying Kermit logger.
+     * Logs an informational message by delegating to the underlying Kermit logger's `i` method.
      *
-     * @param message The message to be logged.
+     * @param message The message string to be logged.
      */
     override fun info(message: String) {
         logger.i(messageString = message)
     }
 
     /**
-     * Logs a warning message with an optional throwable using the underlying Kermit logger.
+     * Logs a warning message by delegating to the underlying Kermit logger's `w` method.
      *
-     * @param message The message to be logged.
-     * @param throwable The optional throwable to be logged.
+     * @param message The message string to be logged.
+     * @param throwable An optional [Throwable] to include for additional context.
      */
     override fun warn(message: String, throwable: Throwable?) {
         logger.w(messageString = message, throwable = throwable)
     }
 
     /**
-     * Logs an error message with an optional throwable using the underlying Kermit logger.
+     * Logs an error message by delegating to the underlying Kermit logger's `e` method.
      *
-     * @param message The message to be logged.
-     * @param throwable The optional throwable to be logged.
+     * @param message The message string to be logged.
+     * @param throwable An optional [Throwable] to include for detailed error information.
      */
     override fun error(message: String, throwable: Throwable?) {
         logger.e(messageString = message, throwable = throwable)
     }
 
     /**
-     * Logs a message with the specified severity.
-     * This method delegates to the specific logging methods based on the severity level.
+     * The core logging function that maps [UmamiLogger.Severity] to the appropriate method in
+     * the underlying Kermit logger.
      *
-     * @param severity The severity of the log message.
-     * @param message The message to be logged.
-     * @param throwable The optional throwable to be logged.
+     * This implementation ensures that calls to the generic `log` method are dispatched to the
+     * correct severity-specific function (e.g., `verbose`, `debug`).
+     *
+     * @param severity The [UmamiLogger.Severity] level of the log message.
+     * @param message The message string to be logged.
+     * @param throwable An optional [Throwable] to accompany the log message.
      */
     override fun log(severity: UmamiLogger.Severity, message: String, throwable: Throwable?) {
         when (severity) {

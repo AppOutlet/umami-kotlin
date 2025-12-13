@@ -35,16 +35,6 @@ class Umami @InternalUmamiApi constructor(
     internal val options = UmamiOptionsBuilder().apply(umamiOptions).build(website)
 
     /**
-     * A mutable map to hold custom headers for HTTP requests.
-     * This can be used to add additional headers like authentication tokens or custom metadata.
-     *
-     * Note: This property is marked with [InternalUmamiApi] and is not intended for public use.
-     * Its behavior may change in future releases.
-     */
-    @InternalUmamiApi
-    var headers = mutableMapOf<String, String?>()
-
-    /**
      * An HTTP client for making requests to the Umami API.
      * This client is created lazily to ensure it is initialized only when needed.
      *

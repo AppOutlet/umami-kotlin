@@ -25,7 +25,7 @@ The source code in the `:umami` library is organized into the following packages
 *   **Kotlinx Serialization**: For JSON serialization and deserialization.
 *   **kotlin.time.Instant**: Used for all date and time representations to ensure type safety and multiplatform compatibility.
 *   **Kermit**: For logging.
-*   **Kotest**: For assertions in tests.
+*   **Kotest**: For assertions in tests. All new tests should use Kotest matchers (e.g., `shouldBe`) instead of `kotlin.test` assertions.
 *   **Mokkery**: For creating mocks in tests.
 
 ### Design Patterns

@@ -1,6 +1,7 @@
 package dev.appoutlet.umami.api
 
 import dev.appoutlet.umami.Umami
+import dev.appoutlet.umami.util.headers
 import dev.appoutlet.umami.util.logger
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
@@ -155,7 +156,11 @@ internal fun Umami.processEventQueueItem(request: HttpRequestBuilder) = options.
             logger.error("Umami server considered the event invalid \n $response")
         }
 
-        headers["x-umami-cache"] = response.cache
+        if (response.cache != null) {
+            headers.put("x-umami-cache", response.cache)
+        } else {
+            headers.remove("x-umami-cache")
+        }
     } catch (clientRequestException: ClientRequestException) {
         logger.error("Error processing event request", clientRequestException)
     } catch (responseException: ResponseException) {

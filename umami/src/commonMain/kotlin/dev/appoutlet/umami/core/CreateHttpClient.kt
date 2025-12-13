@@ -1,6 +1,7 @@
 package dev.appoutlet.umami.core
 
 import dev.appoutlet.umami.Umami
+import dev.appoutlet.umami.util.headers
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.plugins.HttpSend
@@ -58,12 +59,9 @@ internal fun Umami.createHttpClient(engine: HttpClientEngine) = HttpClient(engin
 }.apply {
     plugin(HttpSend).intercept { requestBuilder ->
 
-        headers
-            .filterValues { it != null }
-            .forEach { (key, value) ->
-                if (value.isNullOrBlank()) return@forEach
-                requestBuilder.headers.append(name = key, value = value)
-            }
+        headers.entries().forEach { (key, value) ->
+            requestBuilder.headers.append(name = key, value = value)
+        }
 
         execute(requestBuilder)
     }

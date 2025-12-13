@@ -2,6 +2,7 @@ package dev.appoutlet.umami.api.auth
 
 import dev.appoutlet.umami.Umami
 import dev.appoutlet.umami.api.Api
+import dev.appoutlet.umami.util.headers
 import io.ktor.client.plugins.resources.post
 import io.ktor.http.HttpHeaders
 

@@ -31,7 +31,7 @@ nav:
   - Authentication: auth.md
   - Admin: admin/
   - Roadmap: roadmap.md
-  - Release notes: release-notes/
+  - Release notes: release-notes.md
   - API Reference: reference
 
 markdown_extensions:

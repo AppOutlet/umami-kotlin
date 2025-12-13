@@ -12,12 +12,12 @@ Full changelog: https://github.com/AppOutlet/umami-kotlin/releases/tag/0.3.1
 ## Changes
 ### Features
 - Custom headers provider
-  - New in-memory headers store with thread-safe behavior.
-  - Header values guaranteed non-null; simplified client setup.
-  - Added KDoc and tests for InMemoryHeaders.
+    - New in-memory headers store with thread-safe behavior.
+    - Header values guaranteed non-null; simplified client setup.
+    - Added KDoc and tests for InMemoryHeaders.
 - Admin API: Get all users
-  - Introduced endpoint and client function to retrieve admin users.
-  - Updated docs and sample usage.
+    - Introduced endpoint and client function to retrieve admin users.
+    - Updated docs and sample usage.
 
 ### Dependency updates
 - Ktor client dependencies bumped to 3.3.3.
@@ -40,3 +40,29 @@ Full changelog: https://github.com/AppOutlet/umami-kotlin/releases/tag/0.3.1
 
 ## Contributors (excluding bots)
 - Messias Junior (@MessiasLima)
+
+-----
+
+# 0.3.0
+
+This release introduces a new authentication API and includes various dependency and workflow improvements to enhance stability and development experience.
+
+## ✨ What's New
+
+- **Authentication API**: Added a new authentication API to securely manage user sessions.
+
+## ⚡ Improvements
+
+- **Dependency Updates**: Updated several core dependencies including Ktor and Compose for improved performance and stability.
+- **Development Workflow Enhancements**: Upgraded various GitHub Actions for Java, Python, and checkout processes, streamlining our continuous integration.
+
+## 📚 Documentation & Other Updates
+
+- Adjusted internal documentation logic for better clarity and maintenance.
+- Updated the AGENTS.md guide to reflect recent feedback, improving guidance for AI agents.
+
+---
+
+### 📖 Full Changelog
+[Link to full changelog]: https://github.com/AppOutlet/umami-kotlin/compare/0.2.1...0.3.0
+

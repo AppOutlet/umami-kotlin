@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+
 jobs:
   report-coverage:
     name: Report Coverage

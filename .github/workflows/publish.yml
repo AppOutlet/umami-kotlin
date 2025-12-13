@@ -5,6 +5,9 @@ on:
     tags:
       - '*'
 
+permissions:
+  contents: write
+
 jobs:
   publish-artifacts:
     name: Publish Artifacts
@@ -63,6 +66,8 @@ jobs:
 
       - name: Commit and push changes
         run: |
+          git config --global user.name 'Messias Junior'
+          git config --global user.email 'messiaslima@users.noreply.github.com'
           git add .
           git commit --no-verify -m "chore: Release version ${{ github.ref_name }}"
           git push

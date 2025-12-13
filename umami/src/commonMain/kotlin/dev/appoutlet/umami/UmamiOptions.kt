@@ -82,7 +82,7 @@ class UmamiOptionsBuilder {
 
     var logger: UmamiLogger = DefaultUmamiLogger()
 
-    val headers: SuspendMutableMap<String, String?> = InMemoryHeaders()
+    var headers: SuspendMutableMap<String, String?> = InMemoryHeaders()
 
     /** Sets the base URL of the Umami API. */
     fun baseUrl(value: String) { baseUrl = Url(value) }

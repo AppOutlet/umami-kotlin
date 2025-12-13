@@ -161,7 +161,6 @@ internal fun Umami.processEventQueueItem(request: HttpRequestBuilder) = options.
         } else {
             headers.remove("x-umami-cache")
         }
-
     } catch (clientRequestException: ClientRequestException) {
         logger.error("Error processing event request", clientRequestException)
     } catch (responseException: ResponseException) {

@@ -70,7 +70,9 @@ class Auth(private val umami: Umami) {
      * @return The [User] object of the authenticated user.
      */
     suspend fun verify(): User {
-        return umami.httpClient.post(Api.Auth.Verify()).body()
+        return umami.httpClient
+            .post(Api.Auth.Verify())
+            .body()
     }
 
     interface Login {

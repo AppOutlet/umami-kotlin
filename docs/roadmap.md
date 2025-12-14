@@ -17,8 +17,18 @@ This document outlines the current development status and future plans for the U
 These endpoints are only available for admin users on self-hosted instances.
 
 - [x] Returns all users in the system - `GET /api/admin/users`
-- [ ] Returns all websites in the system - `GET /api/admin/websites`
-- [ ] Returns all teams in the system - `GET /api/admin/teams`
+- [x] Returns all websites in the system - `GET /api/admin/websites`
+- [x] Returns all teams in the system - `GET /api/admin/teams`
+
+## Events
+
+- [ ] Returns a list of events for a website - `GET /api/websites/:websiteId/events`
+- [ ] Returns detailed event data for a website - `GET /api/websites/:websiteId/event-data/events`
+- [ ] Returns all available fields for event data - `GET /api/websites/:websiteId/event-data/fields`
+- [ ] Returns all available values for a given event data field - `GET /api/websites/:websiteId/event-data/values`
+- [ ] Returns statistics for a given event data field - `GET /api/websites/:websiteId/event-data/stats`
+- [ ] Returns all available properties for event data - `GET /api/websites/:websiteId/event-data/properties`
+- [ ] Accesses data for a specific event - `GET /api/websites/:websiteId/event-data/:eventId`
 
 ## Websites
 
@@ -35,14 +45,6 @@ These endpoints are only available for admin users on self-hosted instances.
 - [ ] Returns pageview data for a website - `GET /api/websites/:websiteId/pageviews`
 - [ ] Returns summary statistics for a website - `GET /api/websites/:websiteId/stats`
 - [ ] Returns detailed metrics for a website over a date range - `GET /api/websites/:websiteId/metrics`
-
-### Events
-
-- [ ] Returns a list of events for a website - `GET /api/websites/:websiteId/events`
-- [ ] Returns detailed event data for a website - `GET /api/websites/:websiteId/event-data/events`
-- [ ] Returns all available fields for event data - `GET /api/websites/:websiteId/event-data/fields`
-- [ ] Returns all available values for a given event data field - `GET /api/websites/:websiteId/event-data/values`
-- [ ] Returns statistics for a given event data field - `GET /api/websites/:websiteId/event-data/stats`
 
 ### Sessions
 
@@ -81,3 +83,29 @@ These endpoints are only available for admin users on self-hosted instances.
 ### Team Websites
 
 - [ ] Returns a list of websites in a team - `GET /api/teams/:teamId/websites`
+- [ ] Creates a website for a team - `POST /api/teams/:teamId/websites`
+- [ ] Removes a website from a team - `DELETE /api/teams/:teamId/websites/:websiteId`
+
+## Links
+
+- [x] Returns a list of all links - `GET /api/links`
+- [x] Creates a new link - `POST /api/links`
+- [x] Returns the details of a specific link - `GET /api/links/:linkId`
+- [x] Updates the details of a specific link - `POST /api/links/:linkId`
+- [x] Deletes a link - `DELETE /api/links/:linkId`
+
+## Me
+
+- [ ] Returns the current user - `GET /api/me`
+- [ ] Updates the current user's password - `POST /api/me/password`
+- [ ] Returns a list of websites for the current user - `GET /api/me/websites`
+- [ ] Returns a list of teams for the current user - `GET /api/me/teams`
+
+## Reports
+
+- [ ] Returns a list of all reports - `GET /api/reports`
+- [ ] Creates a new report - `POST /api/reports`
+- [ ] Returns the details of a specific report - `GET /api/reports/:reportId`
+- [ ] Updates the details of a specific report - `POST /api/reports/:reportId`
+- [ ] Deletes a report - `DELETE /api/reports/:reportId`
+- [ ] Returns a list of websites for a report - `GET /api/reports/:reportId/websites`

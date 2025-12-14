@@ -6,8 +6,8 @@ import dev.appoutlet.umami.testing.getUmamiInstance
 import dev.appoutlet.umami.testing.respond
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.test.runTest
-import kotlin.time.Instant
 import kotlin.test.Test
+import kotlin.time.Instant
 
 class LinksTest {
 

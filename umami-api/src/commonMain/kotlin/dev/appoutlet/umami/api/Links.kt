@@ -33,6 +33,16 @@ class Links(private val umami: Umami) {
             parameter("pageSize", pageSize)
         }.body()
     }
+
+    /**
+     * Retrieves a single link from the Umami API by its ID.
+     *
+     * @param linkId The unique identifier of the link.
+     * @return The [Link] object matching the provided ID.
+     */
+    suspend fun getLink(linkId: String): Link {
+        return umami.httpClient.get(Api.Links.Id(id = linkId)).body()
+    }
 }
 
 /**

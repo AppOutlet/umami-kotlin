@@ -69,3 +69,37 @@ suspend fun fetchLinks() {
     }
 }
 ```
+
+## Retrieving a Single Link
+
+The `getLink` function allows you to retrieve a specific link by its ID.
+
+### Function Signature
+
+```kotlin
+suspend fun getLink(linkId: String): Link
+```
+
+### Parameters
+
+*   `linkId` (`String`): The unique identifier of the link to retrieve.
+
+### Return Type
+
+Returns a `Link` object corresponding to the provided ID.
+
+### Example Usage
+
+```kotlin
+import dev.appoutlet.umami.domain.Link
+
+// Assuming 'linksApi' is an instance of Links
+suspend fun fetchLinkById(id: String) {
+    try {
+        val link: Link = linksApi.getLink(id)
+        println("Retrieved link: ${link.name} (${link.url})")
+    } catch (e: Exception) {
+        println("Error fetching link: ${e.message}")
+    }
+}
+```

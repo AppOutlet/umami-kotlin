@@ -44,7 +44,7 @@ data class Team(
      * The date and time the team was last updated.
      */
     @SerialName("updatedAt")
-    val updatedAt: Instant,
+    val updatedAt: Instant? = null,
 
     /**
      * The date and time the team was deleted.

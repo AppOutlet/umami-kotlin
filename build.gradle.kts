@@ -62,19 +62,19 @@ kover {
         verify {
             rule {
                 minBound(
-                    minValue = 77,
+                    minValue = 80,
                     coverageUnits = CoverageUnit.LINE,
                     aggregationForGroup = AggregationType.COVERED_PERCENTAGE
                 )
 
                 minBound(
-                    minValue = 78,
+                    minValue = 80,
                     coverageUnits = CoverageUnit.INSTRUCTION,
                     aggregationForGroup = AggregationType.COVERED_PERCENTAGE
                 )
 
                 minBound(
-                    minValue = 25,
+                    minValue = 38,
                     coverageUnits = CoverageUnit.BRANCH,
                     aggregationForGroup = AggregationType.COVERED_PERCENTAGE,
                 )

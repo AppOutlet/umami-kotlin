@@ -1,0 +1,224 @@
+# Links API
+
+The `umami-kotlin` library provides a `Links` API for managing links within your Umami instance.
+
+!!! info "New to Umami Kotlin?"
+    Before using the Links API, ensure you have initialized the `Umami` client. Refer to our getting started guides for [Kotlin Multiplatform](../getstarted/kmp.md) and [Android](../getstarted/android.md) for setup instructions.
+
+All functions within the `Links` API are `suspend` functions, meaning they must be called from within a coroutine or another `suspend` function.
+
+## Obtaining a Links Instance
+
+You can access the `Links` API functionalities through an extension function on your `Umami` client instance:
+
+```kotlin
+// Assuming 'umami' is an initialized Umami client
+val linksApi = umami.links()
+```
+
+## Retrieving Links
+
+The `getLinks` function allows you to retrieve a paginated list of links.
+
+### Function Signature
+
+```kotlin
+suspend fun getLinks(
+    search: String? = null,
+    page: Int? = null,
+    pageSize: Int? = null,
+): SearchResponse<Link>
+```
+
+### Parameters
+
+*   `search` (Optional `String`): A search string to filter links by.
+*   `page` (Optional `Int`): The page number of the results to retrieve. Useful for pagination.
+*   `pageSize` (Optional `Int`): The maximum number of link records to return per page.
+
+### Return Type
+
+Returns a `SearchResponse<Link>` object, which encapsulates the list of `Link` objects for the current page, along with pagination metadata.
+
+### Example Usage
+
+```kotlin
+import dev.appoutlet.umami.domain.Link
+import dev.appoutlet.umami.domain.SearchResponse
+
+// Assuming 'linksApi' is an instance of Links
+suspend fun fetchLinks() {
+    try {
+        // Fetch all links
+        val allLinks: SearchResponse<Link> = linksApi.getLinks()
+        println("Total links: ${allLinks.count}")
+        allLinks.data.forEach { link ->
+            println("Link ID: ${link.id}, Name: ${link.name}, URL: ${link.url}")
+        }
+
+        // Fetch links matching a search term on page 1 with 5 items per page
+        val filteredLinks: SearchResponse<Link> = linksApi.getLinks(
+            search = "newsletter",
+            page = 1,
+            pageSize = 5
+        )
+        println("Filtered links on page 1: ${filteredLinks.data.size}")
+
+    } catch (e: Exception) {
+        println("Error fetching links: ${e.message}")
+    }
+}
+```
+
+## Retrieving a Single Link
+
+The `getLink` function allows you to retrieve a specific link by its ID.
+
+### Function Signature
+
+```kotlin
+suspend fun getLink(linkId: String): Link
+```
+
+### Parameters
+
+*   `linkId` (`String`): The unique identifier of the link to retrieve.
+
+### Return Type
+
+Returns a `Link` object corresponding to the provided ID.
+
+### Example Usage
+
+```kotlin
+import dev.appoutlet.umami.domain.Link
+
+// Assuming 'linksApi' is an instance of Links
+suspend fun fetchLinkById(id: String) {
+    try {
+        val link: Link = linksApi.getLink(id)
+        println("Retrieved link: ${link.name} (${link.url})")
+    } catch (e: Exception) {
+        println("Error fetching link: ${e.message}")
+    }
+}
+```
+
+## Creating a Link
+
+The `createLink` function allows you to create a new link.
+
+### Function Signature
+
+```kotlin
+suspend fun createLink(
+    name: String,
+    url: String,
+    slug: String,
+): Link
+```
+
+### Parameters
+
+*   `name` (`String`): The name for the link.
+*   `url` (`String`): The destination URL for the link.
+*   `slug` (`String`): The slug for the link (minimum 8 characters).
+
+### Return Type
+
+Returns the created `Link` object.
+
+### Example Usage
+
+```kotlin
+import dev.appoutlet.umami.domain.Link
+
+// Assuming 'linksApi' is an instance of Links
+suspend fun createNewLink() {
+    try {
+        val newLink: Link = linksApi.createLink(
+            name = "My New Link",
+            url = "https://example.com/new-link",
+            slug = "my-new-link-slug"
+        )
+        println("Created link: ${newLink.name} (${newLink.url})")
+    } catch (e: Exception) {
+        println("Error creating link: ${e.message}")
+    }
+}
+```
+
+## Updating a Link
+
+The `updateLink` function allows you to update the properties of an existing link.
+
+### Function Signature
+
+```kotlin
+suspend fun updateLink(
+    linkId: String,
+    name: String? = null,
+    url: String? = null,
+    slug: String? = null,
+): Link
+```
+
+### Parameters
+
+*   `linkId` (`String`): The unique identifier of the link to update.
+*   `name` (Optional `String`): The new name for the link.
+*   `url` (Optional `String`): The new destination URL for the link.
+*   `slug` (Optional `String`): The new slug for the link (minimum 8 characters).
+
+### Return Type
+
+Returns the updated `Link` object.
+
+### Example Usage
+
+```kotlin
+import dev.appoutlet.umami.domain.Link
+
+// Assuming 'linksApi' is an instance of Links
+suspend fun updateLinkDetails(id: String) {
+    try {
+        val updatedLink: Link = linksApi.updateLink(
+            linkId = id,
+            name = "Updated Link Name",
+            url = "https://example.com/new-path",
+            slug = "new-awesome-slug"
+        )
+        println("Updated link: ${updatedLink.name} (${updatedLink.url})")
+    } catch (e: Exception) {
+        println("Error updating link: ${e.message}")
+    }
+}
+```
+
+## Deleting a Link
+
+The `deleteLink` function allows you to delete a link.
+
+### Function Signature
+
+```kotlin
+suspend fun deleteLink(linkId: String)
+```
+
+### Parameters
+
+*   `linkId` (`String`): The unique identifier of the link to delete.
+
+### Example Usage
+
+```kotlin
+// Assuming 'linksApi' is an instance of Links
+suspend fun deleteLinkById(id: String) {
+    try {
+        linksApi.deleteLink(id)
+        println("Link deleted successfully")
+    } catch (e: Exception) {
+        println("Error deleting link: ${e.message}")
+    }
+}
+```

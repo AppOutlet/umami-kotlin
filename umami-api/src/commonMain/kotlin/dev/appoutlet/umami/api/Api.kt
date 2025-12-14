@@ -26,5 +26,8 @@ internal class Api {
 
         @Resource("/websites")
         class Websites(val parent: Admin = Admin())
+
+        @Resource("/teams")
+        class Teams(val parent: Admin = Admin())
     }
 }

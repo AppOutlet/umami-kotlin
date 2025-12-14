@@ -71,6 +71,3 @@ jobs:
           git add .
           git commit --no-verify -m "chore: Release version ${{ github.ref_name }}"
           git push
-
-      - name: Call Docs Workflow
-        uses: ./.github/workflows/docs.yml

@@ -29,7 +29,7 @@ nav:
   - The Umami object: umami-object.md
   - Event tracking: event-tracking.md
   - Authentication: auth.md
-  - Admin: admin/
+  - Admin: admin.md
   - Roadmap: roadmap.md
   - Release notes: release-notes.md
   - API Reference: reference

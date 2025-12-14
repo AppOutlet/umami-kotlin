@@ -24,11 +24,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import dev.appoutlet.umami.api.auth.login
-import dev.appoutlet.umami.api.auth.logout
-import dev.appoutlet.umami.api.auth.verify
+import dev.appoutlet.umami.api.auth
 import dev.appoutlet.umami.domain.User
 import kotlinx.coroutines.launch
+
+private val auth = umami.auth()
 
 @Composable
 fun Authentication() {
@@ -45,7 +45,7 @@ fun Authentication() {
 
     LaunchedEffect(Unit) {
         try {
-            loggedUser = umami.verify()
+            loggedUser = auth.verify()
         } catch (throwable: Throwable) {
             errorMessage = throwable.message
         }
@@ -103,7 +103,7 @@ fun LoginForm(
             onClick = {
                 coroutineScope.launch {
                     try {
-                        val response = umami.login(username, password)
+                        val response = auth.login(username, password)
                         onLoginSuccess(response.user)
                     } catch (e: Exception) {
                         onLoginError(e.message ?: "Unknown error")
@@ -124,7 +124,7 @@ fun UserProfile(user: User, onLogOut: () -> Unit, onLogOutFailed: (String) -> Un
         Button(onClick = {
             coroutineScope.launch {
                 try {
-                    umami.logout()
+                    auth.logout()
                     onLogOut()
                 } catch (e: Exception) {
                     onLogOutFailed(e.message ?: "Unknown error")

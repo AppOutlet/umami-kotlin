@@ -7,9 +7,18 @@ The `umami-kotlin` library provides a straightforward way to handle authenticati
 
 All authentication functions in this library are `suspend` functions. This means they must be called from within a coroutine or another `suspend` function.
 
+## Obtaining an Auth Instance
+
+You can access the `Auth` API functionalities through an extension function on your `Umami` client instance:
+
+```kotlin
+// Assuming 'umami' is an initialized Umami client
+val authApi = umami.auth()
+```
+
 ## Logging In
 
-There are two primary ways to log in using the library: by providing a username and password directly, or by using a `UmamiLogin.Request` object.
+There are two primary ways to log in using the library: by providing a username and password directly, or by using an `Auth.Login.Request` object.
 
 ### Using Username and Password
 
@@ -17,8 +26,8 @@ The most common way to log in is by calling the `login` suspend function with th
 
 **Example:**
 ```kotlin
-// Assuming 'umami' is an initialized Umami client
-val loginResponse = umami.login("my-username", "my-password")
+// Assuming 'authApi' is an instance of Auth
+val loginResponse = authApi.login("my-username", "my-password")
 
 println("Login successful! Token: ${loginResponse.token}")
 ```
@@ -28,51 +37,61 @@ println("Login successful! Token: ${loginResponse.token}")
 
 ### Using a Request Object
 
-You can also create a `UmamiLogin.Request` object and pass it to the `login` suspend function.
+You can also create an `Auth.Login.Request` object and pass it to the `login` suspend function.
 
 **Example:**
 ```kotlin
-import dev.appoutlet.umami.api.auth.UmamiLogin
+import dev.appoutlet.umami.api.Auth // Import Auth class to access Login inner interface
 
-// Assuming 'umami' is an initialized Umami client
-val loginRequest = UmamiLogin.Request(
+// Assuming 'authApi' is an instance of Auth
+val loginRequest = Auth.Login.Request(
     username = "my-username",
     password = "my-password"
 )
 
-val loginResponse = umami.login(loginRequest)
+val loginResponse = authApi.login(loginRequest)
 println("Login successful!")
 ```
 
 ### Login Response
 
-A successful login returns a `UmamiLogin.Response` object, which contains the authentication `token` and the `user` object.
+A successful login returns an `Auth.Login.Response` object, which contains the authentication `token` and the `user` object.
 
-- **`token`**: A JWT token used for authenticating subsequent requests.
-- **`user`**: A `User` object containing details about the logged-in user, such as their ID and username.
+-   **`token`**: A JWT token used for authenticating subsequent requests.
+-   **`user`**: A `User` object containing details about the logged-in user, such as their ID and username.
 
 ## Logging Out
 
-To log out, simply call the `logout` suspend function. This will invalidate the session on the server and remove the locally stored authentication token.
+To log out, simply call the `logout` suspend function on the `Auth` instance. This will invalidate the session on the server and remove the locally stored authentication token.
 
 **Example:**
 ```kotlin
-// Assuming 'umami' is an initialized and logged-in Umami client
-umami.logout()
+// Assuming 'authApi' is an initialized and logged-in Auth instance
+authApi.logout()
 
 println("Logout successful!")
 ```
 
 ## Verifying Authentication
 
-You can verify the current authentication status at any point by calling the `verify` suspend function. This is useful for checking if the current token is still valid.
+You can verify the current authentication status at any point by calling the `verify` suspend function on the `Auth` instance. This is useful for checking if the current token is still valid.
 
 If the authentication is valid, the `verify` function will return a `User` object. If the token is invalid or expired, it will throw a `ClientRequestException`.
 
 **Example:**
 ```kotlin
-// Assuming 'umami' is an initialized and logged-in Umami client
-val user = umami.verify()
+import io.ktor.client.features.ClientRequestException
 
-println("Authentication is valid. User: ${user.username}")
+// Assuming 'authApi' is an initialized Auth instance
+suspend fun checkAuthentication() {
+    try {
+        val user = authApi.verify()
+        println("Authentication is valid. User: ${user.username}")
+    } catch (e: ClientRequestException) {
+        println("Authentication is invalid or expired: ${e.message}")
+    } catch (e: Exception) {
+        println("An error occurred during verification: ${e.message}")
+    }
+}
 ```
+

@@ -82,11 +82,4 @@ data class User(
      */
     @SerialName("teams")
     val teams: List<Team> = emptyList(),
-
-    /**
-     * Additional count-related information for the user,
-     * such as the number of websites they manage.
-     */
-    @SerialName("_count")
-    val count: UserCount? = null,
 )

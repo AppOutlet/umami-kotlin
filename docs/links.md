@@ -194,3 +194,31 @@ suspend fun updateLinkDetails(id: String) {
     }
 }
 ```
+
+## Deleting a Link
+
+The `deleteLink` function allows you to delete a link.
+
+### Function Signature
+
+```kotlin
+suspend fun deleteLink(linkId: String)
+```
+
+### Parameters
+
+*   `linkId` (`String`): The unique identifier of the link to delete.
+
+### Example Usage
+
+```kotlin
+// Assuming 'linksApi' is an instance of Links
+suspend fun deleteLinkById(id: String) {
+    try {
+        linksApi.deleteLink(id)
+        println("Link deleted successfully")
+    } catch (e: Exception) {
+        println("Error deleting link: ${e.message}")
+    }
+}
+```

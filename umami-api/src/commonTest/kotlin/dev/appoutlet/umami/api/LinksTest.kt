@@ -4,11 +4,11 @@ import dev.appoutlet.umami.domain.Link
 import dev.appoutlet.umami.domain.SearchResponse
 import dev.appoutlet.umami.testing.getUmamiInstance
 import dev.appoutlet.umami.testing.respond
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.time.Instant
-import io.kotest.assertions.throwables.shouldThrow
 
 class LinksTest {
 
@@ -181,5 +181,19 @@ class LinksTest {
             )
         }
         exception.message shouldBe "Invalid URL format: $invalidUrl"
+    }
+
+    @Test
+    fun `deleteLink deletes link`() = runTest {
+        val linkId = "link-id"
+
+        val umami = getUmamiInstance(
+            "/api/links/$linkId" to { request ->
+                request.url.encodedPath shouldBe "/api/links/$linkId"
+                respond(Unit)
+            }
+        )
+
+        umami.links().deleteLink(linkId)
     }
 }

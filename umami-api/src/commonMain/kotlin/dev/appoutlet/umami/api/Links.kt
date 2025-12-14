@@ -4,13 +4,13 @@ import dev.appoutlet.umami.Umami
 import dev.appoutlet.umami.domain.Link
 import dev.appoutlet.umami.domain.SearchResponse
 import io.ktor.client.call.body
+import io.ktor.client.plugins.resources.delete
 import io.ktor.client.plugins.resources.get
 import io.ktor.client.plugins.resources.post
 import io.ktor.client.request.parameter
 import io.ktor.client.request.setBody
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import dev.appoutlet.umami.api.Api // Explicit import for Api
 
 /**
  * Provides functionalities for interacting with Links in the Umami API.
@@ -95,6 +95,15 @@ class Links(private val umami: Umami) {
         return umami.httpClient.post(Api.Links.Id(id = linkId)) {
             setBody(request)
         }.body()
+    }
+
+    /**
+     * Deletes a link from the Umami API.
+     *
+     * @param linkId The unique identifier of the link to delete.
+     */
+    suspend fun deleteLink(linkId: String) {
+        umami.httpClient.delete(Api.Links.Id(id = linkId))
     }
 
     @Serializable

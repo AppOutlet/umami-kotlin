@@ -30,4 +30,7 @@ internal class Api {
         @Resource("/teams")
         class Teams(val parent: Admin = Admin())
     }
+
+    @Resource("/links")
+    class Links(val parent: Api = Api())
 }

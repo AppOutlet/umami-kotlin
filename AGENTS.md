@@ -87,3 +87,9 @@ Running tests will verify that the code compiles correctly, as compilation is a 
 ## Maintaining AGENTS.md
 
 This file is a living document. If you make significant architectural changes, add a new major library, or change the build process, please update this file accordingly.
+
+## Agent Guidelines Update
+
+**Revised Instruction for Library Inclusion:**
+
+- **Libraries/Frameworks:** NEVER assume a library/framework is available or appropriate. Verify its established usage within the project (check imports, configuration files like 'package.json', 'Cargo.toml', 'requirements.txt', 'build.gradle', etc., or observe neighboring files) before employing it. **Do not add any new libraries unless explicitly asked by the user.**

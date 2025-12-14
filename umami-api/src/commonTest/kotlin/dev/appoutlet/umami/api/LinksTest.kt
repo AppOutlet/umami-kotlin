@@ -8,6 +8,7 @@ import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.time.Instant
+import io.kotest.assertions.throwables.shouldThrow
 
 class LinksTest {
 
@@ -119,5 +120,66 @@ class LinksTest {
             slug = "updated-slug"
         )
         response shouldBe mockLink
+    }
+
+    @Test
+    fun `createLink creates link`() = runTest {
+        val mockLink = Link(
+            id = "new-link-id",
+            name = "umami-new",
+            url = "https://www.umami.is/new",
+            slug = "new-slug",
+            userId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            teamId = null,
+            createdAt = Instant.parse("2025-10-27T18:49:39.383Z"),
+            updatedAt = Instant.parse("2025-10-27T18:49:39.383Z"),
+            deletedAt = null
+        )
+
+        val umami = getUmamiInstance(
+            "/api/links" to { request ->
+                request.url.encodedPath shouldBe "/api/links"
+                respond(mockLink)
+            }
+        )
+
+        val response = umami.links().createLink(
+            name = "umami-new",
+            url = "https://www.umami.is/new",
+            slug = "new-slug"
+        )
+        response shouldBe mockLink
+    }
+
+    @Test
+    fun `createLink throws IllegalArgumentException for invalid URL`() = runTest {
+        val umami = getUmamiInstance() // No specific mock needed for client-side validation
+
+        val invalidUrl = "not-a-valid-url"
+        val exception = shouldThrow<IllegalArgumentException> {
+            umami.links().createLink(
+                name = "test-link",
+                url = invalidUrl,
+                slug = "test-slug"
+            )
+        }
+        exception.message shouldBe "Invalid URL format: $invalidUrl"
+    }
+
+    @Test
+    fun `updateLink throws IllegalArgumentException for invalid URL`() = runTest {
+        val umami = getUmamiInstance() // No specific mock needed for client-side validation
+
+        val linkId = "some-link-id"
+        val invalidUrl = "not-a-valid-url"
+        val exception = shouldThrow<IllegalArgumentException> {
+            umami.links().updateLink(
+                linkId = linkId,
+                name = "test-link",
+                url = invalidUrl,
+                slug = "test-slug"
+            )
+        }
+        exception.message shouldBe "Invalid URL format: $invalidUrl"
     }
 }

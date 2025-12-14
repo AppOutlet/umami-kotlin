@@ -104,6 +104,50 @@ suspend fun fetchLinkById(id: String) {
 }
 ```
 
+## Creating a Link
+
+The `createLink` function allows you to create a new link.
+
+### Function Signature
+
+```kotlin
+suspend fun createLink(
+    name: String,
+    url: String,
+    slug: String,
+): Link
+```
+
+### Parameters
+
+*   `name` (`String`): The name for the link.
+*   `url` (`String`): The destination URL for the link.
+*   `slug` (`String`): The slug for the link (minimum 8 characters).
+
+### Return Type
+
+Returns the created `Link` object.
+
+### Example Usage
+
+```kotlin
+import dev.appoutlet.umami.domain.Link
+
+// Assuming 'linksApi' is an instance of Links
+suspend fun createNewLink() {
+    try {
+        val newLink: Link = linksApi.createLink(
+            name = "My New Link",
+            url = "https://example.com/new-link",
+            slug = "my-new-link-slug"
+        )
+        println("Created link: ${newLink.name} (${newLink.url})")
+    } catch (e: Exception) {
+        println("Error creating link: ${e.message}")
+    }
+}
+```
+
 ## Updating a Link
 
 The `updateLink` function allows you to update the properties of an existing link.

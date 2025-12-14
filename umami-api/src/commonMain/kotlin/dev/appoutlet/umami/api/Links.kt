@@ -10,6 +10,7 @@ import io.ktor.client.request.parameter
 import io.ktor.client.request.setBody
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import dev.appoutlet.umami.api.Api // Explicit import for Api
 
 /**
  * Provides functionalities for interacting with Links in the Umami API.
@@ -49,6 +50,29 @@ class Links(private val umami: Umami) {
     }
 
     /**
+     * Creates a new link.
+     *
+     * @param name The name for the link.
+     * @param url The destination URL for the link.
+     * @param slug The slug for the link (minimum 8 characters).
+     * @return The created [Link] object.
+     */
+    suspend fun createLink(
+        name: String,
+        url: String,
+        slug: String,
+    ): Link {
+        val request = LinkRequest(
+            name = name,
+            url = url.validate(),
+            slug = slug,
+        )
+        return umami.httpClient.post(Api.Links()) {
+            setBody(request)
+        }.body()
+    }
+
+    /**
      * Updates an existing link.
      *
      * @param linkId The unique identifier of the link to update.
@@ -63,9 +87,9 @@ class Links(private val umami: Umami) {
         url: String? = null,
         slug: String? = null,
     ): Link {
-        val request = UpdateLinkRequest(
+        val request = LinkRequest(
             name = name,
-            url = url,
+            url = url?.validate(),
             slug = slug,
         )
         return umami.httpClient.post(Api.Links.Id(id = linkId)) {
@@ -74,7 +98,7 @@ class Links(private val umami: Umami) {
     }
 
     @Serializable
-    data class UpdateLinkRequest(
+    data class LinkRequest(
         @SerialName("name") val name: String? = null,
         @SerialName("url") val url: String? = null,
         @SerialName("slug") val slug: String? = null,
@@ -87,3 +111,9 @@ class Links(private val umami: Umami) {
  * @return An instance of [Links].
  */
 fun Umami.links(): Links = Links(this)
+
+private val urlRegex = "^https?://(www)?([-a-zA-Z0-9@:%._+~#=]{2,256}.[a-z]{2,6}\b)*(/[/dw.-]*)*[?]*(.+)*$".toRegex()
+private fun String.validate(): String {
+    require(urlRegex.matches(this)) { "Invalid URL format: $this" }
+    return this
+}

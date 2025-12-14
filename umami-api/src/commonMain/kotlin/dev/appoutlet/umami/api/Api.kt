@@ -32,5 +32,9 @@ internal class Api {
     }
 
     @Resource("/links")
-    class Links(val parent: Api = Api())
+    class Links(val parent: Api = Api()) {
+
+        @Resource("/{id}")
+        class Id(val parent: Links = Links(), val id: String)
+    }
 }

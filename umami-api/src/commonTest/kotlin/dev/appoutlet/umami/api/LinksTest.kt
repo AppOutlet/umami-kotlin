@@ -89,4 +89,35 @@ class LinksTest {
         val response = umami.links().getLink(linkId)
         response shouldBe mockLink
     }
+
+    @Test
+    fun `updateLink updates link`() = runTest {
+        val linkId = "link-id"
+        val mockLink = Link(
+            id = linkId,
+            name = "umami-updated",
+            url = "https://www.umami.is/updated",
+            slug = "updated-slug",
+            userId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            teamId = null,
+            createdAt = Instant.parse("2025-10-27T18:49:39.383Z"),
+            updatedAt = Instant.parse("2025-10-27T18:49:39.383Z"),
+            deletedAt = null
+        )
+
+        val umami = getUmamiInstance(
+            "/api/links/$linkId" to { request ->
+                request.url.encodedPath shouldBe "/api/links/$linkId"
+                respond(mockLink)
+            }
+        )
+
+        val response = umami.links().updateLink(
+            linkId = linkId,
+            name = "umami-updated",
+            url = "https://www.umami.is/updated",
+            slug = "updated-slug"
+        )
+        response shouldBe mockLink
+    }
 }

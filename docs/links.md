@@ -103,3 +103,50 @@ suspend fun fetchLinkById(id: String) {
     }
 }
 ```
+
+## Updating a Link
+
+The `updateLink` function allows you to update the properties of an existing link.
+
+### Function Signature
+
+```kotlin
+suspend fun updateLink(
+    linkId: String,
+    name: String? = null,
+    url: String? = null,
+    slug: String? = null,
+): Link
+```
+
+### Parameters
+
+*   `linkId` (`String`): The unique identifier of the link to update.
+*   `name` (Optional `String`): The new name for the link.
+*   `url` (Optional `String`): The new destination URL for the link.
+*   `slug` (Optional `String`): The new slug for the link (minimum 8 characters).
+
+### Return Type
+
+Returns the updated `Link` object.
+
+### Example Usage
+
+```kotlin
+import dev.appoutlet.umami.domain.Link
+
+// Assuming 'linksApi' is an instance of Links
+suspend fun updateLinkDetails(id: String) {
+    try {
+        val updatedLink: Link = linksApi.updateLink(
+            linkId = id,
+            name = "Updated Link Name",
+            url = "https://example.com/new-path",
+            slug = "new-awesome-slug"
+        )
+        println("Updated link: ${updatedLink.name} (${updatedLink.url})")
+    } catch (e: Exception) {
+        println("Error updating link: ${e.message}")
+    }
+}
+```

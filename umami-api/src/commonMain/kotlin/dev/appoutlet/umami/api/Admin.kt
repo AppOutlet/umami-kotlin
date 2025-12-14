@@ -2,6 +2,7 @@ package dev.appoutlet.umami.api
 
 import dev.appoutlet.umami.Umami
 import dev.appoutlet.umami.domain.SearchResponse
+import dev.appoutlet.umami.domain.Team
 import dev.appoutlet.umami.domain.User
 import dev.appoutlet.umami.domain.Website
 import io.ktor.client.call.body
@@ -49,6 +50,26 @@ class Admin(private val umami: Umami) {
         pageSize: Int? = null,
     ): SearchResponse<Website> {
         return umami.httpClient.get(Api.Admin.Websites()) {
+            parameter("search", search)
+            parameter("page", page)
+            parameter("pageSize", pageSize)
+        }.body()
+    }
+
+    /**
+     * Retrieves a paginated list of teams from the Umami API.
+     *
+     * @param search Optional search string to filter teams by.
+     * @param page Optional page number for pagination.
+     * @param pageSize Optional number of results per page.
+     * @return A [SearchResponse] containing a list of [Team] objects.
+     */
+    suspend fun getTeams(
+        search: String? = null,
+        page: Int? = null,
+        pageSize: Int? = null,
+    ): SearchResponse<Team> {
+        return umami.httpClient.get(Api.Admin.Teams()) {
             parameter("search", search)
             parameter("page", page)
             parameter("pageSize", pageSize)

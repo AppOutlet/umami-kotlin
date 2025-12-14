@@ -1,6 +1,7 @@
 package dev.appoutlet.umami.api
 
 import dev.appoutlet.umami.domain.SearchResponse
+import dev.appoutlet.umami.domain.Team
 import dev.appoutlet.umami.domain.User
 import dev.appoutlet.umami.domain.Website
 import dev.appoutlet.umami.testing.getUmamiInstance
@@ -111,5 +112,34 @@ class AdminTest {
         )
 
         umami.admin().getWebsites(search = "test", page = 2, pageSize = 20)
+    }
+
+    @Test
+    fun `getTeams returns search response`() = runTest {
+        val mockTeam = Team(
+            id = "team-id",
+            name = "Team Name",
+            accessCode = "access-code",
+            createdAt = Instant.parse("2023-01-01T00:00:00Z")
+        )
+        val mockResponse = SearchResponse(
+            data = listOf(mockTeam),
+            count = 1,
+            page = 1,
+            pageSize = 10
+        )
+
+        val umami = getUmamiInstance(
+            "/api/admin/teams" to { request ->
+                request.url.encodedPath shouldBe "/api/admin/teams"
+                request.url.parameters["search"] shouldBe "test"
+                request.url.parameters["page"] shouldBe "2"
+                request.url.parameters["pageSize"] shouldBe "20"
+                respond(mockResponse)
+            }
+        )
+
+        val response = umami.admin().getTeams(search = "test", page = 2, pageSize = 20)
+        response shouldBe mockResponse
     }
 }

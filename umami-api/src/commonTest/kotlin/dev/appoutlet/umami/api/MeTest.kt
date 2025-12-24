@@ -62,7 +62,7 @@ class MeTest {
     }
 
     @Test
-    fun `getWebsites returns websites`() = runTest {
+    fun `getWebsites returns websites and passes parameters correctly`() = runTest {
         val expectedWebsites = SearchResponse(
             data = listOf(
                 Website(
@@ -80,7 +80,10 @@ class MeTest {
         )
 
         val umami = getUmamiInstance(
-            "/api/me/websites" to { respond(expectedWebsites) }
+            "/api/me/websites" to { request ->
+                assertEquals("true", request.url.parameters["includeTeams"])
+                respond(expectedWebsites)
+            }
         )
 
         val actualWebsites = umami.me().getWebsites(includeTeams = true)

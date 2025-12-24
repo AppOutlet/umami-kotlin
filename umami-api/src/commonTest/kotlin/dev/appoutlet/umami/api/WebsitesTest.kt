@@ -5,6 +5,7 @@ import dev.appoutlet.umami.domain.Website
 import dev.appoutlet.umami.testing.getUmamiInstance
 import dev.appoutlet.umami.testing.respond
 import io.kotest.matchers.shouldBe
+import io.ktor.http.content.TextContent
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.time.Instant
@@ -114,6 +115,8 @@ class WebsitesTest {
         val umami = getUmamiInstance(
             "/api/websites" to { request ->
                 request.url.encodedPath shouldBe "/api/websites"
+                val body = (request.body as TextContent).text
+                body shouldBe """{"name":"umami-new","domain":"new.umami.is"}"""
                 respond(mockWebsite)
             }
         )

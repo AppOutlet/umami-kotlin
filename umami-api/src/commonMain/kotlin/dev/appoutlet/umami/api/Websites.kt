@@ -133,7 +133,7 @@ class Websites(private val umami: Umami) {
 fun Umami.websites(): Websites = Websites(this)
 
 @Serializable
-private data class WebsiteRequest(
+internal data class WebsiteRequest(
     @SerialName("name")
     val name: String? = null,
     @SerialName("domain")

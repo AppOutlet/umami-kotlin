@@ -32,12 +32,12 @@ These endpoints are only available for admin users on self-hosted instances.
 
 ## Websites
 
-- [ ] Returns a list of all websites available to the user - `GET /api/websites`
-- [ ] Creates a new website - `POST /api/websites`
-- [ ] Returns the details of a specific website - `GET /api/websites/:websiteId`
-- [ ] Updates the details of a specific website - `POST /api/websites/:websiteId`
-- [ ] Deletes a website - `DELETE /api/websites/:websiteId`
-- [ ] Resets all data for a website - `POST /api/websites/:websiteId/reset`
+- [x] Returns a list of all websites available to the user - `GET /api/websites`
+- [x] Creates a new website - `POST /api/websites`
+- [x] Returns the details of a specific website - `GET /api/websites/:websiteId`
+- [x] Updates the details of a specific website - `POST /api/websites/:websiteId`
+- [x] Deletes a website - `DELETE /api/websites/:websiteId`
+- [x] Resets all data for a website - `POST /api/websites/:websiteId/reset`
 
 ### Website Statistics
 

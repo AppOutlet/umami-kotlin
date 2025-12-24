@@ -8,9 +8,11 @@ You can access all `Me` API functionalities through the `umami.me()` extension f
 
 ```kotlin
 val umami = Umami(
-    host = "https://your-umami-instance.com",
+    website = "your-website-uuid"
+) {
+    host = "https://your-umami-instance.com"
     token = "your-authentication-token"
-)
+}
 
 // Access the Me API
 val meApi = umami.me()

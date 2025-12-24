@@ -25,37 +25,23 @@ class Me(private val umami: Umami) {
     }
 
     /**
-     * Retrieves a paginated list of teams for the authenticated user.
-     * @param page Optional page number for pagination.
-     * @param pageSize Optional number of results per page.
+     * Retrieves a list of teams for the authenticated user.
      * @return A [SearchResponse] containing a list of [Team] objects.
      */
-    suspend fun getTeams(
-        page: Int? = null,
-        pageSize: Int? = null,
-    ): SearchResponse<Team> {
-        return umami.httpClient.get(Api.Me.Teams()) {
-            parameter("page", page)
-            parameter("pageSize", pageSize)
-        }.body()
+    suspend fun getTeams(): SearchResponse<Team> {
+        return umami.httpClient.get(Api.Me.Teams()).body()
     }
 
     /**
-     * Retrieves a paginated list of websites for the authenticated user.
+     * Retrieves a list of websites for the authenticated user.
      * @param includeTeams Optional flag to include websites from teams.
-     * @param page Optional page number for pagination.
-     * @param pageSize Optional number of results per page.
      * @return A [SearchResponse] containing a list of [Website] objects.
      */
     suspend fun getWebsites(
         includeTeams: Boolean? = null,
-        page: Int? = null,
-        pageSize: Int? = null,
     ): SearchResponse<Website> {
         return umami.httpClient.get(Api.Me.Websites()) {
             parameter("includeTeams", includeTeams)
-            parameter("page", page)
-            parameter("pageSize", pageSize)
         }.body()
     }
 }

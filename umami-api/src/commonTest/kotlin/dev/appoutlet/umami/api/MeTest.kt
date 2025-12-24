@@ -90,7 +90,7 @@ class MeTest {
             "/api/me/websites" to { respond(expectedWebsites) }
         )
 
-        val actualWebsites = umami.me().getWebsites()
+        val actualWebsites = umami.me().getWebsites(includeTeams = true)
 
         assertEquals(expectedWebsites, actualWebsites)
     }

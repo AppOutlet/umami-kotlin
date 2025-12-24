@@ -31,6 +31,7 @@ nav:
   - Authentication: auth.md
   - Admin: admin.md
   - Links: links.md
+  - Me API: me.md
   - Roadmap: roadmap.md
   - Release notes: release-notes.md
   - API Reference: reference

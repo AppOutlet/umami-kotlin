@@ -7,9 +7,9 @@ import dev.appoutlet.umami.domain.User
 import dev.appoutlet.umami.domain.Website
 import dev.appoutlet.umami.testing.getUmamiInstance
 import dev.appoutlet.umami.testing.respond
+import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlin.time.Instant
 
 class MeTest {
@@ -33,7 +33,7 @@ class MeTest {
 
         val actualSession = umami.me().getSession()
 
-        assertEquals(expectedSession, actualSession)
+        actualSession shouldBe expectedSession
     }
 
     @Test
@@ -58,7 +58,7 @@ class MeTest {
 
         val actualTeams = umami.me().getTeams()
 
-        assertEquals(expectedTeams, actualTeams)
+        actualTeams shouldBe expectedTeams
     }
 
     @Test
@@ -81,13 +81,13 @@ class MeTest {
 
         val umami = getUmamiInstance(
             "/api/me/websites" to { request ->
-                assertEquals("true", request.url.parameters["includeTeams"])
+                request.url.parameters["includeTeams"] shouldBe "true"
                 respond(expectedWebsites)
             }
         )
 
         val actualWebsites = umami.me().getWebsites(includeTeams = true)
 
-        assertEquals(expectedWebsites, actualWebsites)
+        actualWebsites shouldBe expectedWebsites
     }
 }

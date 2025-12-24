@@ -148,6 +148,8 @@ class WebsitesTest {
         val umami = getUmamiInstance(
             "/api/websites/$websiteId" to { request ->
                 request.url.encodedPath shouldBe "/api/websites/$websiteId"
+                val body = (request.body as TextContent).text
+                body shouldBe """{"name":"umami-updated","domain":"updated.umami.is","shareId":"updated-share-id"}"""
                 respond(mockWebsite)
             }
         )

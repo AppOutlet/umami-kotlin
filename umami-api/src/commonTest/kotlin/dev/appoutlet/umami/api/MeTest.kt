@@ -1,6 +1,5 @@
 package dev.appoutlet.umami.api
 
-import dev.appoutlet.umami.domain.Count
 import dev.appoutlet.umami.domain.SearchResponse
 import dev.appoutlet.umami.domain.Session
 import dev.appoutlet.umami.domain.Team
@@ -46,10 +45,6 @@ class MeTest {
                     name = "test_team",
                     accessCode = "test_access_code",
                     createdAt = Instant.DISTANT_PAST,
-                    count = Count(
-                        websites = 0,
-                        members = 1,
-                    )
                 )
             ),
             count = 1,
@@ -64,8 +59,6 @@ class MeTest {
         val actualTeams = umami.me().getTeams()
 
         assertEquals(expectedTeams, actualTeams)
-        assertEquals(0, actualTeams.data.first().count?.websites)
-        assertEquals(1, actualTeams.data.first().count?.members)
     }
 
     @Test

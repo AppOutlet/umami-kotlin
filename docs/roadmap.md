@@ -96,10 +96,10 @@ These endpoints are only available for admin users on self-hosted instances.
 
 ## Me
 
-- [ ] Returns the current user - `GET /api/me`
+- [x] Returns the current user - `GET /api/me`
 - [ ] Updates the current user's password - `POST /api/me/password`
-- [ ] Returns a list of websites for the current user - `GET /api/me/websites`
-- [ ] Returns a list of teams for the current user - `GET /api/me/teams`
+- [x] Returns a list of websites for the current user - `GET /api/me/websites`
+- [x] Returns a list of teams for the current user - `GET /api/me/teams`
 
 ## Reports
 

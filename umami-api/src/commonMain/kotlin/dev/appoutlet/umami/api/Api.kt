@@ -48,4 +48,14 @@ internal class Api {
             class Reset(val parent: Id)
         }
     }
+
+    @Resource("/me")
+    class Me(val parent: Api = Api()) {
+
+        @Resource("/teams")
+        class Teams(val parent: Me = Me())
+
+        @Resource("/websites")
+        class Websites(val parent: Me = Me())
+    }
 }

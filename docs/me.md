@@ -10,7 +10,7 @@ You can access all `Me` API functionalities through the `umami.me()` extension f
 val umami = Umami(
     website = "your-website-uuid"
 ) {
-    host = "https://your-umami-instance.com"
+    baseUrl = "https://your-umami-instance.com"
     token = "your-authentication-token"
 }
 

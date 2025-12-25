@@ -29,20 +29,6 @@ val session = umami.me().getSession()
 println("Authenticated as: ${session.user.username}")
 ```
 
-### Example Response
-
-```json
-{
-  "token": "xxxxxxxxxxxxxxx",
-  "user": {
-    "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-    "username": "admin",
-    "role": "admin",
-    "isAdmin": true
-  }
-}
-```
-
 ## Get Websites
 
 To retrieve a list of websites associated with the current user, use the `getWebsites()` method. You can optionally include websites from teams where the user is a member.

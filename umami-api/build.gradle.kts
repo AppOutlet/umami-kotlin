@@ -33,6 +33,7 @@ kotlin {
         commonMain.dependencies {
             api(project(":umami"))
             implementation(libs.ktor.client.resources)
+            implementation(libs.kotlinx.datetime)
         }
 
         commonTest.dependencies {

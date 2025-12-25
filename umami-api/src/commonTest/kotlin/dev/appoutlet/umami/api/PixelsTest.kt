@@ -1,14 +1,15 @@
 package dev.appoutlet.umami.api
 
-import dev.appoutlet.umami.api.dto.UpdatePixelRequest
 import dev.appoutlet.umami.domain.Pixel
 import dev.appoutlet.umami.domain.SearchResponse
 import dev.appoutlet.umami.testing.getUmamiInstance
 import dev.appoutlet.umami.testing.respond
 import io.kotest.matchers.shouldBe
+import io.ktor.http.content.OutgoingContent
 import kotlinx.coroutines.test.runTest
-import kotlinx.datetime.Instant
+import kotlinx.serialization.json.Json
 import kotlin.test.Test
+import kotlin.time.Instant
 
 class PixelsTest {
     @Test
@@ -92,10 +93,13 @@ class PixelsTest {
     @Test
     fun `updatePixel updates pixel`() = runTest {
         val pixelId = "pixel-id"
+        val requestName = "Umami Pixel Updated"
+        val requestSlug = "updated-slug"
+
         val mockPixel = Pixel(
             id = pixelId,
-            name = "Umami Pixel Updated",
-            slug = "updated-slug",
+            name = requestName,
+            slug = requestSlug,
             userId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             teamId = null,
             createdAt = Instant.parse("2025-10-27T18:50:54.079Z"),
@@ -106,15 +110,19 @@ class PixelsTest {
         val umami = getUmamiInstance(
             "/api/pixels/$pixelId" to { request ->
                 request.url.encodedPath shouldBe "/api/pixels/$pixelId"
+                val bodyText = (request.body as OutgoingContent.ByteArrayContent).bytes().decodeToString()
+                val updateRequest = Json.decodeFromString<Pixels.UpdatePixelRequest>(bodyText)
+                updateRequest.name shouldBe requestName
+                updateRequest.slug shouldBe requestSlug
                 respond(mockPixel)
             }
         )
 
         val response = umami.pixels().updatePixel(
             pixelId,
-            UpdatePixelRequest(
-                name = "Umami Pixel Updated",
-                slug = "updated-slug"
+            Pixels.UpdatePixelRequest(
+                name = requestName,
+                slug = requestSlug
             )
         )
         response shouldBe mockPixel

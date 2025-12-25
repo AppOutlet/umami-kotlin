@@ -1,8 +1,8 @@
-# Me API
+# Authenticated user
 
-The `Me` API provides a convenient way to access information about the currently authenticated user. You can retrieve session details, a list of associated websites, and a list of teams.
+The Authenticated user API provides a convenient way to access information about the currently authenticated user. You can retrieve session details, a list of associated websites, and a list of teams.
 
-## Accessing the Me API
+## Accessing the Authenticated user API
 
 You can access all `Me` API functionalities through the `umami.me()` extension function:
 

@@ -32,7 +32,7 @@ nav:
   - Admin: admin.md
   - Websites: websites.md
   - Links: links.md
-  - Me API: me.md
+  - Authenticated user: me.md
   - Roadmap: roadmap.md
   - Release notes: release-notes.md
   - API Reference: reference

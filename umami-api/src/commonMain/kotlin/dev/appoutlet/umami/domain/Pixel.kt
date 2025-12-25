@@ -5,12 +5,16 @@ import kotlinx.serialization.Serializable
 import kotlin.time.Instant
 
 /**
- * Represents a pixel in the Umami API.
+ * Represents a Pixel entity in the Umami analytics platform.
+ *
+ * This data class maps to the pixel object returned by various Umami API endpoints.
+ *
+ * @see <a href="https://docs.umami.is/docs/api/pixels">Umami API Docs</a>
  */
 @Serializable
 data class Pixel(
     /**
-     * The unique identifier of the pixel.
+     * The unique identifier of the pixel (UUID format).
      */
     @SerialName("id")
     val id: String,
@@ -20,32 +24,32 @@ data class Pixel(
     @SerialName("name")
     val name: String,
     /**
-     * The URL slug for the pixel.
+     * The unique slug identifier for the pixel.
      */
     @SerialName("slug")
     val slug: String,
     /**
-     * The ID of the user who owns the pixel.
+     * The unique identifier of the user who created the pixel (UUID format).
      */
     @SerialName("userId")
     val userId: String,
     /**
-     * The ID of the team the pixel belongs to, if any.
+     * The unique identifier of the team the pixel belongs to (UUID format). Can be null.
      */
     @SerialName("teamId")
     val teamId: String?,
     /**
-     * The timestamp when the pixel was created.
+     * The timestamp when the pixel was created (ISO 8601 format).
      */
     @SerialName("createdAt")
     val createdAt: Instant,
     /**
-     * The timestamp when the pixel was last updated.
+     * The timestamp when the pixel was last updated (ISO 8601 format).
      */
     @SerialName("updatedAt")
     val updatedAt: Instant,
     /**
-     * The timestamp when the pixel was deleted, if it has been.
+     * The timestamp when the pixel was deleted (ISO 8601 format). Can be null.
      */
     @SerialName("deletedAt")
     val deletedAt: Instant?,

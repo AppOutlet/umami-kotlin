@@ -4,14 +4,15 @@ The Authenticated user API provides a convenient way to access information about
 
 ## Accessing the Authenticated user API
 
-You can access all `Me` API functionalities through the `umami.me()` extension function:
+> **Note:** All methods in this API require authentication. You must log in using the `umami.auth().login()` method before calling any of these functions. For more details, see the [Authentication documentation](auth.md).
+
+You can access all functionalities through the `umami.me()` extension function:
 
 ```kotlin
 val umami = Umami(
     website = "your-website-uuid"
 ) {
     baseUrl = "https://your-umami-instance.com"
-    token = "your-authentication-token"
 }
 
 // Access the Me API

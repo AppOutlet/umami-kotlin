@@ -26,7 +26,7 @@ class Users(private val umami: Umami) {
      *
      * @param username The user's username.
      * @param password The user's password.
-     * @param role The user's role. Check [UserRole] for available roles.
+     * @param role The user's role. Possible values are "admin", "user", and "view-only"
      * @param id The user's ID (optional).
      * @return The created [User].
      */

@@ -7,7 +7,7 @@ The `Users` API provides functionalities for managing users in Umami. It allows 
 To access the Users API, you need an instance of the `Umami` class. You can then call the `users()` extension function to get an instance of the `Users` class:
 
 ```kotlin
-val umami = Umami(websiteId = "your_website_id")
+val umami = Umami(website = "your_website_id")
 val usersApi = umami.users()
 ```
 
@@ -82,8 +82,8 @@ Gets all websites that belong to a user.
 - `userId`: The unique identifier of the user.
 - `includeTeams`: Set to true if you want to include websites where you are the team owner.
 - `search`: Search text.
-- `page`: Determines page.
-- `pageSize`: Determines how many results to return.
+- `page`: The page number to retrieve.
+- `pageSize`: The number of items to return per page.
 
 **Example:**
 
@@ -104,8 +104,8 @@ response.data.forEach { website ->
 Gets all teams that belong to a user.
 
 - `userId`: The unique identifier of the user.
-- `page`: Determines page.
-- `pageSize`: Determines how many results to return.
+- `page`: The page number to retrieve.
+- `pageSize`: The number of items to return per page.
 
 **Example:**
 

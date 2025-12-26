@@ -5,53 +5,86 @@ import kotlinx.serialization.Serializable
 import kotlin.time.Instant
 
 /**
- * Represents a tracking pixel in the Umami analytics platform. A tracking pixel is a 1x1 transparent image
- * used to track website visits or other events.
- *
- * This data class maps to the pixel object returned by the Umami API.
- *
- * @see <a href="https://docs.umami.is/docs/api/pixels">Umami API Docs</a>
+ * Represents a pixel in the Umami API.
+ * @see <a href="https://umami.is/docs/api/pixels">Umami API Docs</a>
  */
 @Serializable
 data class Pixel(
     /**
-     * The unique identifier for the tracking pixel, in UUID format. This ID is used to reference the pixel in API calls.
+     * The unique identifier of the pixel.
      */
     @SerialName("id")
     val id: String,
+
     /**
-     * The descriptive name assigned to the tracking pixel for easy identification.
+     * The ID of the website the pixel belongs to.
      */
-    @SerialName("name")
-    val name: String,
+    @SerialName("websiteId")
+    val websiteId: String,
+
     /**
-     * The unique URL slug for the tracking pixel. This slug is part of the URL used to trigger the tracking event.
+     * The slug of the pixel.
      */
     @SerialName("slug")
     val slug: String,
+
     /**
-     * The unique identifier of the user who owns this tracking pixel, in UUID format.
+     * The ID of the user who created the pixel.
      */
     @SerialName("userId")
     val userId: String,
+
     /**
-     * The unique identifier of the team that the tracking pixel belongs to, in UUID format. This can be null if the pixel is not associated with a team.
+     * The ID of the team the pixel belongs to.
      */
     @SerialName("teamId")
     val teamId: String?,
+
     /**
-     * The timestamp indicating when the tracking pixel was created, in ISO 8601 format.
+     * The name of the pixel.
+     */
+    @SerialName("name")
+    val name: String,
+
+    /**
+     * The payload of the pixel.
+     */
+    @SerialName("payload")
+    val payload: PixelPayload,
+
+    /**
+     * The timestamp when the pixel was created.
      */
     @SerialName("createdAt")
     val createdAt: Instant,
+
     /**
-     * The timestamp indicating when the tracking pixel was last updated, in ISO 8601 format.
+     * The timestamp when the pixel was last updated.
      */
     @SerialName("updatedAt")
-    val updatedAt: Instant,
+    val updatedAt: Instant?,
+
     /**
-     * The timestamp indicating when the tracking pixel was deleted, in ISO 8601 format. This will be null if the pixel has not been deleted.
+     * The timestamp when the pixel was deleted.
      */
     @SerialName("deletedAt")
-    val deletedAt: Instant?,
+    val deletedAt: Instant?
+)
+
+/**
+ * Represents the payload of a pixel.
+ */
+@Serializable
+data class PixelPayload(
+    /**
+     * The type of the pixel.
+     */
+    @SerialName("type")
+    val type: String,
+
+    /**
+     * The value of the pixel.
+     */
+    @SerialName("value")
+    val value: String
 )

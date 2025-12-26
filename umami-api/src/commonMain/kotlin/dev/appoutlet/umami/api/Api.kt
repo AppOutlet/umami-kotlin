@@ -65,4 +65,22 @@ internal class Api {
         @Resource("/{id}")
         class Id(val parent: Pixels = Pixels(), val id: String)
     }
+
+    @Resource("/teams")
+    class Teams(val parent: Api = Api()) {
+        @Resource("/join")
+        class Join(val parent: Teams = Teams())
+
+        @Resource("/{teamId}")
+        class Id(val parent: Teams = Teams(), val teamId: String) {
+            @Resource("/users")
+            class Users(val parent: Id) {
+                @Resource("/{userId}")
+                class UserId(val parent: Users, val userId: String)
+            }
+
+            @Resource("/websites")
+            class Websites(val parent: Id)
+        }
+    }
 }

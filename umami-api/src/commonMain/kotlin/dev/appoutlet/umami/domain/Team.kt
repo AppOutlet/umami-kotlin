@@ -56,5 +56,11 @@ data class Team(
      * The members of the team.
      */
     @SerialName("members")
-    val members: List<User> = emptyList()
+    val members: List<TeamMember> = emptyList(),
+
+    /**
+     * The counts of websites and members in the team.
+     */
+    @SerialName("_count")
+    val count: TeamCount? = null
 )

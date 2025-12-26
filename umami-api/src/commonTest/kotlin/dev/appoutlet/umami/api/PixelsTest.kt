@@ -1,6 +1,7 @@
 package dev.appoutlet.umami.api
 
 import dev.appoutlet.umami.domain.Pixel
+import dev.appoutlet.umami.domain.PixelPayload
 import dev.appoutlet.umami.domain.SearchResponse
 import dev.appoutlet.umami.testing.getUmamiInstance
 import dev.appoutlet.umami.testing.respond
@@ -23,7 +24,12 @@ class PixelsTest {
             teamId = null,
             createdAt = Instant.parse("2025-10-27T18:50:54.079Z"),
             updatedAt = Instant.parse("2025-10-27T18:50:54.079Z"),
-            deletedAt = null
+            deletedAt = null,
+            websiteId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            payload = PixelPayload(
+                type = "event",
+                value = "test"
+            )
         )
 
         val mockResponse = SearchResponse(
@@ -77,7 +83,12 @@ class PixelsTest {
             teamId = null,
             createdAt = Instant.parse("2025-10-27T18:50:54.079Z"),
             updatedAt = Instant.parse("2025-10-27T18:50:54.079Z"),
-            deletedAt = null
+            deletedAt = null,
+            websiteId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            payload = PixelPayload(
+                type = "event",
+                value = "test"
+            )
         )
 
         val umami = getUmamiInstance(
@@ -105,7 +116,12 @@ class PixelsTest {
             teamId = null,
             createdAt = Instant.parse("2025-10-27T18:50:54.079Z"),
             updatedAt = Instant.parse("2025-10-27T18:50:54.079Z"),
-            deletedAt = null
+            deletedAt = null,
+            websiteId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            payload = PixelPayload(
+                type = "event",
+                value = "test"
+            )
         )
 
         val umami = getUmamiInstance(

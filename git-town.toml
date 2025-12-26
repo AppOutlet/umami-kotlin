@@ -3,7 +3,6 @@
 [branches]
 main = "main"
 order = "asc"
-unknown-branch-type = "feature"
 
 [create]
 new-branch-type = "feature"

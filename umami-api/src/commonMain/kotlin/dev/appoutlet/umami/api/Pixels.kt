@@ -55,7 +55,7 @@ class Pixels(private val umami: Umami) {
      * @param request The request object containing the new pixel data.
      * @return The updated [Pixel] object.
      */
-    internal suspend fun updatePixel(pixelId: String, request: UpdatePixelRequest): Pixel {
+    suspend fun updatePixel(pixelId: String, request: UpdatePixelRequest): Pixel {
         return umami.httpClient.post(Api.Pixels.Id(id = pixelId)) {
             setBody(request)
         }.body()
@@ -71,7 +71,7 @@ class Pixels(private val umami: Umami) {
     }
 
     @Serializable
-    internal data class UpdatePixelRequest(
+    data class UpdatePixelRequest(
         val name: String? = null,
         val slug: String? = null
     )

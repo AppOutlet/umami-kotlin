@@ -53,14 +53,8 @@ data class Team(
     val deletedAt: Instant? = null,
 
     /**
-     * The members of the team.
+     * The users of the team.
      */
-    @SerialName("members")
-    val members: List<TeamMember> = emptyList(),
-
-    /**
-     * The counts of websites and members in the team.
-     */
-    @SerialName("_count")
-    val count: TeamCount? = null
+    @SerialName("teamUser")
+    val teamUser: List<TeamMember> = emptyList()
 )

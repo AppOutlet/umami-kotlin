@@ -19,17 +19,12 @@ class PixelsTest {
         val mockPixel = Pixel(
             id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             name = "Umami Pixel",
-            slug = "xxxxxxxx",
-            userId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-            teamId = null,
-            createdAt = Instant.parse("2025-10-27T18:50:54.079Z"),
-            updatedAt = Instant.parse("2025-10-27T18:50:54.079Z"),
-            deletedAt = null,
             websiteId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             payload = PixelPayload(
                 type = "event",
                 value = "test"
-            )
+            ),
+            createdAt = Instant.parse("2025-10-27T18:50:54.079Z")
         )
 
         val mockResponse = SearchResponse(
@@ -78,17 +73,12 @@ class PixelsTest {
         val mockPixel = Pixel(
             id = pixelId,
             name = "Umami Pixel",
-            slug = "xxxxxxxx",
-            userId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-            teamId = null,
-            createdAt = Instant.parse("2025-10-27T18:50:54.079Z"),
-            updatedAt = Instant.parse("2025-10-27T18:50:54.079Z"),
-            deletedAt = null,
             websiteId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             payload = PixelPayload(
                 type = "event",
                 value = "test"
-            )
+            ),
+            createdAt = Instant.parse("2025-10-27T18:50:54.079Z")
         )
 
         val umami = getUmamiInstance(
@@ -106,22 +96,16 @@ class PixelsTest {
     fun `updatePixel updates pixel`() = runTest {
         val pixelId = "pixel-id"
         val requestName = "Umami Pixel Updated"
-        val requestSlug = "updated-slug"
 
         val mockPixel = Pixel(
             id = pixelId,
             name = requestName,
-            slug = requestSlug,
-            userId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-            teamId = null,
-            createdAt = Instant.parse("2025-10-27T18:50:54.079Z"),
-            updatedAt = Instant.parse("2025-10-27T18:50:54.079Z"),
-            deletedAt = null,
             websiteId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             payload = PixelPayload(
                 type = "event",
                 value = "test"
-            )
+            ),
+            createdAt = Instant.parse("2025-10-27T18:50:54.079Z")
         )
 
         val umami = getUmamiInstance(
@@ -132,20 +116,17 @@ class PixelsTest {
                 @Serializable
                 data class UpdatePixelRequest(
                     val name: String? = null,
-                    val slug: String? = null
                 )
 
                 val updateRequest = Json.decodeFromString<UpdatePixelRequest>(bodyText)
                 updateRequest.name shouldBe requestName
-                updateRequest.slug shouldBe requestSlug
                 respond(mockPixel)
             }
         )
 
         val response = umami.pixels().updatePixel(
             pixelId,
-            name = requestName,
-            slug = requestSlug
+            name = requestName
         )
         response shouldBe mockPixel
     }

@@ -70,21 +70,3 @@ data class TeamMemberUser(
     @SerialName("username")
     val username: String
 )
-
-/**
- * A class to represent the counts of websites and members in a team.
- */
-@Serializable
-data class TeamCount(
-    /**
-     * The number of websites in the team.
-     */
-    @SerialName("websites")
-    val websites: Int,
-
-    /**
-     * The number of members in the team.
-     */
-    @SerialName("members")
-    val members: Int
-)

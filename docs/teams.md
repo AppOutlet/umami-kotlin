@@ -91,8 +91,11 @@ Removes a user from a team.
 - `teamId`: The ID of the team.
 - `userId`: The ID of the user to remove.
 
-### `getWebsites(teamId: String): SearchResponse<Website>`
+### `getWebsites(teamId: String, search: String? = null, page: Int? = null, pageSize: Int? = null): SearchResponse<Website>`
 
 Retrieves the websites of a team.
 
 - `teamId`: The ID of the team.
+- `search`: An optional search string to filter websites by.
+- `page`: An optional page number for pagination.
+- `pageSize`: An optional number of results per page.

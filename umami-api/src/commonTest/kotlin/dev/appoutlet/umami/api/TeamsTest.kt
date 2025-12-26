@@ -287,11 +287,19 @@ class TeamsTest {
 
         val umami = getUmamiInstance(
             "/api/teams/a1b2c3d4-e5f6-7890-1234-567890abcdef/websites" to {
+                it.url.parameters["search"] shouldBe "test"
+                it.url.parameters["page"] shouldBe "2"
+                it.url.parameters["pageSize"] shouldBe "20"
                 respond(expectedResponse)
             }
         )
 
-        val actualResponse = umami.teams().getWebsites("a1b2c3d4-e5f6-7890-1234-567890abcdef")
+        val actualResponse = umami.teams().getWebsites(
+            teamId = "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+            search = "test",
+            page = 2,
+            pageSize = 20
+        )
         actualResponse shouldBe expectedResponse
     }
 

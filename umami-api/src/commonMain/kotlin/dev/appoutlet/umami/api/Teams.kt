@@ -182,10 +182,22 @@ class Teams(private val umami: Umami) {
      * Retrieves the websites of a team.
      *
      * @param teamId The ID of the team.
+     * @param search An optional search string to filter websites by.
+     * @param page An optional page number for pagination.
+     * @param pageSize An optional number of results per page.
      * @return A list of [Website] objects.
      */
-    suspend fun getWebsites(teamId: String): SearchResponse<Website> {
-        return umami.httpClient.get(Api.Teams.Id.Websites(parent = Api.Teams.Id(teamId = teamId))).body()
+    suspend fun getWebsites(
+        teamId: String,
+        search: String? = null,
+        page: Int? = null,
+        pageSize: Int? = null
+    ): SearchResponse<Website> {
+        return umami.httpClient.get(Api.Teams.Id.Websites(parent = Api.Teams.Id(teamId = teamId))) {
+            parameter("search", search)
+            parameter("page", page)
+            parameter("pageSize", pageSize)
+        }.body()
     }
 }
 

@@ -58,11 +58,11 @@ These endpoints are only available for admin users on self-hosted instances.
 
 ## Users
 
-- [ ] Returns the details of a specific user - `GET /api/users/:userId`
-- [ ] Updates the details of a specific user - `POST /api/users/:userId`
-- [ ] Deletes a user - `DELETE /api/users/:userId`
-- [ ] Returns a list of websites for a user - `GET /api/users/:userId/websites`
-- [ ] Returns a list of teams for a user - `GET /api/users/:userId/teams`
+- [x] Returns the details of a specific user - `GET /api/users/:userId`
+- [x] Updates the details of a specific user - `POST /api/users/:userId`
+- [x] Deletes a user - `DELETE /api/users/:userId`
+- [x] Returns a list of websites for a user - `GET /api/users/:userId/websites`
+- [x] Returns a list of teams for a user - `GET /api/users/:userId/teams`
 
 ## Teams
 

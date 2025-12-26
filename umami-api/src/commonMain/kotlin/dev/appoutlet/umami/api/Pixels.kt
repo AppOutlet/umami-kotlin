@@ -52,10 +52,19 @@ class Pixels(private val umami: Umami) {
      * Updates an existing pixel.
      *
      * @param pixelId The unique identifier of the pixel to update.
-     * @param request The request object containing the new pixel data.
+     * @param name The new name for the pixel.
+     * @param slug The new slug for the pixel.
      * @return The updated [Pixel] object.
      */
-    suspend fun updatePixel(pixelId: String, request: UpdatePixelRequest): Pixel {
+    suspend fun updatePixel(
+        pixelId: String,
+        name: String? = null,
+        slug: String? = null,
+    ): Pixel {
+        val request = UpdatePixelRequest(
+            name = name,
+            slug = slug,
+        )
         return umami.httpClient.post(Api.Pixels.Id(id = pixelId)) {
             setBody(request)
         }.body()
@@ -71,7 +80,7 @@ class Pixels(private val umami: Umami) {
     }
 
     @Serializable
-    data class UpdatePixelRequest(
+    private data class UpdatePixelRequest(
         val name: String? = null,
         val slug: String? = null
     )

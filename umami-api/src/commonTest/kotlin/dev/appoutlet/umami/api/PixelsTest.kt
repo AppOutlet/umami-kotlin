@@ -7,6 +7,7 @@ import dev.appoutlet.umami.testing.respond
 import io.kotest.matchers.shouldBe
 import io.ktor.http.content.OutgoingContent
 import kotlinx.coroutines.test.runTest
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlin.test.Test
 import kotlin.time.Instant
@@ -111,7 +112,14 @@ class PixelsTest {
             "/api/pixels/$pixelId" to { request ->
                 request.url.encodedPath shouldBe "/api/pixels/$pixelId"
                 val bodyText = (request.body as OutgoingContent.ByteArrayContent).bytes().decodeToString()
-                val updateRequest = Json.decodeFromString<Pixels.UpdatePixelRequest>(bodyText)
+
+                @Serializable
+                data class UpdatePixelRequest(
+                    val name: String? = null,
+                    val slug: String? = null
+                )
+
+                val updateRequest = Json.decodeFromString<UpdatePixelRequest>(bodyText)
                 updateRequest.name shouldBe requestName
                 updateRequest.slug shouldBe requestSlug
                 respond(mockPixel)
@@ -120,10 +128,8 @@ class PixelsTest {
 
         val response = umami.pixels().updatePixel(
             pixelId,
-            Pixels.UpdatePixelRequest(
-                name = requestName,
-                slug = requestSlug
-            )
+            name = requestName,
+            slug = requestSlug
         )
         response shouldBe mockPixel
     }

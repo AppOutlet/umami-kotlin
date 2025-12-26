@@ -180,7 +180,7 @@ class TeamsTest {
             id = "e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e",
             teamId = "a1b2c3d4-e5f6-7890-1234-567890abcdef",
             userId = "f0e9d8c7-b6a5-4321-fedc-ba9876543210",
-            role = "member",
+            role = "team-member",
             createdAt = Instant.parse("2022-01-01T00:00:00Z"),
             updatedAt = Instant.parse("2022-01-01T00:00:00Z")
         )
@@ -189,7 +189,7 @@ class TeamsTest {
             "/api/teams/a1b2c3d4-e5f6-7890-1234-567890abcdef/users" to {
                 val body = it.body<AddUserRequest>()
                 body.userId shouldBe "f0e9d8c7-b6a5-4321-fedc-ba9876543210"
-                body.role shouldBe "member"
+                body.role shouldBe  "team-member"
                 respond(expectedResponse)
             }
         )
@@ -197,7 +197,7 @@ class TeamsTest {
         val actualResponse = umami.teams().addUser(
             "a1b2c3d4-e5f6-7890-1234-567890abcdef",
             "f0e9d8c7-b6a5-4321-fedc-ba9876543210",
-            "member"
+            "team-member"
         )
         actualResponse shouldBe expectedResponse
     }
@@ -232,14 +232,14 @@ class TeamsTest {
             id = "e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e",
             teamId = "a1b2c3d4-e5f6-7890-1234-567890abcdef",
             userId = "f0e9d8c7-b6a5-4321-fedc-ba9876543210",
-            role = "admin",
+            role = "team-manager",
             createdAt = Instant.parse("2022-01-01T00:00:00Z"),
             updatedAt = Instant.parse("2022-01-01T00:00:00Z")
         )
 
         val umami = getUmamiInstance(
             "/api/teams/a1b2c3d4-e5f6-7890-1234-567890abcdef/users/f0e9d8c7-b6a5-4321-fedc-ba9876543210" to {
-                it.body<UpdateUserRoleRequest>().role shouldBe "admin"
+                it.body<UpdateUserRoleRequest>().role shouldBe "team-manager"
                 respond(expectedResponse)
             }
         )
@@ -247,7 +247,7 @@ class TeamsTest {
         val actualResponse = umami.teams().updateUserRole(
             "a1b2c3d4-e5f6-7890-1234-567890abcdef",
             "f0e9d8c7-b6a5-4321-fedc-ba9876543210",
-            "admin"
+            "team-manager"
         )
         actualResponse shouldBe expectedResponse
     }

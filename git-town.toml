@@ -13,7 +13,7 @@ stash = false
 [hosting]
 dev-remote = "origin"
 forge-type = "github"
-github-connector-type = "gh"
+github-connector-type = "api"
 
 [propose]
 lineage = "none"

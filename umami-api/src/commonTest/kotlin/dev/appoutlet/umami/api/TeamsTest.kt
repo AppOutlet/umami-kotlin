@@ -51,7 +51,7 @@ class TeamsTest {
 
         val umami = getUmamiInstance(
             "/api/teams" to {
-                it.body<TeamRequest>().name shouldBe "Test Team"
+                it.body<CreateTeamRequest>().name shouldBe "Test Team"
                 respond(expectedResponse)
             }
         )
@@ -112,7 +112,7 @@ class TeamsTest {
 
         val umami = getUmamiInstance(
             "/api/teams/e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e" to {
-                val body = it.body<TeamRequest>()
+                val body = it.body<UpdateTeamRequest>()
                 body.name shouldBe "Updated Team"
                 body.accessCode shouldBe "updated-code"
                 respond(expectedResponse)
@@ -302,13 +302,4 @@ class TeamsTest {
         )
         actualResponse shouldBe expectedResponse
     }
-
-    private val TeamRequest.Companion.serializer
-        get() = dev.appoutlet.umami.api.TeamRequest.serializer()
-    private val JoinTeamRequest.Companion.serializer
-        get() = dev.appoutlet.umami.api.JoinTeamRequest.serializer()
-    private val AddUserRequest.Companion.serializer
-        get() = dev.appoutlet.umami.api.AddUserRequest.serializer()
-    private val UpdateUserRoleRequest.Companion.serializer
-        get() = dev.appoutlet.umami.api.UpdateUserRoleRequest.serializer()
 }

@@ -1,6 +1,5 @@
 package dev.appoutlet.umami.api
 
-import TeamMemberRole
 import dev.appoutlet.umami.Umami
 import dev.appoutlet.umami.domain.SearchResponse
 import dev.appoutlet.umami.domain.Team
@@ -123,9 +122,9 @@ class Teams(private val umami: Umami) {
      * @param role The role of the user in the team.
      * @return The [TeamMember] object representing the new membership.
      */
-    suspend fun addUser(teamId: String, userId: String, role: TeamMemberRole): TeamMember {
+    suspend fun addUser(teamId: String, userId: String, role: String): TeamMember {
         return umami.httpClient.post(Api.Teams.TeamId.Users(parent = Api.Teams.TeamId(teamId = teamId))) {
-            setBody(AddUserRequest(userId = userId, role = role.value))
+            setBody(AddUserRequest(userId = userId, role = role))
         }.body()
     }
 
@@ -150,11 +149,11 @@ class Teams(private val umami: Umami) {
      * @param role The new role of the user.
      * @return The updated [TeamMember] object.
      */
-    suspend fun updateUserRole(teamId: String, userId: String, role: TeamMemberRole): TeamMember {
+    suspend fun updateUserRole(teamId: String, userId: String, role: String): TeamMember {
         return umami.httpClient.post(
             Api.Teams.TeamId(teamId = teamId).Users().UserId(userId = userId)
         ) {
-            setBody(UpdateUserRoleRequest(role = role.value))
+            setBody(UpdateUserRoleRequest(role = role))
         }.body()
     }
 

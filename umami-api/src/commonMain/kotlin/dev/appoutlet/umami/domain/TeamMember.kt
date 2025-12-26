@@ -50,23 +50,5 @@ data class TeamMember(
      * The user associated with this membership. This is not always present.
      */
     @SerialName("user")
-    val user: TeamMemberUser? = null
-)
-
-/**
- * A simplified user object nested within a TeamMember.
- */
-@Serializable
-data class TeamMemberUser(
-    /**
-     * The unique identifier of the user.
-     */
-    @SerialName("id")
-    val id: String,
-
-    /**
-     * The username of the user.
-     */
-    @SerialName("username")
-    val username: String
+    val user: User? = null
 )

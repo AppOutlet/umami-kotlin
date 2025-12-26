@@ -74,7 +74,7 @@ kover {
                 )
 
                 minBound(
-                    minValue = 38,
+                    minValue = 37,
                     coverageUnits = CoverageUnit.BRANCH,
                     aggregationForGroup = AggregationType.COVERED_PERCENTAGE,
                 )

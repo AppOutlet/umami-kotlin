@@ -1,16 +1,16 @@
 {
-  "context": {
-    "fileName": [
-      "AGENTS.md"
-    ]
-  },
-  "general": {
-    "previewFeatures": true
-  },
-  "ui": {
-    "footer": {
-      "hideContextPercentage": false,
-      "hideSandboxStatus": true
+    "context": {
+        "fileName": [
+            "AGENTS.md"
+        ]
+    },
+    "general": {
+        "previewFeatures": true
+    },
+    "ui": {
+        "footer": {
+            "hideContextPercentage": false,
+            "hideSandboxStatus": true
+        }
     }
-  }
 }

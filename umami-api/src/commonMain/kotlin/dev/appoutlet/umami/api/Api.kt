@@ -2,6 +2,7 @@ package dev.appoutlet.umami.api
 
 import io.ktor.resources.Resource
 
+@Suppress("FunctionNaming")
 @Resource("/api")
 internal class Api {
 

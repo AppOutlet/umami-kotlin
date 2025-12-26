@@ -189,7 +189,7 @@ class TeamsTest {
             "/api/teams/a1b2c3d4-e5f6-7890-1234-567890abcdef/users" to {
                 val body = it.body<AddUserRequest>()
                 body.userId shouldBe "f0e9d8c7-b6a5-4321-fedc-ba9876543210"
-                body.role shouldBe  "team-member"
+                body.role shouldBe "team-member"
                 respond(expectedResponse)
             }
         )

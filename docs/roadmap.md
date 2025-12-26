@@ -101,6 +101,13 @@ These endpoints are only available for admin users on self-hosted instances.
 - [x] Returns a list of websites for the current user - `GET /api/me/websites`
 - [x] Returns a list of teams for the current user - `GET /api/me/teams`
 
+## Pixels
+
+- [x] Returns all user pixels - `GET /api/pixels`
+- [x] Gets a pixel by ID - `GET /api/pixels/:pixelId`
+- [x] Updates a pixel - `POST /api/pixels/:pixelId`
+- [x] Deletes a pixel - `DELETE /api/pixels/:pixelId`
+
 ## Reports
 
 - [ ] Returns a list of all reports - `GET /api/reports`

@@ -33,6 +33,7 @@ nav:
   - Websites: websites.md
   - Links: links.md
   - Authenticated user: me.md
+  - Pixels: pixels.md
   - Roadmap: roadmap.md
   - Release notes: release-notes.md
   - API Reference: reference

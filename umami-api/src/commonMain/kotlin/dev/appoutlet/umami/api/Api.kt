@@ -58,4 +58,11 @@ internal class Api {
         @Resource("/websites")
         class Websites(val parent: Me = Me())
     }
+
+    @Resource("/pixels")
+    class Pixels(val parent: Api = Api()) {
+
+        @Resource("/{id}")
+        class Id(val parent: Pixels = Pixels(), val id: String)
+    }
 }

@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 import kotlin.time.Instant
 
 /**
- * Represents a tracking pixel in the Umami analytics platform. A tracking pixel is a 1x1 transparent image
- * used to track website visits or other events.
+ * Represents a tracking pixel in the Umami analytics platform. A tracking pixel is a 1x1
+ * transparent image used to track website visits or other events.
  *
  * This data class maps to the pixel object returned by the Umami API.
  *
@@ -15,7 +15,8 @@ import kotlin.time.Instant
 @Serializable
 data class Pixel(
     /**
-     * The unique identifier for the tracking pixel, in UUID format. This ID is used to reference the pixel in API calls.
+     * The unique identifier for the tracking pixel, in UUID format. This ID is used to reference
+     * the pixel in API calls.
      */
     @SerialName("id")
     val id: String,
@@ -25,7 +26,8 @@ data class Pixel(
     @SerialName("name")
     val name: String,
     /**
-     * The unique URL slug for the tracking pixel. This slug is part of the URL used to trigger the tracking event.
+     * The unique URL slug for the tracking pixel. This slug is part of the URL used to trigger
+     * the tracking event.
      */
     @SerialName("slug")
     val slug: String,
@@ -35,7 +37,8 @@ data class Pixel(
     @SerialName("userId")
     val userId: String,
     /**
-     * The unique identifier of the team that the tracking pixel belongs to, in UUID format. This can be null if the pixel is not associated with a team.
+     * The unique identifier of the team that the tracking pixel belongs to, in UUID format. This
+     * can be null if the pixel is not associated with a team.
      */
     @SerialName("teamId")
     val teamId: String?,
@@ -50,7 +53,8 @@ data class Pixel(
     @SerialName("updatedAt")
     val updatedAt: Instant,
     /**
-     * The timestamp indicating when the tracking pixel was deleted, in ISO 8601 format. This will be null if the pixel has not been deleted.
+     * The timestamp indicating when the tracking pixel was deleted, in ISO 8601 format. This will
+     * be null if the pixel has not been deleted.
      */
     @SerialName("deletedAt")
     val deletedAt: Instant?,

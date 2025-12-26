@@ -68,19 +68,30 @@ internal class Api {
 
     @Resource("/teams")
     class Teams(val parent: Api = Api()) {
+
+        fun TeamId(teamId: String) = TeamId(parent = this, teamId = teamId)
+
         @Resource("/join")
         class Join(val parent: Teams = Teams())
 
         @Resource("/{teamId}")
-        class Id(val parent: Teams = Teams(), val teamId: String) {
+        class TeamId(val parent: Teams = Teams(), val teamId: String) {
+
+            fun Users() = Users(parent = this)
+
+            fun Websites() = Websites(parent = this)
+
             @Resource("/users")
-            class Users(val parent: Id) {
+            class Users(val parent: TeamId) {
+
+                fun UserId(userId: String) = UserId(parent = this, userId = userId)
+
                 @Resource("/{userId}")
                 class UserId(val parent: Users, val userId: String)
             }
 
             @Resource("/websites")
-            class Websites(val parent: Id)
+            class Websites(val parent: TeamId)
         }
     }
 }

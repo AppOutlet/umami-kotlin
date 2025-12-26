@@ -1,5 +1,6 @@
 package dev.appoutlet.umami.api
 
+import TeamMemberRole
 import dev.appoutlet.umami.Umami
 import dev.appoutlet.umami.domain.SearchResponse
 import dev.appoutlet.umami.domain.Team
@@ -43,7 +44,7 @@ class Teams(private val umami: Umami) {
      */
     suspend fun create(name: String): Team {
         return umami.httpClient.post(Api.Teams()) {
-            setBody(TeamRequest(name = name))
+            setBody(CreateTeamRequest(name = name))
         }.body()
     }
 
@@ -66,7 +67,7 @@ class Teams(private val umami: Umami) {
      * @return The [Team] object.
      */
     suspend fun get(teamId: String): Team {
-        return umami.httpClient.get(Api.Teams.Id(teamId = teamId)).body()
+        return umami.httpClient.get(Api.Teams.TeamId(teamId = teamId)).body()
     }
 
     /**
@@ -78,8 +79,8 @@ class Teams(private val umami: Umami) {
      * @return The updated [Team].
      */
     suspend fun update(teamId: String, name: String? = null, accessCode: String? = null): Team {
-        return umami.httpClient.post(Api.Teams.Id(teamId = teamId)) {
-            setBody(TeamRequest(name = name, accessCode = accessCode))
+        return umami.httpClient.post(Api.Teams.TeamId(teamId = teamId)) {
+            setBody(UpdateTeamRequest(name = name, accessCode = accessCode))
         }.body()
     }
 
@@ -89,7 +90,7 @@ class Teams(private val umami: Umami) {
      * @param teamId The ID of the team to delete.
      */
     suspend fun delete(teamId: String) {
-        umami.httpClient.delete(Api.Teams.Id(teamId = teamId))
+        umami.httpClient.delete(Api.Teams.TeamId(teamId = teamId))
     }
 
     /**
@@ -107,7 +108,7 @@ class Teams(private val umami: Umami) {
         page: Int? = null,
         pageSize: Int? = null
     ): SearchResponse<TeamMember> {
-        return umami.httpClient.get(Api.Teams.Id.Users(parent = Api.Teams.Id(teamId = teamId))) {
+        return umami.httpClient.get(Api.Teams.TeamId(teamId = teamId).Users()) {
             parameter("search", search)
             parameter("page", page)
             parameter("pageSize", pageSize)
@@ -122,9 +123,9 @@ class Teams(private val umami: Umami) {
      * @param role The role of the user in the team.
      * @return The [TeamMember] object representing the new membership.
      */
-    suspend fun addUser(teamId: String, userId: String, role: String): TeamMember {
-        return umami.httpClient.post(Api.Teams.Id.Users(parent = Api.Teams.Id(teamId = teamId))) {
-            setBody(AddUserRequest(userId = userId, role = role))
+    suspend fun addUser(teamId: String, userId: String, role: TeamMemberRole): TeamMember {
+        return umami.httpClient.post(Api.Teams.TeamId.Users(parent = Api.Teams.TeamId(teamId = teamId))) {
+            setBody(AddUserRequest(userId = userId, role = role.value))
         }.body()
     }
 
@@ -137,10 +138,7 @@ class Teams(private val umami: Umami) {
      */
     suspend fun getUser(teamId: String, userId: String): TeamMember {
         return umami.httpClient.get(
-            Api.Teams.Id.Users.UserId(
-                parent = Api.Teams.Id.Users(parent = Api.Teams.Id(teamId = teamId)),
-                userId = userId
-            )
+            resource = Api.Teams.TeamId(teamId = teamId).Users().UserId(userId = userId)
         ).body()
     }
 
@@ -152,14 +150,11 @@ class Teams(private val umami: Umami) {
      * @param role The new role of the user.
      * @return The updated [TeamMember] object.
      */
-    suspend fun updateUserRole(teamId: String, userId: String, role: String): TeamMember {
+    suspend fun updateUserRole(teamId: String, userId: String, role: TeamMemberRole): TeamMember {
         return umami.httpClient.post(
-            Api.Teams.Id.Users.UserId(
-                parent = Api.Teams.Id.Users(parent = Api.Teams.Id(teamId = teamId)),
-                userId = userId
-            )
+            Api.Teams.TeamId(teamId = teamId).Users().UserId(userId = userId)
         ) {
-            setBody(UpdateUserRoleRequest(role = role))
+            setBody(UpdateUserRoleRequest(role = role.value))
         }.body()
     }
 
@@ -171,10 +166,7 @@ class Teams(private val umami: Umami) {
      */
     suspend fun removeUser(teamId: String, userId: String) {
         umami.httpClient.delete(
-            Api.Teams.Id.Users.UserId(
-                parent = Api.Teams.Id.Users(parent = Api.Teams.Id(teamId = teamId)),
-                userId = userId
-            )
+            Api.Teams.TeamId(teamId = teamId).Users().UserId(userId)
         )
     }
 
@@ -193,7 +185,7 @@ class Teams(private val umami: Umami) {
         page: Int? = null,
         pageSize: Int? = null
     ): SearchResponse<Website> {
-        return umami.httpClient.get(Api.Teams.Id.Websites(parent = Api.Teams.Id(teamId = teamId))) {
+        return umami.httpClient.get(Api.Teams.TeamId(teamId = teamId).Websites()) {
             parameter("search", search)
             parameter("page", page)
             parameter("pageSize", pageSize)
@@ -202,17 +194,24 @@ class Teams(private val umami: Umami) {
 }
 
 @Serializable
-internal data class TeamRequest(
+internal data class CreateTeamRequest(
     @SerialName("name")
     val name: String? = null,
-    @SerialName("accessCode")
-    val accessCode: String? = null
 )
 
 @Serializable
 internal data class JoinTeamRequest(
     @SerialName("accessCode")
     val accessCode: String
+)
+
+@Serializable
+internal data class UpdateTeamRequest(
+    @SerialName("name")
+    val name: String? = null,
+
+    @SerialName("accessCode")
+    val accessCode: String? = null,
 )
 
 @Serializable

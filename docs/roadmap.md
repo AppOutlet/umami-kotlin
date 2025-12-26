@@ -66,23 +66,23 @@ These endpoints are only available for admin users on self-hosted instances.
 
 ## Teams
 
-- [ ] Creates a new team - `POST /api/teams`
-- [ ] Joins an existing team using an access code - `POST /api/teams/join`
-- [ ] Returns the details of a specific team - `GET /api/teams/:teamId`
-- [ ] Updates the details of a specific team - `POST /api/teams/:teamId`
-- [ ] Deletes a team - `DELETE /api/teams/:teamId`
+- [x] Creates a new team - `POST /api/teams`
+- [x] Joins an existing team using an access code - `POST /api/teams/join`
+- [x] Returns the details of a specific team - `GET /api/teams/:teamId`
+- [x] Updates the details of a specific team - `POST /api/teams/:teamId`
+- [x] Deletes a team - `DELETE /api/teams/:teamId`
 
 ### Team Members
 
-- [ ] Returns a list of users in a team - `GET /api/teams/:teamId/users`
-- [ ] Adds a user to a team - `POST /api/teams/:teamId/users`
-- [ ] Returns details for a specific user in a team - `GET /api/teams/:teamId/users/:userId`
-- [ ] Updates the role of a user in a team - `POST /api/teams/:teamId/users/:userId`
-- [ ] Removes a user from a team - `DELETE /api/teams/:teamId/users/:userId`
+- [x] Returns a list of users in a team - `GET /api/teams/:teamId/users`
+- [x] Adds a user to a team - `POST /api/teams/:teamId/users`
+- [x] Returns details for a specific user in a team - `GET /api/teams/:teamId/users/:userId`
+- [x] Updates the role of a user in a team - `POST /api/teams/:teamId/users/:userId`
+- [x] Removes a user from a team - `DELETE /api/teams/:teamId/users/:userId`
 
 ### Team Websites
 
-- [ ] Returns a list of websites in a team - `GET /api/teams/:teamId/websites`
+- [x] Returns a list of websites in a team - `GET /api/teams/:teamId/websites`
 - [ ] Creates a website for a team - `POST /api/teams/:teamId/websites`
 - [ ] Removes a website from a team - `DELETE /api/teams/:teamId/websites/:websiteId`
 

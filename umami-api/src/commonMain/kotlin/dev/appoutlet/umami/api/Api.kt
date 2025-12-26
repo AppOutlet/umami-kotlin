@@ -2,6 +2,7 @@ package dev.appoutlet.umami.api
 
 import io.ktor.resources.Resource
 
+@Suppress("FunctionNaming")
 @Resource("/api")
 internal class Api {
 
@@ -64,5 +65,34 @@ internal class Api {
 
         @Resource("/{id}")
         class Id(val parent: Pixels = Pixels(), val id: String)
+    }
+
+    @Resource("/teams")
+    class Teams(val parent: Api = Api()) {
+
+        fun TeamId(teamId: String) = TeamId(parent = this, teamId = teamId)
+
+        @Resource("/join")
+        class Join(val parent: Teams = Teams())
+
+        @Resource("/{teamId}")
+        class TeamId(val parent: Teams = Teams(), val teamId: String) {
+
+            fun Users() = Users(parent = this)
+
+            fun Websites() = Websites(parent = this)
+
+            @Resource("/users")
+            class Users(val parent: TeamId) {
+
+                fun UserId(userId: String) = UserId(parent = this, userId = userId)
+
+                @Resource("/{userId}")
+                class UserId(val parent: Users, val userId: String)
+            }
+
+            @Resource("/websites")
+            class Websites(val parent: TeamId)
+        }
     }
 }

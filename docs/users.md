@@ -22,11 +22,27 @@ Creates a new user.
 - `role`: The user's role.
 - `id`: The user's ID (optional).
 
+**Example:**
+
+```kotlin
+val user = umami.users().create(
+    username = "new_user",
+    password = "secure_password",
+    role = "admin"
+)
+```
+
 ### `get(userId: String): User`
 
 Gets a user by ID.
 
 - `userId`: The unique identifier of the user.
+
+**Example:**
+
+```kotlin
+val user = umami.users().get(userId = "user-id-123")
+```
 
 ### `update(userId: String, username: String? = null, password: String? = null, role: String? = null): User`
 
@@ -37,11 +53,27 @@ Updates a user.
 - `password`: The new password.
 - `role`: The new role.
 
+**Example:**
+
+```kotlin
+val updatedUser = umami.users().update(
+    userId = "user-id-123",
+    username = "updated_username",
+    role = "user"
+)
+```
+
 ### `delete(userId: String)`
 
 Deletes a user.
 
 - `userId`: The unique identifier of the user.
+
+**Example:**
+
+```kotlin
+umami.users().delete(userId = "user-id-123")
+```
 
 ### `getWebsites(userId: String, includeTeams: Boolean = false, search: String? = null, page: Int? = null, pageSize: Int? = null): SearchResponse<Website>`
 
@@ -53,6 +85,20 @@ Gets all websites that belong to a user.
 - `page`: Determines page.
 - `pageSize`: Determines how many results to return.
 
+**Example:**
+
+```kotlin
+val response = umami.users().getWebsites(
+    userId = "user-id-123",
+    page = 1,
+    pageSize = 10
+)
+
+response.data.forEach { website ->
+    println("Website: ${website.name}")
+}
+```
+
 ### `getTeams(userId: String, page: Int? = null, pageSize: Int? = null): SearchResponse<Team>`
 
 Gets all teams that belong to a user.
@@ -60,3 +106,17 @@ Gets all teams that belong to a user.
 - `userId`: The unique identifier of the user.
 - `page`: Determines page.
 - `pageSize`: Determines how many results to return.
+
+**Example:**
+
+```kotlin
+val response = umami.users().getTeams(
+    userId = "user-id-123",
+    page = 1,
+    pageSize = 10
+)
+
+response.data.forEach { team ->
+    println("Team: ${team.name}")
+}
+```

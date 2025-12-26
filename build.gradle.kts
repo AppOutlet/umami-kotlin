@@ -82,3 +82,14 @@ kover {
         }
     }
 }
+
+gitHooks {
+    gitHooksDirectory = project.layout.projectDirectory.dir("git-hooks")
+    gitDirectory = project.rootProject.layout.projectDirectory.dir(".git")
+}
+
+tasks {
+    assemble {
+        dependsOn(":installGitHooks")
+    }
+}

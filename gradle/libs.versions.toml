@@ -44,7 +44,7 @@ compose-hotReload = "org.jetbrains.compose.hot-reload:1.1.0-alpha01"
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 gitHooks = "eu.bambooapps.gradle.plugin.githook:1.1.1"
-kover = "org.jetbrains.kotlinx.kover:0.9.3"
+kover = "org.jetbrains.kotlinx.kover:0.9.4"
 maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }
 mokkery = "dev.mokkery:3.0.0"
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }

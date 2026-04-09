@@ -16,3 +16,5 @@ Pods/
 *.gpg
 *yarn.lock
 .env
+.opencode/*
+!.opencode/skills

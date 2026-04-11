@@ -10,6 +10,20 @@ updates:
     open-pull-requests-limit: 99
     schedule:
       interval: "monthly"
+    ignore:
+      - dependency-name: "gradle-wrapper"
+      - dependency-name: "org.jetbrains.compose.runtime:runtime*"
+      - dependency-name: "org.jetbrains.compose.ui:ui*"
+      - dependency-name: "org.jetbrains.compose.foundation:foundation*"
+      - dependency-name: "org.jetbrains.compose.material:material*"
+      - dependency-name: "org.jetbrains.compose.material3:material3*"
+      - dependency-name: "org.jetbrains.compose.material3.adaptive:adaptive*"
+      - dependency-name: "org.jetbrains.androidx.lifecycle:lifecycle-*"
+      - dependency-name: "org.jetbrains.androidx.navigation:navigation-*"
+      - dependency-name: "org.jetbrains.androidx.navigation3:navigation3-*"
+      - dependency-name: "org.jetbrains.androidx.navigationevent:navigationevent-compose"
+      - dependency-name: "org.jetbrains.androidx.savedstate:savedstate*"
+      - dependency-name: "org.jetbrains.androidx.window:window-core"
 
   - package-ecosystem: "github-actions"
     directory: "/"

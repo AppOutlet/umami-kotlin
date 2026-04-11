@@ -1,6 +1,5 @@
 package dev.appoutlet.umami.api
 
-import dev.appoutlet.umami.Umami
 import dev.appoutlet.umami.domain.SearchResponse
 import dev.appoutlet.umami.domain.Team
 import dev.appoutlet.umami.domain.User
@@ -17,9 +16,9 @@ import kotlinx.serialization.Serializable
 /**
  * Provides functionalities for interacting with Users in the Umami API.
  *
- * @param umami The [Umami] instance used for making HTTP requests.
+ * @param umami The [UmamiApi] instance used for making HTTP requests.
  */
-class Users(private val umami: Umami) {
+class Users(private val api: UmamiApi) {
 
     /**
      * Creates a new user.
@@ -36,7 +35,7 @@ class Users(private val umami: Umami) {
         role: String,
         id: String? = null,
     ): User {
-        return umami.httpClient.post(Api.Users()) {
+        return api.httpClient.post(Api.Users()) {
             setBody(
                 CreateUserRequest(
                     username = username,
@@ -55,7 +54,7 @@ class Users(private val umami: Umami) {
      * @return The [User] object.
      */
     suspend fun get(userId: String): User {
-        return umami.httpClient.get(Api.Users.UserId(userId = userId)).body()
+        return api.httpClient.get(Api.Users.UserId(userId = userId)).body()
     }
 
     /**
@@ -73,7 +72,7 @@ class Users(private val umami: Umami) {
         password: String? = null,
         role: String? = null,
     ): User {
-        return umami.httpClient.post(Api.Users.UserId(userId = userId)) {
+        return api.httpClient.post(Api.Users.UserId(userId = userId)) {
             setBody(
                 UpdateUserRequest(
                     username = username,
@@ -90,7 +89,7 @@ class Users(private val umami: Umami) {
      * @param userId The unique identifier of the user.
      */
     suspend fun delete(userId: String) {
-        umami.httpClient.delete(Api.Users.UserId(userId = userId))
+        api.httpClient.delete(Api.Users.UserId(userId = userId))
     }
 
     /**
@@ -110,7 +109,7 @@ class Users(private val umami: Umami) {
         page: Int? = null,
         pageSize: Int? = null,
     ): SearchResponse<Website> {
-        return umami.httpClient.get(Api.Users.UserId(userId = userId).Websites()) {
+        return api.httpClient.get(Api.Users.UserId(userId = userId).Websites()) {
             parameter("includeTeams", includeTeams)
             parameter("search", search)
             parameter("page", page)
@@ -131,7 +130,7 @@ class Users(private val umami: Umami) {
         page: Int? = null,
         pageSize: Int? = null,
     ): SearchResponse<Team> {
-        return umami.httpClient.get(Api.Users.UserId(userId = userId).Teams()) {
+        return api.httpClient.get(Api.Users.UserId(userId = userId).Teams()) {
             parameter("page", page)
             parameter("pageSize", pageSize)
         }.body()
@@ -139,11 +138,11 @@ class Users(private val umami: Umami) {
 }
 
 /**
- * Extension function to provide easy access to [Users] functionalities from an [Umami] instance.
+ * Extension function to provide easy access to [Users] functionalities from an [UmamiApi] instance.
  *
  * @return An instance of [Users].
  */
-fun Umami.users(): Users = Users(this)
+fun UmamiApi.users(): Users = Users(this)
 
 @Serializable
 internal data class CreateUserRequest(

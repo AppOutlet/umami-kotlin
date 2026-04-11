@@ -7,8 +7,8 @@ The `Users` API provides functionalities for managing users in Umami. It allows 
 To access the Users API, you need an instance of the `Umami` class. You can then call the `users()` extension function to get an instance of the `Users` class:
 
 ```kotlin
-val umami = Umami(website = "your_website_id")
-val usersApi = umami.users()
+val api = UmamiApi {website = "your_website_id")
+val usersApi = api.users()
 ```
 
 ## Methods
@@ -25,7 +25,7 @@ Creates a new user.
 **Example:**
 
 ```kotlin
-val user = umami.users().create(
+val user = api.users().create(
     username = "new_user",
     password = "secure_password",
     role = "admin"
@@ -41,7 +41,7 @@ Gets a user by ID.
 **Example:**
 
 ```kotlin
-val user = umami.users().get(userId = "user-id-123")
+val user = api.users().get(userId = "user-id-123")
 ```
 
 ### `update(userId: String, username: String? = null, password: String? = null, role: String? = null): User`
@@ -56,7 +56,7 @@ Updates a user.
 **Example:**
 
 ```kotlin
-val updatedUser = umami.users().update(
+val updatedUser = api.users().update(
     userId = "user-id-123",
     username = "updated_username",
     role = "user"
@@ -72,7 +72,7 @@ Deletes a user.
 **Example:**
 
 ```kotlin
-umami.users().delete(userId = "user-id-123")
+api.users().delete(userId = "user-id-123")
 ```
 
 ### `getWebsites(userId: String, includeTeams: Boolean = false, search: String? = null, page: Int? = null, pageSize: Int? = null): SearchResponse<Website>`
@@ -88,7 +88,7 @@ Gets all websites that belong to a user.
 **Example:**
 
 ```kotlin
-val response = umami.users().getWebsites(
+val response = api.users().getWebsites(
     userId = "user-id-123",
     page = 1,
     pageSize = 10
@@ -110,7 +110,7 @@ Gets all teams that belong to a user.
 **Example:**
 
 ```kotlin
-val response = umami.users().getTeams(
+val response = api.users().getTeams(
     userId = "user-id-123",
     page = 1,
     pageSize = 10

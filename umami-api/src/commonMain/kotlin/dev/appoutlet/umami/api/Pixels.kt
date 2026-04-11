@@ -1,6 +1,5 @@
 package dev.appoutlet.umami.api
 
-import dev.appoutlet.umami.Umami
 import dev.appoutlet.umami.domain.Pixel
 import dev.appoutlet.umami.domain.SearchResponse
 import io.ktor.client.call.body
@@ -14,9 +13,9 @@ import kotlinx.serialization.Serializable
 /**
  * Provides functionalities for interacting with Pixels in the Umami API.
  *
- * @param umami The [Umami] instance used for making HTTP requests.
+ * @param umami The [UmamiApi] instance used for making HTTP requests.
  */
-class Pixels(private val umami: Umami) {
+class Pixels(private val api: UmamiApi) {
 
     /**
      * Retrieves a paginated list of pixels from the Umami API.
@@ -31,7 +30,7 @@ class Pixels(private val umami: Umami) {
         page: Int? = null,
         pageSize: Int? = null,
     ): SearchResponse<Pixel> {
-        return umami.httpClient.get(Api.Pixels()) {
+        return api.httpClient.get(Api.Pixels()) {
             parameter("search", search)
             parameter("page", page)
             parameter("pageSize", pageSize)
@@ -45,7 +44,7 @@ class Pixels(private val umami: Umami) {
      * @return The [Pixel] object matching the provided ID.
      */
     suspend fun getPixel(pixelId: String): Pixel {
-        return umami.httpClient.get(Api.Pixels.Id(id = pixelId)).body()
+        return api.httpClient.get(Api.Pixels.Id(id = pixelId)).body()
     }
 
     /**
@@ -65,7 +64,7 @@ class Pixels(private val umami: Umami) {
             name = name,
             slug = slug,
         )
-        return umami.httpClient.post(Api.Pixels.Id(id = pixelId)) {
+        return api.httpClient.post(Api.Pixels.Id(id = pixelId)) {
             setBody(request)
         }.body()
     }
@@ -76,7 +75,7 @@ class Pixels(private val umami: Umami) {
      * @param pixelId The unique identifier of the pixel to delete.
      */
     suspend fun deletePixel(pixelId: String) {
-        umami.httpClient.delete(Api.Pixels.Id(id = pixelId))
+        api.httpClient.delete(Api.Pixels.Id(id = pixelId))
     }
 
     @Serializable
@@ -87,8 +86,8 @@ class Pixels(private val umami: Umami) {
 }
 
 /**
- * Extension function to provide easy access to [Pixels] functionalities from an [Umami] instance.
+ * Extension function to provide easy access to [Pixels] functionalities from an [UmamiApi] instance.
  *
  * @return An instance of [Pixels].
  */
-fun Umami.pixels(): Pixels = Pixels(this)
+fun UmamiApi.pixels(): Pixels = Pixels(this)

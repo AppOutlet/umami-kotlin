@@ -1,6 +1,5 @@
 package dev.appoutlet.umami.api
 
-import dev.appoutlet.umami.Umami
 import dev.appoutlet.umami.domain.SearchResponse
 import dev.appoutlet.umami.domain.Team
 import dev.appoutlet.umami.domain.User
@@ -13,9 +12,9 @@ import io.ktor.client.request.parameter
  * Provides administrative functionalities for interacting with the Umami API.
  * This class allows fetching lists of users and websites with optional search and pagination.
  *
- * @param umami The [Umami] instance used for making HTTP requests.
+ * @param umami The [UmamiApi] instance used for making HTTP requests.
  */
-class Admin(private val umami: Umami) {
+class Admin(private val api: UmamiApi) {
     /**
      * Retrieves a paginated list of users from the Umami API.
      *
@@ -29,7 +28,7 @@ class Admin(private val umami: Umami) {
         page: Int? = null,
         pageSize: Int? = null,
     ): SearchResponse<User> {
-        return umami.httpClient.get(Api.Admin.Users()) {
+        return api.httpClient.get(Api.Admin.Users()) {
             parameter("search", search)
             parameter("page", page)
             parameter("pageSize", pageSize)
@@ -49,7 +48,7 @@ class Admin(private val umami: Umami) {
         page: Int? = null,
         pageSize: Int? = null,
     ): SearchResponse<Website> {
-        return umami.httpClient.get(Api.Admin.Websites()) {
+        return api.httpClient.get(Api.Admin.Websites()) {
             parameter("search", search)
             parameter("page", page)
             parameter("pageSize", pageSize)
@@ -69,7 +68,7 @@ class Admin(private val umami: Umami) {
         page: Int? = null,
         pageSize: Int? = null,
     ): SearchResponse<Team> {
-        return umami.httpClient.get(Api.Admin.Teams()) {
+        return api.httpClient.get(Api.Admin.Teams()) {
             parameter("search", search)
             parameter("page", page)
             parameter("pageSize", pageSize)
@@ -78,8 +77,8 @@ class Admin(private val umami: Umami) {
 }
 
 /**
- * Extension function to provide easy access to [Admin] functionalities from an [Umami] instance.
+ * Extension function to provide easy access to [Admin] functionalities from an [UmamiApi] instance.
  *
  * @return An instance of [Admin].
  */
-fun Umami.admin(): Admin = Admin(this)
+fun UmamiApi.admin(): Admin = Admin(this)

@@ -32,7 +32,12 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             api(project(":umami"))
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.client.resources)
+            implementation(libs.ktor.client.serialization)
+            implementation(libs.ktor.serialization.json)
+            implementation(libs.ktor.client.logging)
         }
 
         commonTest.dependencies {

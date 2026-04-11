@@ -2,7 +2,7 @@ package dev.appoutlet.umami.api
 
 import dev.appoutlet.umami.domain.Pixel
 import dev.appoutlet.umami.domain.SearchResponse
-import dev.appoutlet.umami.testing.getUmamiInstance
+import dev.appoutlet.umami.testing.getUmamiApiInstance
 import dev.appoutlet.umami.testing.respond
 import io.kotest.matchers.shouldBe
 import io.ktor.http.content.OutgoingContent
@@ -33,14 +33,14 @@ class PixelsTest {
             pageSize = 10
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/pixels" to { request ->
                 request.url.encodedPath shouldBe "/api/pixels"
                 respond(mockResponse)
             }
         )
 
-        val response = umami.pixels().getPixels()
+        val response = api.pixels().getPixels()
         response shouldBe mockResponse
     }
 
@@ -53,7 +53,7 @@ class PixelsTest {
             pageSize = 20
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/pixels" to { request ->
                 request.url.encodedPath shouldBe "/api/pixels"
                 request.url.parameters["search"] shouldBe "test"
@@ -63,7 +63,7 @@ class PixelsTest {
             }
         )
 
-        umami.pixels().getPixels(search = "test", page = 2, pageSize = 20)
+        api.pixels().getPixels(search = "test", page = 2, pageSize = 20)
     }
 
     @Test
@@ -80,14 +80,14 @@ class PixelsTest {
             deletedAt = null
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/pixels/$pixelId" to { request ->
                 request.url.encodedPath shouldBe "/api/pixels/$pixelId"
                 respond(mockPixel)
             }
         )
 
-        val response = umami.pixels().getPixel(pixelId)
+        val response = api.pixels().getPixel(pixelId)
         response shouldBe mockPixel
     }
 
@@ -108,7 +108,7 @@ class PixelsTest {
             deletedAt = null
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/pixels/$pixelId" to { request ->
                 request.url.encodedPath shouldBe "/api/pixels/$pixelId"
                 val bodyText = (request.body as OutgoingContent.ByteArrayContent).bytes().decodeToString()
@@ -126,7 +126,7 @@ class PixelsTest {
             }
         )
 
-        val response = umami.pixels().updatePixel(
+        val response = api.pixels().updatePixel(
             pixelId,
             name = requestName,
             slug = requestSlug
@@ -138,13 +138,13 @@ class PixelsTest {
     fun `deletePixel deletes pixel`() = runTest {
         val pixelId = "pixel-id"
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/pixels/$pixelId" to { request ->
                 request.url.encodedPath shouldBe "/api/pixels/$pixelId"
                 respond(Unit)
             }
         )
 
-        umami.pixels().deletePixel(pixelId)
+        api.pixels().deletePixel(pixelId)
     }
 }

@@ -3,17 +3,17 @@
 The `umami-kotlin` library provides a `Links` API for managing links within your Umami instance.
 
 !!! info "New to Umami Kotlin?"
-    Before using the Links API, ensure you have initialized the `Umami` client. Refer to our getting started guides for [Kotlin Multiplatform](../getstarted/kmp.md) and [Android](../getstarted/android.md) for setup instructions.
+    Before using the Links API, ensure you have initialized the `UmamiApi` client. Refer to our getting started guides for [Kotlin Multiplatform](../getstarted/kmp.md) and [Android](../getstarted/android.md) for setup instructions.
 
 All functions within the `Links` API are `suspend` functions, meaning they must be called from within a coroutine or another `suspend` function.
 
 ## Obtaining a Links Instance
 
-You can access the `Links` API functionalities through an extension function on your `Umami` client instance:
+You can access the `Links` API functionalities through an extension function on your `UmamiApi` client instance:
 
 ```kotlin
-// Assuming 'umami' is an initialized Umami client
-val linksApi = umami.links()
+// Assuming 'api' is an initialized UmamiApi client
+val linksApi = api.links()
 ```
 
 ## Retrieving Links
@@ -47,7 +47,6 @@ import dev.appoutlet.umami.domain.Link
 import dev.appoutlet.umami.domain.SearchResponse
 
 // Assuming 'linksApi' is an instance of Links
-suspend fun fetchLinks() {
     try {
         // Fetch all links
         val allLinks: SearchResponse<Link> = linksApi.getLinks()
@@ -64,7 +63,6 @@ suspend fun fetchLinks() {
         )
         println("Filtered links on page 1: ${filteredLinks.data.size}")
 
-    } catch (e: Exception) {
         println("Error fetching links: ${e.message}")
     }
 }
@@ -94,11 +92,9 @@ Returns a `Link` object corresponding to the provided ID.
 import dev.appoutlet.umami.domain.Link
 
 // Assuming 'linksApi' is an instance of Links
-suspend fun fetchLinkById(id: String) {
     try {
         val link: Link = linksApi.getLink(id)
         println("Retrieved link: ${link.name} (${link.url})")
-    } catch (e: Exception) {
         println("Error fetching link: ${e.message}")
     }
 }
@@ -134,7 +130,6 @@ Returns the created `Link` object.
 import dev.appoutlet.umami.domain.Link
 
 // Assuming 'linksApi' is an instance of Links
-suspend fun createNewLink() {
     try {
         val newLink: Link = linksApi.createLink(
             name = "My New Link",
@@ -142,7 +137,6 @@ suspend fun createNewLink() {
             slug = "my-new-link-slug"
         )
         println("Created link: ${newLink.name} (${newLink.url})")
-    } catch (e: Exception) {
         println("Error creating link: ${e.message}")
     }
 }
@@ -180,7 +174,6 @@ Returns the updated `Link` object.
 import dev.appoutlet.umami.domain.Link
 
 // Assuming 'linksApi' is an instance of Links
-suspend fun updateLinkDetails(id: String) {
     try {
         val updatedLink: Link = linksApi.updateLink(
             linkId = id,
@@ -189,7 +182,6 @@ suspend fun updateLinkDetails(id: String) {
             slug = "new-awesome-slug"
         )
         println("Updated link: ${updatedLink.name} (${updatedLink.url})")
-    } catch (e: Exception) {
         println("Error updating link: ${e.message}")
     }
 }
@@ -213,11 +205,9 @@ suspend fun deleteLink(linkId: String)
 
 ```kotlin
 // Assuming 'linksApi' is an instance of Links
-suspend fun deleteLinkById(id: String) {
     try {
         linksApi.deleteLink(id)
         println("Link deleted successfully")
-    } catch (e: Exception) {
         println("Error deleting link: ${e.message}")
     }
 }

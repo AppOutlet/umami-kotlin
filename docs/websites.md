@@ -5,8 +5,8 @@ The `Websites` API provides a convenient way to interact with the website-relate
 To get started, you can access the `Websites` API from your `Umami` instance:
 
 ```kotlin
-val umami = Umami(website = "your-website-id")
-val websitesApi = umami.websites()
+val api = UmamiApi {website = "your-website-id")
+val websitesApi = api.websites()
 ```
 
 ## Get all websites

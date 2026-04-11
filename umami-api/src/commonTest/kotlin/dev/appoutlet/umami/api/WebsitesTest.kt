@@ -2,7 +2,7 @@ package dev.appoutlet.umami.api
 
 import dev.appoutlet.umami.domain.SearchResponse
 import dev.appoutlet.umami.domain.Website
-import dev.appoutlet.umami.testing.getUmamiInstance
+import dev.appoutlet.umami.testing.getUmamiApiInstance
 import dev.appoutlet.umami.testing.respond
 import io.kotest.matchers.shouldBe
 import io.ktor.http.content.TextContent
@@ -34,14 +34,14 @@ class WebsitesTest {
             pageSize = 10
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/websites" to { request ->
                 request.url.encodedPath shouldBe "/api/websites"
                 respond(mockResponse)
             }
         )
 
-        val response = umami.websites().getWebsites()
+        val response = api.websites().getWebsites()
         response shouldBe mockResponse
     }
 
@@ -54,7 +54,7 @@ class WebsitesTest {
             pageSize = 20
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/websites" to { request ->
                 request.url.encodedPath shouldBe "/api/websites"
                 request.url.parameters["search"] shouldBe "test"
@@ -65,7 +65,7 @@ class WebsitesTest {
             }
         )
 
-        umami.websites().getWebsites(search = "test", page = 2, pageSize = 20, includeTeams = true)
+        api.websites().getWebsites(search = "test", page = 2, pageSize = 20, includeTeams = true)
     }
 
     @Test
@@ -85,14 +85,14 @@ class WebsitesTest {
             deletedAt = null
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/websites/$websiteId" to { request ->
                 request.url.encodedPath shouldBe "/api/websites/$websiteId"
                 respond(mockWebsite)
             }
         )
 
-        val response = umami.websites().getWebsite(websiteId)
+        val response = api.websites().getWebsite(websiteId)
         response shouldBe mockWebsite
     }
 
@@ -101,7 +101,7 @@ class WebsitesTest {
         val mockWebsite = Website(
             id = "new-website-id",
             name = "umami-new",
-            domain = "new.umami.is",
+            domain = "new.api.is",
             shareId = null,
             resetAt = null,
             userId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -112,18 +112,18 @@ class WebsitesTest {
             deletedAt = null
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/websites" to { request ->
                 request.url.encodedPath shouldBe "/api/websites"
                 val body = (request.body as TextContent).text
-                body shouldBe """{"name":"umami-new","domain":"new.umami.is"}"""
+                body shouldBe """{"name":"umami-new","domain":"new.api.is"}"""
                 respond(mockWebsite)
             }
         )
 
-        val response = umami.websites().createWebsite(
+        val response = api.websites().createWebsite(
             name = "umami-new",
-            domain = "new.umami.is",
+            domain = "new.api.is",
         )
         response shouldBe mockWebsite
     }
@@ -134,7 +134,7 @@ class WebsitesTest {
         val mockWebsite = Website(
             id = websiteId,
             name = "umami-updated",
-            domain = "updated.umami.is",
+            domain = "updated.api.is",
             shareId = "updated-share-id",
             resetAt = null,
             userId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -145,19 +145,19 @@ class WebsitesTest {
             deletedAt = null
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/websites/$websiteId" to { request ->
                 request.url.encodedPath shouldBe "/api/websites/$websiteId"
                 val body = (request.body as TextContent).text
-                body shouldBe """{"name":"umami-updated","domain":"updated.umami.is","shareId":"updated-share-id"}"""
+                body shouldBe """{"name":"umami-updated","domain":"updated.api.is","shareId":"updated-share-id"}"""
                 respond(mockWebsite)
             }
         )
 
-        val response = umami.websites().updateWebsite(
+        val response = api.websites().updateWebsite(
             websiteId = websiteId,
             name = "umami-updated",
-            domain = "updated.umami.is",
+            domain = "updated.api.is",
             shareId = "updated-share-id"
         )
         response shouldBe mockWebsite
@@ -167,27 +167,27 @@ class WebsitesTest {
     fun `deleteWebsite deletes website`() = runTest {
         val websiteId = "website-id"
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/websites/$websiteId" to { request ->
                 request.url.encodedPath shouldBe "/api/websites/$websiteId"
                 respond(Unit)
             }
         )
 
-        umami.websites().deleteWebsite(websiteId)
+        api.websites().deleteWebsite(websiteId)
     }
 
     @Test
     fun `resetWebsite resets website`() = runTest {
         val websiteId = "website-id"
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/websites/$websiteId/reset" to { request ->
                 request.url.encodedPath shouldBe "/api/websites/$websiteId/reset"
                 respond(Unit)
             }
         )
 
-        umami.websites().resetWebsite(websiteId)
+        api.websites().resetWebsite(websiteId)
     }
 }

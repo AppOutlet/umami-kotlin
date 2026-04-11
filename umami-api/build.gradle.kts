@@ -92,7 +92,7 @@ android {
     }
 }
 
-val version = "0.4.0"
+val version = libs.versions.umami.get()
 
 mavenPublishing {
     publishToMavenCentral(true)

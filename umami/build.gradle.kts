@@ -160,8 +160,6 @@ mavenPublishing {
 }
 
 dokka {
-    val currentVersion = libs.versions.umami.get()
-
     dokkaPublications.html {
         outputDirectory.set(projectDir.resolve("docs/reference"))
     }

@@ -25,13 +25,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v5
+        uses: gradle/actions/setup-gradle@v6
         with:
           add-job-summary: 'on-failure'
           cache-read-only: false
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
 
       - name: Run detekt
         run: ./gradlew detekt
@@ -45,9 +45,7 @@ jobs:
         run: |
           git fetch
           git checkout main
-          sed -i '' -E 's/version = "[0-9]+\.[0-9]+\.[0-9]+"/version = "${{ github.ref_name }}"/g' build.gradle.kts
-          sed -i '' -E 's/version = "[0-g]+\.[0-9]+\.[0-9]+"/version = "${{ github.ref_name }}"/g' umami/build.gradle.kts
-          sed -i '' -E 's/version = "[0-g]+\.[0-9]+\.[0-9]+"/version = "${{ github.ref_name }}"/g' umami-api/build.gradle.kts
+          sed -i '' -E 's/umami = "[0-9]+\.[0-9]+\.[0-9]+"/umami = "${{ github.ref_name }}"/g' gradle/libs.versions.toml
 
       - name: Archive previous documentation version
         run: |

@@ -1,95 +1,65 @@
-# AGENTS.md: Instructions for AI Agents
+# AGENTS.md
 
-This document provides guidance for AI agents contributing to the `umami-kotlin` repository.
+Kotlin Multiplatform library for the [Umami](https://umami.is) web analytics REST API.
 
-## Project Overview
+## Modules
 
-This is a Kotlin Multiplatform library that serves as a wrapper for the [Umami](https://umami.is/) web analytics REST API. The goal is to provide a type-safe, asynchronous, and easy-to-use interface for Kotlin developers on various platforms (Android, iOS, JVM, etc.).
+| Module | Path | Purpose |
+|---|---|---|
+| `:umami` | `umami/` | Core event tracking (lightweight client) |
+| `:umami-api` | `umami-api/` | Full REST API wrapper — depends on `:umami` via `api()` |
+| `:sample:*` | `sample/` | Demo apps (Compose Desktop, native terminal). Not published. |
 
-The project is structured into the following main modules:
-- `:umami`: The core library containing the main logic.
-- `:sample:simple-compose-app`: A sample application demonstrating usage with Jetpack Compose.
-- `:sample:terminalApp`: A sample terminal application.
+`:umami-api` re-exports `:umami`. Both publish to Maven Central as `dev.appoutlet:umami` / `dev.appoutlet:umami-api`.
 
-The source code in the `:umami` library is organized into the following packages:
-- `api`: Handles the direct communication with the Umami REST API.
-- `core`: Contains the central logic, including the HTTP client and event queue.
-- `domain`: Holds the data models and value objects (e.g., `Hostname`, `Ip`).
-
-## Key Libraries and Design Patterns
-
-### Key Libraries
-
-*   **Ktor**: Used for all HTTP networking. The library is designed to be multiplatform, with different client engines for each target (e.g., `OkHttp` for Android/JVM, `Darwin` for iOS).
-*   **Kotlinx Coroutines**: For handling asynchronous operations, especially the event queue.
-*   **Kotlinx Serialization**: For JSON serialization and deserialization.
-*   **kotlin.time.Instant**: Used for all date and time representations to ensure type safety and multiplatform compatibility.
-*   **Kermit**: For logging.
-*   **Kotest**: For assertions in tests. All new tests should use Kotest matchers (e.g., `shouldBe`) instead of `kotlin.test` assertions.
-*   **Mokkery**: For creating mocks in tests.
-
-### Design Patterns
-
-*   **Builder Pattern**: The `UmamiOptionsBuilder` is used to provide a flexible and readable way to configure the `Umami` instance.
-*   **Facade Pattern**: The main `Umami` class acts as a facade, providing a simple, high-level interface to the more complex underlying systems like the event queue and HTTP client.
-*   **Producer-Consumer Pattern**: The library uses a Kotlin `Channel` as a queue to process analytics events asynchronously. Events are produced by the client code and consumed by a background coroutine that sends them to the Umami API.
-
-## Contribution Guidelines
-
-All contributions must adhere to the guidelines outlined in [`CONTRIBUTING.md`](./CONTRIBUTING.md) and the [`CODE_OF_CONDUCT.md`](./CODE_OF_CONDUCT.md).
-
-## Development Setup
-
-The project is built with Gradle. The recommended IDEs are **IntelliJ IDEA Community Edition** or **Android Studio**.
-
-## Code Quality and Testing
-
-### Static Analysis
-
-The project uses two main tools for static analysis:
-1.  **Detekt**: The configuration is in `detekt/detekt.yml`. Detekt runs automatically before a git push.
-2.  **Qlty**: A multi-linter tool configured via `.qlty/qlty.toml`.
-
-Please ensure your changes do not introduce any new static analysis issues.
-
-### Code Coverage
-
-Code coverage is enforced using **Kover**. The minimum coverage requirements are defined in the root `build.gradle.kts` file. You can run the coverage check with:
+## Commands
 
 ```bash
-./gradlew koverVerify
+./gradlew detekt            # Lint + auto-correct — runs automatically on pre-push; do NOT run autonomously
+./gradlew allTests          # All tests, all KMP targets — very slow on dev machines; do NOT run autonomously
+./gradlew jvmTest           # JVM tests only — still slow; do NOT run autonomously
+./gradlew koverVerify       # Coverage gates — runs full test suite; do NOT run autonomously
 ```
 
-### Testing
+**When to run what:**
+- To verify a change compiles and behaves correctly, run only the specific test class(es) affected:
+  ```bash
+  ./gradlew jvmTest --tests "dev.appoutlet.umami.api.auth.LoginTest"
+  ```
+- `detekt`, `allTests`, `jvmTest`, and `koverVerify` must **only** be run when explicitly requested by the user.
+- CI pipeline order (reference only): `detekt` → `koverVerify` → `koverXmlReport`.
 
-All new features must be accompanied by tests. Bug fixes should also include a test that reproduces the bug.
+Dokka and Maven publish require `--no-configuration-cache` despite it being globally enabled.
 
-When verifying that your changes compile and work correctly, run the JVM tests for the specific module you modified. Using `jvmTest` ensures compatibility with environments that don't have the Android SDK installed:
+## Testing
 
-```bash
-# For the core library
-./gradlew :umami:jvmTest
+- Wrap every test in `kotlinx.coroutines.test.runTest`.
+- Assertions: Kotest matchers (`shouldBe`).
+- HTTP mocking: Ktor `MockEngine` via helpers in `dev.appoutlet.umami.testing` package (both modules have their own copy).
+- General mocking: Mokkery.
+- Test names use backtick style: `` fun `should do something`() = runTest { ... } ``
+- Tests live in `commonTest` only — no platform-specific test source sets.
+- See `umami-api/src/commonTest/AGENTS.md` for detailed test-writing patterns (MockEngine helpers, `getUmamiInstance`, `respond<T>`, `body<T>()`).
 
-# For the API library
-./gradlew :umami-api:jvmTest
+Key difference between the two `getUmamiInstance` copies: `:umami-api` sets `enableEventQueue = false`; `:umami` leaves it enabled.
 
-# For sample applications (JVM target)
-./gradlew :sample:terminalApp:jvmTest
-```
+## Architecture
 
-Running tests will verify that the code compiles correctly, as compilation is a prerequisite for test execution. Full compilation and integration checks for all platforms (including Android) are performed automatically in the CI stage.
+- **Extension function pattern**: API features are classes taking `Umami` as a constructor param, exposed via extension functions (`umami.auth()`, `umami.websites()`, etc.).
+- **Ktor Resources**: API routes are nested `@Resource` classes in `umami-api/.../Api.kt`.
+- **`@InternalUmamiApi`**: `@RequiresOptIn` annotation for internal APIs. All source sets opt in via `languageSettings`.
+- **`SuspendMutableMap`**: Custom interface for async-safe header management (`InMemoryHeaders` default impl).
+- Platform `expect`/`actual` declarations live only in `:umami` (HTTP engine selection, user-agent string).
 
-## Build and Release
+## Toolchain
 
-*   **Documentation**: The project uses **Dokka** to generate documentation. You can generate the docs with `./gradlew dokkaHtml`.
-*   **Publishing**: The library is published to Maven Central using the `maven-publish` plugin.
+- Gradle 8.14.2 (use `./gradlew`, not system Gradle).
+- JVM toolchain: Java 21 for compilation. CI uses Java 17 (JetBrains distro).
+- KMP targets: Android, JVM, JS (browser), WasmJS, iOS, macOS, Linux, Windows.
 
-## Maintaining AGENTS.md
+## Git Conventions
 
-This file is a living document. If you make significant architectural changes, add a new major library, or change the build process, please update this file accordingly.
-
-## Agent Guidelines Update
-
-**Revised Instruction for Library Inclusion:**
-
-- **Libraries/Frameworks:** NEVER assume a library/framework is available or appropriate. Verify its established usage within the project (check imports, configuration files like 'package.json', 'Cargo.toml', 'requirements.txt', 'build.gradle', etc., or observe neighboring files) before employing it. **Do not add any new libraries unless explicitly asked by the user.**
+- **NEVER commit or push code autonomously.** Every change must be reviewed by a human before committing.
+- Commit messages: Conventional Commits (`feat:`, `fix:`, `chore:`, etc.).
+- Branch names: `feature/`, `fix/` prefixes.
+- Pre-push hook runs `detekt` automatically (installed via `./gradlew installGitHooks`, which runs on `assemble`).

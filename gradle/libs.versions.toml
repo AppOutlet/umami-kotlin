@@ -7,11 +7,11 @@ android-targetSdk = "36"
 compose = "1.9.3"
 coroutines = "1.10.2"
 detekt = "1.23.8"
-dokka = "2.1.0"
+dokka = "2.2.0"
 kotest = "6.0.7"
 kotlin = "2.2.21"
 ktor = "3.3.3"
-maven-publish = "0.35.0"
+maven-publish = "0.36.0"
 umami = "0.4.0"
 
 [libraries]

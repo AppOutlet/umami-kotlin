@@ -92,11 +92,9 @@ android {
     }
 }
 
-val version = libs.versions.umami.get()
-
 mavenPublishing {
     publishToMavenCentral(true)
-    coordinates(groupId = "dev.appoutlet", artifactId = "umami-api", version = version)
+    coordinates(groupId = "dev.appoutlet", artifactId = "umami-api", version = libs.versions.umami.get())
 
     pom {
         name = "umami-api"
@@ -131,7 +129,7 @@ mavenPublishing {
 }
 
 dokka {
-    val currentVersion = version
+    val currentVersion = libs.versions.umami.get()
 
     dokkaPublications.html {
         outputDirectory.set(projectDir.resolve("docs/reference/api"))
@@ -150,7 +148,7 @@ dokka {
         }
 
         versioning {
-            version.set(currentVersion)
+            version.set(libs.versions.umami.get())
             olderVersionsDir.set(projectDir.resolve("docs/versions"))
             renderVersionsNavigationOnAllPages.set(true)
         }

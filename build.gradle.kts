@@ -28,11 +28,7 @@ dependencies {
     kover(project(":umami-api"))
 }
 
-val version = "0.4.0"
-
 dokka {
-    val currentVersion = version
-
     dokkaPublications.html {
         outputDirectory.set(projectDir.resolve("docs/reference"))
     }
@@ -50,7 +46,7 @@ dokka {
         }
 
         versioning {
-            version.set(currentVersion)
+            version.set(libs.versions.umami.get())
             olderVersionsDir.set(projectDir.resolve("docs/versions"))
             renderVersionsNavigationOnAllPages.set(true)
         }

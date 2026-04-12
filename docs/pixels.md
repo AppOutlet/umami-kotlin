@@ -7,7 +7,7 @@ The `pixels()` method provides access to the pixels API endpoints.
 This method returns a list of all pixels available to the user.
 
 ```kotlin
-val pixels = umami.pixels().getPixels()
+val pixels = api.pixels().getPixels()
 ```
 
 ### Parameters
@@ -21,7 +21,7 @@ val pixels = umami.pixels().getPixels()
 This method returns the details of a specific pixel.
 
 ```kotlin
-val pixel = umami.pixels().getPixel("pixel-id")
+val pixel = api.pixels().getPixel("pixel-id")
 ```
 
 ## Update a pixel
@@ -29,7 +29,7 @@ val pixel = umami.pixels().getPixel("pixel-id")
 This method updates the details of a specific pixel.
 
 ```kotlin
-val pixel = umami.pixels().updatePixel(
+val pixel = api.pixels().updatePixel(
     pixelId = "pixel-id",
     request = UpdatePixelRequest(
         name = "New Pixel Name",
@@ -43,5 +43,5 @@ val pixel = umami.pixels().updatePixel(
 This method deletes a specific pixel.
 
 ```kotlin
-umami.pixels().deletePixel("pixel-id")
+api.pixels().deletePixel("pixel-id")
 ```

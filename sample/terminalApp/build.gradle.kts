@@ -1,22 +1,10 @@
+import org.gradle.kotlin.dsl.project
+
 plugins {
-    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotlin.jvm)
 }
 
-kotlin {
-    listOf(
-        macosX64(),
-        macosArm64(),
-        linuxX64(),
-        mingwX64(),
-    ).forEach {
-        it.binaries.executable {
-            entryPoint = "main"
-        }
-    }
-
-    sourceSets {
-        commonMain.dependencies {
-            implementation(project(":umami"))
-        }
-    }
+dependencies {
+    implementation(project(":umami-api"))
+    implementation(libs.coroutines.swing)
 }

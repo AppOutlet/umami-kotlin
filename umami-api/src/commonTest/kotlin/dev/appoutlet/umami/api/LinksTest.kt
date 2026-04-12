@@ -2,7 +2,7 @@ package dev.appoutlet.umami.api
 
 import dev.appoutlet.umami.domain.Link
 import dev.appoutlet.umami.domain.SearchResponse
-import dev.appoutlet.umami.testing.getUmamiInstance
+import dev.appoutlet.umami.testing.getUmamiApiInstance
 import dev.appoutlet.umami.testing.respond
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
@@ -32,14 +32,14 @@ class LinksTest {
             pageSize = 10
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/links" to { request ->
                 request.url.encodedPath shouldBe "/api/links"
                 respond(mockResponse)
             }
         )
 
-        val response = umami.links().getLinks()
+        val response = api.links().getLinks()
         response shouldBe mockResponse
     }
 
@@ -52,7 +52,7 @@ class LinksTest {
             pageSize = 20
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/links" to { request ->
                 request.url.encodedPath shouldBe "/api/links"
                 request.url.parameters["search"] shouldBe "test"
@@ -62,7 +62,7 @@ class LinksTest {
             }
         )
 
-        umami.links().getLinks(search = "test", page = 2, pageSize = 20)
+        api.links().getLinks(search = "test", page = 2, pageSize = 20)
     }
 
     @Test
@@ -80,14 +80,14 @@ class LinksTest {
             deletedAt = null
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/links/$linkId" to { request ->
                 request.url.encodedPath shouldBe "/api/links/$linkId"
                 respond(mockLink)
             }
         )
 
-        val response = umami.links().getLink(linkId)
+        val response = api.links().getLink(linkId)
         response shouldBe mockLink
     }
 
@@ -106,14 +106,14 @@ class LinksTest {
             deletedAt = null
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/links/$linkId" to { request ->
                 request.url.encodedPath shouldBe "/api/links/$linkId"
                 respond(mockLink)
             }
         )
 
-        val response = umami.links().updateLink(
+        val response = api.links().updateLink(
             linkId = linkId,
             name = "umami-updated",
             url = "https://www.umami.is/updated",
@@ -136,14 +136,14 @@ class LinksTest {
             deletedAt = null
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/links" to { request ->
                 request.url.encodedPath shouldBe "/api/links"
                 respond(mockLink)
             }
         )
 
-        val response = umami.links().createLink(
+        val response = api.links().createLink(
             name = "umami-new",
             url = "https://www.umami.is/new",
             slug = "new-slug"
@@ -153,11 +153,11 @@ class LinksTest {
 
     @Test
     fun `createLink throws IllegalArgumentException for invalid URL`() = runTest {
-        val umami = getUmamiInstance() // No specific mock needed for client-side validation
+        val api = getUmamiApiInstance() // No specific mock needed for client-side validation
 
         val invalidUrl = "not-a-valid-url"
         val exception = shouldThrow<IllegalArgumentException> {
-            umami.links().createLink(
+            api.links().createLink(
                 name = "test-link",
                 url = invalidUrl,
                 slug = "test-slug"
@@ -168,12 +168,12 @@ class LinksTest {
 
     @Test
     fun `updateLink throws IllegalArgumentException for invalid URL`() = runTest {
-        val umami = getUmamiInstance() // No specific mock needed for client-side validation
+        val api = getUmamiApiInstance() // No specific mock needed for client-side validation
 
         val linkId = "some-link-id"
         val invalidUrl = "not-a-valid-url"
         val exception = shouldThrow<IllegalArgumentException> {
-            umami.links().updateLink(
+            api.links().updateLink(
                 linkId = linkId,
                 name = "test-link",
                 url = invalidUrl,
@@ -187,13 +187,13 @@ class LinksTest {
     fun `deleteLink deletes link`() = runTest {
         val linkId = "link-id"
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/links/$linkId" to { request ->
                 request.url.encodedPath shouldBe "/api/links/$linkId"
                 respond(Unit)
             }
         )
 
-        umami.links().deleteLink(linkId)
+        api.links().deleteLink(linkId)
     }
 }

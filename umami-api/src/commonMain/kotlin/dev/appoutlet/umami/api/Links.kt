@@ -1,6 +1,5 @@
 package dev.appoutlet.umami.api
 
-import dev.appoutlet.umami.Umami
 import dev.appoutlet.umami.domain.Link
 import dev.appoutlet.umami.domain.SearchResponse
 import io.ktor.client.call.body
@@ -15,9 +14,9 @@ import kotlinx.serialization.Serializable
 /**
  * Provides functionalities for interacting with Links in the Umami API.
  *
- * @param umami The [Umami] instance used for making HTTP requests.
+ * @param umami The [UmamiApi] instance used for making HTTP requests.
  */
-class Links(private val umami: Umami) {
+class Links(private val api: UmamiApi) {
 
     /**
      * Retrieves a paginated list of links from the Umami API.
@@ -32,7 +31,7 @@ class Links(private val umami: Umami) {
         page: Int? = null,
         pageSize: Int? = null,
     ): SearchResponse<Link> {
-        return umami.httpClient.get(Api.Links()) {
+        return api.httpClient.get(Api.Links()) {
             parameter("search", search)
             parameter("page", page)
             parameter("pageSize", pageSize)
@@ -46,7 +45,7 @@ class Links(private val umami: Umami) {
      * @return The [Link] object matching the provided ID.
      */
     suspend fun getLink(linkId: String): Link {
-        return umami.httpClient.get(Api.Links.Id(id = linkId)).body()
+        return api.httpClient.get(Api.Links.Id(id = linkId)).body()
     }
 
     /**
@@ -67,7 +66,7 @@ class Links(private val umami: Umami) {
             url = url.validate(),
             slug = slug,
         )
-        return umami.httpClient.post(Api.Links()) {
+        return api.httpClient.post(Api.Links()) {
             setBody(request)
         }.body()
     }
@@ -92,7 +91,7 @@ class Links(private val umami: Umami) {
             url = url?.validate(),
             slug = slug,
         )
-        return umami.httpClient.post(Api.Links.Id(id = linkId)) {
+        return api.httpClient.post(Api.Links.Id(id = linkId)) {
             setBody(request)
         }.body()
     }
@@ -103,7 +102,7 @@ class Links(private val umami: Umami) {
      * @param linkId The unique identifier of the link to delete.
      */
     suspend fun deleteLink(linkId: String) {
-        umami.httpClient.delete(Api.Links.Id(id = linkId))
+        api.httpClient.delete(Api.Links.Id(id = linkId))
     }
 
     @Serializable
@@ -115,11 +114,11 @@ class Links(private val umami: Umami) {
 }
 
 /**
- * Extension function to provide easy access to [Links] functionalities from an [Umami] instance.
+ * Extension function to provide easy access to [Links] functionalities from an [UmamiApi] instance.
  *
  * @return An instance of [Links].
  */
-fun Umami.links(): Links = Links(this)
+fun UmamiApi.links(): Links = Links(this)
 
 private val urlRegex = "^https?://(www)?([-a-zA-Z0-9@:%._+~#=]{2,256}.[a-z]{2,6}\b)*(/[/dw.-]*)*[?]*(.+)*$".toRegex()
 private fun String.validate(): String {

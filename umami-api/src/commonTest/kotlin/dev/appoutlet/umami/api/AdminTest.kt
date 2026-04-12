@@ -4,7 +4,7 @@ import dev.appoutlet.umami.domain.SearchResponse
 import dev.appoutlet.umami.domain.Team
 import dev.appoutlet.umami.domain.User
 import dev.appoutlet.umami.domain.Website
-import dev.appoutlet.umami.testing.getUmamiInstance
+import dev.appoutlet.umami.testing.getUmamiApiInstance
 import dev.appoutlet.umami.testing.respond
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.test.runTest
@@ -31,14 +31,14 @@ class AdminTest {
             pageSize = 10
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/admin/users" to { request ->
                 request.url.encodedPath shouldBe "/api/admin/users"
                 respond(mockResponse)
             }
         )
 
-        val response = umami.admin().getUsers()
+        val response = api.admin().getUsers()
         response shouldBe mockResponse
     }
 
@@ -59,14 +59,14 @@ class AdminTest {
             pageSize = 10
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/admin/websites" to { request ->
                 request.url.encodedPath shouldBe "/api/admin/websites"
                 respond(mockResponse)
             }
         )
 
-        val response = umami.admin().getWebsites()
+        val response = api.admin().getWebsites()
         response shouldBe mockResponse
     }
 
@@ -79,7 +79,7 @@ class AdminTest {
             pageSize = 20
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/admin/users" to { request ->
                 request.url.encodedPath shouldBe "/api/admin/users"
                 request.url.parameters["search"] shouldBe "test"
@@ -89,7 +89,7 @@ class AdminTest {
             }
         )
 
-        umami.admin().getUsers(search = "test", page = 2, pageSize = 20)
+        api.admin().getUsers(search = "test", page = 2, pageSize = 20)
     }
 
     @Test
@@ -101,7 +101,7 @@ class AdminTest {
             pageSize = 20
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/admin/websites" to { request ->
                 request.url.encodedPath shouldBe "/api/admin/websites"
                 request.url.parameters["search"] shouldBe "test"
@@ -111,7 +111,7 @@ class AdminTest {
             }
         )
 
-        umami.admin().getWebsites(search = "test", page = 2, pageSize = 20)
+        api.admin().getWebsites(search = "test", page = 2, pageSize = 20)
     }
 
     @Test
@@ -129,7 +129,7 @@ class AdminTest {
             pageSize = 10
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/admin/teams" to { request ->
                 request.url.encodedPath shouldBe "/api/admin/teams"
                 request.url.parameters["search"] shouldBe "test"
@@ -139,7 +139,7 @@ class AdminTest {
             }
         )
 
-        val response = umami.admin().getTeams(search = "test", page = 2, pageSize = 20)
+        val response = api.admin().getTeams(search = "test", page = 2, pageSize = 20)
         response shouldBe mockResponse
     }
 }

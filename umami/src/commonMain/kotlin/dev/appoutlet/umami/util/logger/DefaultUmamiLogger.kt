@@ -14,7 +14,7 @@ import co.touchlab.kermit.Logger
  * @property logger The underlying [Logger] instance from the Kermit library, configured with the
  * tag "Umami" by default.
  */
-internal class DefaultUmamiLogger(
+class DefaultUmamiLogger(
     private val logger: Logger = Logger.withTag("Umami")
 ) : UmamiLogger {
     /**

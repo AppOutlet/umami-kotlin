@@ -4,19 +4,17 @@ The Authenticated user API provides a convenient way to access information about
 
 ## Accessing the Authenticated user API
 
-> **Note:** All methods in this API require authentication. You must log in using the `umami.auth().login()` method before calling any of these functions. For more details, see the [Authentication documentation](auth.md).
+> **Note:** All methods in this API require authentication. You must log in using the `api.auth().login()` method before calling any of these functions. For more details, see the [Authentication documentation](auth.md).
 
-You can access all functionalities through the `umami.me()` extension function:
+You can access all functionalities through the `api.me()` extension function:
 
 ```kotlin
-val umami = Umami(
-    website = "your-website-uuid"
-) {
-    baseUrl = "https://your-umami-instance.com"
+val api = UmamiApi {
+    baseUrl("https://your-umami-instance.com")
 }
 
 // Access the Me API
-val meApi = umami.me()
+val meApi = api.me()
 ```
 
 ## Get Session Information
@@ -26,7 +24,7 @@ To retrieve details about the current session, including user information, use t
 ### Usage
 
 ```kotlin
-val session = umami.me().getSession()
+val session = api.me().getSession()
 println("Authenticated as: ${session.user.username}")
 ```
 
@@ -38,10 +36,10 @@ To retrieve a list of websites associated with the current user, use the `getWeb
 
 ```kotlin
 // Get only personal websites
-val personalWebsites = umami.me().getWebsites()
+val personalWebsites = api.me().getWebsites()
 
 // Include websites from teams
-val allWebsites = umami.me().getWebsites(includeTeams = true)
+val allWebsites = api.me().getWebsites(includeTeams = true)
 
 println("Found ${allWebsites.data.size} websites.")
 ```
@@ -53,6 +51,6 @@ To retrieve a list of teams the current user belongs to, use the `getTeams()` me
 ### Usage
 
 ```kotlin
-val teams = umami.me().getTeams()
+val teams = api.me().getTeams()
 println("User is a member of ${teams.data.size} teams.")
 ```

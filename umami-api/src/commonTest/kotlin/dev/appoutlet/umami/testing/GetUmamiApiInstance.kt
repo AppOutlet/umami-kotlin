@@ -1,6 +1,6 @@
 package dev.appoutlet.umami.testing
 
-import dev.appoutlet.umami.Umami
+import dev.appoutlet.umami.api.UmamiApi
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.MockRequestHandleScope
 import io.ktor.client.engine.mock.respond
@@ -12,8 +12,6 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
 import kotlinx.coroutines.test.TestScope
 import kotlinx.serialization.json.Json
-import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 
 val json = Json {
     ignoreUnknownKeys = true
@@ -23,18 +21,16 @@ val json = Json {
     explicitNulls = false
 }
 
-@OptIn(ExperimentalUuidApi::class)
-fun TestScope.getUmamiInstance(
+fun TestScope.getUmamiApiInstance(
     vararg requests: Pair<String, MockRequestHandleScope.(HttpRequestData) -> HttpResponseData>,
-): Umami {
+): UmamiApi {
     val mockEngine = MockEngine { request ->
         mapOf(*requests)[request.url.encodedPath]
             ?.invoke(this, request) ?: error("No mock response defined for ${request.url.encodedPath}")
     }
 
-    return Umami(website = Uuid.random(), enableEventQueue = false) {
+    return UmamiApi {
         httpClientEngine = mockEngine
-        coroutineScope = this@getUmamiInstance
     }
 }
 

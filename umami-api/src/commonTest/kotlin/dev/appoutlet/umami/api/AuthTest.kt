@@ -1,5 +1,6 @@
 package dev.appoutlet.umami.api
 
+import dev.appoutlet.umami.domain.Session
 import dev.appoutlet.umami.domain.User
 import dev.appoutlet.umami.testing.body
 import dev.appoutlet.umami.testing.getUmamiApiInstance
@@ -29,7 +30,7 @@ class AuthTest {
     fun `login with username and password should return success response and set auth header`() = runTest {
         val fixtureUsername = "testuser"
         val fixturePassword = "testpassword"
-        val mockLoginResponse = Auth.Login.Response(
+        val mockLoginResponse = Session(
             token = testToken,
             user = testUser
         )
@@ -55,7 +56,7 @@ class AuthTest {
             username = "testuser",
             password = "testpassword"
         )
-        val mockLoginResponse = Auth.Login.Response(
+        val mockLoginResponse = Session(
             token = testToken,
             user = testUser
         )

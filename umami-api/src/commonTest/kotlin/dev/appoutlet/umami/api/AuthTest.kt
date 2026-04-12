@@ -11,6 +11,7 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
+import kotlin.test.assertFailsWith
 import kotlin.time.Instant
 import kotlin.uuid.ExperimentalUuidApi
 
@@ -93,7 +94,7 @@ class AuthTest {
         val response = api.auth().login(fixtureApiKey)
 
         response shouldBe mockLoginResponse
-        api.headers.get("x-umami-api-key") shouldBe fixtureApiKey
+        api.headers.get(UMAMI_API_KEY_HEADER) shouldBe fixtureApiKey
     }
 
     @Test
@@ -106,13 +107,11 @@ class AuthTest {
             }
         )
 
-        try {
+        assertFailsWith<Exception> {
             api.auth().login(fixtureApiKey)
-        } catch (exception: Throwable) {
-            // Success
         }
 
-        api.headers.get("x-umami-api-key") shouldBe null
+        api.headers.get(UMAMI_API_KEY_HEADER) shouldBe null
     }
 
     @Test
@@ -127,13 +126,13 @@ class AuthTest {
         )
         // Set dummy headers
         api.headers.put(HttpHeaders.Authorization, "Bearer $testToken")
-        api.headers.put("x-umami-api-key", "some-key")
+        api.headers.put(UMAMI_API_KEY_HEADER, "some-key")
 
         api.auth().logout()
 
         logoutCalled shouldBe true
         api.headers.get(HttpHeaders.Authorization) shouldBe null
-        api.headers.get("x-umami-api-key") shouldBe null
+        api.headers.get(UMAMI_API_KEY_HEADER) shouldBe null
     }
 
     @Test
@@ -146,12 +145,12 @@ class AuthTest {
             }
         )
         // Set dummy API key header, but no Authorization header
-        api.headers.put("x-umami-api-key", "some-key")
+        api.headers.put(UMAMI_API_KEY_HEADER, "some-key")
 
         api.auth().logout()
 
         logoutCalled shouldBe false
-        api.headers.get("x-umami-api-key") shouldBe null
+        api.headers.get(UMAMI_API_KEY_HEADER) shouldBe null
     }
 
     @Test

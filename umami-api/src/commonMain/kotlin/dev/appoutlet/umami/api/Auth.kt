@@ -9,7 +9,7 @@ import io.ktor.http.HttpHeaders
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-private const val UmamiApiKeyHeader = "x-umami-api-key"
+internal const val UMAMI_API_KEY_HEADER = "x-umami-api-key"
 
 /**
  * Provides authentication functionalities for interacting with the Umami API.
@@ -63,13 +63,14 @@ class Auth(private val api: UmamiApi) {
      * @param apiKey The API key to use for authentication.
      * @return A [Session] object containing the user's session details.
      */
+    @Suppress("TooGenericExceptionCaught")
     suspend fun login(apiKey: String): Session {
-        api.headers.put(UmamiApiKeyHeader, apiKey)
+        api.headers.put(UMAMI_API_KEY_HEADER, apiKey)
 
         return try {
             api.me().getSession()
-        } catch (exception: Throwable) {
-            api.headers.remove(UmamiApiKeyHeader)
+        } catch (exception: Exception) {
+            api.headers.remove(UMAMI_API_KEY_HEADER)
             throw exception
         }
     }
@@ -89,7 +90,7 @@ class Auth(private val api: UmamiApi) {
             api.headers.remove(HttpHeaders.Authorization)
         }
 
-        api.headers.remove(UmamiApiKeyHeader)
+        api.headers.remove(UMAMI_API_KEY_HEADER)
     }
 
     /**

@@ -5,7 +5,7 @@ import dev.appoutlet.umami.domain.Team
 import dev.appoutlet.umami.domain.TeamMember
 import dev.appoutlet.umami.domain.Website
 import dev.appoutlet.umami.testing.body
-import dev.appoutlet.umami.testing.getUmamiInstance
+import dev.appoutlet.umami.testing.getUmamiApiInstance
 import dev.appoutlet.umami.testing.respond
 import io.kotest.matchers.shouldBe
 import io.ktor.client.engine.mock.respondOk
@@ -30,13 +30,13 @@ class TeamsTest {
             pageSize = 10
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/teams" to {
                 respond(expectedResponse)
             }
         )
 
-        val actualResponse = umami.teams().find()
+        val actualResponse = api.teams().find()
         actualResponse shouldBe expectedResponse
     }
 
@@ -49,14 +49,14 @@ class TeamsTest {
             createdAt = Instant.parse("2022-01-01T00:00:00Z"),
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/teams" to {
                 it.body<CreateTeamRequest>().name shouldBe "Test Team"
                 respond(expectedResponse)
             }
         )
 
-        val actualResponse = umami.teams().create("Test Team")
+        val actualResponse = api.teams().create("Test Team")
         actualResponse shouldBe expectedResponse
     }
 
@@ -71,14 +71,14 @@ class TeamsTest {
             updatedAt = Instant.parse("2022-01-01T00:00:00Z")
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/teams/join" to {
                 it.body<JoinTeamRequest>().accessCode shouldBe "test-code"
                 respond(expectedResponse)
             }
         )
 
-        val actualResponse = umami.teams().join("test-code")
+        val actualResponse = api.teams().join("test-code")
         actualResponse shouldBe expectedResponse
     }
 
@@ -91,13 +91,13 @@ class TeamsTest {
             createdAt = Instant.parse("2022-01-01T00:00:00Z"),
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/teams/e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e" to {
                 respond(expectedResponse)
             }
         )
 
-        val actualResponse = umami.teams().get("e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e")
+        val actualResponse = api.teams().get("e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e")
         actualResponse shouldBe expectedResponse
     }
 
@@ -110,7 +110,7 @@ class TeamsTest {
             createdAt = Instant.parse("2022-01-01T00:00:00Z"),
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/teams/e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e" to {
                 val body = it.body<UpdateTeamRequest>()
                 body.name shouldBe "Updated Team"
@@ -119,7 +119,7 @@ class TeamsTest {
             }
         )
 
-        val actualResponse = umami.teams().update(
+        val actualResponse = api.teams().update(
             "e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e",
             "Updated Team",
             "updated-code"
@@ -129,13 +129,13 @@ class TeamsTest {
 
     @Test
     fun `delete should not throw an exception on success`() = runTest {
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/teams/e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e" to {
                 respondOk()
             }
         )
 
-        umami.teams().delete("e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e")
+        api.teams().delete("e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e")
     }
 
     @Test
@@ -156,7 +156,7 @@ class TeamsTest {
             pageSize = 10
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/teams/a1b2c3d4-e5f6-7890-1234-567890abcdef/users" to {
                 it.url.parameters["search"] shouldBe "test"
                 it.url.parameters["page"] shouldBe "2"
@@ -165,7 +165,7 @@ class TeamsTest {
             }
         )
 
-        val actualResponse = umami.teams().getUsers(
+        val actualResponse = api.teams().getUsers(
             teamId = "a1b2c3d4-e5f6-7890-1234-567890abcdef",
             search = "test",
             page = 2,
@@ -185,7 +185,7 @@ class TeamsTest {
             updatedAt = Instant.parse("2022-01-01T00:00:00Z")
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/teams/a1b2c3d4-e5f6-7890-1234-567890abcdef/users" to {
                 val body = it.body<AddUserRequest>()
                 body.userId shouldBe "f0e9d8c7-b6a5-4321-fedc-ba9876543210"
@@ -194,7 +194,7 @@ class TeamsTest {
             }
         )
 
-        val actualResponse = umami.teams().addUser(
+        val actualResponse = api.teams().addUser(
             "a1b2c3d4-e5f6-7890-1234-567890abcdef",
             "f0e9d8c7-b6a5-4321-fedc-ba9876543210",
             "team-member"
@@ -213,13 +213,13 @@ class TeamsTest {
             updatedAt = Instant.parse("2022-01-01T00:00:00Z")
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/teams/a1b2c3d4-e5f6-7890-1234-567890abcdef/users/f0e9d8c7-b6a5-4321-fedc-ba9876543210" to {
                 respond(expectedResponse)
             }
         )
 
-        val actualResponse = umami.teams().getUser(
+        val actualResponse = api.teams().getUser(
             "a1b2c3d4-e5f6-7890-1234-567890abcdef",
             "f0e9d8c7-b6a5-4321-fedc-ba9876543210"
         )
@@ -237,14 +237,14 @@ class TeamsTest {
             updatedAt = Instant.parse("2022-01-01T00:00:00Z")
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/teams/a1b2c3d4-e5f6-7890-1234-567890abcdef/users/f0e9d8c7-b6a5-4321-fedc-ba9876543210" to {
                 it.body<UpdateUserRoleRequest>().role shouldBe "team-manager"
                 respond(expectedResponse)
             }
         )
 
-        val actualResponse = umami.teams().updateUserRole(
+        val actualResponse = api.teams().updateUserRole(
             "a1b2c3d4-e5f6-7890-1234-567890abcdef",
             "f0e9d8c7-b6a5-4321-fedc-ba9876543210",
             "team-manager"
@@ -254,13 +254,13 @@ class TeamsTest {
 
     @Test
     fun `removeUser should not throw an exception on success`() = runTest {
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/teams/a1b2c3d4-e5f6-7890-1234-567890abcdef/users/f0e9d8c7-b6a5-4321-fedc-ba9876543210" to {
                 respondOk()
             }
         )
 
-        umami.teams().removeUser(
+        api.teams().removeUser(
             "a1b2c3d4-e5f6-7890-1234-567890abcdef",
             "f0e9d8c7-b6a5-4321-fedc-ba9876543210"
         )
@@ -285,7 +285,7 @@ class TeamsTest {
             pageSize = 10
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/teams/a1b2c3d4-e5f6-7890-1234-567890abcdef/websites" to {
                 it.url.parameters["search"] shouldBe "test"
                 it.url.parameters["page"] shouldBe "2"
@@ -294,7 +294,7 @@ class TeamsTest {
             }
         )
 
-        val actualResponse = umami.teams().getWebsites(
+        val actualResponse = api.teams().getWebsites(
             teamId = "a1b2c3d4-e5f6-7890-1234-567890abcdef",
             search = "test",
             page = 2,

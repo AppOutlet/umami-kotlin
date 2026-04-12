@@ -7,8 +7,8 @@ The `Teams` API provides a set of methods for managing teams in Umami. It allows
 To access the Teams API, you need an instance of the `Umami` class. You can then call the `teams()` extension function to get an instance of the `Teams` class:
 
 ```kotlin
-val umami = Umami(websiteId = "your_website_id")
-val teamsApi = umami.teams()
+val api = UmamiApi {websiteId = "your_website_id")
+val teamsApi = api.teams()
 ```
 
 ## Methods

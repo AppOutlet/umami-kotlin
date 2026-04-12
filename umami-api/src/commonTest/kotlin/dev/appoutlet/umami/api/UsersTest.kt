@@ -5,7 +5,7 @@ import dev.appoutlet.umami.domain.Team
 import dev.appoutlet.umami.domain.User
 import dev.appoutlet.umami.domain.Website
 import dev.appoutlet.umami.testing.body
-import dev.appoutlet.umami.testing.getUmamiInstance
+import dev.appoutlet.umami.testing.getUmamiApiInstance
 import dev.appoutlet.umami.testing.respond
 import io.kotest.matchers.shouldBe
 import io.ktor.client.engine.mock.respondOk
@@ -23,7 +23,7 @@ class UsersTest {
             createdAt = Instant.parse("2022-01-01T00:00:00Z"),
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/users" to {
                 val body = it.body<CreateUserRequest>()
                 body.username shouldBe "testuser"
@@ -33,7 +33,7 @@ class UsersTest {
             }
         )
 
-        val actualResponse = umami.users().create("testuser", "password", "user")
+        val actualResponse = api.users().create("testuser", "password", "user")
         actualResponse shouldBe expectedResponse
     }
 
@@ -46,13 +46,13 @@ class UsersTest {
             createdAt = Instant.parse("2022-01-01T00:00:00Z"),
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/users/user-123" to {
                 respond(expectedResponse)
             }
         )
 
-        val actualResponse = umami.users().get("user-123")
+        val actualResponse = api.users().get("user-123")
         actualResponse shouldBe expectedResponse
     }
 
@@ -65,7 +65,7 @@ class UsersTest {
             createdAt = Instant.parse("2022-01-01T00:00:00Z"),
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/users/user-123" to {
                 val body = it.body<UpdateUserRequest>()
                 body.username shouldBe "updateduser"
@@ -74,7 +74,7 @@ class UsersTest {
             }
         )
 
-        val actualResponse = umami.users().update(
+        val actualResponse = api.users().update(
             userId = "user-123",
             username = "updateduser",
             role = "admin"
@@ -84,13 +84,13 @@ class UsersTest {
 
     @Test
     fun `delete should not throw an exception on success`() = runTest {
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/users/user-123" to {
                 respondOk()
             }
         )
 
-        umami.users().delete("user-123")
+        api.users().delete("user-123")
     }
 
     @Test
@@ -112,7 +112,7 @@ class UsersTest {
             pageSize = 10
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/users/user-123/websites" to {
                 it.url.parameters["includeTeams"] shouldBe "false"
                 it.url.parameters["search"] shouldBe "test"
@@ -122,7 +122,7 @@ class UsersTest {
             }
         )
 
-        val actualResponse = umami.users().getWebsites(
+        val actualResponse = api.users().getWebsites(
             userId = "user-123",
             includeTeams = false,
             search = "test",
@@ -148,7 +148,7 @@ class UsersTest {
             pageSize = 10
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/users/user-123/teams" to {
                 it.url.parameters["page"] shouldBe "1"
                 it.url.parameters["pageSize"] shouldBe "10"
@@ -156,7 +156,7 @@ class UsersTest {
             }
         )
 
-        val actualResponse = umami.users().getTeams(
+        val actualResponse = api.users().getTeams(
             userId = "user-123",
             page = 1,
             pageSize = 10

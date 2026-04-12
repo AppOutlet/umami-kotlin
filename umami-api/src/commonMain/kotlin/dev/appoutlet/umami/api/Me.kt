@@ -1,6 +1,5 @@
 package dev.appoutlet.umami.api
 
-import dev.appoutlet.umami.Umami
 import dev.appoutlet.umami.domain.SearchResponse
 import dev.appoutlet.umami.domain.Session
 import dev.appoutlet.umami.domain.Team
@@ -12,16 +11,16 @@ import io.ktor.client.request.parameter
 /**
  * Provides functionalities for interacting with the Me API in Umami.
  *
- * @param umami The [Umami] instance used for making HTTP requests.
+ * @param umami The [UmamiApi] instance used for making HTTP requests.
  */
-class Me(private val umami: Umami) {
+class Me(private val api: UmamiApi) {
 
     /**
      * Retrieves the current session information for the authenticated user.
      * @return A [Session] object containing the user's session details.
      */
     suspend fun getSession(): Session {
-        return umami.httpClient.get(Api.Me()).body()
+        return api.httpClient.get(Api.Me()).body()
     }
 
     /**
@@ -29,7 +28,7 @@ class Me(private val umami: Umami) {
      * @return A [SearchResponse] containing a list of [Team] objects.
      */
     suspend fun getTeams(): SearchResponse<Team> {
-        return umami.httpClient.get(Api.Me.Teams()).body()
+        return api.httpClient.get(Api.Me.Teams()).body()
     }
 
     /**
@@ -40,15 +39,15 @@ class Me(private val umami: Umami) {
     suspend fun getWebsites(
         includeTeams: Boolean? = null,
     ): SearchResponse<Website> {
-        return umami.httpClient.get(Api.Me.Websites()) {
+        return api.httpClient.get(Api.Me.Websites()) {
             parameter("includeTeams", includeTeams)
         }.body()
     }
 }
 
 /**
- * Extension function to provide easy access to [Me] functionalities from an [Umami] instance.
+ * Extension function to provide easy access to [Me] functionalities from an [UmamiApi] instance.
  *
  * @return An instance of [Me].
  */
-fun Umami.me(): Me = Me(this)
+fun UmamiApi.me(): Me = Me(this)

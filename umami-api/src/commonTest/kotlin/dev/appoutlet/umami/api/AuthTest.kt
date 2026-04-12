@@ -1,10 +1,10 @@
 package dev.appoutlet.umami.api
 
+import dev.appoutlet.umami.domain.Session
 import dev.appoutlet.umami.domain.User
 import dev.appoutlet.umami.testing.body
-import dev.appoutlet.umami.testing.getUmamiInstance
+import dev.appoutlet.umami.testing.getUmamiApiInstance
 import dev.appoutlet.umami.testing.respond
-import dev.appoutlet.umami.util.headers
 import io.kotest.matchers.shouldBe
 import io.ktor.client.engine.mock.respond
 import io.ktor.http.HttpHeaders
@@ -30,12 +30,12 @@ class AuthTest {
     fun `login with username and password should return success response and set auth header`() = runTest {
         val fixtureUsername = "testuser"
         val fixturePassword = "testpassword"
-        val mockLoginResponse = Auth.Login.Response(
+        val mockLoginResponse = Session(
             token = testToken,
             user = testUser
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/auth/login" to { request ->
                 val loginRequest = request.body<Auth.Login.Request>()
                 loginRequest.username shouldBe fixtureUsername
@@ -44,10 +44,10 @@ class AuthTest {
             }
         )
 
-        val response = umami.auth().login(fixtureUsername, fixturePassword)
+        val response = api.auth().login(fixtureUsername, fixturePassword)
 
         response shouldBe mockLoginResponse
-        umami.headers.get(HttpHeaders.Authorization) shouldBe "Bearer $testToken"
+        api.headers.get(HttpHeaders.Authorization) shouldBe "Bearer $testToken"
     }
 
     @Test
@@ -56,12 +56,12 @@ class AuthTest {
             username = "testuser",
             password = "testpassword"
         )
-        val mockLoginResponse = Auth.Login.Response(
+        val mockLoginResponse = Session(
             token = testToken,
             user = testUser
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/auth/login" to { request ->
                 val loginRequest = request.body<Auth.Login.Request>()
                 loginRequest shouldBe fixtureLoginRequest
@@ -69,40 +69,40 @@ class AuthTest {
             }
         )
 
-        val response = umami.auth().login(fixtureLoginRequest)
+        val response = api.auth().login(fixtureLoginRequest)
 
         response shouldBe mockLoginResponse
-        umami.headers.get(HttpHeaders.Authorization) shouldBe "Bearer $testToken"
+        api.headers.get(HttpHeaders.Authorization) shouldBe "Bearer $testToken"
     }
 
     @Test
     fun `logout should remove auth header`() = runTest {
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/auth/logout" to { request ->
                 request.url.encodedPath shouldBe "/api/auth/logout"
                 respond(status = HttpStatusCode.OK, content = "")
             }
         )
         // Set a dummy token to ensure it gets removed
-        umami.headers.put(HttpHeaders.Authorization, "Bearer $testToken")
+        api.headers.put(HttpHeaders.Authorization, "Bearer $testToken")
 
-        umami.auth().logout()
+        api.auth().logout()
 
-        umami.headers.get(HttpHeaders.Authorization) shouldBe null
+        api.headers.get(HttpHeaders.Authorization) shouldBe null
     }
 
     @Test
     fun `verify should return user details`() = runTest {
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/auth/verify" to { request ->
                 request.url.encodedPath shouldBe "/api/auth/verify"
                 respond(testUser)
             }
         )
         // Ensure Authorization header is present for verification (optional, but good practice for testing)
-        umami.headers.put(HttpHeaders.Authorization, "Bearer $testToken")
+        api.headers.put(HttpHeaders.Authorization, "Bearer $testToken")
 
-        val response = umami.auth().verify()
+        val response = api.auth().verify()
 
         response shouldBe testUser
     }

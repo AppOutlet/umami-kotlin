@@ -5,7 +5,7 @@ import dev.appoutlet.umami.domain.Session
 import dev.appoutlet.umami.domain.Team
 import dev.appoutlet.umami.domain.User
 import dev.appoutlet.umami.domain.Website
-import dev.appoutlet.umami.testing.getUmamiInstance
+import dev.appoutlet.umami.testing.getUmamiApiInstance
 import dev.appoutlet.umami.testing.respond
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.test.runTest
@@ -27,11 +27,11 @@ class MeTest {
             )
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/me" to { respond(expectedSession) }
         )
 
-        val actualSession = umami.me().getSession()
+        val actualSession = api.me().getSession()
 
         actualSession shouldBe expectedSession
     }
@@ -52,11 +52,11 @@ class MeTest {
             pageSize = 10,
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/me/teams" to { respond(expectedTeams) }
         )
 
-        val actualTeams = umami.me().getTeams()
+        val actualTeams = api.me().getTeams()
 
         actualTeams shouldBe expectedTeams
     }
@@ -79,14 +79,14 @@ class MeTest {
             pageSize = 10,
         )
 
-        val umami = getUmamiInstance(
+        val api = getUmamiApiInstance(
             "/api/me/websites" to { request ->
                 request.url.parameters["includeTeams"] shouldBe "true"
                 respond(expectedWebsites)
             }
         )
 
-        val actualWebsites = umami.me().getWebsites(includeTeams = true)
+        val actualWebsites = api.me().getWebsites(includeTeams = true)
 
         actualWebsites shouldBe expectedWebsites
     }

@@ -87,6 +87,7 @@ class AuthTest {
         val api = getUmamiApiInstance(
             "/api/me" to { request ->
                 request.url.encodedPath shouldBe "/api/me"
+                request.headers[UMAMI_API_KEY_HEADER] shouldBe fixtureApiKey
                 respond(mockLoginResponse)
             }
         )
@@ -133,6 +134,27 @@ class AuthTest {
         logoutCalled shouldBe true
         api.headers.get(HttpHeaders.Authorization) shouldBe null
         api.headers.get(UMAMI_API_KEY_HEADER) shouldBe null
+    }
+
+    @Test
+    fun `login with API key should remove existing authorization header`() = runTest {
+        val fixtureApiKey = "test-api-key"
+        val mockLoginResponse = Session(
+            token = "unused-token",
+            user = testUser
+        )
+
+        val api = getUmamiApiInstance(
+            "/api/me" to { _ ->
+                respond(mockLoginResponse)
+            }
+        )
+        api.headers.put(HttpHeaders.Authorization, "Bearer $testToken")
+
+        api.auth().login(fixtureApiKey)
+
+        api.headers.get(HttpHeaders.Authorization) shouldBe null
+        api.headers.get(UMAMI_API_KEY_HEADER) shouldBe fixtureApiKey
     }
 
     @Test

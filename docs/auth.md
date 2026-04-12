@@ -18,7 +18,7 @@ val authApi = api.auth()
 
 ## Logging In
 
-There are two primary ways to log in using the library: by providing a username and password directly, or by using an `Auth.Login.Request` object.
+There are three primary ways to log in using the library: by providing a username and password directly, using an `Auth.Login.Request` object, or by using an API key (ideal for Umami Cloud).
 
 ### Using Username and Password
 
@@ -52,6 +52,21 @@ val loginRequest = Auth.Login.Request(
 val loginResponse = authApi.login(loginRequest)
 println("Login successful!")
 ```
+
+### Using an API Key (Umami Cloud)
+
+Umami Cloud and some self-hosted instances support authentication via an API key. This method doesn't require a username or password and is the recommended way to authenticate with Umami Cloud.
+
+**Example:**
+```kotlin
+// Assuming 'authApi' is an instance of Auth
+val loginResponse = authApi.login("your-umami-api-key")
+
+println("Authenticated with API key! User: ${loginResponse.user.username}")
+```
+
+!!! info "API Key Validation"
+    When you log in with an API key, the library automatically calls the `GET /api/me` endpoint to verify that the key is valid.
 
 ### Login Response
 

@@ -66,6 +66,7 @@ class Auth(private val api: UmamiApi) {
     @Suppress("TooGenericExceptionCaught")
     suspend fun login(apiKey: String): Session {
         api.headers.put(UMAMI_API_KEY_HEADER, apiKey)
+        api.headers.remove(HttpHeaders.Authorization)
 
         return try {
             api.me().getSession()

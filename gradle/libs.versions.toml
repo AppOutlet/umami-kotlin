@@ -7,11 +7,12 @@ android-targetSdk = "36"
 compose = "1.9.3"
 coroutines = "1.10.2"
 detekt = "1.23.8"
-dokka = "2.1.0"
-kotest = "6.0.7"
+dokka = "2.2.0"
+kotest = "6.1.11"
 kotlin = "2.2.21"
-ktor = "3.3.3"
-maven-publish = "0.35.0"
+ktor = "3.4.2"
+maven-publish = "0.36.0"
+umami = "0.4.0"
 
 [libraries]
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
@@ -19,7 +20,7 @@ coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", ve
 coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "coroutines" }
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 dokka-versioning = { module = "org.jetbrains.dokka:versioning-plugin", version.ref = "dokka" }
-kermit = "co.touchlab:kermit:2.0.8"
+kermit = "co.touchlab:kermit:2.1.0"
 kotest-assertions = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }

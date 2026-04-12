@@ -1,5 +1,6 @@
 package dev.appoutlet.umami.api
 
+import dev.appoutlet.umami.domain.Session
 import dev.appoutlet.umami.domain.User
 import io.ktor.client.call.body
 import io.ktor.client.plugins.resources.post
@@ -12,7 +13,7 @@ import kotlinx.serialization.Serializable
  * Provides authentication functionalities for interacting with the Umami API.
  * This class handles user login, logout, and token verification.
  *
- * @param umami The [UmamiApi] instance used for making HTTP requests.
+ * @param api The [UmamiApi] instance used for making HTTP requests.
  */
 class Auth(private val api: UmamiApi) {
 
@@ -22,12 +23,12 @@ class Auth(private val api: UmamiApi) {
      *
      * @param username The username of the user.
      * @param password The password of the user.
-     * @return A [Login.Response] containing the JWT token and user details.
+     * @return A [Session] containing the JWT token and user details.
      */
     suspend fun login(
         username: String,
         password: String,
-    ): Login.Response {
+    ): Session {
         val request = Login.Request(
             username = username,
             password = password,
@@ -41,10 +42,10 @@ class Auth(private val api: UmamiApi) {
      * On successful login, the received JWT token is stored for subsequent authenticated requests.
      *
      * @param request The [Login.Request] object containing username and password.
-     * @return A [Login.Response] containing the JWT token and user details.
+     * @return A [Session] containing the JWT token and user details.
      */
-    suspend fun login(request: Login.Request): Login.Response {
-        val response: Login.Response = api.httpClient.post(Api.Auth.Login()) {
+    suspend fun login(request: Login.Request): Session {
+        val response: Session = api.httpClient.post(Api.Auth.Login()) {
             setBody(request)
         }.body()
 
@@ -83,17 +84,6 @@ class Auth(private val api: UmamiApi) {
         data class Request(
             @SerialName("username") val username: String,
             @SerialName("password") val password: String,
-        )
-
-        /**
-         * Represents the response from a successful login API call.
-         * @property token The JWT token for authenticating subsequent requests.
-         * @property user The details of the logged-in user.
-         */
-        @Serializable
-        data class Response(
-            @SerialName("token") val token: String,
-            @SerialName("user") val user: User
         )
     }
 }

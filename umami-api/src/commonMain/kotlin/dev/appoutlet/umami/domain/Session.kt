@@ -22,7 +22,7 @@ data class Session(
      * The authentication key for the session.
      */
     @SerialName("authKey")
-    val authKey: String,
+    val authKey: String?,
 
     /**
      * The share token for the session, if it exists.

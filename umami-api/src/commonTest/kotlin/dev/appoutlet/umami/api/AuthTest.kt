@@ -76,19 +76,82 @@ class AuthTest {
     }
 
     @Test
-    fun `logout should remove auth header`() = runTest {
+    fun `login with API key should return success response and set x-umami-api-key header`() = runTest {
+        val fixtureApiKey = "test-api-key"
+        val mockLoginResponse = Session(
+            token = "unused-token",
+            user = testUser
+        )
+
+        val api = getUmamiApiInstance(
+            "/api/me" to { request ->
+                request.url.encodedPath shouldBe "/api/me"
+                respond(mockLoginResponse)
+            }
+        )
+
+        val response = api.auth().login(fixtureApiKey)
+
+        response shouldBe mockLoginResponse
+        api.headers.get("x-umami-api-key") shouldBe fixtureApiKey
+    }
+
+    @Test
+    fun `login with invalid API key should remove header and throw exception`() = runTest {
+        val fixtureApiKey = "invalid-api-key"
+
+        val api = getUmamiApiInstance(
+            "/api/me" to { _ ->
+                respond(status = HttpStatusCode.Unauthorized, content = "")
+            }
+        )
+
+        try {
+            api.auth().login(fixtureApiKey)
+        } catch (exception: Throwable) {
+            // Success
+        }
+
+        api.headers.get("x-umami-api-key") shouldBe null
+    }
+
+    @Test
+    fun `logout with authorization header should call logout endpoint and remove headers`() = runTest {
+        var logoutCalled = false
         val api = getUmamiApiInstance(
             "/api/auth/logout" to { request ->
                 request.url.encodedPath shouldBe "/api/auth/logout"
+                logoutCalled = true
                 respond(status = HttpStatusCode.OK, content = "")
             }
         )
-        // Set a dummy token to ensure it gets removed
+        // Set dummy headers
         api.headers.put(HttpHeaders.Authorization, "Bearer $testToken")
+        api.headers.put("x-umami-api-key", "some-key")
 
         api.auth().logout()
 
+        logoutCalled shouldBe true
         api.headers.get(HttpHeaders.Authorization) shouldBe null
+        api.headers.get("x-umami-api-key") shouldBe null
+    }
+
+    @Test
+    fun `logout without authorization header should only remove x-umami-api-key header`() = runTest {
+        var logoutCalled = false
+        val api = getUmamiApiInstance(
+            "/api/auth/logout" to { _ ->
+                logoutCalled = true
+                respond(status = HttpStatusCode.OK, content = "")
+            }
+        )
+        // Set dummy API key header, but no Authorization header
+        api.headers.put("x-umami-api-key", "some-key")
+
+        api.auth().logout()
+
+        logoutCalled shouldBe false
+        api.headers.get("x-umami-api-key") shouldBe null
     }
 
     @Test

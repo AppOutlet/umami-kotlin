@@ -9,6 +9,8 @@ import io.ktor.http.HttpHeaders
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+private const val UmamiApiKeyHeader = "x-umami-api-key"
+
 /**
  * Provides authentication functionalities for interacting with the Umami API.
  * This class handles user login, logout, and token verification.
@@ -55,12 +57,39 @@ class Auth(private val api: UmamiApi) {
     }
 
     /**
-     * Logs out the current user by sending a logout request to the Umami API
-     * and removing the authorization header.
+     * Logs in a user using an API key.
+     * This method is intended for use with Umami Cloud or instances where API key authentication is enabled.
+     *
+     * @param apiKey The API key to use for authentication.
+     * @return A [Session] object containing the user's session details.
+     */
+    suspend fun login(apiKey: String): Session {
+        api.headers.put(UmamiApiKeyHeader, apiKey)
+
+        return try {
+            api.me().getSession()
+        } catch (exception: Throwable) {
+            api.headers.remove(UmamiApiKeyHeader)
+            throw exception
+        }
+    }
+
+    /**
+     * Logs out the current user.
+     *
+     * If an authorization token is present, it sends a logout request to the Umami API
+     * and removes both the authorization and API key headers.
+     *
+     * If no authorization token is present (e.g., when using an API key for Umami Cloud),
+     * it only removes the API key header without calling the logout endpoint.
      */
     suspend fun logout() {
-        api.httpClient.post(Api.Auth.Logout())
-        api.headers.remove(HttpHeaders.Authorization)
+        if (api.headers.get(HttpHeaders.Authorization) != null) {
+            api.httpClient.post(Api.Auth.Logout())
+            api.headers.remove(HttpHeaders.Authorization)
+        }
+
+        api.headers.remove(UmamiApiKeyHeader)
     }
 
     /**

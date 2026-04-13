@@ -19,7 +19,6 @@
         }
       }
     </script>
-<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
 <link href="../../../styles/style.css" rel="Stylesheet">
 <link href="../../../styles/main.css" rel="Stylesheet">
@@ -45,7 +44,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-<dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ReplaceVersionsCommand&quot;,&quot;location&quot;:&quot;umami/dev.appoutlet.umami.util.headers/-suspend-mutable-map/index.html&quot;}">0.4.0</dokka-template-command>        </div>
+<dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ReplaceVersionsCommand&quot;,&quot;location&quot;:&quot;umami/dev.appoutlet.umami.util.headers/-suspend-mutable-map/index.html&quot;}">0.5.0</dokka-template-command>        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
@@ -109,7 +108,7 @@
   <div class="breadcrumbs"><a href="../../../index.html">umami</a><span class="delimiter">/</span><a href="../index.html">dev.appoutlet.umami.util.headers</a><span class="delimiter">/</span><span class="current">SuspendMutableMap</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Suspend</span><wbr></wbr><span>Mutable</span><wbr></wbr><span><span>Map</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":umami/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">SuspendMutableMap</a><span class="token operator">&lt;</span><a href="index.html">K</a><span class="token punctuation">, </span><a href="index.html">V</a><span class="token operator">&gt;</span></div><p class="paragraph">A mutable map with suspendable, non-blocking operations, designed for asynchronous access in coroutine-based environments. This interface mirrors the standard <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a>, but its functions are suspendable to allow for implementations that perform I/O, network requests, or other long-running tasks without blocking a thread.</p><p class="paragraph">Implementations of this interface are expected to be safe for concurrent use.</p><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":umami/commonMain" data-filterable-set=":umami/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>K</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The type of keys maintained by this map.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":umami/commonMain" data-filterable-set=":umami/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>V</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The type of mapped values.</p></div></div></div></div></div><h4 class="tableheader">Inheritors</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":umami/commonMain" data-filterable-set=":umami/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-in-memory-headers/index.html">InMemoryHeaders</a></div></span></div><div></div></div></div></div></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":umami/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">SuspendMutableMap</a><span class="token operator">&lt;</span><a href="index.html">K</a><span class="token punctuation">, </span><a href="index.html">V</a><span class="token operator">&gt;</span></div><p class="paragraph">A mutable map with suspendable, non-blocking operations, designed for asynchronous access in coroutine-based environments. This interface mirrors the standard <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-map/index.html">MutableMap</a>, but its functions are suspendable to allow for implementations that perform I/O, network requests, or other long-running tasks without blocking a thread.</p><p class="paragraph">Implementations of this interface are expected to be safe for concurrent use.</p><h4 class="tableheader">Type Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":umami/commonMain" data-filterable-set=":umami/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>K</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The type of keys maintained by this map.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":umami/commonMain" data-filterable-set=":umami/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>V</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The type of mapped values.</p></div></div></div></div></div><h4 class="tableheader">Inheritors</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":umami/commonMain" data-filterable-set=":umami/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-in-memory-headers/index.html">InMemoryHeaders</a></div></span></div><div></div></div></div></div></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
@@ -295,7 +294,7 @@
                     <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
                         Dokka
                     </a>
-                    <div>© AppOutlet 2025</div>
+                    <div>© AppOutlet 2026</div>
                 </div>
             </div>
         </div>

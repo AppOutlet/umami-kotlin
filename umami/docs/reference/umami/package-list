@@ -64,6 +64,14 @@ $dokka.location:dev.appoutlet.umami.util.headers/SuspendMutableMap/remove/#TypeP
 $dokka.location:dev.appoutlet.umami.util.headers/SuspendMutableMap/size/#/PointingToDeclaration/umami/dev.appoutlet.umami.util.headers/-suspend-mutable-map/size.html
 $dokka.location:dev.appoutlet.umami.util.headers/SuspendMutableMap/values/#/PointingToDeclaration/umami/dev.appoutlet.umami.util.headers/-suspend-mutable-map/values.html
 $dokka.location:dev.appoutlet.umami.util.logger////PointingToDeclaration/umami/dev.appoutlet.umami.util.logger/index.html
+$dokka.location:dev.appoutlet.umami.util.logger/DefaultUmamiLogger///PointingToDeclaration/umami/dev.appoutlet.umami.util.logger/-default-umami-logger/index.html
+$dokka.location:dev.appoutlet.umami.util.logger/DefaultUmamiLogger/DefaultUmamiLogger/#co.touchlab.kermit.Logger/PointingToDeclaration/umami/dev.appoutlet.umami.util.logger/-default-umami-logger/-default-umami-logger.html
+$dokka.location:dev.appoutlet.umami.util.logger/DefaultUmamiLogger/debug/#kotlin.String/PointingToDeclaration/umami/dev.appoutlet.umami.util.logger/-default-umami-logger/debug.html
+$dokka.location:dev.appoutlet.umami.util.logger/DefaultUmamiLogger/error/#kotlin.String#kotlin.Throwable?/PointingToDeclaration/umami/dev.appoutlet.umami.util.logger/-default-umami-logger/error.html
+$dokka.location:dev.appoutlet.umami.util.logger/DefaultUmamiLogger/info/#kotlin.String/PointingToDeclaration/umami/dev.appoutlet.umami.util.logger/-default-umami-logger/info.html
+$dokka.location:dev.appoutlet.umami.util.logger/DefaultUmamiLogger/log/#dev.appoutlet.umami.util.logger.UmamiLogger.Severity#kotlin.String#kotlin.Throwable?/PointingToDeclaration/umami/dev.appoutlet.umami.util.logger/-default-umami-logger/log.html
+$dokka.location:dev.appoutlet.umami.util.logger/DefaultUmamiLogger/verbose/#kotlin.String/PointingToDeclaration/umami/dev.appoutlet.umami.util.logger/-default-umami-logger/verbose.html
+$dokka.location:dev.appoutlet.umami.util.logger/DefaultUmamiLogger/warn/#kotlin.String#kotlin.Throwable?/PointingToDeclaration/umami/dev.appoutlet.umami.util.logger/-default-umami-logger/warn.html
 $dokka.location:dev.appoutlet.umami.util.logger/UmamiLogger.Severity.Debug///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}umami/dev.appoutlet.umami.util.logger/-umami-logger/-severity/-debug/index.html
 $dokka.location:dev.appoutlet.umami.util.logger/UmamiLogger.Severity.Error///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}umami/dev.appoutlet.umami.util.logger/-umami-logger/-severity/-error/index.html
 $dokka.location:dev.appoutlet.umami.util.logger/UmamiLogger.Severity.Info///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}umami/dev.appoutlet.umami.util.logger/-umami-logger/-severity/-info/index.html

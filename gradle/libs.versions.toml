@@ -12,7 +12,7 @@ kotest = "6.1.11"
 kotlin = "2.3.20"
 ktor = "3.4.2"
 maven-publish = "0.36.0"
-umami = "0.4.0"
+umami = "0.5.0"
 
 [libraries]
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }

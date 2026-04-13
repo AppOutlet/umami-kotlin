@@ -3,10 +3,10 @@ package dev.appoutlet.umami.api
 import dev.appoutlet.umami.domain.Link
 import dev.appoutlet.umami.domain.SearchResponse
 import io.ktor.client.call.body
-import io.ktor.client.plugins.resources.delete
-import io.ktor.client.plugins.resources.get
-import io.ktor.client.plugins.resources.post
+import io.ktor.client.request.delete
+import io.ktor.client.request.get
 import io.ktor.client.request.parameter
+import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -14,7 +14,7 @@ import kotlinx.serialization.Serializable
 /**
  * Provides functionalities for interacting with Links in the Umami API.
  *
- * @param umami The [UmamiApi] instance used for making HTTP requests.
+ * @param api The [UmamiApi] instance used for making HTTP requests.
  */
 class Links(private val api: UmamiApi) {
 
@@ -31,7 +31,7 @@ class Links(private val api: UmamiApi) {
         page: Int? = null,
         pageSize: Int? = null,
     ): SearchResponse<Link> {
-        return api.httpClient.get(Api.Links()) {
+        return api.httpClient.get("links") {
             parameter("search", search)
             parameter("page", page)
             parameter("pageSize", pageSize)
@@ -45,7 +45,7 @@ class Links(private val api: UmamiApi) {
      * @return The [Link] object matching the provided ID.
      */
     suspend fun getLink(linkId: String): Link {
-        return api.httpClient.get(Api.Links.Id(id = linkId)).body()
+        return api.httpClient.get("links/$linkId").body()
     }
 
     /**
@@ -66,7 +66,7 @@ class Links(private val api: UmamiApi) {
             url = url.validate(),
             slug = slug,
         )
-        return api.httpClient.post(Api.Links()) {
+        return api.httpClient.post("links") {
             setBody(request)
         }.body()
     }
@@ -91,7 +91,7 @@ class Links(private val api: UmamiApi) {
             url = url?.validate(),
             slug = slug,
         )
-        return api.httpClient.post(Api.Links.Id(id = linkId)) {
+        return api.httpClient.post("links/$linkId") {
             setBody(request)
         }.body()
     }
@@ -102,7 +102,7 @@ class Links(private val api: UmamiApi) {
      * @param linkId The unique identifier of the link to delete.
      */
     suspend fun deleteLink(linkId: String) {
-        api.httpClient.delete(Api.Links.Id(id = linkId))
+        api.httpClient.delete("links/$linkId")
     }
 
     @Serializable

@@ -3,17 +3,17 @@ package dev.appoutlet.umami.api
 import dev.appoutlet.umami.domain.Pixel
 import dev.appoutlet.umami.domain.SearchResponse
 import io.ktor.client.call.body
-import io.ktor.client.plugins.resources.delete
-import io.ktor.client.plugins.resources.get
-import io.ktor.client.plugins.resources.post
+import io.ktor.client.request.delete
+import io.ktor.client.request.get
 import io.ktor.client.request.parameter
+import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import kotlinx.serialization.Serializable
 
 /**
  * Provides functionalities for interacting with Pixels in the Umami API.
  *
- * @param umami The [UmamiApi] instance used for making HTTP requests.
+ * @param api The [UmamiApi] instance used for making HTTP requests.
  */
 class Pixels(private val api: UmamiApi) {
 
@@ -30,7 +30,7 @@ class Pixels(private val api: UmamiApi) {
         page: Int? = null,
         pageSize: Int? = null,
     ): SearchResponse<Pixel> {
-        return api.httpClient.get(Api.Pixels()) {
+        return api.httpClient.get("pixels") {
             parameter("search", search)
             parameter("page", page)
             parameter("pageSize", pageSize)
@@ -44,7 +44,7 @@ class Pixels(private val api: UmamiApi) {
      * @return The [Pixel] object matching the provided ID.
      */
     suspend fun getPixel(pixelId: String): Pixel {
-        return api.httpClient.get(Api.Pixels.Id(id = pixelId)).body()
+        return api.httpClient.get("pixels/$pixelId").body()
     }
 
     /**
@@ -64,7 +64,7 @@ class Pixels(private val api: UmamiApi) {
             name = name,
             slug = slug,
         )
-        return api.httpClient.post(Api.Pixels.Id(id = pixelId)) {
+        return api.httpClient.post("pixels/$pixelId") {
             setBody(request)
         }.body()
     }
@@ -75,7 +75,7 @@ class Pixels(private val api: UmamiApi) {
      * @param pixelId The unique identifier of the pixel to delete.
      */
     suspend fun deletePixel(pixelId: String) {
-        api.httpClient.delete(Api.Pixels.Id(id = pixelId))
+        api.httpClient.delete("pixels/$pixelId")
     }
 
     @Serializable

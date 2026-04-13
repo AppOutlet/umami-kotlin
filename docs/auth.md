@@ -22,6 +22,10 @@ There are three primary ways to log in using the library: by providing a usernam
 
 ### Using Username and Password
 
+!!! warning "Self-Hosted Only"
+    Login with a username and password is **only supported on self-hosted instances**.
+    If you are using Umami Cloud (`BaseUrl.Cloud`), you must authenticate using an API key instead.
+
 The most common way to log in is by calling the `login` suspend function with the user's credentials.
 
 **Example:**

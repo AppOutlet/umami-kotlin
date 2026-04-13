@@ -5,7 +5,7 @@ import dev.appoutlet.umami.domain.Team
 import dev.appoutlet.umami.domain.User
 import dev.appoutlet.umami.domain.Website
 import io.ktor.client.call.body
-import io.ktor.client.plugins.resources.get
+import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 
 /**
@@ -28,7 +28,7 @@ class Admin(private val api: UmamiApi) {
         page: Int? = null,
         pageSize: Int? = null,
     ): SearchResponse<User> {
-        return api.httpClient.get(Api.Admin.Users()) {
+        return api.httpClient.get("admin/users") {
             parameter("search", search)
             parameter("page", page)
             parameter("pageSize", pageSize)
@@ -48,7 +48,7 @@ class Admin(private val api: UmamiApi) {
         page: Int? = null,
         pageSize: Int? = null,
     ): SearchResponse<Website> {
-        return api.httpClient.get(Api.Admin.Websites()) {
+        return api.httpClient.get("admin/websites") {
             parameter("search", search)
             parameter("page", page)
             parameter("pageSize", pageSize)
@@ -68,7 +68,7 @@ class Admin(private val api: UmamiApi) {
         page: Int? = null,
         pageSize: Int? = null,
     ): SearchResponse<Team> {
-        return api.httpClient.get(Api.Admin.Teams()) {
+        return api.httpClient.get("admin/teams") {
             parameter("search", search)
             parameter("page", page)
             parameter("pageSize", pageSize)

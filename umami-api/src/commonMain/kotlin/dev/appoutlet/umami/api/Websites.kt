@@ -3,10 +3,10 @@ package dev.appoutlet.umami.api
 import dev.appoutlet.umami.domain.SearchResponse
 import dev.appoutlet.umami.domain.Website
 import io.ktor.client.call.body
-import io.ktor.client.plugins.resources.delete
-import io.ktor.client.plugins.resources.get
-import io.ktor.client.plugins.resources.post
+import io.ktor.client.request.delete
+import io.ktor.client.request.get
 import io.ktor.client.request.parameter
+import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -14,7 +14,7 @@ import kotlinx.serialization.Serializable
 /**
  * Provides functionalities for interacting with Websites in the Umami API.
  *
- * @param umami The [UmamiApi] instance used for making HTTP requests.
+ * @param api The [UmamiApi] instance used for making HTTP requests.
  */
 class Websites(private val api: UmamiApi) {
 
@@ -33,7 +33,7 @@ class Websites(private val api: UmamiApi) {
         page: Int? = null,
         pageSize: Int? = null,
     ): SearchResponse<Website> {
-        return api.httpClient.get(Api.Websites()) {
+        return api.httpClient.get("websites") {
             parameter("includeTeams", includeTeams)
             parameter("search", search)
             parameter("page", page)
@@ -65,7 +65,7 @@ class Websites(private val api: UmamiApi) {
             teamId = teamId,
             id = id,
         )
-        return api.httpClient.post(Api.Websites()) {
+        return api.httpClient.post("websites") {
             setBody(request)
         }.body()
     }
@@ -77,7 +77,7 @@ class Websites(private val api: UmamiApi) {
      * @return The [Website] object matching the provided ID.
      */
     suspend fun getWebsite(websiteId: String): Website {
-        return api.httpClient.get(Api.Websites.Id(id = websiteId)).body()
+        return api.httpClient.get("websites/$websiteId").body()
     }
 
     /**
@@ -100,7 +100,7 @@ class Websites(private val api: UmamiApi) {
             domain = domain,
             shareId = shareId,
         )
-        return api.httpClient.post(Api.Websites.Id(id = websiteId)) {
+        return api.httpClient.post("websites/$websiteId") {
             setBody(request)
         }.body()
     }
@@ -111,7 +111,7 @@ class Websites(private val api: UmamiApi) {
      * @param websiteId The unique identifier of the website to delete.
      */
     suspend fun deleteWebsite(websiteId: String) {
-        api.httpClient.delete(Api.Websites.Id(id = websiteId))
+        api.httpClient.delete("websites/$websiteId")
     }
 
     /**
@@ -120,7 +120,7 @@ class Websites(private val api: UmamiApi) {
      * @param websiteId The unique identifier of the website to reset.
      */
     suspend fun resetWebsite(websiteId: String) {
-        api.httpClient.post(Api.Websites.Id.Reset(parent = Api.Websites.Id(id = websiteId)))
+        api.httpClient.post("websites/$websiteId/reset")
     }
 }
 

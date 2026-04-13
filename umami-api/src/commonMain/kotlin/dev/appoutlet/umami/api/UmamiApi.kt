@@ -28,6 +28,12 @@ class UmamiApi(block: UmamiApiConfig.() -> Unit = {}) {
     private val config = UmamiApiConfig().apply(block)
 
     /**
+     * The base URL of the Umami instance.
+     * Accessible so feature classes can check the instance type (Cloud vs Self-Hosted).
+     */
+    internal val baseUrl: BaseUrl = config.baseUrl
+
+    /**
      * A suspendable map for managing custom HTTP headers.
      * Accessible so feature classes can get/set items like Authorization.
      */

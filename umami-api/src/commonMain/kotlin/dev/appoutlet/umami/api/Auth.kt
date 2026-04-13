@@ -47,6 +47,11 @@ class Auth(private val api: UmamiApi) {
      * @return A [Session] containing the JWT token and user details.
      */
     suspend fun login(request: Login.Request): Session {
+        require(api.baseUrl is BaseUrl.SelfHosted) {
+            "Login with username and password is only supported for self-hosted instances. " +
+                "For Umami Cloud, please use an API key."
+        }
+
         val response: Session = api.httpClient.post("auth/login") {
             setBody(request)
         }.body()

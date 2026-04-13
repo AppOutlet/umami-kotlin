@@ -77,6 +77,17 @@ class AuthTest {
     }
 
     @Test
+    fun `login with username and password on Cloud instance should throw exception`() = runTest {
+        val api = getUmamiApiInstance(
+            baseUrl = BaseUrl.Cloud
+        )
+
+        assertFailsWith<IllegalArgumentException> {
+            api.auth().login("testuser", "testpassword")
+        }
+    }
+
+    @Test
     fun `login with API key should return success response and set x-umami-api-key header`() = runTest {
         val fixtureApiKey = "test-api-key"
         val mockLoginResponse = Session(

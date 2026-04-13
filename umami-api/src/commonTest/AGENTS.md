@@ -26,6 +26,8 @@ All essential testing utilities are located in the `dev.appoutlet.umami.testing`
 
 This is the most important helper function for setting up a test. It creates an `Umami` instance configured with a Ktor `MockEngine`.
 
+The helper explicitly configures `baseUrl = BaseUrl.SelfHosted("https://localhost", "/api")` so that all test paths use the `/api/` prefix (e.g., `/api/auth/login`), matching the self-hosted URL convention.
+
 **Signature:**
 ```kotlin
 fun TestScope.getUmamiInstance(

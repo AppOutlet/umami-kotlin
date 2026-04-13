@@ -6,7 +6,6 @@ import dev.appoutlet.umami.util.headers.SuspendMutableMap
 import dev.appoutlet.umami.util.logger.DefaultUmamiLogger
 import dev.appoutlet.umami.util.logger.UmamiLogger
 import io.ktor.client.engine.HttpClientEngine
-import io.ktor.http.Url
 
 /**
  * A DSL-style builder for configuring [UmamiApi].
@@ -15,9 +14,14 @@ import io.ktor.http.Url
 class UmamiApiConfig {
     /**
      * The base URL of the Umami instance.
-     * Defaults to "https://cloud.umami.is".
+     * Defaults to [BaseUrl.Cloud] (`https://api.umami.is/v1/`).
+     *
+     * For self-hosted instances, use [BaseUrl.SelfHosted]:
+     * ```
+     * baseUrl = BaseUrl.SelfHosted("https://umami.my-domain.com")
+     * ```
      */
-    var baseUrl: Url = Url("https://cloud.umami.is")
+    var baseUrl: BaseUrl = BaseUrl.Cloud
 
     /**
      * The Ktor HTTP client engine used for making requests.
@@ -39,9 +43,14 @@ class UmamiApiConfig {
     var headers: SuspendMutableMap<String, String> = InMemoryHeaders()
 
     /**
-     * Convenience function to set the base URL from a String.
+     * Convenience function to set the base URL for a self-hosted instance.
+     *
+     * Equivalent to `baseUrl = BaseUrl.SelfHosted(url)`.
+     * The default `/api` prefix will be appended automatically.
+     *
+     * @param url The base URL string (e.g. `"https://umami.my-domain.com"`).
      */
     fun baseUrl(url: String) {
-        baseUrl = Url(url)
+        baseUrl = BaseUrl.SelfHosted(url)
     }
 }

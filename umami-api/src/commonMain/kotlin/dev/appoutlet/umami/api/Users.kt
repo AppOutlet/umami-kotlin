@@ -5,10 +5,10 @@ import dev.appoutlet.umami.domain.Team
 import dev.appoutlet.umami.domain.User
 import dev.appoutlet.umami.domain.Website
 import io.ktor.client.call.body
-import io.ktor.client.plugins.resources.delete
-import io.ktor.client.plugins.resources.get
-import io.ktor.client.plugins.resources.post
+import io.ktor.client.request.delete
+import io.ktor.client.request.get
 import io.ktor.client.request.parameter
+import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -16,7 +16,7 @@ import kotlinx.serialization.Serializable
 /**
  * Provides functionalities for interacting with Users in the Umami API.
  *
- * @param umami The [UmamiApi] instance used for making HTTP requests.
+ * @param api The [UmamiApi] instance used for making HTTP requests.
  */
 class Users(private val api: UmamiApi) {
 
@@ -35,7 +35,7 @@ class Users(private val api: UmamiApi) {
         role: String,
         id: String? = null,
     ): User {
-        return api.httpClient.post(Api.Users()) {
+        return api.httpClient.post("users") {
             setBody(
                 CreateUserRequest(
                     username = username,
@@ -54,7 +54,7 @@ class Users(private val api: UmamiApi) {
      * @return The [User] object.
      */
     suspend fun get(userId: String): User {
-        return api.httpClient.get(Api.Users.UserId(userId = userId)).body()
+        return api.httpClient.get("users/$userId").body()
     }
 
     /**
@@ -72,7 +72,7 @@ class Users(private val api: UmamiApi) {
         password: String? = null,
         role: String? = null,
     ): User {
-        return api.httpClient.post(Api.Users.UserId(userId = userId)) {
+        return api.httpClient.post("users/$userId") {
             setBody(
                 UpdateUserRequest(
                     username = username,
@@ -89,7 +89,7 @@ class Users(private val api: UmamiApi) {
      * @param userId The unique identifier of the user.
      */
     suspend fun delete(userId: String) {
-        api.httpClient.delete(Api.Users.UserId(userId = userId))
+        api.httpClient.delete("users/$userId")
     }
 
     /**
@@ -109,7 +109,7 @@ class Users(private val api: UmamiApi) {
         page: Int? = null,
         pageSize: Int? = null,
     ): SearchResponse<Website> {
-        return api.httpClient.get(Api.Users.UserId(userId = userId).Websites()) {
+        return api.httpClient.get("users/$userId/websites") {
             parameter("includeTeams", includeTeams)
             parameter("search", search)
             parameter("page", page)
@@ -130,7 +130,7 @@ class Users(private val api: UmamiApi) {
         page: Int? = null,
         pageSize: Int? = null,
     ): SearchResponse<Team> {
-        return api.httpClient.get(Api.Users.UserId(userId = userId).Teams()) {
+        return api.httpClient.get("users/$userId/teams") {
             parameter("page", page)
             parameter("pageSize", pageSize)
         }.body()

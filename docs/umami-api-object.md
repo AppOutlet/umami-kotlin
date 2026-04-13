@@ -6,7 +6,7 @@ It does not maintain an event queue or a background coroutine scope, making it a
 
 ## Initialization
 
-You can create an instance of `UmamiApi` using its builder pattern. By default, it communicates with the Umami Cloud API.
+You can create an instance of `UmamiApi` using its builder pattern. By default, it communicates with the Umami Cloud API at `https://api.umami.is/v1`.
 
 ```kotlin
 import dev.appoutlet.umami.api.UmamiApi
@@ -19,13 +19,21 @@ val api = UmamiApi()
 You can fully customize the `UmamiApi` client to point to a self-hosted instance, change the HTTP engine, or customize headers.
 
 ```kotlin
+import dev.appoutlet.umami.api.BaseUrl
 import dev.appoutlet.umami.api.UmamiApi
 
 val api = UmamiApi {
     // 1. Base URL
-    // If you self-host Umami, you can configure your custom endpoint.
-    // Defaults to "https://cloud.umami.is".
+    // Defaults to BaseUrl.Cloud ("https://api.umami.is/v1/").
+
+    // For self-hosted instances, use the convenience function:
     baseUrl("https://umami.my-domain.com")
+    // This is equivalent to:
+    // baseUrl = BaseUrl.SelfHosted("https://umami.my-domain.com")
+    // which resolves to "https://umami.my-domain.com/api/"
+
+    // You can also specify a custom path prefix:
+    // baseUrl = BaseUrl.SelfHosted("https://umami.my-domain.com", prefix = "/custom-prefix")
 
     // 2. HTTP Client Engine
     // You can override the default platform Ktor engine (e.g., to use MockEngine in tests).

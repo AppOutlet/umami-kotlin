@@ -5,7 +5,7 @@ import dev.appoutlet.umami.domain.Session
 import dev.appoutlet.umami.domain.Team
 import dev.appoutlet.umami.domain.Website
 import io.ktor.client.call.body
-import io.ktor.client.plugins.resources.get
+import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 
 /**
@@ -20,7 +20,7 @@ class Me(private val api: UmamiApi) {
      * @return A [Session] object containing the user's session details.
      */
     suspend fun getSession(): Session {
-        return api.httpClient.get(Api.Me()).body()
+        return api.httpClient.get("me").body()
     }
 
     /**
@@ -28,7 +28,7 @@ class Me(private val api: UmamiApi) {
      * @return A [SearchResponse] containing a list of [Team] objects.
      */
     suspend fun getTeams(): SearchResponse<Team> {
-        return api.httpClient.get(Api.Me.Teams()).body()
+        return api.httpClient.get("me/teams").body()
     }
 
     /**
@@ -39,7 +39,7 @@ class Me(private val api: UmamiApi) {
     suspend fun getWebsites(
         includeTeams: Boolean? = null,
     ): SearchResponse<Website> {
-        return api.httpClient.get(Api.Me.Websites()) {
+        return api.httpClient.get("me/websites") {
             parameter("includeTeams", includeTeams)
         }.body()
     }

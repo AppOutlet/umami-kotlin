@@ -3,7 +3,7 @@ package dev.appoutlet.umami.api
 import dev.appoutlet.umami.domain.Session
 import dev.appoutlet.umami.domain.User
 import io.ktor.client.call.body
-import io.ktor.client.plugins.resources.post
+import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.HttpHeaders
 import kotlinx.serialization.SerialName
@@ -47,7 +47,7 @@ class Auth(private val api: UmamiApi) {
      * @return A [Session] containing the JWT token and user details.
      */
     suspend fun login(request: Login.Request): Session {
-        val response: Session = api.httpClient.post(Api.Auth.Login()) {
+        val response: Session = api.httpClient.post("auth/login") {
             setBody(request)
         }.body()
 
@@ -87,7 +87,7 @@ class Auth(private val api: UmamiApi) {
      */
     suspend fun logout() {
         if (api.headers.get(HttpHeaders.Authorization) != null) {
-            api.httpClient.post(Api.Auth.Logout())
+            api.httpClient.post("auth/logout")
             api.headers.remove(HttpHeaders.Authorization)
         }
 
@@ -101,7 +101,7 @@ class Auth(private val api: UmamiApi) {
      */
     suspend fun verify(): User {
         return api.httpClient
-            .post(Api.Auth.Verify())
+            .post("auth/verify")
             .body()
     }
 

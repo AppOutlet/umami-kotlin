@@ -1,5 +1,6 @@
 package dev.appoutlet.umami.testing
 
+import dev.appoutlet.umami.api.BaseUrl
 import dev.appoutlet.umami.api.UmamiApi
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.MockRequestHandleScope
@@ -31,6 +32,7 @@ fun TestScope.getUmamiApiInstance(
 
     return UmamiApi {
         httpClientEngine = mockEngine
+        baseUrl = BaseUrl.SelfHosted(baseUrl = "http://localhost:3000", prefix = "api")
     }
 }
 

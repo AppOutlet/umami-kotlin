@@ -11,7 +11,6 @@ import io.ktor.content.TextContent
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
-import kotlinx.coroutines.test.TestScope
 import kotlinx.serialization.json.Json
 
 val json = Json {
@@ -22,8 +21,9 @@ val json = Json {
     explicitNulls = false
 }
 
-fun TestScope.getUmamiApiInstance(
+fun getUmamiApiInstance(
     vararg requests: Pair<String, MockRequestHandleScope.(HttpRequestData) -> HttpResponseData>,
+    baseUrl: BaseUrl = BaseUrl.SelfHosted(baseUrl = "http://localhost:3000", prefix = "api"),
 ): UmamiApi {
     val mockEngine = MockEngine { request ->
         mapOf(*requests)[request.url.encodedPath]
@@ -32,7 +32,7 @@ fun TestScope.getUmamiApiInstance(
 
     return UmamiApi {
         httpClientEngine = mockEngine
-        baseUrl = BaseUrl.SelfHosted(baseUrl = "http://localhost:3000", prefix = "api")
+        this.baseUrl = baseUrl
     }
 }
 

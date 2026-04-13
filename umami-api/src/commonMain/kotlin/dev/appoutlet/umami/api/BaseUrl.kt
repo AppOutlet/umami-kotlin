@@ -2,14 +2,11 @@ package dev.appoutlet.umami.api
 
 import io.ktor.http.URLBuilder
 import io.ktor.http.Url
-import io.ktor.http.appendPathSegments
 import io.ktor.http.path
 import io.ktor.http.set
-import io.ktor.http.takeFrom
 
 private const val UmamiCloudApiHost = "https://api.umami.is"
 private const val UmamiCloudApiPathPrefix = "v1"
-
 
 /**
  * Represents the base URL configuration for the Umami API.
@@ -56,6 +53,6 @@ sealed class BaseUrl(val url: Url) {
     }
 }
 
-fun String.withTrailingSlash() : String {
+fun String.withTrailingSlash(): String {
     return if (this.endsWith("/").not()) "$this/" else this
 }

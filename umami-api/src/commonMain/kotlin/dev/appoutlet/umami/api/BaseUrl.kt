@@ -3,10 +3,9 @@ package dev.appoutlet.umami.api
 import io.ktor.http.URLBuilder
 import io.ktor.http.Url
 import io.ktor.http.path
-import io.ktor.http.set
 
-private const val UmamiCloudApiHost = "https://api.umami.is"
-private const val UmamiCloudApiPathPrefix = "v1"
+private const val UMAMI_CLOUD_BASE_URL = "https://api.umami.is"
+private const val UMAMI_CLOUD_PATH_PREFIX = "v1"
 
 /**
  * Represents the base URL configuration for the Umami API.
@@ -20,9 +19,9 @@ sealed class BaseUrl(val url: Url) {
      * Umami Cloud: `https://api.umami.is/v1/`.
      */
     data object Cloud : BaseUrl(
-        URLBuilder(UmamiCloudApiHost)
+        URLBuilder(UMAMI_CLOUD_BASE_URL)
             .apply {
-                path(UmamiCloudApiPathPrefix.withTrailingSlash())
+                path(UMAMI_CLOUD_PATH_PREFIX.withTrailingSlash())
             }
             .build()
     )

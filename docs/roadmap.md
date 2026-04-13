@@ -23,12 +23,14 @@ These endpoints are only available for admin users on self-hosted instances.
 ## Events
 
 - [ ] Returns a list of events for a website - `GET /api/websites/:websiteId/events`
+- [ ] Returns aggregated event statistics - `GET /api/websites/:websiteId/events/stats`
+- [ ] Returns event data grouped by event - `GET /api/websites/:websiteId/event-data`
+- [ ] Accesses data for a specific event - `GET /api/websites/:websiteId/event-data/:eventId`
 - [ ] Returns detailed event data for a website - `GET /api/websites/:websiteId/event-data/events`
 - [ ] Returns all available fields for event data - `GET /api/websites/:websiteId/event-data/fields`
+- [ ] Returns all available properties for event data - `GET /api/websites/:websiteId/event-data/properties`
 - [ ] Returns all available values for a given event data field - `GET /api/websites/:websiteId/event-data/values`
 - [ ] Returns statistics for a given event data field - `GET /api/websites/:websiteId/event-data/stats`
-- [ ] Returns all available properties for event data - `GET /api/websites/:websiteId/event-data/properties`
-- [ ] Accesses data for a specific event - `GET /api/websites/:websiteId/event-data/:eventId`
 
 ## Websites
 
@@ -42,14 +44,22 @@ These endpoints are only available for admin users on self-hosted instances.
 ### Website Statistics
 
 - [ ] Returns the number of active visitors on a website - `GET /api/websites/:websiteId/active`
+- [ ] Gets the date range of available data - `GET /api/websites/:websiteId/daterange`
+- [ ] Gets events within a given time range - `GET /api/websites/:websiteId/events/series`
+- [ ] Returns detailed metrics for a website over a date range - `GET /api/websites/:websiteId/metrics`
+- [ ] Gets expanded metrics for a given time range - `GET /api/websites/:websiteId/metrics/expanded`
 - [ ] Returns pageview data for a website - `GET /api/websites/:websiteId/pageviews`
 - [ ] Returns summary statistics for a website - `GET /api/websites/:websiteId/stats`
-- [ ] Returns detailed metrics for a website over a date range - `GET /api/websites/:websiteId/metrics`
+
+### Realtime
+
+- [ ] Realtime stats within the last 30 minutes - `GET /api/realtime/:websiteId`
 
 ### Sessions
 
 - [ ] Returns a list of sessions for a website - `GET /api/websites/:websiteId/sessions`
 - [ ] Returns statistics for sessions on a website - `GET /api/websites/:websiteId/sessions/stats`
+- [ ] Get collected count of sessions by hour of weekday - `GET /api/websites/:websiteId/sessions/weekly`
 - [ ] Returns details for a specific session - `GET /api/websites/:websiteId/sessions/:sessionId`
 - [ ] Returns the activity log for a specific session - `GET /api/websites/:websiteId/sessions/:sessionId/activity`
 - [ ] Returns all properties for a specific session - `GET /api/websites/:websiteId/sessions/:sessionId/properties`
@@ -104,6 +114,7 @@ These endpoints are only available for admin users on self-hosted instances.
 ## Pixels
 
 - [x] Returns all user pixels - `GET /api/pixels`
+- [ ] Creates a new pixel - `POST /api/pixels`
 - [x] Gets a pixel by ID - `GET /api/pixels/:pixelId`
 - [x] Updates a pixel - `POST /api/pixels/:pixelId`
 - [x] Deletes a pixel - `DELETE /api/pixels/:pixelId`
@@ -115,4 +126,21 @@ These endpoints are only available for admin users on self-hosted instances.
 - [ ] Returns the details of a specific report - `GET /api/reports/:reportId`
 - [ ] Updates the details of a specific report - `POST /api/reports/:reportId`
 - [ ] Deletes a report - `DELETE /api/reports/:reportId`
-- [ ] Returns a list of websites for a report - `GET /api/reports/:reportId/websites`
+- [ ] Run attribution report - `POST /api/reports/attribution`
+- [ ] Run breakdown report - `POST /api/reports/breakdown`
+- [ ] Run funnel report - `POST /api/reports/funnel`
+- [ ] Run goal report - `POST /api/reports/goal`
+- [ ] Run journey report - `POST /api/reports/journey`
+- [ ] Run performance report - `POST /api/reports/performance`
+- [ ] Run retention report - `POST /api/reports/retention`
+- [ ] Run revenue report - `POST /api/reports/revenue`
+- [ ] Run UTM report - `POST /api/reports/utm`
+
+## Share
+
+- [ ] Creates a share page - `POST /api/share`
+- [ ] Gets a share page by ID - `GET /api/share/id/:shareId`
+- [ ] Updates a share page - `POST /api/share/id/:shareId`
+- [ ] Deletes a share page - `DELETE /api/share/id/:shareId`
+- [ ] Gets all share pages that belong to a website - `GET api/websites/:websiteId/shares`
+- [ ] Creates a share page belonging to a website - `POST api/websites/:websiteId/shares`

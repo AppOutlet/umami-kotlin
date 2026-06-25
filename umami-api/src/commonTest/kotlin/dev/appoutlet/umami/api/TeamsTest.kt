@@ -4,6 +4,7 @@ import dev.appoutlet.umami.domain.SearchResponse
 import dev.appoutlet.umami.domain.Team
 import dev.appoutlet.umami.domain.TeamMember
 import dev.appoutlet.umami.domain.Website
+import dev.appoutlet.umami.domain.fixture
 import dev.appoutlet.umami.testing.body
 import dev.appoutlet.umami.testing.getUmamiApiInstance
 import dev.appoutlet.umami.testing.respond
@@ -17,14 +18,7 @@ class TeamsTest {
     @Test
     fun `find should return a list of teams`() = runTest {
         val expectedResponse = SearchResponse(
-            data = listOf(
-                Team(
-                    id = "e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e",
-                    name = "Test Team",
-                    accessCode = "test-code",
-                    createdAt = Instant.parse("2022-01-01T00:00:00Z"),
-                )
-            ),
+            data = listOf(Team.fixture()),
             count = 1,
             page = 1,
             pageSize = 10
@@ -42,34 +36,22 @@ class TeamsTest {
 
     @Test
     fun `create should return the created team`() = runTest {
-        val expectedResponse = Team(
-            id = "e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e",
-            name = "Test Team",
-            accessCode = "test-code",
-            createdAt = Instant.parse("2022-01-01T00:00:00Z"),
-        )
+        val expectedResponse = Team.fixture(name = "Test Team")
 
         val api = getUmamiApiInstance(
             "/api/teams" to {
-                it.body<CreateTeamRequest>().name shouldBe "Test Team"
+                it.body<CreateTeamRequest>().name shouldBe expectedResponse.name
                 respond(expectedResponse)
             }
         )
 
-        val actualResponse = api.teams().create("Test Team")
+        val actualResponse = api.teams().create(expectedResponse.name)
         actualResponse shouldBe expectedResponse
     }
 
     @Test
     fun `join should return the team membership`() = runTest {
-        val expectedResponse = TeamMember(
-            id = "e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e",
-            teamId = "a1b2c3d4-e5f6-7890-1234-567890abcdef",
-            userId = "f0e9d8c7-b6a5-4321-fedc-ba9876543210",
-            role = "member",
-            createdAt = Instant.parse("2022-01-01T00:00:00Z"),
-            updatedAt = Instant.parse("2022-01-01T00:00:00Z")
-        )
+        val expectedResponse = TeamMember.fixture()
 
         val api = getUmamiApiInstance(
             "/api/teams/join" to {
@@ -84,80 +66,68 @@ class TeamsTest {
 
     @Test
     fun `get should return a team`() = runTest {
-        val expectedResponse = Team(
-            id = "e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e",
-            name = "Test Team",
-            accessCode = "test-code",
-            createdAt = Instant.parse("2022-01-01T00:00:00Z"),
-        )
+        val expectedResponse = Team.fixture(id = "e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e")
 
         val api = getUmamiApiInstance(
-            "/api/teams/e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e" to {
+            "/api/teams/${expectedResponse.id}" to {
                 respond(expectedResponse)
             }
         )
 
-        val actualResponse = api.teams().get("e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e")
+        val actualResponse = api.teams().get(expectedResponse.id)
         actualResponse shouldBe expectedResponse
     }
 
     @Test
     fun `update should return the updated team`() = runTest {
-        val expectedResponse = Team(
+        val expectedResponse = Team.fixture(
             id = "e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e",
             name = "Updated Team",
             accessCode = "updated-code",
-            createdAt = Instant.parse("2022-01-01T00:00:00Z"),
         )
 
         val api = getUmamiApiInstance(
-            "/api/teams/e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e" to {
+            "/api/teams/${expectedResponse.id}" to {
                 val body = it.body<UpdateTeamRequest>()
-                body.name shouldBe "Updated Team"
-                body.accessCode shouldBe "updated-code"
+                body.name shouldBe expectedResponse.name
+                body.accessCode shouldBe expectedResponse.accessCode
                 respond(expectedResponse)
             }
         )
 
         val actualResponse = api.teams().update(
-            "e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e",
-            "Updated Team",
-            "updated-code"
+            expectedResponse.id,
+            expectedResponse.name,
+            expectedResponse.accessCode,
         )
         actualResponse shouldBe expectedResponse
     }
 
     @Test
     fun `delete should not throw an exception on success`() = runTest {
+        val teamId = "e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e"
         val api = getUmamiApiInstance(
-            "/api/teams/e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e" to {
+            "/api/teams/$teamId" to {
                 respondOk()
             }
         )
 
-        api.teams().delete("e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e")
+        api.teams().delete(teamId)
     }
 
     @Test
     fun `getUsers should return a list of team members`() = runTest {
+        val teamId = "a1b2c3d4-e5f6-7890-1234-567890abcdef"
+
         val expectedResponse = SearchResponse(
-            data = listOf(
-                TeamMember(
-                    id = "e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e",
-                    teamId = "a1b2c3d4-e5f6-7890-1234-567890abcdef",
-                    userId = "f0e9d8c7-b6a5-4321-fedc-ba9876543210",
-                    role = "member",
-                    createdAt = Instant.parse("2022-01-01T00:00:00Z"),
-                    updatedAt = Instant.parse("2022-01-01T00:00:00Z")
-                )
-            ),
+            data = listOf(TeamMember.fixture()),
             count = 1,
             page = 1,
             pageSize = 10
         )
 
         val api = getUmamiApiInstance(
-            "/api/teams/a1b2c3d4-e5f6-7890-1234-567890abcdef/users" to {
+            "/api/teams/$teamId/users" to {
                 it.url.parameters["search"] shouldBe "test"
                 it.url.parameters["page"] shouldBe "2"
                 it.url.parameters["pageSize"] shouldBe "20"
@@ -166,7 +136,7 @@ class TeamsTest {
         )
 
         val actualResponse = api.teams().getUsers(
-            teamId = "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+            teamId = teamId,
             search = "test",
             page = 2,
             pageSize = 20
@@ -176,98 +146,85 @@ class TeamsTest {
 
     @Test
     fun `addUser should return the new team member`() = runTest {
-        val expectedResponse = TeamMember(
-            id = "e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e",
-            teamId = "a1b2c3d4-e5f6-7890-1234-567890abcdef",
-            userId = "f0e9d8c7-b6a5-4321-fedc-ba9876543210",
-            role = "team-member",
-            createdAt = Instant.parse("2022-01-01T00:00:00Z"),
-            updatedAt = Instant.parse("2022-01-01T00:00:00Z")
-        )
+        val teamId = "a1b2c3d4-e5f6-7890-1234-567890abcdef"
+        val userId = "f0e9d8c7-b6a5-4321-fedc-ba9876543210"
+
+        val expectedResponse = TeamMember.fixture(role = "team-member")
 
         val api = getUmamiApiInstance(
-            "/api/teams/a1b2c3d4-e5f6-7890-1234-567890abcdef/users" to {
+            "/api/teams/$teamId/users" to {
                 val body = it.body<AddUserRequest>()
-                body.userId shouldBe "f0e9d8c7-b6a5-4321-fedc-ba9876543210"
-                body.role shouldBe "team-member"
+                body.userId shouldBe userId
+                body.role shouldBe expectedResponse.role
                 respond(expectedResponse)
             }
         )
 
         val actualResponse = api.teams().addUser(
-            "a1b2c3d4-e5f6-7890-1234-567890abcdef",
-            "f0e9d8c7-b6a5-4321-fedc-ba9876543210",
-            "team-member"
+            teamId,
+            userId,
+            expectedResponse.role,
         )
         actualResponse shouldBe expectedResponse
     }
 
     @Test
     fun `getUser should return a team member`() = runTest {
-        val expectedResponse = TeamMember(
-            id = "e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e",
-            teamId = "a1b2c3d4-e5f6-7890-1234-567890abcdef",
-            userId = "f0e9d8c7-b6a5-4321-fedc-ba9876543210",
-            role = "member",
-            createdAt = Instant.parse("2022-01-01T00:00:00Z"),
-            updatedAt = Instant.parse("2022-01-01T00:00:00Z")
-        )
+        val teamId = "a1b2c3d4-e5f6-7890-1234-567890abcdef"
+        val userId = "f0e9d8c7-b6a5-4321-fedc-ba9876543210"
+
+        val expectedResponse = TeamMember.fixture()
 
         val api = getUmamiApiInstance(
-            "/api/teams/a1b2c3d4-e5f6-7890-1234-567890abcdef/users/f0e9d8c7-b6a5-4321-fedc-ba9876543210" to {
+            "/api/teams/$teamId/users/$userId" to {
                 respond(expectedResponse)
             }
         )
 
-        val actualResponse = api.teams().getUser(
-            "a1b2c3d4-e5f6-7890-1234-567890abcdef",
-            "f0e9d8c7-b6a5-4321-fedc-ba9876543210"
-        )
+        val actualResponse = api.teams().getUser(teamId, userId)
         actualResponse shouldBe expectedResponse
     }
 
     @Test
     fun `updateUserRole should return the updated team member`() = runTest {
-        val expectedResponse = TeamMember(
-            id = "e6e4f1a6-2b4c-4c7a-9f5b-1e2a3b4c5d6e",
-            teamId = "a1b2c3d4-e5f6-7890-1234-567890abcdef",
-            userId = "f0e9d8c7-b6a5-4321-fedc-ba9876543210",
-            role = "team-manager",
-            createdAt = Instant.parse("2022-01-01T00:00:00Z"),
-            updatedAt = Instant.parse("2022-01-01T00:00:00Z")
-        )
+        val teamId = "a1b2c3d4-e5f6-7890-1234-567890abcdef"
+        val userId = "f0e9d8c7-b6a5-4321-fedc-ba9876543210"
+
+        val expectedResponse = TeamMember.fixture(role = "team-manager")
 
         val api = getUmamiApiInstance(
-            "/api/teams/a1b2c3d4-e5f6-7890-1234-567890abcdef/users/f0e9d8c7-b6a5-4321-fedc-ba9876543210" to {
-                it.body<UpdateUserRoleRequest>().role shouldBe "team-manager"
+            "/api/teams/$teamId/users/$userId" to {
+                it.body<UpdateUserRoleRequest>().role shouldBe expectedResponse.role
                 respond(expectedResponse)
             }
         )
 
         val actualResponse = api.teams().updateUserRole(
-            "a1b2c3d4-e5f6-7890-1234-567890abcdef",
-            "f0e9d8c7-b6a5-4321-fedc-ba9876543210",
-            "team-manager"
+            teamId,
+            userId,
+            expectedResponse.role,
         )
         actualResponse shouldBe expectedResponse
     }
 
     @Test
     fun `removeUser should not throw an exception on success`() = runTest {
+        val teamId = "a1b2c3d4-e5f6-7890-1234-567890abcdef"
+        val userId = "f0e9d8c7-b6a5-4321-fedc-ba9876543210"
+
         val api = getUmamiApiInstance(
-            "/api/teams/a1b2c3d4-e5f6-7890-1234-567890abcdef/users/f0e9d8c7-b6a5-4321-fedc-ba9876543210" to {
+            "/api/teams/$teamId/users/$userId" to {
                 respondOk()
             }
         )
 
-        api.teams().removeUser(
-            "a1b2c3d4-e5f6-7890-1234-567890abcdef",
-            "f0e9d8c7-b6a5-4321-fedc-ba9876543210"
-        )
+        api.teams().removeUser(teamId, userId)
     }
 
     @Test
     fun `getWebsites should return a list of websites`() = runTest {
+        val teamId = "a1b2c3d4-e5f6-7890-1234-567890abcdef"
+
         val expectedResponse = SearchResponse(
             data = listOf(
                 Website(
@@ -286,7 +243,7 @@ class TeamsTest {
         )
 
         val api = getUmamiApiInstance(
-            "/api/teams/a1b2c3d4-e5f6-7890-1234-567890abcdef/websites" to {
+            "/api/teams/$teamId/websites" to {
                 it.url.parameters["search"] shouldBe "test"
                 it.url.parameters["page"] shouldBe "2"
                 it.url.parameters["pageSize"] shouldBe "20"
@@ -295,7 +252,7 @@ class TeamsTest {
         )
 
         val actualResponse = api.teams().getWebsites(
-            teamId = "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+            teamId = teamId,
             search = "test",
             page = 2,
             pageSize = 20

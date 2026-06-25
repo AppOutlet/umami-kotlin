@@ -2,32 +2,22 @@ package dev.appoutlet.umami.api
 
 import dev.appoutlet.umami.domain.Pixel
 import dev.appoutlet.umami.domain.SearchResponse
+import dev.appoutlet.umami.domain.fixture
 import dev.appoutlet.umami.testing.getUmamiApiInstance
 import dev.appoutlet.umami.testing.respond
 import io.kotest.matchers.shouldBe
 import io.ktor.http.content.OutgoingContent
 import kotlinx.coroutines.test.runTest
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlin.test.Test
-import kotlin.time.Instant
 
 class PixelsTest {
     @Test
     fun `getPixels returns search response`() = runTest {
-        val mockPixel = Pixel(
-            id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-            name = "Umami Pixel",
-            slug = "xxxxxxxx",
-            userId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-            teamId = null,
-            createdAt = Instant.parse("2025-10-27T18:50:54.079Z"),
-            updatedAt = Instant.parse("2025-10-27T18:50:54.079Z"),
-            deletedAt = null
-        )
+        val fixturePixel = Pixel.fixture()
 
         val mockResponse = SearchResponse(
-            data = listOf(mockPixel),
+            data = listOf(fixturePixel),
             count = 1,
             page = 1,
             pageSize = 10
@@ -69,26 +59,20 @@ class PixelsTest {
     @Test
     fun `getPixel returns pixel`() = runTest {
         val pixelId = "pixel-id"
-        val mockPixel = Pixel(
-            id = pixelId,
-            name = "Umami Pixel",
-            slug = "xxxxxxxx",
-            userId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-            teamId = null,
-            createdAt = Instant.parse("2025-10-27T18:50:54.079Z"),
-            updatedAt = Instant.parse("2025-10-27T18:50:54.079Z"),
-            deletedAt = null
-        )
+
+        val fixturePixel = Pixel.fixture()
 
         val api = getUmamiApiInstance(
             "/api/pixels/$pixelId" to { request ->
                 request.url.encodedPath shouldBe "/api/pixels/$pixelId"
-                respond(mockPixel)
+
+                respond(fixturePixel)
             }
         )
 
         val response = api.pixels().getPixel(pixelId)
-        response shouldBe mockPixel
+
+        response shouldBe fixturePixel
     }
 
     @Test
@@ -97,16 +81,7 @@ class PixelsTest {
         val requestSlug = "pixel-slug"
         val requestTeamId = "team-id"
 
-        val mockPixel = Pixel(
-            id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-            name = requestName,
-            slug = requestSlug,
-            userId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-            teamId = requestTeamId,
-            createdAt = Instant.parse("2025-10-27T18:50:54.079Z"),
-            updatedAt = Instant.parse("2025-10-27T18:50:54.079Z"),
-            deletedAt = null
-        )
+        val fixturePixel = Pixel.fixture()
 
         val api = getUmamiApiInstance(
             "/api/pixels" to { request ->
@@ -116,7 +91,7 @@ class PixelsTest {
                 createRequest.name shouldBe requestName
                 createRequest.slug shouldBe requestSlug
                 createRequest.teamId shouldBe requestTeamId
-                respond(mockPixel)
+                respond(fixturePixel)
             }
         )
 
@@ -125,21 +100,13 @@ class PixelsTest {
             slug = requestSlug,
             teamId = requestTeamId,
         )
-        response shouldBe mockPixel
+
+        response shouldBe fixturePixel
     }
 
     @Test
     fun `createPixel sends null teamId by default`() = runTest {
-        val mockPixel = Pixel(
-            id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-            name = "Umami Pixel",
-            slug = "pixel-slug",
-            userId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-            teamId = null,
-            createdAt = Instant.parse("2025-10-27T18:50:54.079Z"),
-            updatedAt = Instant.parse("2025-10-27T18:50:54.079Z"),
-            deletedAt = null
-        )
+        val fixturePixel = Pixel.fixture()
 
         val api = getUmamiApiInstance(
             "/api/pixels" to { request ->
@@ -149,7 +116,7 @@ class PixelsTest {
                 createRequest.name shouldBe "Umami Pixel"
                 createRequest.slug shouldBe "pixel-slug"
                 createRequest.teamId shouldBe null
-                respond(mockPixel)
+                respond(fixturePixel)
             }
         )
 
@@ -157,7 +124,8 @@ class PixelsTest {
             name = "Umami Pixel",
             slug = "pixel-slug",
         )
-        response shouldBe mockPixel
+
+        response shouldBe fixturePixel
     }
 
     @Test
@@ -166,16 +134,7 @@ class PixelsTest {
         val requestName = "Umami Pixel Updated"
         val requestSlug = "updated-slug"
 
-        val mockPixel = Pixel(
-            id = pixelId,
-            name = requestName,
-            slug = requestSlug,
-            userId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-            teamId = null,
-            createdAt = Instant.parse("2025-10-27T18:50:54.079Z"),
-            updatedAt = Instant.parse("2025-10-27T18:50:54.079Z"),
-            deletedAt = null
-        )
+        val fixturePixel = Pixel.fixture()
 
         val api = getUmamiApiInstance(
             "/api/pixels/$pixelId" to { request ->
@@ -184,7 +143,7 @@ class PixelsTest {
                 val updateRequest = Json.decodeFromString<Pixels.UpdatePixelRequest>(bodyText)
                 updateRequest.name shouldBe requestName
                 updateRequest.slug shouldBe requestSlug
-                respond(mockPixel)
+                respond(fixturePixel)
             }
         )
 
@@ -193,7 +152,8 @@ class PixelsTest {
             name = requestName,
             slug = requestSlug
         )
-        response shouldBe mockPixel
+
+        response shouldBe fixturePixel
     }
 
     @Test

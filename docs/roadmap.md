@@ -114,7 +114,7 @@ These endpoints are only available for admin users on self-hosted instances.
 ## Pixels
 
 - [x] Returns all user pixels - `GET /api/pixels`
-- [ ] Creates a new pixel - `POST /api/pixels`
+- [x] Creates a new pixel - `POST /api/pixels`
 - [x] Gets a pixel by ID - `GET /api/pixels/:pixelId`
 - [x] Updates a pixel - `POST /api/pixels/:pixelId`
 - [x] Deletes a pixel - `DELETE /api/pixels/:pixelId`

@@ -40,7 +40,6 @@ nav:
     - Teams: teams.md
     - Users: users.md
   - Roadmap: roadmap.md
-  - Release notes: release-notes.md
   - API Reference: reference
 
 markdown_extensions:

@@ -92,6 +92,75 @@ class PixelsTest {
     }
 
     @Test
+    fun `createPixel creates pixel`() = runTest {
+        val requestName = "Umami Pixel"
+        val requestSlug = "pixel-slug"
+        val requestTeamId = "team-id"
+
+        val mockPixel = Pixel(
+            id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            name = requestName,
+            slug = requestSlug,
+            userId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            teamId = requestTeamId,
+            createdAt = Instant.parse("2025-10-27T18:50:54.079Z"),
+            updatedAt = Instant.parse("2025-10-27T18:50:54.079Z"),
+            deletedAt = null
+        )
+
+        val api = getUmamiApiInstance(
+            "/api/pixels" to { request ->
+                request.url.encodedPath shouldBe "/api/pixels"
+                val bodyText = (request.body as OutgoingContent.ByteArrayContent).bytes().decodeToString()
+                val createRequest = Json.decodeFromString<Pixels.CreatePixelRequest>(bodyText)
+                createRequest.name shouldBe requestName
+                createRequest.slug shouldBe requestSlug
+                createRequest.teamId shouldBe requestTeamId
+                respond(mockPixel)
+            }
+        )
+
+        val response = api.pixels().createPixel(
+            name = requestName,
+            slug = requestSlug,
+            teamId = requestTeamId,
+        )
+        response shouldBe mockPixel
+    }
+
+    @Test
+    fun `createPixel sends null teamId by default`() = runTest {
+        val mockPixel = Pixel(
+            id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            name = "Umami Pixel",
+            slug = "pixel-slug",
+            userId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            teamId = null,
+            createdAt = Instant.parse("2025-10-27T18:50:54.079Z"),
+            updatedAt = Instant.parse("2025-10-27T18:50:54.079Z"),
+            deletedAt = null
+        )
+
+        val api = getUmamiApiInstance(
+            "/api/pixels" to { request ->
+                request.url.encodedPath shouldBe "/api/pixels"
+                val bodyText = (request.body as OutgoingContent.ByteArrayContent).bytes().decodeToString()
+                val createRequest = Json.decodeFromString<Pixels.CreatePixelRequest>(bodyText)
+                createRequest.name shouldBe "Umami Pixel"
+                createRequest.slug shouldBe "pixel-slug"
+                createRequest.teamId shouldBe null
+                respond(mockPixel)
+            }
+        )
+
+        val response = api.pixels().createPixel(
+            name = "Umami Pixel",
+            slug = "pixel-slug",
+        )
+        response shouldBe mockPixel
+    }
+
+    @Test
     fun `updatePixel updates pixel`() = runTest {
         val pixelId = "pixel-id"
         val requestName = "Umami Pixel Updated"
@@ -112,14 +181,7 @@ class PixelsTest {
             "/api/pixels/$pixelId" to { request ->
                 request.url.encodedPath shouldBe "/api/pixels/$pixelId"
                 val bodyText = (request.body as OutgoingContent.ByteArrayContent).bytes().decodeToString()
-
-                @Serializable
-                data class UpdatePixelRequest(
-                    val name: String? = null,
-                    val slug: String? = null
-                )
-
-                val updateRequest = Json.decodeFromString<UpdatePixelRequest>(bodyText)
+                val updateRequest = Json.decodeFromString<Pixels.UpdatePixelRequest>(bodyText)
                 updateRequest.name shouldBe requestName
                 updateRequest.slug shouldBe requestSlug
                 respond(mockPixel)

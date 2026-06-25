@@ -1,8 +1,11 @@
-@file:OptIn(ExperimentalWasmDsl::class)
+@file:OptIn(ExperimentalWasmDsl::class, KotlinNativeCacheApi::class)
 
+import java.net.URI
 import java.time.LocalDateTime
 import org.gradle.kotlin.dsl.dokkaPlugin
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.plugin.mpp.DisableCacheInKotlinVersion
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCacheApi
 
 plugins {
     alias(libs.plugins.android.library)
@@ -58,7 +61,6 @@ kotlin {
             }
         }
     }
-
 }
 
 dependencies {

@@ -24,11 +24,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import dev.appoutlet.umami.api.UmamiApi
 import dev.appoutlet.umami.api.auth
 import dev.appoutlet.umami.domain.User
 import kotlinx.coroutines.launch
 
-private val auth = umami.auth()
+private val auth = UmamiApi().auth()
 
 @Composable
 fun Authentication() {

@@ -24,6 +24,24 @@ This method returns the details of a specific pixel.
 val pixel = api.pixels().getPixel("pixel-id")
 ```
 
+## Create a pixel
+
+This method creates a new tracking pixel.
+
+```kotlin
+val pixel = api.pixels().createPixel(
+    name = "New Pixel",
+    slug = "new-pixel-slug",
+    teamId = "team-id"
+)
+```
+
+### Parameters
+
+- `name` (required): The name for the pixel.
+- `slug` (required): The slug for the pixel.
+- `teamId` (optional): The ID of the team to associate the pixel with.
+
 ## Update a pixel
 
 This method updates the details of a specific pixel.

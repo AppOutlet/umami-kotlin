@@ -48,6 +48,30 @@ class Pixels(private val api: UmamiApi) {
     }
 
     /**
+     * Creates a new tracking pixel.
+     *
+     * @param name The name for the pixel.
+     * @param slug The slug for the pixel.
+     * @param teamId The ID of the team to associate the pixel with. Optional.
+     * @return The created [Pixel] object.
+     */
+    suspend fun createPixel(
+        name: String,
+        slug: String,
+        teamId: String? = null,
+    ): Pixel {
+        val request = CreatePixelRequest(
+            name = name,
+            slug = slug,
+            teamId = teamId,
+        )
+
+        return api.httpClient.post("pixels") {
+            setBody(request)
+        }.body()
+    }
+
+    /**
      * Updates an existing pixel.
      *
      * @param pixelId The unique identifier of the pixel to update.
@@ -79,7 +103,14 @@ class Pixels(private val api: UmamiApi) {
     }
 
     @Serializable
-    private data class UpdatePixelRequest(
+    internal data class CreatePixelRequest(
+        val name: String,
+        val slug: String,
+        val teamId: String? = null,
+    )
+
+    @Serializable
+    internal data class UpdatePixelRequest(
         val name: String? = null,
         val slug: String? = null
     )

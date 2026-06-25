@@ -37,6 +37,7 @@ Dokka and Maven publish require `--no-configuration-cache` despite it being glob
 - General mocking: Mokkery.
 - Test names use backtick style: `` fun `should do something`() = runTest { ... } ``
 - Tests live in `commonTest` only — no platform-specific test source sets.
+- **Sample data**: use fixtures (see the `fixtures` skill in `.agents/skills/fixtures/`) instead of inline object literals whenever a test needs a domain model. A fixture is an extension on a model's `Companion` (e.g. `Pixel.fixture()`) living in `commonTest` under the model's own package. When a requested fixture references other domain models, the skill creates those in cascade and reuses any existing fixture rather than duplicating. See `umami-api/src/commonTest/.../domain/PixelFixture.kt` and `PixelsTest.kt` for the canonical pattern.
 - See `umami-api/src/commonTest/AGENTS.md` for detailed test-writing patterns (MockEngine helpers, `getUmamiInstance`, `respond<T>`, `body<T>()`).
 
 Key difference between the two `getUmamiInstance` copies: `:umami-api` sets `enableEventQueue = false`; `:umami` leaves it enabled.

@@ -1,6 +1,4 @@
 import java.time.LocalDateTime
-import kotlinx.kover.gradle.plugin.dsl.AggregationType
-import kotlinx.kover.gradle.plugin.dsl.CoverageUnit
 
 plugins {
     alias(libs.plugins.android.application) apply false
@@ -14,7 +12,6 @@ plugins {
     alias(libs.plugins.detekt)
     alias(libs.plugins.dokka)
     alias(libs.plugins.gitHooks)
-    alias(libs.plugins.kover)
     alias(libs.plugins.kotlin.android) apply false
 }
 
@@ -22,9 +19,6 @@ dependencies {
     dokka(project(":umami"))
     dokka(project(":umami-api"))
     dokkaPlugin(libs.dokka.versioning)
-
-    kover(project(":umami"))
-    kover(project(":umami-api"))
 }
 
 dokka {
@@ -48,32 +42,6 @@ dokka {
             version.set(libs.versions.umami.get())
             olderVersionsDir.set(projectDir.resolve("docs/versions"))
             renderVersionsNavigationOnAllPages.set(true)
-        }
-    }
-}
-
-kover {
-    reports {
-        verify {
-            rule {
-                minBound(
-                    minValue = 80,
-                    coverageUnits = CoverageUnit.LINE,
-                    aggregationForGroup = AggregationType.COVERED_PERCENTAGE
-                )
-
-                minBound(
-                    minValue = 80,
-                    coverageUnits = CoverageUnit.INSTRUCTION,
-                    aggregationForGroup = AggregationType.COVERED_PERCENTAGE
-                )
-
-                minBound(
-                    minValue = 36,
-                    coverageUnits = CoverageUnit.BRANCH,
-                    aggregationForGroup = AggregationType.COVERED_PERCENTAGE,
-                )
-            }
         }
     }
 }

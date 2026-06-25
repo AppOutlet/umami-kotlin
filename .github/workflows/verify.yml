@@ -28,4 +28,7 @@ jobs:
           cache-read-only: false
 
       - name: Check code style
-        run: ./gradlew detekt koverVerify koverXmlReport
+        run: ./gradlew detekt
+
+      - name: Check tests
+        run: ./gradlew allTests -Pkover koverVerify

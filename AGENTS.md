@@ -18,7 +18,6 @@ Kotlin Multiplatform library for the [Umami](https://umami.is) web analytics RES
 ./gradlew detekt            # Lint + auto-correct — runs automatically on pre-push; do NOT run autonomously
 ./gradlew allTests          # All tests, all KMP targets — very slow on dev machines; do NOT run autonomously
 ./gradlew jvmTest           # JVM tests only — still slow; do NOT run autonomously
-./gradlew koverVerify       # Coverage gates — runs full test suite; do NOT run autonomously
 ```
 
 **When to run what:**
@@ -26,8 +25,7 @@ Kotlin Multiplatform library for the [Umami](https://umami.is) web analytics RES
   ```bash
   ./gradlew jvmTest --tests "dev.appoutlet.umami.api.auth.LoginTest"
   ```
-- `detekt`, `allTests`, `jvmTest`, and `koverVerify` must **only** be run when explicitly requested by the user.
-- CI pipeline order (reference only): `detekt` → `koverVerify` → `koverXmlReport`.
+- `detekt`, `allTests` and `jvmTest` must **only** be run when explicitly requested by the user.
 
 Dokka and Maven publish require `--no-configuration-cache` despite it being globally enabled.
 

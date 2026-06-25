@@ -9,7 +9,6 @@ plugins {
     alias(libs.plugins.detekt)
     alias(libs.plugins.dokka)
     alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.kover)
     alias(libs.plugins.maven.publish)
     alias(libs.plugins.mokkery)
     alias(libs.plugins.serialization)
@@ -21,10 +20,8 @@ kotlin {
     jvm()
     js { browser() }
     wasmJs { browser() }
-    iosX64()
     iosArm64()
     iosSimulatorArm64()
-    macosX64()
     macosArm64()
     linuxX64()
     mingwX64()

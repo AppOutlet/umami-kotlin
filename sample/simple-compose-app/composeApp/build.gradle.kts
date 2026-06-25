@@ -24,7 +24,6 @@ kotlin {
         binaries.executable()
     }
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach {

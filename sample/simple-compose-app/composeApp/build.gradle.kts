@@ -45,7 +45,7 @@ kotlin {
         }
 
         androidMain.dependencies {
-            implementation(libs.androidx.activityCompose)
+            implementation(libs.activity.compose)
         }
 
         jvmMain.dependencies {

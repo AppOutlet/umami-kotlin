@@ -1,5 +1,6 @@
 @file:OptIn(ExperimentalWasmDsl::class)
 
+import com.android.build.api.dsl.androidLibrary
 import java.time.LocalDateTime
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
@@ -15,7 +16,11 @@ plugins {
 
 kotlin {
     jvmToolchain(21)
-    androidTarget { publishLibraryVariants("release") }
+    androidLibrary {
+        namespace = "dev.appoutlet.umami.api"
+        compileSdk = libs.versions.android.compileSdk.get().toInt()
+        minSdk = libs.versions.android.minSdk.get().toInt()
+    }
     jvm()
     js { browser() }
     wasmJs { browser() }
@@ -80,15 +85,6 @@ detekt {
         "src/mingwMain/kotlin",
         "src/wasmJsMain/kotlin",
     )
-}
-
-android {
-    namespace = "dev.appoutlet.umami.api"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
-
-    defaultConfig {
-        minSdk = libs.versions.android.minSdk.get().toInt()
-    }
 }
 
 mavenPublishing {

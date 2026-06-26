@@ -2,7 +2,9 @@ import kotlinx.kover.gradle.aggregation.settings.dsl.minBound
 import kotlinx.kover.gradle.plugin.dsl.AggregationType
 import kotlinx.kover.gradle.plugin.dsl.CoverageUnit
 
-rootProject.name = "umami"
+rootProject.name = "umami-kotlin"
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
     repositories {
@@ -37,6 +39,10 @@ include(":umami")
 include(":umami-api")
 include(":sample:simple-compose-app:composeApp")
 include(":sample:terminalApp")
+include(":sample:kombu:androidApp")
+include(":sample:kombu:desktopApp")
+include(":sample:kombu:shared")
+include(":sample:kombu:webApp")
 
 
 plugins {

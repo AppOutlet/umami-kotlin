@@ -38,9 +38,11 @@ kotlin {
        compilerOptions {
            jvmTarget = JvmTarget.JVM_11
        }
+
        androidResources {
            enable = true
        }
+
        withHostTest {
            isIncludeAndroidResources = true
        }
@@ -48,7 +50,7 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
-            implementation(libs.compose.uiToolingPreview)
+            implementation(libs.compose.ui.tooling.preview)
         }
 
         commonMain.dependencies {
@@ -57,7 +59,7 @@ kotlin {
             implementation(libs.compose.material3)
             implementation(libs.compose.ui)
             implementation(libs.compose.components.resources)
-            implementation(libs.compose.uiToolingPreview)
+            implementation(libs.compose.ui.tooling.preview)
             implementation(libs.lifecycle.viewmodelCompose)
             implementation(libs.lifecycle.runtimeCompose)
         }
@@ -73,5 +75,5 @@ kotlin {
 }
 
 dependencies {
-    androidRuntimeClasspath(libs.compose.uiTooling)
+    androidRuntimeClasspath(libs.compose.ui.tooling)
 }

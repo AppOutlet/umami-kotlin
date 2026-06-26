@@ -10,7 +10,7 @@ dependencies {
     implementation(projects.sample.kombu.shared)
     implementation(compose.desktop.currentOs)
     implementation(libs.coroutines.swing)
-    implementation(libs.compose.uiToolingPreview)
+    implementation(libs.compose.ui.tooling.preview)
 }
 
 compose.desktop {

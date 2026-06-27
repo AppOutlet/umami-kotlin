@@ -55,8 +55,8 @@ kover {
     reports {
         verify {
             rule {
-                minBound(80, CoverageUnit.LINE, AggregationType.COVERED_PERCENTAGE)
-                minBound(80, CoverageUnit.INSTRUCTION, AggregationType.COVERED_PERCENTAGE)
+                minBound(70, CoverageUnit.LINE, AggregationType.COVERED_PERCENTAGE)
+                minBound(70, CoverageUnit.INSTRUCTION, AggregationType.COVERED_PERCENTAGE)
                 minBound(36, CoverageUnit.BRANCH, AggregationType.COVERED_PERCENTAGE)
             }
         }

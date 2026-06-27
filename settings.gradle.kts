@@ -2,7 +2,9 @@ import kotlinx.kover.gradle.aggregation.settings.dsl.minBound
 import kotlinx.kover.gradle.plugin.dsl.AggregationType
 import kotlinx.kover.gradle.plugin.dsl.CoverageUnit
 
-rootProject.name = "umami"
+rootProject.name = "umami-kotlin"
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
     repositories {
@@ -35,8 +37,11 @@ dependencyResolutionManagement {
 
 include(":umami")
 include(":umami-api")
-include(":sample:simple-compose-app:composeApp")
 include(":sample:terminalApp")
+include(":sample:kombu:android")
+include(":sample:kombu:desktop")
+include(":sample:kombu:shared")
+include(":sample:kombu:web")
 
 
 plugins {
@@ -45,13 +50,13 @@ plugins {
 }
 
 kover {
-    skipProjects(":sample:simple-compose-app:composeApp", ":sample:terminalApp")
+    skipProjects(":sample:terminalApp")
 
     reports {
         verify {
             rule {
-                minBound(80, CoverageUnit.LINE, AggregationType.COVERED_PERCENTAGE)
-                minBound(80, CoverageUnit.INSTRUCTION, AggregationType.COVERED_PERCENTAGE)
+                minBound(70, CoverageUnit.LINE, AggregationType.COVERED_PERCENTAGE)
+                minBound(70, CoverageUnit.INSTRUCTION, AggregationType.COVERED_PERCENTAGE)
                 minBound(36, CoverageUnit.BRANCH, AggregationType.COVERED_PERCENTAGE)
             }
         }

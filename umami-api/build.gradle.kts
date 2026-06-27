@@ -15,7 +15,11 @@ plugins {
 
 kotlin {
     jvmToolchain(21)
-    androidTarget { publishLibraryVariants("release") }
+    android {
+        namespace = "dev.appoutlet.umami.api"
+        compileSdk = libs.versions.android.compileSdk.get().toInt()
+        minSdk = libs.versions.android.minSdk.get().toInt()
+    }
     jvm()
     js { browser() }
     wasmJs { browser() }
@@ -80,15 +84,6 @@ detekt {
         "src/mingwMain/kotlin",
         "src/wasmJsMain/kotlin",
     )
-}
-
-android {
-    namespace = "dev.appoutlet.umami.api"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
-
-    defaultConfig {
-        minSdk = libs.versions.android.minSdk.get().toInt()
-    }
 }
 
 mavenPublishing {

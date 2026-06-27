@@ -6,6 +6,7 @@
 .DS_Store
 build
 */build
+**/build/
 captures
 .externalNativeBuild
 .cxx
@@ -18,3 +19,10 @@ Pods/
 .env
 .opencode/*
 !.opencode/skills
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcodeproj/project.xcworkspace/
+!*.xcworkspace/contents.xcworkspacedata
+**/xcshareddata/WorkspaceSettings.xcsettings
+node_modules/

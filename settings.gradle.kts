@@ -37,7 +37,6 @@ dependencyResolutionManagement {
 
 include(":umami")
 include(":umami-api")
-include(":sample:simple-compose-app:composeApp")
 include(":sample:terminalApp")
 include(":sample:kombu:android")
 include(":sample:kombu:desktop")
@@ -51,7 +50,7 @@ plugins {
 }
 
 kover {
-    skipProjects(":sample:simple-compose-app:composeApp", ":sample:terminalApp")
+    skipProjects(":sample:terminalApp")
 
     reports {
         verify {

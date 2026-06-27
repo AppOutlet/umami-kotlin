@@ -16,7 +16,7 @@ This guide is fully focused on adding analytics with `umami-kotlin` to a **share
 ## 2. Add the dependency (commonMain)
 Add the library to the `commonMain` source set so all platforms can access it.
 
-=== "composeApp/build.gradle.kts"
+=== "shared/build.gradle.kts"
     ```kotlin
     kotlin {
         sourceSets {
@@ -37,7 +37,7 @@ Add the library to the `commonMain` source set so all platforms can access it.
     [libraries]
     umami = { group = "dev.appoutlet", name = "umami", version.ref = "umami" }
     ```
-    ```kotlin title="composeApp/build.gradle.kts"
+    ```kotlin title="shared/build.gradle.kts"
     kotlin {
         sourceSets {
             val commonMain by getting {

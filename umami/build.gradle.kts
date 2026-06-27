@@ -1,6 +1,5 @@
 @file:OptIn(ExperimentalWasmDsl::class)
 
-import com.android.build.api.dsl.androidLibrary
 import java.time.LocalDateTime
 import org.gradle.kotlin.dsl.dokkaPlugin
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
@@ -17,7 +16,7 @@ plugins {
 
 kotlin {
     jvmToolchain(21)
-    androidLibrary {
+    android {
         namespace = "dev.appoutlet.umami"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()

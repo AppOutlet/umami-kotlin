@@ -39,10 +39,10 @@ include(":umami")
 include(":umami-api")
 include(":sample:simple-compose-app:composeApp")
 include(":sample:terminalApp")
-include(":sample:kombu:androidApp")
-include(":sample:kombu:desktopApp")
+include(":sample:kombu:android")
+include(":sample:kombu:desktop")
 include(":sample:kombu:shared")
-include(":sample:kombu:webApp")
+include(":sample:kombu:web")
 
 
 plugins {

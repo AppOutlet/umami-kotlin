@@ -52,6 +52,7 @@ $dokka.location:dev.appoutlet.umami.api/Me/getTeams/#/PointingToDeclaration/uma
 $dokka.location:dev.appoutlet.umami.api/Me/getWebsites/#kotlin.Boolean?/PointingToDeclaration/umami-api/dev.appoutlet.umami.api/-me/get-websites.html
 $dokka.location:dev.appoutlet.umami.api/Pixels///PointingToDeclaration/umami-api/dev.appoutlet.umami.api/-pixels/index.html
 $dokka.location:dev.appoutlet.umami.api/Pixels/Pixels/#dev.appoutlet.umami.api.UmamiApi/PointingToDeclaration/umami-api/dev.appoutlet.umami.api/-pixels/-pixels.html
+$dokka.location:dev.appoutlet.umami.api/Pixels/createPixel/#kotlin.String#kotlin.String#kotlin.String?/PointingToDeclaration/umami-api/dev.appoutlet.umami.api/-pixels/create-pixel.html
 $dokka.location:dev.appoutlet.umami.api/Pixels/deletePixel/#kotlin.String/PointingToDeclaration/umami-api/dev.appoutlet.umami.api/-pixels/delete-pixel.html
 $dokka.location:dev.appoutlet.umami.api/Pixels/getPixel/#kotlin.String/PointingToDeclaration/umami-api/dev.appoutlet.umami.api/-pixels/get-pixel.html
 $dokka.location:dev.appoutlet.umami.api/Pixels/getPixels/#kotlin.String?#kotlin.Int?#kotlin.Int?/PointingToDeclaration/umami-api/dev.appoutlet.umami.api/-pixels/get-pixels.html

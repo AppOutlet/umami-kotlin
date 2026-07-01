@@ -34,7 +34,7 @@ dokka-versioning = { module = "org.jetbrains.dokka:versioning-plugin", version.r
 kermit = "co.touchlab:kermit:2.1.0"
 kotest-assertions = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
-kotlin-wrappers-browser = "org.jetbrains.kotlin-wrappers:kotlin-browser:2026.6.7"
+kotlin-wrappers-browser = "org.jetbrains.kotlin-wrappers:kotlin-browser:2026.6.11"
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-curl = { module = "io.ktor:ktor-client-curl", version.ref = "ktor" }

@@ -45,7 +45,7 @@ include(":sample:kombu:web")
 
 
 plugins {
-    id("org.jetbrains.kotlinx.kover.aggregation") version "0.9.8"
+    id("org.jetbrains.kotlinx.kover.aggregation") version "0.9.9"
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 

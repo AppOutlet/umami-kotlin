@@ -2,7 +2,7 @@
 agp = "9.2.1"
 activityCompose = "1.13.0"
 android-compileSdk = "37"
-android-minSdk = "28"
+android-minSdk = "23"
 android-targetSdk = "37"
 compose = "1.12.0"
 coroutines = "1.11.0"

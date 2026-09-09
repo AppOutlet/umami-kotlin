@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.serialization)
+    alias(libs.plugins.koin.compiler)
 }
 
 kotlin {
@@ -59,11 +60,15 @@ kotlin {
             implementation(libs.compose.foundation)
             implementation(libs.compose.material3)
             implementation(libs.compose.ui)
-            implementation(libs.compose.navigation)
             implementation(libs.compose.components.resources)
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.lifecycle.viewmodelCompose)
             implementation(libs.lifecycle.runtimeCompose)
+            implementation(libs.lifecycle.viewmodelNavigation3)
+            implementation(libs.navigation3.ui)
+            implementation(libs.koin.annotations)
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
         }
 
         commonTest.dependencies {
@@ -72,6 +77,7 @@ kotlin {
 
         jsMain.dependencies {
             implementation(libs.kotlin.wrappers.browser)
+            implementation(libs.navigation3.browser)
         }
     }
 }

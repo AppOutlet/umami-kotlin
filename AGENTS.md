@@ -50,12 +50,6 @@ Key difference between the two `getUmamiInstance` copies: `:umami-api` sets `ena
 - **`SuspendMutableMap`**: Custom interface for async-safe header management (`InMemoryHeaders` default impl).
 - Platform `expect`/`actual` declarations live only in `:umami` (HTTP engine selection, user-agent string).
 
-## Style & formatting
-
-- **Respect `.editorconfig`** in every `.kt`/`.kts` file: 4-space indentation, max line length 120,
-  `insert_final_newline` (final newline at EOF), no trailing whitespace, and UTF-8. No star imports.
-  Import ordering is enforced by detekt (ktlint) — do not hand-sort imports against it.
-
 ## Toolchain
 
 - Gradle 8.14.2 (use `./gradlew`, not system Gradle).

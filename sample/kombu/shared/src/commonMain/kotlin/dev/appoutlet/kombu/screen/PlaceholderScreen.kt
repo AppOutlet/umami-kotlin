@@ -12,11 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun PlaceholderScreen(
-    title: String,
-    hint: String,
-    modifier: Modifier = Modifier,
-) {
+fun PlaceholderScreen(title: String, hint: String, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.fillMaxSize().padding(24.dp),
         verticalArrangement = Arrangement.Center,

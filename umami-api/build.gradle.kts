@@ -70,7 +70,7 @@ dependencies {
 
 detekt {
     autoCorrect = true
-    config.setFrom(file("$rootDir/detekt/detekt.yml"))
+    config.setFrom(file("$rootDir/detekt.yml"))
     buildUponDefaultConfig = true
     source.setFrom(
         "src/commonMain/kotlin",

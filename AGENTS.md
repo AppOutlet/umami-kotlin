@@ -53,8 +53,8 @@ Key difference between the two `getUmamiInstance` copies: `:umami-api` sets `ena
 ## Style & formatting
 
 - **Respect `.editorconfig`** in every `.kt`/`.kts` file: 4-space indentation, max line length 120,
-  `insert_final_newline` (final newline at EOF), no trailing whitespace, UTF-8, and the Kotlin import
-  layout `*, java, javax, org, com` (`com.*` imports come after `org.*`). No star imports.
+  `insert_final_newline` (final newline at EOF), no trailing whitespace, and UTF-8. No star imports.
+  Import ordering is enforced by detekt (ktlint) — do not hand-sort imports against it.
 
 ## Toolchain
 

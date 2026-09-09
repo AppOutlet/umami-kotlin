@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.serialization)
     alias(libs.plugins.koin.compiler)
+    alias(libs.plugins.detekt)
 }
 
 kotlin {
@@ -85,4 +86,20 @@ kotlin {
 
 dependencies {
     androidRuntimeClasspath(libs.compose.ui.tooling)
+    detektPlugins(libs.detekt.formatting)
+}
+
+detekt {
+    autoCorrect = true
+    config.setFrom(file("$rootDir/detekt.yml"))
+    buildUponDefaultConfig = true
+    source.setFrom(
+        "src/commonMain/kotlin",
+        "src/commonTest/kotlin",
+        "src/androidMain/kotlin",
+        "src/iosMain/kotlin",
+        "src/jsMain/kotlin",
+        "src/jvmMain/kotlin",
+        "src/wasmJsMain/kotlin",
+    )
 }

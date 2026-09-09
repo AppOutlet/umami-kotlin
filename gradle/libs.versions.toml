@@ -16,6 +16,7 @@ ktor = "3.5.2"
 lifecycle = "2.11.0"
 maven-publish = "0.37.0"
 material3 = "1.12.0-alpha03"
+navigation = "2.9.2"
 umami = "0.5.1"
 
 [libraries]
@@ -23,6 +24,7 @@ activity-compose = { module = "androidx.activity:activity-compose", version.ref 
 compose-components-resources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "compose" }
 compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "compose" }
 compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "material3" }
+compose-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation" }
 compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "compose" }
 compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "compose" }
 compose-ui-tooling = { module = "org.jetbrains.compose.ui:ui-tooling", version.ref = "compose" }

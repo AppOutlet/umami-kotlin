@@ -50,7 +50,13 @@ plugins {
 }
 
 kover {
-    skipProjects(":sample:terminalApp")
+    skipProjects(
+        ":sample:terminalApp",
+        ":sample:kombu:android",
+        ":sample:kombu:desktop",
+        ":sample:kombu:shared",
+        ":sample:kombu:web",
+    )
 
     reports {
         verify {

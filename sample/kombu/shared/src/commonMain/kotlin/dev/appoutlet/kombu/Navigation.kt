@@ -29,7 +29,6 @@ import dev.appoutlet.kombu.core.navigation.Route
 import dev.appoutlet.kombu.core.navigation.getSavedStateConfiguration
 import dev.appoutlet.kombu.feature.home.HomeRoute
 import dev.appoutlet.kombu.navigation.kombuTopLevelDestinations
-import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.koinInject
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -74,7 +73,7 @@ fun Navigation() {
                             onClick = { navigator.setRoot(destination.route) },
                             icon = {
                                 Icon(
-                                    painter = painterResource(destination.icon),
+                                    imageVector = destination.icon,
                                     contentDescription = destination.label,
                                 )
                             },

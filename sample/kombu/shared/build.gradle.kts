@@ -66,6 +66,7 @@ kotlin {
             implementation(libs.lifecycle.runtimeCompose)
             implementation(libs.lifecycle.viewmodelNavigation3)
             implementation(libs.navigation3.ui)
+            implementation(libs.lucide)
             implementation(libs.koin.annotations)
             implementation(libs.koin.core)
             implementation(libs.koin.compose)

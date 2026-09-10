@@ -6,6 +6,9 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.serialization)
+    alias(libs.plugins.koin.compiler)
+    alias(libs.plugins.detekt)
 }
 
 kotlin {
@@ -62,6 +65,12 @@ kotlin {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.lifecycle.viewmodelCompose)
             implementation(libs.lifecycle.runtimeCompose)
+            implementation(libs.lifecycle.viewmodelNavigation3)
+            implementation(libs.navigation3.ui)
+            implementation(libs.lucide)
+            implementation(libs.koin.annotations)
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
         }
 
         commonTest.dependencies {
@@ -70,10 +79,27 @@ kotlin {
 
         jsMain.dependencies {
             implementation(libs.kotlin.wrappers.browser)
+            implementation(libs.navigation3.browser)
         }
     }
 }
 
 dependencies {
     androidRuntimeClasspath(libs.compose.ui.tooling)
+    detektPlugins(libs.detekt.formatting)
+}
+
+detekt {
+    autoCorrect = true
+    config.setFrom(file("$rootDir/detekt.yml"))
+    buildUponDefaultConfig = true
+    source.setFrom(
+        "src/commonMain/kotlin",
+        "src/commonTest/kotlin",
+        "src/androidMain/kotlin",
+        "src/iosMain/kotlin",
+        "src/jsMain/kotlin",
+        "src/jvmMain/kotlin",
+        "src/wasmJsMain/kotlin",
+    )
 }

@@ -77,7 +77,7 @@ kotlin {
             implementation(libs.kotlin.test)
         }
 
-        jsMain.dependencies {
+        webMain.dependencies {
             implementation(libs.kotlin.wrappers.browser)
             implementation(libs.navigation3.browser)
         }

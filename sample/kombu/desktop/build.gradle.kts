@@ -21,6 +21,18 @@ compose.desktop {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "dev.appoutlet.kombu"
             packageVersion = "1.0.0"
+
+            macOS {
+                iconFile.set(file("$projectDir/icon/icon.icns"))
+            }
+
+            linux {
+                iconFile.set(file("$projectDir/icon/icon.png"))
+            }
+
+            windows {
+                iconFile.set(file("$projectDir/icon/icon.ico"))
+            }
         }
     }
 }

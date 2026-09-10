@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.detekt)
 }
 
 dependencies {
@@ -11,6 +12,16 @@ dependencies {
     implementation(compose.desktop.currentOs)
     implementation(libs.coroutines.swing)
     implementation(libs.compose.ui.tooling.preview)
+    detektPlugins(libs.detekt.formatting)
+}
+
+detekt {
+    autoCorrect = true
+    config.setFrom(file("$rootDir/detekt.yml"))
+    buildUponDefaultConfig = true
+    source.setFrom(
+        "src/main/kotlin",
+    )
 }
 
 compose.desktop {

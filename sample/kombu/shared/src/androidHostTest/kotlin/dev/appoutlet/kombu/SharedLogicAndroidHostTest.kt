@@ -5,8 +5,12 @@ import kotlin.test.assertEquals
 
 class SharedLogicAndroidHostTest {
 
+    companion object {
+        private const val EXPECTED_SUM = 3
+    }
+
     @Test
     fun example() {
-        assertEquals(3, 1 + 2)
+        assertEquals(EXPECTED_SUM, 1 + 2)
     }
 }

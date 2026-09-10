@@ -74,7 +74,14 @@ kotlin {
         }
 
         commonTest.dependencies {
+            implementation(libs.compose.ui.test)
+            implementation(libs.coroutines.test)
+            implementation(libs.kotest.assertions)
             implementation(libs.kotlin.test)
+        }
+
+        jvmTest.dependencies {
+            implementation(compose.desktop.currentOs)
         }
 
         webMain.dependencies {

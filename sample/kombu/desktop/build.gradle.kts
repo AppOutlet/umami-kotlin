@@ -25,6 +25,14 @@ compose.desktop {
             macOS {
                 iconFile.set(file("$projectDir/icon/icon.icns"))
             }
+
+            linux {
+                iconFile.set(file("$projectDir/icon/icon.png"))
+            }
+
+            windows {
+                iconFile.set(file("$projectDir/icon/icon.ico"))
+            }
         }
     }
 }

@@ -8,14 +8,6 @@ plugins {
     alias(libs.plugins.nucleus)
 }
 
-dependencies {
-    implementation(projects.sample.kombu.shared)
-    implementation(compose.desktop.currentOs)
-    implementation(libs.coroutines.swing)
-    implementation(libs.compose.ui.tooling.preview)
-    detektPlugins(libs.detekt.formatting)
-}
-
 detekt {
     autoCorrect = true
     config.setFrom(file("$rootDir/detekt.yml"))
@@ -25,13 +17,20 @@ detekt {
     )
 }
 
+kotlin.jvmToolchain {
+    languageVersion.set(JavaLanguageVersion.of(25))
+    vendor.set(JvmVendorSpec.JETBRAINS)
+}
+
 nucleus.application {
     mainClass = "dev.appoutlet.kombu.MainKt"
 
     nativeDistributions {
-        targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
         packageName = "dev.appoutlet.kombu"
         packageVersion = libs.versions.umami.get()
+        enableAotCache = true
+
+        targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
 
         macOS {
             iconFile.set(file("$projectDir/icon/icon.icns"))
@@ -45,4 +44,17 @@ nucleus.application {
             iconFile.set(file("$projectDir/icon/icon.ico"))
         }
     }
+}
+
+dependencies {
+    implementation(projects.sample.kombu.shared)
+
+    implementation(compose.desktop.currentOs)
+
+    implementation(libs.coroutines.swing)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.nucleus.application)
+    implementation(libs.nucleus.decoratedWindow.tao)
+
+    detektPlugins(libs.detekt.formatting)
 }

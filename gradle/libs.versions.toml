@@ -64,6 +64,8 @@ koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 lucide = { module = "com.composables:icons-lucide-cmp", version.ref = "lucide" }
 navigation3-ui = { module = "org.jetbrains.androidx.navigation3:navigation3-ui", version.ref = "navigation3" }
 navigation3-browser = { module = "com.github.terrakok:navigation3-browser", version.ref = "navigation3-browser" }
+nucleus-application = { module = "dev.nucleusframework:nucleus.nucleus-application", version.ref = "nucleus" }
+nucleus-decoratedWindow-tao = { module = "dev.nucleusframework:nucleus.decorated-window-tao", version.ref = "nucleus" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

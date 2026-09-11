@@ -80,7 +80,7 @@ kotlin {
             implementation(libs.kotlin.test)
         }
 
-        jvmTest.dependencies {
+        jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
         }
 

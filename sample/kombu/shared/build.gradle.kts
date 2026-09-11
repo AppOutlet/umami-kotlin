@@ -98,8 +98,8 @@ detekt {
         "src/commonTest/kotlin",
         "src/androidMain/kotlin",
         "src/iosMain/kotlin",
-        "src/jsMain/kotlin",
+        "src/iosTest/kotlin",
         "src/jvmMain/kotlin",
-        "src/wasmJsMain/kotlin",
+        "src/webMain/kotlin",
     )
 }

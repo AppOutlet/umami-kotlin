@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.detekt)
 }
 
 android {
@@ -47,4 +48,14 @@ dependencies {
     implementation(libs.activity.compose)
     implementation(libs.compose.ui.tooling.preview)
     debugImplementation(libs.compose.ui.tooling)
+    detektPlugins(libs.detekt.formatting)
+}
+
+detekt {
+    autoCorrect = true
+    config.setFrom(file("$rootDir/detekt.yml"))
+    buildUponDefaultConfig = true
+    source.setFrom(
+        "src/main/kotlin",
+    )
 }

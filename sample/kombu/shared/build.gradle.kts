@@ -97,7 +97,6 @@ detekt {
         "src/commonMain/kotlin",
         "src/commonTest/kotlin",
         "src/androidMain/kotlin",
-        "src/androidHostTest/kotlin",
         "src/iosMain/kotlin",
         "src/iosTest/kotlin",
         "src/jvmMain/kotlin",

@@ -50,20 +50,12 @@ plugins {
 }
 
 kover {
-    skipProjects(
-        ":sample:terminalApp",
-        ":sample:kombu:android",
-        ":sample:kombu:desktop",
-        ":sample:kombu:shared",
-        ":sample:kombu:web",
-    )
-
     reports {
         verify {
             rule {
                 minBound(70, CoverageUnit.LINE, AggregationType.COVERED_PERCENTAGE)
                 minBound(70, CoverageUnit.INSTRUCTION, AggregationType.COVERED_PERCENTAGE)
-                minBound(36, CoverageUnit.BRANCH, AggregationType.COVERED_PERCENTAGE)
+                minBound(40, CoverageUnit.BRANCH, AggregationType.COVERED_PERCENTAGE)
             }
         }
     }

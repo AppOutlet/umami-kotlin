@@ -24,13 +24,10 @@ kotlin {
 
     jvm()
 
-    js {
-        browser()
-    }
-
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser()
+        binaries.executable()
     }
 
     android {
@@ -38,17 +35,8 @@ kotlin {
        compileSdk = libs.versions.android.compileSdk.get().toInt()
        minSdk = libs.versions.android.minSdk.get().toInt()
 
-       compilerOptions {
-           jvmTarget = JvmTarget.JVM_11
-       }
-
-       androidResources {
-           enable = true
-       }
-
-       withHostTest {
-           isIncludeAndroidResources = true
-       }
+       compilerOptions { jvmTarget = JvmTarget.JVM_11 }
+       androidResources { enable = true }
     }
 
     sourceSets {

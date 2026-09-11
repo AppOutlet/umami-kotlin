@@ -31,4 +31,4 @@ jobs:
         run: ./gradlew detekt
 
       - name: Check tests
-        run: ./gradlew jvmTest -Pkover koverVerify
+        run: ./gradlew allTests -Pkover koverVerify

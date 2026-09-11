@@ -16,6 +16,7 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.entryProvider
@@ -32,10 +33,6 @@ import dev.appoutlet.kombu.navigation.kombuTopLevelDestinations
 import org.koin.compose.koinInject
 import org.koin.core.annotation.KoinExperimentalAPI
 
-/**
- * Root scaffold for Kombu: renders the active route with Navigation3, keeps a top app bar and a
- * bottom navigation bar for the top-level destinations, and wires browser-history support on web.
- */
 @Suppress("UNCHECKED_CAST")
 @OptIn(ExperimentalMaterial3Api::class, KoinExperimentalAPI::class)
 @Composable
@@ -85,6 +82,7 @@ fun Navigation() {
         ) { innerPadding ->
             Box(Modifier.padding(innerPadding).fillMaxSize()) {
                 NavDisplay(
+                    modifier = Modifier.testTag("Navigation"),
                     backStack = backStack,
                     entryDecorators = listOf(
                         rememberSaveableStateHolderNavEntryDecorator(),

@@ -1,10 +1,11 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import dev.nucleusframework.desktop.application.dsl.TargetFormat
 
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.detekt)
+    alias(libs.plugins.nucleus)
 }
 
 dependencies {
@@ -24,26 +25,24 @@ detekt {
     )
 }
 
-compose.desktop {
-    application {
-        mainClass = "dev.appoutlet.kombu.MainKt"
+nucleus.application {
+    mainClass = "dev.appoutlet.kombu.MainKt"
 
-        nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "dev.appoutlet.kombu"
-            packageVersion = "1.0.0"
+    nativeDistributions {
+        targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+        packageName = "dev.appoutlet.kombu"
+        packageVersion = libs.versions.umami.get()
 
-            macOS {
-                iconFile.set(file("$projectDir/icon/icon.icns"))
-            }
+        macOS {
+            iconFile.set(file("$projectDir/icon/icon.icns"))
+        }
 
-            linux {
-                iconFile.set(file("$projectDir/icon/icon.png"))
-            }
+        linux {
+            iconFile.set(file("$projectDir/icon/icon.png"))
+        }
 
-            windows {
-                iconFile.set(file("$projectDir/icon/icon.ico"))
-            }
+        windows {
+            iconFile.set(file("$projectDir/icon/icon.ico"))
         }
     }
 }

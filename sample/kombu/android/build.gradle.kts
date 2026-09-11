@@ -15,7 +15,7 @@ android {
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = libs.versions.kombu.versionCode.get().toInt()
-        versionName = libs.versions.kombu.versionName.get()
+        versionName = libs.versions.umami.get()
     }
 
     packaging {

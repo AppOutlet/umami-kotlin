@@ -38,5 +38,3 @@ private fun kombuTextStyle(
     fontWeight = fontWeight,
     letterSpacing = letterSpacing,
 )
-
-

@@ -19,5 +19,3 @@ object KombuRadii {
     val large = 16.dp
     val extraLarge = 28.dp
 }
-
-

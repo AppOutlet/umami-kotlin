@@ -53,7 +53,7 @@ internal fun Umami.createHttpClient(engine: HttpClientEngine) = HttpClient(engin
                 ignoreUnknownKeys = true
                 coerceInputValues = true
                 explicitNulls = false
-            }
+            },
         )
     }
 }.apply {

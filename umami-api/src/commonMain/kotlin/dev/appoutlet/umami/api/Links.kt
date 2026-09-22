@@ -26,17 +26,12 @@ class Links(private val api: UmamiApi) {
      * @param pageSize Optional number of results per page.
      * @return A [SearchResponse] containing a list of [Link] objects.
      */
-    suspend fun getLinks(
-        search: String? = null,
-        page: Int? = null,
-        pageSize: Int? = null,
-    ): SearchResponse<Link> {
-        return api.httpClient.get("links") {
+    suspend fun getLinks(search: String? = null, page: Int? = null, pageSize: Int? = null): SearchResponse<Link> =
+        api.httpClient.get("links") {
             parameter("search", search)
             parameter("page", page)
             parameter("pageSize", pageSize)
         }.body()
-    }
 
     /**
      * Retrieves a single link from the Umami API by its ID.
@@ -44,9 +39,7 @@ class Links(private val api: UmamiApi) {
      * @param linkId The unique identifier of the link.
      * @return The [Link] object matching the provided ID.
      */
-    suspend fun getLink(linkId: String): Link {
-        return api.httpClient.get("links/$linkId").body()
-    }
+    suspend fun getLink(linkId: String): Link = api.httpClient.get("links/$linkId").body()
 
     /**
      * Creates a new link.
@@ -56,11 +49,7 @@ class Links(private val api: UmamiApi) {
      * @param slug The slug for the link (minimum 8 characters).
      * @return The created [Link] object.
      */
-    suspend fun createLink(
-        name: String,
-        url: String,
-        slug: String,
-    ): Link {
+    suspend fun createLink(name: String, url: String, slug: String): Link {
         val request = LinkRequest(
             name = name,
             url = url.validate(),
@@ -80,12 +69,7 @@ class Links(private val api: UmamiApi) {
      * @param slug The new slug for the link (minimum 8 characters). Optional.
      * @return The updated [Link] object.
      */
-    suspend fun updateLink(
-        linkId: String,
-        name: String? = null,
-        url: String? = null,
-        slug: String? = null,
-    ): Link {
+    suspend fun updateLink(linkId: String, name: String? = null, url: String? = null, slug: String? = null): Link {
         val request = LinkRequest(
             name = name,
             url = url?.validate(),

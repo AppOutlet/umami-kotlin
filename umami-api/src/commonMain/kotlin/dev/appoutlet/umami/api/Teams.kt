@@ -27,12 +27,10 @@ class Teams(private val api: UmamiApi) {
      * @param pageSize The number of teams to retrieve per page.
      * @return A [SearchResponse] containing a list of [Team] objects.
      */
-    suspend fun find(page: Int? = null, pageSize: Int? = null): SearchResponse<Team> {
-        return api.httpClient.get("teams") {
-            parameter("page", page)
-            parameter("pageSize", pageSize)
-        }.body()
-    }
+    suspend fun find(page: Int? = null, pageSize: Int? = null): SearchResponse<Team> = api.httpClient.get("teams") {
+        parameter("page", page)
+        parameter("pageSize", pageSize)
+    }.body()
 
     /**
      * Creates a new team.
@@ -40,11 +38,9 @@ class Teams(private val api: UmamiApi) {
      * @param name The name of the team.
      * @return The newly created [Team].
      */
-    suspend fun create(name: String): Team {
-        return api.httpClient.post("teams") {
-            setBody(CreateTeamRequest(name = name))
-        }.body()
-    }
+    suspend fun create(name: String): Team = api.httpClient.post("teams") {
+        setBody(CreateTeamRequest(name = name))
+    }.body()
 
     /**
      * Joins a team.
@@ -52,11 +48,9 @@ class Teams(private val api: UmamiApi) {
      * @param accessCode The access code of the team to join.
      * @return The [TeamMember] object representing the user's membership in the team.
      */
-    suspend fun join(accessCode: String): TeamMember {
-        return api.httpClient.post("teams/join") {
-            setBody(JoinTeamRequest(accessCode = accessCode))
-        }.body()
-    }
+    suspend fun join(accessCode: String): TeamMember = api.httpClient.post("teams/join") {
+        setBody(JoinTeamRequest(accessCode = accessCode))
+    }.body()
 
     /**
      * Retrieves a team by its ID.
@@ -64,9 +58,7 @@ class Teams(private val api: UmamiApi) {
      * @param teamId The ID of the team to retrieve.
      * @return The [Team] object.
      */
-    suspend fun get(teamId: String): Team {
-        return api.httpClient.get("teams/$teamId").body()
-    }
+    suspend fun get(teamId: String): Team = api.httpClient.get("teams/$teamId").body()
 
     /**
      * Updates a team.
@@ -76,11 +68,10 @@ class Teams(private val api: UmamiApi) {
      * @param accessCode The new access code of the team.
      * @return The updated [Team].
      */
-    suspend fun update(teamId: String, name: String? = null, accessCode: String? = null): Team {
-        return api.httpClient.post("teams/$teamId") {
+    suspend fun update(teamId: String, name: String? = null, accessCode: String? = null): Team =
+        api.httpClient.post("teams/$teamId") {
             setBody(UpdateTeamRequest(name = name, accessCode = accessCode))
         }.body()
-    }
 
     /**
      * Deletes a team.
@@ -104,14 +95,12 @@ class Teams(private val api: UmamiApi) {
         teamId: String,
         search: String? = null,
         page: Int? = null,
-        pageSize: Int? = null
-    ): SearchResponse<TeamMember> {
-        return api.httpClient.get("teams/$teamId/users") {
-            parameter("search", search)
-            parameter("page", page)
-            parameter("pageSize", pageSize)
-        }.body()
-    }
+        pageSize: Int? = null,
+    ): SearchResponse<TeamMember> = api.httpClient.get("teams/$teamId/users") {
+        parameter("search", search)
+        parameter("page", page)
+        parameter("pageSize", pageSize)
+    }.body()
 
     /**
      * Adds a user to a team.
@@ -121,11 +110,10 @@ class Teams(private val api: UmamiApi) {
      * @param role The role of the user in the team.
      * @return The [TeamMember] object representing the new membership.
      */
-    suspend fun addUser(teamId: String, userId: String, role: String): TeamMember {
-        return api.httpClient.post("teams/$teamId/users") {
+    suspend fun addUser(teamId: String, userId: String, role: String): TeamMember =
+        api.httpClient.post("teams/$teamId/users") {
             setBody(AddUserRequest(userId = userId, role = role))
         }.body()
-    }
 
     /**
      * Retrieves a user from a team.
@@ -134,9 +122,8 @@ class Teams(private val api: UmamiApi) {
      * @param userId The ID of the user.
      * @return The [TeamMember] object.
      */
-    suspend fun getUser(teamId: String, userId: String): TeamMember {
-        return api.httpClient.get("teams/$teamId/users/$userId").body()
-    }
+    suspend fun getUser(teamId: String, userId: String): TeamMember =
+        api.httpClient.get("teams/$teamId/users/$userId").body()
 
     /**
      * Updates a user's role in a team.
@@ -146,11 +133,10 @@ class Teams(private val api: UmamiApi) {
      * @param role The new role of the user.
      * @return The updated [TeamMember] object.
      */
-    suspend fun updateUserRole(teamId: String, userId: String, role: String): TeamMember {
-        return api.httpClient.post("teams/$teamId/users/$userId") {
+    suspend fun updateUserRole(teamId: String, userId: String, role: String): TeamMember =
+        api.httpClient.post("teams/$teamId/users/$userId") {
             setBody(UpdateUserRoleRequest(role = role))
         }.body()
-    }
 
     /**
      * Removes a user from a team.
@@ -175,14 +161,12 @@ class Teams(private val api: UmamiApi) {
         teamId: String,
         search: String? = null,
         page: Int? = null,
-        pageSize: Int? = null
-    ): SearchResponse<Website> {
-        return api.httpClient.get("teams/$teamId/websites") {
-            parameter("search", search)
-            parameter("page", page)
-            parameter("pageSize", pageSize)
-        }.body()
-    }
+        pageSize: Int? = null,
+    ): SearchResponse<Website> = api.httpClient.get("teams/$teamId/websites") {
+        parameter("search", search)
+        parameter("page", page)
+        parameter("pageSize", pageSize)
+    }.body()
 }
 
 @Serializable
@@ -194,7 +178,7 @@ internal data class CreateTeamRequest(
 @Serializable
 internal data class JoinTeamRequest(
     @SerialName("accessCode")
-    val accessCode: String
+    val accessCode: String,
 )
 
 @Serializable
@@ -211,13 +195,13 @@ internal data class AddUserRequest(
     @SerialName("userId")
     val userId: String,
     @SerialName("role")
-    val role: String
+    val role: String,
 )
 
 @Serializable
 internal data class UpdateUserRoleRequest(
     @SerialName("role")
-    val role: String
+    val role: String,
 )
 
 /**

@@ -23,17 +23,12 @@ class Admin(private val api: UmamiApi) {
      * @param pageSize Optional number of results per page.
      * @return A [SearchResponse] containing a list of [User] objects.
      */
-    suspend fun getUsers(
-        search: String? = null,
-        page: Int? = null,
-        pageSize: Int? = null,
-    ): SearchResponse<User> {
-        return api.httpClient.get("admin/users") {
+    suspend fun getUsers(search: String? = null, page: Int? = null, pageSize: Int? = null): SearchResponse<User> =
+        api.httpClient.get("admin/users") {
             parameter("search", search)
             parameter("page", page)
             parameter("pageSize", pageSize)
         }.body()
-    }
 
     /**
      * Retrieves a paginated list of websites from the Umami API.
@@ -47,13 +42,11 @@ class Admin(private val api: UmamiApi) {
         search: String? = null,
         page: Int? = null,
         pageSize: Int? = null,
-    ): SearchResponse<Website> {
-        return api.httpClient.get("admin/websites") {
-            parameter("search", search)
-            parameter("page", page)
-            parameter("pageSize", pageSize)
-        }.body()
-    }
+    ): SearchResponse<Website> = api.httpClient.get("admin/websites") {
+        parameter("search", search)
+        parameter("page", page)
+        parameter("pageSize", pageSize)
+    }.body()
 
     /**
      * Retrieves a paginated list of teams from the Umami API.
@@ -63,17 +56,12 @@ class Admin(private val api: UmamiApi) {
      * @param pageSize Optional number of results per page.
      * @return A [SearchResponse] containing a list of [Team] objects.
      */
-    suspend fun getTeams(
-        search: String? = null,
-        page: Int? = null,
-        pageSize: Int? = null,
-    ): SearchResponse<Team> {
-        return api.httpClient.get("admin/teams") {
+    suspend fun getTeams(search: String? = null, page: Int? = null, pageSize: Int? = null): SearchResponse<Team> =
+        api.httpClient.get("admin/teams") {
             parameter("search", search)
             parameter("page", page)
             parameter("pageSize", pageSize)
         }.body()
-    }
 }
 
 /**

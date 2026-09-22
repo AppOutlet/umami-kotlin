@@ -12,7 +12,7 @@ fun main() = nucleusApplication(backend = NucleusBackend.Tao) {
     DecoratedWindow(
         onCloseRequest = ::exitApplication,
         title = "Kombu",
-        minimumSize = DpSize(width = 460.dp, height = 640.dp)
+        minimumSize = DpSize(width = 460.dp, height = 640.dp),
     ) {
         Box {
             App()

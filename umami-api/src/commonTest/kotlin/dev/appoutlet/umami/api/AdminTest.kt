@@ -22,20 +22,20 @@ class AdminTest {
             username = "username",
             role = "admin",
             createdAt = Instant.parse("2023-01-01T00:00:00Z"),
-            isAdmin = true
+            isAdmin = true,
         )
         val mockResponse = SearchResponse(
             data = listOf(mockUser),
             count = 1,
             page = 1,
-            pageSize = 10
+            pageSize = 10,
         )
 
         val api = getUmamiApiInstance(
             "/api/admin/users" to { request ->
                 request.url.encodedPath shouldBe "/api/admin/users"
                 respond(mockResponse)
-            }
+            },
         )
 
         val response = api.admin().getUsers()
@@ -50,20 +50,20 @@ class AdminTest {
             domain = "example.com",
             userId = "user-id",
             createdBy = "user-id",
-            createdAt = Instant.parse("2023-01-01T00:00:00Z")
+            createdAt = Instant.parse("2023-01-01T00:00:00Z"),
         )
         val mockResponse = SearchResponse(
             data = listOf(mockWebsite),
             count = 1,
             page = 1,
-            pageSize = 10
+            pageSize = 10,
         )
 
         val api = getUmamiApiInstance(
             "/api/admin/websites" to { request ->
                 request.url.encodedPath shouldBe "/api/admin/websites"
                 respond(mockResponse)
-            }
+            },
         )
 
         val response = api.admin().getWebsites()
@@ -76,7 +76,7 @@ class AdminTest {
             data = emptyList(),
             count = 0,
             page = 2,
-            pageSize = 20
+            pageSize = 20,
         )
 
         val api = getUmamiApiInstance(
@@ -86,7 +86,7 @@ class AdminTest {
                 request.url.parameters["page"] shouldBe "2"
                 request.url.parameters["pageSize"] shouldBe "20"
                 respond(mockResponse)
-            }
+            },
         )
 
         api.admin().getUsers(search = "test", page = 2, pageSize = 20)
@@ -98,7 +98,7 @@ class AdminTest {
             data = emptyList(),
             count = 0,
             page = 2,
-            pageSize = 20
+            pageSize = 20,
         )
 
         val api = getUmamiApiInstance(
@@ -108,7 +108,7 @@ class AdminTest {
                 request.url.parameters["page"] shouldBe "2"
                 request.url.parameters["pageSize"] shouldBe "20"
                 respond(mockResponse)
-            }
+            },
         )
 
         api.admin().getWebsites(search = "test", page = 2, pageSize = 20)
@@ -120,13 +120,13 @@ class AdminTest {
             id = "team-id",
             name = "Team Name",
             accessCode = "access-code",
-            createdAt = Instant.parse("2023-01-01T00:00:00Z")
+            createdAt = Instant.parse("2023-01-01T00:00:00Z"),
         )
         val mockResponse = SearchResponse(
             data = listOf(mockTeam),
             count = 1,
             page = 1,
-            pageSize = 10
+            pageSize = 10,
         )
 
         val api = getUmamiApiInstance(
@@ -136,7 +136,7 @@ class AdminTest {
                 request.url.parameters["page"] shouldBe "2"
                 request.url.parameters["pageSize"] shouldBe "20"
                 respond(mockResponse)
-            }
+            },
         )
 
         val response = api.admin().getTeams(search = "test", page = 2, pageSize = 20)

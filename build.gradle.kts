@@ -51,8 +51,6 @@ gitHooks {
     gitDirectory = project.rootProject.layout.projectDirectory.dir(".git")
 }
 
-tasks {
-    assemble {
-        dependsOn(":installGitHooks")
-    }
+tasks.named("prepareKotlinBuildScriptModel") {
+    dependsOn(":installGitHooks")
 }

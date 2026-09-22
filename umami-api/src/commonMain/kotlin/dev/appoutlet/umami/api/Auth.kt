@@ -27,10 +27,7 @@ class Auth(private val api: UmamiApi) {
      * @param password The password of the user.
      * @return A [Session] containing the JWT token and user details.
      */
-    suspend fun login(
-        username: String,
-        password: String,
-    ): Session {
+    suspend fun login(username: String, password: String): Session {
         val request = Login.Request(
             username = username,
             password = password,
@@ -104,11 +101,9 @@ class Auth(private val api: UmamiApi) {
      *
      * @return The [User] object of the authenticated user.
      */
-    suspend fun verify(): User {
-        return api.httpClient
-            .post("auth/verify")
-            .body()
-    }
+    suspend fun verify(): User = api.httpClient
+        .post("auth/verify")
+        .body()
 
     interface Login {
         /**
@@ -117,10 +112,7 @@ class Auth(private val api: UmamiApi) {
          * @property password The password of the user.
          */
         @Serializable
-        data class Request(
-            @SerialName("username") val username: String,
-            @SerialName("password") val password: String,
-        )
+        data class Request(@SerialName("username") val username: String, @SerialName("password") val password: String)
     }
 }
 

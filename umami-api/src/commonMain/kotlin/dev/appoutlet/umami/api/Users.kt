@@ -29,23 +29,17 @@ class Users(private val api: UmamiApi) {
      * @param id The user's ID (optional).
      * @return The created [User].
      */
-    suspend fun create(
-        username: String,
-        password: String,
-        role: String,
-        id: String? = null,
-    ): User {
-        return api.httpClient.post("users") {
+    suspend fun create(username: String, password: String, role: String, id: String? = null): User =
+        api.httpClient.post("users") {
             setBody(
                 CreateUserRequest(
                     username = username,
                     password = password,
                     role = role,
                     id = id,
-                )
+                ),
             )
         }.body()
-    }
 
     /**
      * Gets a user by ID.
@@ -53,9 +47,7 @@ class Users(private val api: UmamiApi) {
      * @param userId The unique identifier of the user.
      * @return The [User] object.
      */
-    suspend fun get(userId: String): User {
-        return api.httpClient.get("users/$userId").body()
-    }
+    suspend fun get(userId: String): User = api.httpClient.get("users/$userId").body()
 
     /**
      * Updates a user.
@@ -71,17 +63,15 @@ class Users(private val api: UmamiApi) {
         username: String? = null,
         password: String? = null,
         role: String? = null,
-    ): User {
-        return api.httpClient.post("users/$userId") {
-            setBody(
-                UpdateUserRequest(
-                    username = username,
-                    password = password,
-                    role = role,
-                )
-            )
-        }.body()
-    }
+    ): User = api.httpClient.post("users/$userId") {
+        setBody(
+            UpdateUserRequest(
+                username = username,
+                password = password,
+                role = role,
+            ),
+        )
+    }.body()
 
     /**
      * Deletes a user.
@@ -108,14 +98,12 @@ class Users(private val api: UmamiApi) {
         search: String? = null,
         page: Int? = null,
         pageSize: Int? = null,
-    ): SearchResponse<Website> {
-        return api.httpClient.get("users/$userId/websites") {
-            parameter("includeTeams", includeTeams)
-            parameter("search", search)
-            parameter("page", page)
-            parameter("pageSize", pageSize)
-        }.body()
-    }
+    ): SearchResponse<Website> = api.httpClient.get("users/$userId/websites") {
+        parameter("includeTeams", includeTeams)
+        parameter("search", search)
+        parameter("page", page)
+        parameter("pageSize", pageSize)
+    }.body()
 
     /**
      * Gets all teams that belong to a user.
@@ -125,16 +113,11 @@ class Users(private val api: UmamiApi) {
      * @param pageSize Determines how many results to return.
      * @return A [SearchResponse] containing a list of [Team] objects.
      */
-    suspend fun getTeams(
-        userId: String,
-        page: Int? = null,
-        pageSize: Int? = null,
-    ): SearchResponse<Team> {
-        return api.httpClient.get("users/$userId/teams") {
+    suspend fun getTeams(userId: String, page: Int? = null, pageSize: Int? = null): SearchResponse<Team> =
+        api.httpClient.get("users/$userId/teams") {
             parameter("page", page)
             parameter("pageSize", pageSize)
         }.body()
-    }
 }
 
 /**

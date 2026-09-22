@@ -47,7 +47,7 @@ fun Umami.event(
         data = data,
         tag = tag,
         timestamp = timestamp,
-        id = id
+        id = id,
     )
 }
 
@@ -58,11 +58,7 @@ fun Umami.event(
  * @param timestamp The timestamp of the event.
  * @param id The ID of the event.
  */
-fun Umami.identify(
-    data: Map<String, Any?>? = null,
-    timestamp: Long? = now(),
-    id: String? = null,
-) {
+fun Umami.identify(data: Map<String, Any?>? = null, timestamp: Long? = now(), id: String? = null) {
     send(
         type = EventType.Identify,
         referrer = null,
@@ -72,7 +68,7 @@ fun Umami.identify(
         data = data,
         tag = null,
         timestamp = timestamp,
-        id = id
+        id = id,
     )
 }
 
@@ -127,8 +123,8 @@ private fun Umami.send(
             ip = options.ip?.value,
             userAgent = options.userAgent,
             timestamp = timestamp,
-            id = id
-        )
+            id = id,
+        ),
     )
 
     val requestBuilder = HttpRequestBuilder().apply {

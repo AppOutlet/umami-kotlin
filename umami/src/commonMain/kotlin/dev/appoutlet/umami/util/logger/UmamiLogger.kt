@@ -103,6 +103,6 @@ interface UmamiLogger {
         Warn,
 
         /** For serious issues that may impact application functionality. */
-        Error
+        Error,
     }
 }

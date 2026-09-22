@@ -65,5 +65,5 @@ data class Link(
      * The timestamp when the link was deleted (ISO 8601 format). Can be null.
      */
     @SerialName("deletedAt")
-    val deletedAt: Instant? = null
+    val deletedAt: Instant? = null,
 )

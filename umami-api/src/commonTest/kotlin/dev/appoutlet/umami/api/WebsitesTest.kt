@@ -25,20 +25,20 @@ class WebsitesTest {
             createdBy = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             createdAt = Instant.parse("2025-10-27T18:49:39.383Z"),
             updatedAt = null,
-            deletedAt = null
+            deletedAt = null,
         )
         val mockResponse = SearchResponse(
             data = listOf(mockWebsite),
             count = 1,
             page = 1,
-            pageSize = 10
+            pageSize = 10,
         )
 
         val api = getUmamiApiInstance(
             "/api/websites" to { request ->
                 request.url.encodedPath shouldBe "/api/websites"
                 respond(mockResponse)
-            }
+            },
         )
 
         val response = api.websites().getWebsites()
@@ -51,7 +51,7 @@ class WebsitesTest {
             data = emptyList(),
             count = 0,
             page = 2,
-            pageSize = 20
+            pageSize = 20,
         )
 
         val api = getUmamiApiInstance(
@@ -62,7 +62,7 @@ class WebsitesTest {
                 request.url.parameters["pageSize"] shouldBe "20"
                 request.url.parameters["includeTeams"] shouldBe "true"
                 respond(mockResponse)
-            }
+            },
         )
 
         api.websites().getWebsites(search = "test", page = 2, pageSize = 20, includeTeams = true)
@@ -82,14 +82,14 @@ class WebsitesTest {
             createdBy = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             createdAt = Instant.parse("2025-10-27T18:49:39.383Z"),
             updatedAt = null,
-            deletedAt = null
+            deletedAt = null,
         )
 
         val api = getUmamiApiInstance(
             "/api/websites/$websiteId" to { request ->
                 request.url.encodedPath shouldBe "/api/websites/$websiteId"
                 respond(mockWebsite)
-            }
+            },
         )
 
         val response = api.websites().getWebsite(websiteId)
@@ -109,7 +109,7 @@ class WebsitesTest {
             createdBy = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             createdAt = Instant.parse("2025-10-27T18:49:39.383Z"),
             updatedAt = null,
-            deletedAt = null
+            deletedAt = null,
         )
 
         val api = getUmamiApiInstance(
@@ -118,7 +118,7 @@ class WebsitesTest {
                 val body = (request.body as TextContent).text
                 body shouldBe """{"name":"umami-new","domain":"new.api.is"}"""
                 respond(mockWebsite)
-            }
+            },
         )
 
         val response = api.websites().createWebsite(
@@ -142,7 +142,7 @@ class WebsitesTest {
             createdBy = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             createdAt = Instant.parse("2025-10-27T18:49:39.383Z"),
             updatedAt = null,
-            deletedAt = null
+            deletedAt = null,
         )
 
         val api = getUmamiApiInstance(
@@ -151,14 +151,14 @@ class WebsitesTest {
                 val body = (request.body as TextContent).text
                 body shouldBe """{"name":"umami-updated","domain":"updated.api.is","shareId":"updated-share-id"}"""
                 respond(mockWebsite)
-            }
+            },
         )
 
         val response = api.websites().updateWebsite(
             websiteId = websiteId,
             name = "umami-updated",
             domain = "updated.api.is",
-            shareId = "updated-share-id"
+            shareId = "updated-share-id",
         )
         response shouldBe mockWebsite
     }
@@ -171,7 +171,7 @@ class WebsitesTest {
             "/api/websites/$websiteId" to { request ->
                 request.url.encodedPath shouldBe "/api/websites/$websiteId"
                 respond(Unit)
-            }
+            },
         )
 
         api.websites().deleteWebsite(websiteId)
@@ -185,7 +185,7 @@ class WebsitesTest {
             "/api/websites/$websiteId/reset" to { request ->
                 request.url.encodedPath shouldBe "/api/websites/$websiteId/reset"
                 respond(Unit)
-            }
+            },
         )
 
         api.websites().resetWebsite(websiteId)

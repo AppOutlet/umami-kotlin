@@ -71,7 +71,7 @@ class UmamiApi(block: UmamiApiConfig.() -> Unit = {}) {
                         ignoreUnknownKeys = true
                         coerceInputValues = true
                         explicitNulls = false
-                    }
+                    },
                 )
             }
         }.apply {

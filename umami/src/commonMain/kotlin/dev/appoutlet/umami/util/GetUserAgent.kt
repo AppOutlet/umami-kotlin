@@ -16,9 +16,7 @@ fun createUserAgent(
     platform: String = getPlatform(),
     platformVersion: String = "1.0",
     architecture: String = "Unknown",
-): String {
-    return "Mozilla/5.0 ($platform; $platformVersion; $architecture) $applicationName/$applicationVersion"
-}
+): String = "Mozilla/5.0 ($platform; $platformVersion; $architecture) $applicationName/$applicationVersion"
 
 /**
  * Gets the current platform/operating system.

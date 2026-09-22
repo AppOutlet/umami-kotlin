@@ -50,5 +50,5 @@ data class TeamMember(
      * The user associated with this membership. This is not always present.
      */
     @SerialName("user")
-    val user: User? = null
+    val user: User? = null,
 )

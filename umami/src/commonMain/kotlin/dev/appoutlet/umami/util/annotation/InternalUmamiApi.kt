@@ -12,7 +12,7 @@ package dev.appoutlet.umami.util.annotation
  */
 @RequiresOptIn(
     level = RequiresOptIn.Level.ERROR,
-    message = "This API is internal to Umami and should not be used directly from outside the library."
+    message = "This API is internal to Umami and should not be used directly from outside the library.",
 )
 @Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.PROPERTY, AnnotationTarget.CONSTRUCTOR)

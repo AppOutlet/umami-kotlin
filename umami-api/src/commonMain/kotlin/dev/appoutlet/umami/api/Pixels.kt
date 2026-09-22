@@ -25,17 +25,12 @@ class Pixels(private val api: UmamiApi) {
      * @param pageSize Optional number of results per page.
      * @return A [SearchResponse] containing a list of [Pixel] objects.
      */
-    suspend fun getPixels(
-        search: String? = null,
-        page: Int? = null,
-        pageSize: Int? = null,
-    ): SearchResponse<Pixel> {
-        return api.httpClient.get("pixels") {
+    suspend fun getPixels(search: String? = null, page: Int? = null, pageSize: Int? = null): SearchResponse<Pixel> =
+        api.httpClient.get("pixels") {
             parameter("search", search)
             parameter("page", page)
             parameter("pageSize", pageSize)
         }.body()
-    }
 
     /**
      * Retrieves a single pixel from the Umami API by its ID.
@@ -43,9 +38,7 @@ class Pixels(private val api: UmamiApi) {
      * @param pixelId The unique identifier of the pixel.
      * @return The [Pixel] object matching the provided ID.
      */
-    suspend fun getPixel(pixelId: String): Pixel {
-        return api.httpClient.get("pixels/$pixelId").body()
-    }
+    suspend fun getPixel(pixelId: String): Pixel = api.httpClient.get("pixels/$pixelId").body()
 
     /**
      * Creates a new tracking pixel.
@@ -55,11 +48,7 @@ class Pixels(private val api: UmamiApi) {
      * @param teamId The ID of the team to associate the pixel with. Optional.
      * @return The created [Pixel] object.
      */
-    suspend fun createPixel(
-        name: String,
-        slug: String,
-        teamId: String? = null,
-    ): Pixel {
+    suspend fun createPixel(name: String, slug: String, teamId: String? = null): Pixel {
         val request = CreatePixelRequest(
             name = name,
             slug = slug,
@@ -79,11 +68,7 @@ class Pixels(private val api: UmamiApi) {
      * @param slug The new slug for the pixel.
      * @return The updated [Pixel] object.
      */
-    suspend fun updatePixel(
-        pixelId: String,
-        name: String? = null,
-        slug: String? = null,
-    ): Pixel {
+    suspend fun updatePixel(pixelId: String, name: String? = null, slug: String? = null): Pixel {
         val request = UpdatePixelRequest(
             name = name,
             slug = slug,
@@ -103,17 +88,10 @@ class Pixels(private val api: UmamiApi) {
     }
 
     @Serializable
-    internal data class CreatePixelRequest(
-        val name: String,
-        val slug: String,
-        val teamId: String? = null,
-    )
+    internal data class CreatePixelRequest(val name: String, val slug: String, val teamId: String? = null)
 
     @Serializable
-    internal data class UpdatePixelRequest(
-        val name: String? = null,
-        val slug: String? = null
-    )
+    internal data class UpdatePixelRequest(val name: String? = null, val slug: String? = null)
 }
 
 /**

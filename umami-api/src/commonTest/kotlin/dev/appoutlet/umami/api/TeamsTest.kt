@@ -21,13 +21,13 @@ class TeamsTest {
             data = listOf(Team.fixture()),
             count = 1,
             page = 1,
-            pageSize = 10
+            pageSize = 10,
         )
 
         val api = getUmamiApiInstance(
             "/api/teams" to {
                 respond(expectedResponse)
-            }
+            },
         )
 
         val actualResponse = api.teams().find()
@@ -42,7 +42,7 @@ class TeamsTest {
             "/api/teams" to {
                 it.body<CreateTeamRequest>().name shouldBe expectedResponse.name
                 respond(expectedResponse)
-            }
+            },
         )
 
         val actualResponse = api.teams().create(expectedResponse.name)
@@ -57,7 +57,7 @@ class TeamsTest {
             "/api/teams/join" to {
                 it.body<JoinTeamRequest>().accessCode shouldBe "test-code"
                 respond(expectedResponse)
-            }
+            },
         )
 
         val actualResponse = api.teams().join("test-code")
@@ -71,7 +71,7 @@ class TeamsTest {
         val api = getUmamiApiInstance(
             "/api/teams/${expectedResponse.id}" to {
                 respond(expectedResponse)
-            }
+            },
         )
 
         val actualResponse = api.teams().get(expectedResponse.id)
@@ -92,7 +92,7 @@ class TeamsTest {
                 body.name shouldBe expectedResponse.name
                 body.accessCode shouldBe expectedResponse.accessCode
                 respond(expectedResponse)
-            }
+            },
         )
 
         val actualResponse = api.teams().update(
@@ -109,7 +109,7 @@ class TeamsTest {
         val api = getUmamiApiInstance(
             "/api/teams/$teamId" to {
                 respondOk()
-            }
+            },
         )
 
         api.teams().delete(teamId)
@@ -123,7 +123,7 @@ class TeamsTest {
             data = listOf(TeamMember.fixture()),
             count = 1,
             page = 1,
-            pageSize = 10
+            pageSize = 10,
         )
 
         val api = getUmamiApiInstance(
@@ -132,14 +132,14 @@ class TeamsTest {
                 it.url.parameters["page"] shouldBe "2"
                 it.url.parameters["pageSize"] shouldBe "20"
                 respond(expectedResponse)
-            }
+            },
         )
 
         val actualResponse = api.teams().getUsers(
             teamId = teamId,
             search = "test",
             page = 2,
-            pageSize = 20
+            pageSize = 20,
         )
         actualResponse shouldBe expectedResponse
     }
@@ -157,7 +157,7 @@ class TeamsTest {
                 body.userId shouldBe userId
                 body.role shouldBe expectedResponse.role
                 respond(expectedResponse)
-            }
+            },
         )
 
         val actualResponse = api.teams().addUser(
@@ -178,7 +178,7 @@ class TeamsTest {
         val api = getUmamiApiInstance(
             "/api/teams/$teamId/users/$userId" to {
                 respond(expectedResponse)
-            }
+            },
         )
 
         val actualResponse = api.teams().getUser(teamId, userId)
@@ -196,7 +196,7 @@ class TeamsTest {
             "/api/teams/$teamId/users/$userId" to {
                 it.body<UpdateUserRoleRequest>().role shouldBe expectedResponse.role
                 respond(expectedResponse)
-            }
+            },
         )
 
         val actualResponse = api.teams().updateUserRole(
@@ -215,7 +215,7 @@ class TeamsTest {
         val api = getUmamiApiInstance(
             "/api/teams/$teamId/users/$userId" to {
                 respondOk()
-            }
+            },
         )
 
         api.teams().removeUser(teamId, userId)
@@ -234,12 +234,12 @@ class TeamsTest {
                     shareId = null,
                     createdAt = Instant.parse("2022-01-01T00:00:00Z"),
                     userId = "f0e9d8c7-b6a5-4321-fedc-ba9876543210",
-                    createdBy = "f0e9d8c7-b6a5-4321-fedc-ba9876543210"
-                )
+                    createdBy = "f0e9d8c7-b6a5-4321-fedc-ba9876543210",
+                ),
             ),
             count = 1,
             page = 1,
-            pageSize = 10
+            pageSize = 10,
         )
 
         val api = getUmamiApiInstance(
@@ -248,14 +248,14 @@ class TeamsTest {
                 it.url.parameters["page"] shouldBe "2"
                 it.url.parameters["pageSize"] shouldBe "20"
                 respond(expectedResponse)
-            }
+            },
         )
 
         val actualResponse = api.teams().getWebsites(
             teamId = teamId,
             search = "test",
             page = 2,
-            pageSize = 20
+            pageSize = 20,
         )
         actualResponse shouldBe expectedResponse
     }

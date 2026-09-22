@@ -20,14 +20,14 @@ class PixelsTest {
             data = listOf(fixturePixel),
             count = 1,
             page = 1,
-            pageSize = 10
+            pageSize = 10,
         )
 
         val api = getUmamiApiInstance(
             "/api/pixels" to { request ->
                 request.url.encodedPath shouldBe "/api/pixels"
                 respond(mockResponse)
-            }
+            },
         )
 
         val response = api.pixels().getPixels()
@@ -40,7 +40,7 @@ class PixelsTest {
             data = emptyList(),
             count = 0,
             page = 2,
-            pageSize = 20
+            pageSize = 20,
         )
 
         val api = getUmamiApiInstance(
@@ -50,7 +50,7 @@ class PixelsTest {
                 request.url.parameters["page"] shouldBe "2"
                 request.url.parameters["pageSize"] shouldBe "20"
                 respond(mockResponse)
-            }
+            },
         )
 
         api.pixels().getPixels(search = "test", page = 2, pageSize = 20)
@@ -67,7 +67,7 @@ class PixelsTest {
                 request.url.encodedPath shouldBe "/api/pixels/$pixelId"
 
                 respond(fixturePixel)
-            }
+            },
         )
 
         val response = api.pixels().getPixel(pixelId)
@@ -92,7 +92,7 @@ class PixelsTest {
                 createRequest.slug shouldBe requestSlug
                 createRequest.teamId shouldBe requestTeamId
                 respond(fixturePixel)
-            }
+            },
         )
 
         val response = api.pixels().createPixel(
@@ -117,7 +117,7 @@ class PixelsTest {
                 createRequest.slug shouldBe "pixel-slug"
                 createRequest.teamId shouldBe null
                 respond(fixturePixel)
-            }
+            },
         )
 
         val response = api.pixels().createPixel(
@@ -144,13 +144,13 @@ class PixelsTest {
                 updateRequest.name shouldBe requestName
                 updateRequest.slug shouldBe requestSlug
                 respond(fixturePixel)
-            }
+            },
         )
 
         val response = api.pixels().updatePixel(
             pixelId,
             name = requestName,
-            slug = requestSlug
+            slug = requestSlug,
         )
 
         response shouldBe fixturePixel
@@ -164,7 +164,7 @@ class PixelsTest {
             "/api/pixels/$pixelId" to { request ->
                 request.url.encodedPath shouldBe "/api/pixels/$pixelId"
                 respond(Unit)
-            }
+            },
         )
 
         api.pixels().deletePixel(pixelId)

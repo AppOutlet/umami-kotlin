@@ -4,6 +4,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Shapes
 import androidx.compose.ui.unit.dp
 
+val Shapes = Shapes(
+    extraSmall = RoundedCornerShape(KombuRadii.extraSmall),
+    small = RoundedCornerShape(KombuRadii.small),
+    medium = RoundedCornerShape(KombuRadii.medium),
+    large = RoundedCornerShape(KombuRadii.large),
+    extraLarge = RoundedCornerShape(KombuRadii.extraLarge),
+)
+
 object KombuRadii {
     val extraSmall = 4.dp
     val small = 8.dp
@@ -12,10 +20,4 @@ object KombuRadii {
     val extraLarge = 28.dp
 }
 
-val KombuShapes = Shapes(
-    extraSmall = RoundedCornerShape(KombuRadii.extraSmall),
-    small = RoundedCornerShape(KombuRadii.small),
-    medium = RoundedCornerShape(KombuRadii.medium),
-    large = RoundedCornerShape(KombuRadii.large),
-    extraLarge = RoundedCornerShape(KombuRadii.extraLarge),
-)
+

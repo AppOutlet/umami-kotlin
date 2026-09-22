@@ -12,6 +12,6 @@ fun getTransparentTitleBarStyle(): TitleBarStyle {
         colors = titleBarStyle.colors.copy(
             background = Color.Transparent,
             inactiveBackground = Color.Transparent,
-        )
+        ),
     )
 }

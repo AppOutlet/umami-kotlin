@@ -3,7 +3,7 @@ package dev.appoutlet.kombu.ui.theme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.unit.dp
 
-object KombuSpacing {
+object Spacing {
     val extraSmall = 8.dp
     val small = 16.dp
     val medium = 24.dp
@@ -11,5 +11,5 @@ object KombuSpacing {
     val extraLarge = 40.dp
 }
 
-val MaterialTheme.spacing: KombuSpacing
-    get() = KombuSpacing
+val MaterialTheme.spacing: Spacing
+    get() = Spacing

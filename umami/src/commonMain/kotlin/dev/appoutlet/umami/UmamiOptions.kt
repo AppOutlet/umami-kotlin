@@ -104,22 +104,34 @@ class UmamiOptionsBuilder {
     var headers: SuspendMutableMap<String, String> = InMemoryHeaders()
 
     /** Sets the base URL of the Umami API from a string. */
-    fun baseUrl(value: String) { baseUrl = Url(value) }
+    fun baseUrl(value: String) {
+        baseUrl = Url(value)
+    }
 
     /** Sets the hostname of the website being tracked. */
-    fun hostname(value: String) { hostname = Hostname(value) }
+    fun hostname(value: String) {
+        hostname = Hostname(value)
+    }
 
     /** Sets the language of the user's browser from an IETF language tag string. */
-    fun language(value: String) { language = Language(value) }
+    fun language(value: String) {
+        language = Language(value)
+    }
 
     /** Sets the screen size from a string in "widthxheight" format (e.g., "1920x1080"). */
-    fun screenSize(value: String) { screenSize = ScreenSize(value) }
+    fun screenSize(value: String) {
+        screenSize = ScreenSize(value)
+    }
 
     /** Sets the screen size from explicit width and height values. */
-    fun screenSize(width: Int, height: Int) { screenSize = ScreenSize(width = width, height = height) }
+    fun screenSize(width: Int, height: Int) {
+        screenSize = ScreenSize(width = width, height = height)
+    }
 
     /** Sets the IP address of the user. */
-    fun ip(value: String) { ip = Ip(value) }
+    fun ip(value: String) {
+        ip = Ip(value)
+    }
 
     /**
      * Builds an immutable [UmamiOptions] instance from the current builder configuration.
@@ -128,20 +140,18 @@ class UmamiOptionsBuilder {
      * @param website The UUID of the website to be tracked.
      * @return An [UmamiOptions] instance with the configured settings.
      */
-    internal fun build(website: Uuid): UmamiOptions {
-        return UmamiOptions(
-            website = website,
-            baseUrl = baseUrl,
-            hostname = hostname,
-            language = language,
-            screenSize = screenSize,
-            ip = ip,
-            userAgent = userAgent,
-            eventQueueCapacity = eventQueueCapacity,
-            httpClientEngine = httpClientEngine,
-            coroutineScope = coroutineScope,
-            logger = logger,
-            headers = headers
-        )
-    }
+    internal fun build(website: Uuid): UmamiOptions = UmamiOptions(
+        website = website,
+        baseUrl = baseUrl,
+        hostname = hostname,
+        language = language,
+        screenSize = screenSize,
+        ip = ip,
+        userAgent = userAgent,
+        eventQueueCapacity = eventQueueCapacity,
+        httpClientEngine = httpClientEngine,
+        coroutineScope = coroutineScope,
+        logger = logger,
+        headers = headers,
+    )
 }

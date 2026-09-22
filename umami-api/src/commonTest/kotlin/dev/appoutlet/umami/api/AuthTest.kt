@@ -23,7 +23,7 @@ class AuthTest {
         username = "testuser",
         role = "admin",
         createdAt = Instant.parse("2023-01-01T00:00:00Z"),
-        isAdmin = true
+        isAdmin = true,
     )
     private val testToken = "test-jwt-token"
 
@@ -33,7 +33,7 @@ class AuthTest {
         val fixturePassword = "testpassword"
         val mockLoginResponse = Session(
             token = testToken,
-            user = testUser
+            user = testUser,
         )
 
         val api = getUmamiApiInstance(
@@ -42,7 +42,7 @@ class AuthTest {
                 loginRequest.username shouldBe fixtureUsername
                 loginRequest.password shouldBe fixturePassword
                 respond(mockLoginResponse)
-            }
+            },
         )
 
         val response = api.auth().login(fixtureUsername, fixturePassword)
@@ -55,11 +55,11 @@ class AuthTest {
     fun `login with request object should return success response and set auth header`() = runTest {
         val fixtureLoginRequest = Auth.Login.Request(
             username = "testuser",
-            password = "testpassword"
+            password = "testpassword",
         )
         val mockLoginResponse = Session(
             token = testToken,
-            user = testUser
+            user = testUser,
         )
 
         val api = getUmamiApiInstance(
@@ -67,7 +67,7 @@ class AuthTest {
                 val loginRequest = request.body<Auth.Login.Request>()
                 loginRequest shouldBe fixtureLoginRequest
                 respond(mockLoginResponse)
-            }
+            },
         )
 
         val response = api.auth().login(fixtureLoginRequest)
@@ -79,7 +79,7 @@ class AuthTest {
     @Test
     fun `login with username and password on Cloud instance should throw exception`() = runTest {
         val api = getUmamiApiInstance(
-            baseUrl = BaseUrl.Cloud
+            baseUrl = BaseUrl.Cloud,
         )
 
         assertFailsWith<IllegalArgumentException> {
@@ -92,7 +92,7 @@ class AuthTest {
         val fixtureApiKey = "test-api-key"
         val mockLoginResponse = Session(
             token = "unused-token",
-            user = testUser
+            user = testUser,
         )
 
         val api = getUmamiApiInstance(
@@ -100,7 +100,7 @@ class AuthTest {
                 request.url.encodedPath shouldBe "/api/me"
                 request.headers[UMAMI_API_KEY_HEADER] shouldBe fixtureApiKey
                 respond(mockLoginResponse)
-            }
+            },
         )
 
         val response = api.auth().login(fixtureApiKey)
@@ -116,7 +116,7 @@ class AuthTest {
         val api = getUmamiApiInstance(
             "/api/me" to { _ ->
                 respond(status = HttpStatusCode.Unauthorized, content = "")
-            }
+            },
         )
 
         assertFailsWith<Exception> {
@@ -134,7 +134,7 @@ class AuthTest {
                 request.url.encodedPath shouldBe "/api/auth/logout"
                 logoutCalled = true
                 respond(status = HttpStatusCode.OK, content = "")
-            }
+            },
         )
         // Set dummy headers
         api.headers.put(HttpHeaders.Authorization, "Bearer $testToken")
@@ -152,13 +152,13 @@ class AuthTest {
         val fixtureApiKey = "test-api-key"
         val mockLoginResponse = Session(
             token = "unused-token",
-            user = testUser
+            user = testUser,
         )
 
         val api = getUmamiApiInstance(
             "/api/me" to { _ ->
                 respond(mockLoginResponse)
-            }
+            },
         )
         api.headers.put(HttpHeaders.Authorization, "Bearer $testToken")
 
@@ -175,7 +175,7 @@ class AuthTest {
             "/api/auth/logout" to { _ ->
                 logoutCalled = true
                 respond(status = HttpStatusCode.OK, content = "")
-            }
+            },
         )
         // Set dummy API key header, but no Authorization header
         api.headers.put(UMAMI_API_KEY_HEADER, "some-key")
@@ -192,7 +192,7 @@ class AuthTest {
             "/api/auth/verify" to { request ->
                 request.url.encodedPath shouldBe "/api/auth/verify"
                 respond(testUser)
-            }
+            },
         )
         // Ensure Authorization header is present for verification (optional, but good practice for testing)
         api.headers.put(HttpHeaders.Authorization, "Bearer $testToken")

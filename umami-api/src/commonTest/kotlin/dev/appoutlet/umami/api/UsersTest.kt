@@ -30,7 +30,7 @@ class UsersTest {
                 body.password shouldBe "password"
                 body.role shouldBe "user"
                 respond(expectedResponse)
-            }
+            },
         )
 
         val actualResponse = api.users().create("testuser", "password", "user")
@@ -49,7 +49,7 @@ class UsersTest {
         val api = getUmamiApiInstance(
             "/api/users/user-123" to {
                 respond(expectedResponse)
-            }
+            },
         )
 
         val actualResponse = api.users().get("user-123")
@@ -71,13 +71,13 @@ class UsersTest {
                 body.username shouldBe "updateduser"
                 body.role shouldBe "admin"
                 respond(expectedResponse)
-            }
+            },
         )
 
         val actualResponse = api.users().update(
             userId = "user-123",
             username = "updateduser",
-            role = "admin"
+            role = "admin",
         )
         actualResponse shouldBe expectedResponse
     }
@@ -87,7 +87,7 @@ class UsersTest {
         val api = getUmamiApiInstance(
             "/api/users/user-123" to {
                 respondOk()
-            }
+            },
         )
 
         api.users().delete("user-123")
@@ -104,12 +104,12 @@ class UsersTest {
                     shareId = null,
                     createdAt = Instant.parse("2022-01-01T00:00:00Z"),
                     userId = "user-123",
-                    createdBy = "user-123"
-                )
+                    createdBy = "user-123",
+                ),
             ),
             count = 1,
             page = 1,
-            pageSize = 10
+            pageSize = 10,
         )
 
         val api = getUmamiApiInstance(
@@ -119,7 +119,7 @@ class UsersTest {
                 it.url.parameters["page"] shouldBe "1"
                 it.url.parameters["pageSize"] shouldBe "10"
                 respond(expectedResponse)
-            }
+            },
         )
 
         val actualResponse = api.users().getWebsites(
@@ -127,7 +127,7 @@ class UsersTest {
             includeTeams = false,
             search = "test",
             page = 1,
-            pageSize = 10
+            pageSize = 10,
         )
         actualResponse shouldBe expectedResponse
     }
@@ -140,12 +140,12 @@ class UsersTest {
                     id = "team-123",
                     name = "Test Team",
                     accessCode = "code",
-                    createdAt = Instant.parse("2022-01-01T00:00:00Z")
-                )
+                    createdAt = Instant.parse("2022-01-01T00:00:00Z"),
+                ),
             ),
             count = 1,
             page = 1,
-            pageSize = 10
+            pageSize = 10,
         )
 
         val api = getUmamiApiInstance(
@@ -153,13 +153,13 @@ class UsersTest {
                 it.url.parameters["page"] shouldBe "1"
                 it.url.parameters["pageSize"] shouldBe "10"
                 respond(expectedResponse)
-            }
+            },
         )
 
         val actualResponse = api.users().getTeams(
             userId = "user-123",
             page = 1,
-            pageSize = 10
+            pageSize = 10,
         )
         actualResponse shouldBe expectedResponse
     }

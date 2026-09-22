@@ -23,20 +23,20 @@ class LinksTest {
             teamId = null,
             createdAt = Instant.parse("2025-10-27T18:49:39.383Z"),
             updatedAt = Instant.parse("2025-10-27T18:49:39.383Z"),
-            deletedAt = null
+            deletedAt = null,
         )
         val mockResponse = SearchResponse(
             data = listOf(mockLink),
             count = 1,
             page = 1,
-            pageSize = 10
+            pageSize = 10,
         )
 
         val api = getUmamiApiInstance(
             "/api/links" to { request ->
                 request.url.encodedPath shouldBe "/api/links"
                 respond(mockResponse)
-            }
+            },
         )
 
         val response = api.links().getLinks()
@@ -49,7 +49,7 @@ class LinksTest {
             data = emptyList(),
             count = 0,
             page = 2,
-            pageSize = 20
+            pageSize = 20,
         )
 
         val api = getUmamiApiInstance(
@@ -59,7 +59,7 @@ class LinksTest {
                 request.url.parameters["page"] shouldBe "2"
                 request.url.parameters["pageSize"] shouldBe "20"
                 respond(mockResponse)
-            }
+            },
         )
 
         api.links().getLinks(search = "test", page = 2, pageSize = 20)
@@ -77,14 +77,14 @@ class LinksTest {
             teamId = null,
             createdAt = Instant.parse("2025-10-27T18:49:39.383Z"),
             updatedAt = Instant.parse("2025-10-27T18:49:39.383Z"),
-            deletedAt = null
+            deletedAt = null,
         )
 
         val api = getUmamiApiInstance(
             "/api/links/$linkId" to { request ->
                 request.url.encodedPath shouldBe "/api/links/$linkId"
                 respond(mockLink)
-            }
+            },
         )
 
         val response = api.links().getLink(linkId)
@@ -103,21 +103,21 @@ class LinksTest {
             teamId = null,
             createdAt = Instant.parse("2025-10-27T18:49:39.383Z"),
             updatedAt = Instant.parse("2025-10-27T18:49:39.383Z"),
-            deletedAt = null
+            deletedAt = null,
         )
 
         val api = getUmamiApiInstance(
             "/api/links/$linkId" to { request ->
                 request.url.encodedPath shouldBe "/api/links/$linkId"
                 respond(mockLink)
-            }
+            },
         )
 
         val response = api.links().updateLink(
             linkId = linkId,
             name = "umami-updated",
             url = "https://www.umami.is/updated",
-            slug = "updated-slug"
+            slug = "updated-slug",
         )
         response shouldBe mockLink
     }
@@ -133,20 +133,20 @@ class LinksTest {
             teamId = null,
             createdAt = Instant.parse("2025-10-27T18:49:39.383Z"),
             updatedAt = Instant.parse("2025-10-27T18:49:39.383Z"),
-            deletedAt = null
+            deletedAt = null,
         )
 
         val api = getUmamiApiInstance(
             "/api/links" to { request ->
                 request.url.encodedPath shouldBe "/api/links"
                 respond(mockLink)
-            }
+            },
         )
 
         val response = api.links().createLink(
             name = "umami-new",
             url = "https://www.umami.is/new",
-            slug = "new-slug"
+            slug = "new-slug",
         )
         response shouldBe mockLink
     }
@@ -160,7 +160,7 @@ class LinksTest {
             api.links().createLink(
                 name = "test-link",
                 url = invalidUrl,
-                slug = "test-slug"
+                slug = "test-slug",
             )
         }
         exception.message shouldBe "Invalid URL format: $invalidUrl"
@@ -177,7 +177,7 @@ class LinksTest {
                 linkId = linkId,
                 name = "test-link",
                 url = invalidUrl,
-                slug = "test-slug"
+                slug = "test-slug",
             )
         }
         exception.message shouldBe "Invalid URL format: $invalidUrl"
@@ -191,7 +191,7 @@ class LinksTest {
             "/api/links/$linkId" to { request ->
                 request.url.encodedPath shouldBe "/api/links/$linkId"
                 respond(Unit)
-            }
+            },
         )
 
         api.links().deleteLink(linkId)

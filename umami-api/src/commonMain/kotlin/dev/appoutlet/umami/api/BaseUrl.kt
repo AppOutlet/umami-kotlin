@@ -23,7 +23,7 @@ sealed class BaseUrl(val url: Url) {
             .apply {
                 path(UMAMI_CLOUD_PATH_PREFIX.withTrailingSlash())
             }
-            .build()
+            .build(),
     )
 
     /**
@@ -47,11 +47,9 @@ sealed class BaseUrl(val url: Url) {
         ) : this(
             URLBuilder(baseUrl).apply {
                 path(prefix.withTrailingSlash())
-            }.build()
+            }.build(),
         )
     }
 }
 
-fun String.withTrailingSlash(): String {
-    return if (this.endsWith("/").not()) "$this/" else this
-}
+fun String.withTrailingSlash(): String = if (this.endsWith("/").not()) "$this/" else this

@@ -7,22 +7,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 
-private val KombuFontFamily = FontFamily.SansSerif
-
-private fun kombuTextStyle(
-    fontSize: TextUnit,
-    lineHeight: TextUnit,
-    fontWeight: FontWeight,
-    letterSpacing: TextUnit = TextUnit.Unspecified,
-) = TextStyle(
-    fontFamily = KombuFontFamily,
-    fontSize = fontSize,
-    lineHeight = lineHeight,
-    fontWeight = fontWeight,
-    letterSpacing = letterSpacing,
-)
-
-val KombuTypography = Typography(
+val Typography = Typography(
     displayLarge = kombuTextStyle(57.sp, 64.sp, FontWeight.Bold, (-1.14).sp),
     displayMedium = kombuTextStyle(45.sp, 52.sp, FontWeight.Bold, (-0.9).sp),
     displaySmall = kombuTextStyle(36.sp, 44.sp, FontWeight.Bold, (-0.72).sp),
@@ -39,3 +24,19 @@ val KombuTypography = Typography(
     labelMedium = kombuTextStyle(12.sp, 16.sp, FontWeight.Medium, 0.96.sp),
     labelSmall = kombuTextStyle(11.sp, 16.sp, FontWeight.Medium, 0.88.sp),
 )
+private val KombuFontFamily = FontFamily.SansSerif
+
+private fun kombuTextStyle(
+    fontSize: TextUnit,
+    lineHeight: TextUnit,
+    fontWeight: FontWeight,
+    letterSpacing: TextUnit = TextUnit.Unspecified,
+) = TextStyle(
+    fontFamily = KombuFontFamily,
+    fontSize = fontSize,
+    lineHeight = lineHeight,
+    fontWeight = fontWeight,
+    letterSpacing = letterSpacing,
+)
+
+

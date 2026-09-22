@@ -56,5 +56,5 @@ data class Team(
      * The users of the team.
      */
     @SerialName("teamUser")
-    val teamUser: List<TeamMember> = emptyList()
+    val teamUser: List<TeamMember> = emptyList(),
 )

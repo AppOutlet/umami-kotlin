@@ -35,7 +35,7 @@ class EventTest {
             cache = "event-cache-token",
             sessionId = "session-id",
             visitId = "visit-id",
-            beep = null
+            beep = null,
         )
 
         val umami = getUmamiInstance(
@@ -57,7 +57,7 @@ class EventTest {
                 }
 
                 respond(fixtureResponse)
-            }
+            },
         )
 
         umami.event(
@@ -68,7 +68,7 @@ class EventTest {
             data = fixtureData,
             tag = fixtureTag,
             timestamp = fixtureTimestamp,
-            id = fixtureId
+            id = fixtureId,
         )
 
         advanceUntilIdle()
@@ -86,7 +86,7 @@ class EventTest {
             cache = "event-cache-token",
             sessionId = "session-id",
             visitId = "visit-id",
-            beep = null
+            beep = null,
         )
 
         val umami = getUmamiInstance(
@@ -108,13 +108,13 @@ class EventTest {
                 }
 
                 respond(fixtureResponse)
-            }
+            },
         )
 
         umami.identify(
             data = fixtureData,
             timestamp = fixtureTimestamp,
-            id = fixtureId
+            id = fixtureId,
         )
 
         umami.eventQueue.close()
@@ -126,7 +126,7 @@ class EventTest {
             cache = "event-cache-token",
             sessionId = "session-id",
             visitId = "visit-id",
-            beep = null
+            beep = null,
         )
 
         val fixtureRequest = EventRequest(
@@ -145,14 +145,14 @@ class EventTest {
                 ip = null,
                 userAgent = "user-agent-string",
                 timestamp = null,
-                id = null
-            )
+                id = null,
+            ),
         )
 
         val umami = getUmamiInstance(
             "/api/send" to { request ->
                 respond(fixtureResponse)
-            }
+            },
         )
 
         val requestBuilder = HttpRequestBuilder().apply {

@@ -24,11 +24,11 @@ class MeTest {
                 username = "test_user",
                 role = "user",
                 createdAt = Instant.DISTANT_PAST,
-            )
+            ),
         )
 
         val api = getUmamiApiInstance(
-            "/api/me" to { respond(expectedSession) }
+            "/api/me" to { respond(expectedSession) },
         )
 
         val actualSession = api.me().getSession()
@@ -45,7 +45,7 @@ class MeTest {
                     name = "test_team",
                     accessCode = "test_access_code",
                     createdAt = Instant.DISTANT_PAST,
-                )
+                ),
             ),
             count = 1,
             page = 1,
@@ -53,7 +53,7 @@ class MeTest {
         )
 
         val api = getUmamiApiInstance(
-            "/api/me/teams" to { respond(expectedTeams) }
+            "/api/me/teams" to { respond(expectedTeams) },
         )
 
         val actualTeams = api.me().getTeams()
@@ -72,7 +72,7 @@ class MeTest {
                     userId = "user_id",
                     createdBy = "user_id",
                     createdAt = Instant.DISTANT_PAST,
-                )
+                ),
             ),
             count = 1,
             page = 1,
@@ -83,7 +83,7 @@ class MeTest {
             "/api/me/websites" to { request ->
                 request.url.parameters["includeTeams"] shouldBe "true"
                 respond(expectedWebsites)
-            }
+            },
         )
 
         val actualWebsites = api.me().getWebsites(includeTeams = true)

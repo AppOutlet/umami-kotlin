@@ -32,14 +32,12 @@ class Websites(private val api: UmamiApi) {
         search: String? = null,
         page: Int? = null,
         pageSize: Int? = null,
-    ): SearchResponse<Website> {
-        return api.httpClient.get("websites") {
-            parameter("includeTeams", includeTeams)
-            parameter("search", search)
-            parameter("page", page)
-            parameter("pageSize", pageSize)
-        }.body()
-    }
+    ): SearchResponse<Website> = api.httpClient.get("websites") {
+        parameter("includeTeams", includeTeams)
+        parameter("search", search)
+        parameter("page", page)
+        parameter("pageSize", pageSize)
+    }.body()
 
     /**
      * Creates a new website.
@@ -76,9 +74,7 @@ class Websites(private val api: UmamiApi) {
      * @param websiteId The unique identifier of the website.
      * @return The [Website] object matching the provided ID.
      */
-    suspend fun getWebsite(websiteId: String): Website {
-        return api.httpClient.get("websites/$websiteId").body()
-    }
+    suspend fun getWebsite(websiteId: String): Website = api.httpClient.get("websites/$websiteId").body()
 
     /**
      * Updates an existing website.

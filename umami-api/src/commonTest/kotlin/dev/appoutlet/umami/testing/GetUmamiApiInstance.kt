@@ -41,10 +41,8 @@ inline fun <reified T> HttpRequestData.body(): T {
     return json.decodeFromString<T>(textJson)
 }
 
-inline fun <reified T> MockRequestHandleScope.respond(content: T): HttpResponseData {
-    return respond(
-        content = json.encodeToString(content),
-        status = HttpStatusCode.OK,
-        headers = headersOf(HttpHeaders.ContentType, "application/json")
-    )
-}
+inline fun <reified T> MockRequestHandleScope.respond(content: T): HttpResponseData = respond(
+    content = json.encodeToString(content),
+    status = HttpStatusCode.OK,
+    headers = headersOf(HttpHeaders.ContentType, "application/json"),
+)

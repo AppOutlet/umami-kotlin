@@ -18,7 +18,7 @@ class BaseUrlTest {
             username = "testuser",
             role = "admin",
             createdAt = Instant.parse("2023-01-01T00:00:00Z"),
-        )
+        ),
     )
 
     @Test
@@ -32,7 +32,7 @@ class BaseUrlTest {
                 capturedPath = request.url.encodedPath
                 respond(mockSession)
             },
-            baseUrl = BaseUrl.Cloud
+            baseUrl = BaseUrl.Cloud,
         )
 
         api.me().getSession()
@@ -51,7 +51,7 @@ class BaseUrlTest {
                 capturedHost = request.url.host
                 capturedPath = request.url.encodedPath
                 respond(mockSession)
-            }
+            },
         )
 
         api.me().getSession()
@@ -71,7 +71,7 @@ class BaseUrlTest {
                 capturedPath = request.url.encodedPath
                 respond(mockSession)
             },
-            baseUrl = BaseUrl.SelfHosted("https://umami.my-domain.com", "custom/prefix")
+            baseUrl = BaseUrl.SelfHosted("https://umami.my-domain.com", "custom/prefix"),
         )
 
         api.me().getSession()

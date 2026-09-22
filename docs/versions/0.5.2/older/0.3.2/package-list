@@ -1,0 +1,16 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+module:umami
+dev.appoutlet.umami
+dev.appoutlet.umami.api
+dev.appoutlet.umami.core
+dev.appoutlet.umami.domain
+dev.appoutlet.umami.util
+dev.appoutlet.umami.util.annotation
+dev.appoutlet.umami.util.headers
+dev.appoutlet.umami.util.logger
+module:umami-api
+dev.appoutlet.umami.api.admin
+dev.appoutlet.umami.api.auth
+dev.appoutlet.umami.domain

@@ -22,7 +22,7 @@ nucleus = "2.5.15"
 koin = "4.2.2"
 koin-plugin = "1.1.0"
 lucide = "2.2.1"
-umami = "0.5.1"
+umami = "0.5.2"
 
 [libraries]
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }

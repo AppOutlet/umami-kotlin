@@ -20,7 +20,7 @@ navigation3 = "1.2.0-alpha02"
 navigation3-browser = "1.1.0"
 nucleus = "2.5.15"
 koin = "4.2.2"
-koin-plugin = "1.1.0"
+koin-plugin = "1.2.1"
 lucide = "2.2.1"
 umami = "0.5.2"
 

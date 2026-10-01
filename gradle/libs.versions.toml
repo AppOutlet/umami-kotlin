@@ -77,7 +77,7 @@ dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 gitHooks = "eu.bambooapps.gradle.plugin.githook:1.1.1"
 koin-compiler = { id = "io.insert-koin.compiler.plugin", version.ref = "koin-plugin" }
 maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }
-mokkery = "dev.mokkery:3.4.2"
+mokkery = "dev.mokkery:3.5.0"
 nucleus = { id = "dev.nucleusframework", version.ref = "nucleus" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
